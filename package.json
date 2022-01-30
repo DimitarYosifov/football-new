@@ -1,9 +1,10 @@
 {
   "license": "",
   "scripts": {
-    "start": "webpack serve --mode=development",
+    "start-dev": "webpack serve --mode=development",
     "build": "run-s clean build-only",
     "build-only": "webpack --mode=production",
+    "start": "webpack --mode=production",
     "clean": "rimraf dist"
   },
   "dependencies": {
