@@ -10,10 +10,11 @@
         "strict": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
-        "noUnusedParameters": true,
+        "noUnusedParameters": false,
         "noUnusedLocals": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitOverride": true,
+        "strictPropertyInitialization":false,
 
         // Settings for linking source files
         "moduleResolution": "node",

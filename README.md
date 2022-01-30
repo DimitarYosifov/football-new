@@ -28,6 +28,8 @@
 if we want to add new club go to =>  localhost:3000/add-players.html
 <!-- 
     TODO LIST:
+
+                REMOVE ALL CDN - USE NPM!!
                 add autoplay
                 add usage for players' exp points
                 add players' price

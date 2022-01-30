@@ -1,8 +1,8 @@
-import { Manager } from './Manager';
-import { LoaderScene } from './scenes/LoaderScene';
+import { App } from './App';
+import { LoadingScene } from './scenes/LoadingScene';
 import './css/style';
 
-Manager.initialize(540, 960, 0x6495ed);
+App.initialize(540, 960, 0x000000);
 
-const loady: LoaderScene = new LoaderScene();
-Manager.changeScene(loady);
+const loading: LoadingScene = new LoadingScene();
+App.setScene(loading);

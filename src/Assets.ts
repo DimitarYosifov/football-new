@@ -1,6 +1,10 @@
 export const assets = [
-    // { name: "Clampy the clamp", url: "./clampy.png" },
-    { name: "Clampy from assets.ts!", url: "./clampy.png" }
-    // { name: "another image", url: "./monster.png" },
-    // { name: "whistle", url: "./whistle.mp3" },
+    { name: "Girassol", url: "fonts/Girassol-Regular.ttf" },
+    { name: "main1", url: "assets/main-1.json" },
+    { name: "players", url: "assets/players.json" },
+    { name: "logos", url: "assets/logos.json" },
+    { name: "backgrounds-0", url: "assets/backgrounds-0.json" },
+    { name: "backgrounds-1", url: "assets/backgrounds-1.json" },
+    { name: "buttons", url: "assets/buttons.json" },
+    { name: "anims", url: "assets/anims.json" }
 ]
