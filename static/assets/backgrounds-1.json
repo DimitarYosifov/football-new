@@ -1,0 +1,39 @@
+{
+  "frames": {
+    "bg909": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 570,
+        "h": 946
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 570,
+        "h": 946
+      },
+      "sourceSize": {
+        "w": 570,
+        "h": 946
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  },
+  "meta": {
+    "app": "http://free-tex-packer.com",
+    "version": "0.6.4",
+    "image": "backgrounds-1.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 570,
+      "h": 946
+    },
+    "scale": 1
+  }
+}

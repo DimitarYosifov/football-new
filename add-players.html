@@ -1,0 +1,3124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Football</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Girassol&display=swap" rel="stylesheet">
+    <link href="css/css-main.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <form id="add-team-section" class="col-6">
+        <main>
+            <div style="display: flex;align-items: center;">
+                <h2 style="color: black; text-align: center;">CLUB</h2>
+                <div class="ml-2" id="stars-container-club">
+                    <img src="images/main-1/star.png" class="club-power-stars">
+                    <img src="images/main-1/star.png" class="club-power-stars">
+                    <img src="images/main-1/star.png" class="club-power-stars">
+                    <img src="images/main-1/star.png" class="club-power-stars">
+                    <img src="images/main-1/star.png" class="club-power-stars">
+                    <img src="images/main-1/star.png" class="club-power-stars">
+                    <img src="images/main-1/star.png" class="club-power-stars">
+                </div>
+            </div>
+            <table class="table table-bordered table-active table-sm table-striped">
+                <tr>
+                    <td>
+                        name
+                    </td>
+                    <td>
+                        <input id="clubName" value="" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        colors
+                    </td>
+                    <td>
+                        <input id="colors " value="null" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        power
+                    </td>
+                    <td>
+                        <input id="power" value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        logo
+                    </td>
+                    <td>
+                        <input id="logo" value="" type="text">
+                    </td>
+                </tr>
+            </table>
+        </main>
+
+        <!-- player1 -->
+        <div style="display: flex;align-items: baseline;">
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#addPlayer1">player
+                1</button>
+            <div class="ml-2" id="stars-container1">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+            </div>
+        </div>
+        <div id="addPlayer1" class="collapse">
+            <table class="table table-bordered table-active table-sm table-striped">
+                <tr>
+                    <td>
+                        position
+                    </td>
+                    <td>
+                        <input value="GK" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        special
+                    </td>
+                    <td>
+                        <input value="null" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        player_img_id
+                    </td>
+                    <td>
+                        <input value="000" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueYellowCards
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueRedCards
+                    </td>
+                    <td>
+                        <input value="false" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        injured
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        EXP
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        goalsScored
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        substitute
+                    </td>
+                    <td>
+                        <input value="false" type="text" disabled>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- player2 -->
+        <div style="display: flex;align-items: baseline;">
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#addPlayer2">player
+                2</button>
+            <div class="ml-2" id="stars-container2">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+            </div>
+        </div>
+        <div id="addPlayer2" class="collapse">
+            <table class="table table-bordered table-active table-sm table-striped">
+                <tr>
+                    <td>
+                        position
+                    </td>
+                    <td>
+                        <input value="DF" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        special
+                    </td>
+                    <td>
+                        <input value="null" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        player_img_id
+                    </td>
+                    <td>
+                        <input value="000" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueYellowCards
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueRedCards
+                    </td>
+                    <td>
+                        <input value="false" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        injured
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        EXP
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        goalsScored
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        substitute
+                    </td>
+                    <td>
+                        <input value="false" type="text" disabled>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- player3 -->
+        <div style="display: flex;align-items: baseline;">
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#addPlayer3">player
+                3</button>
+            <div class="ml-2" id="stars-container3">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+            </div>
+        </div>
+        <div id="addPlayer3" class="collapse">
+            <table class="table table-bordered table-active table-sm table-striped">
+                <tr>
+                    <td>
+                        position
+                    </td>
+                    <td>
+                        <input value="DF" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        special
+                    </td>
+                    <td>
+                        <input value="null" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        player_img_id
+                    </td>
+                    <td>
+                        <input value="000" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueYellowCards
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueRedCards
+                    </td>
+                    <td>
+                        <input value="false" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        injured
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        EXP
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        goalsScored
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        substitute
+                    </td>
+                    <td>
+                        <input value="false" type="text" disabled>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- player4 -->
+        <div style="display: flex;align-items: baseline;">
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#addPlayer4">player
+                4</button>
+            <div class="ml-2" id="stars-container4">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+            </div>
+        </div>
+        <div id="addPlayer4" class="collapse">
+            <table class="table table-bordered table-active table-sm table-striped">
+                <tr>
+                    <td>
+                        position
+                    </td>
+                    <td>
+                        <input value="MD" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        special
+                    </td>
+                    <td>
+                        <input value="null" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        player_img_id
+                    </td>
+                    <td>
+                        <input value="000" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueYellowCards
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueRedCards
+                    </td>
+                    <td>
+                        <input value="false" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        injured
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        EXP
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        goalsScored
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        substitute
+                    </td>
+                    <td>
+                        <input value="false" type="text" disabled>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- player5 -->
+        <div style="display: flex;align-items: baseline;">
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#addPlayer5">player
+                5</button>
+            <div class="ml-2" id="stars-container5">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+            </div>
+        </div>
+        <div id="addPlayer5" class="collapse">
+            <table class="table table-bordered table-active table-sm table-striped">
+                <tr>
+                    <td>
+                        position
+                    </td>
+                    <td>
+                        <input value="MD" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        special
+                    </td>
+                    <td>
+                        <input value="null" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        player_img_id
+                    </td>
+                    <td>
+                        <input value="000" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueYellowCards
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueRedCards
+                    </td>
+                    <td>
+                        <input value="false" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        injured
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        EXP
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        goalsScored
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        substitute
+                    </td>
+                    <td>
+                        <input value="false" type="text" disabled>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- player6 -->
+        <div style="display: flex;align-items: baseline;">
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#addPlayer6">player
+                6</button>
+            <div class="ml-2" id="stars-container6">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+            </div>
+        </div>
+        <div id="addPlayer6" class="collapse">
+            <table class="table table-bordered table-active table-sm table-striped">
+                <tr>
+                    <td>
+                        position
+                    </td>
+                    <td>
+                        <input value="F" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        special
+                    </td>
+                    <td>
+                        <input value="null" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        player_img_id
+                    </td>
+                    <td>
+                        <input value="000" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueYellowCards
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueRedCards
+                    </td>
+                    <td>
+                        <input value="false" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        injured
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        EXP
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        goalsScored
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        substitute
+                    </td>
+                    <td>
+                        <input value="false" type="text" disabled>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- player7 -->
+        <div style="display: flex;align-items: baseline;">
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#addPlayer7">player
+                7</button>
+            <div class="ml-2" id="stars-container7">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+            </div>
+        </div>
+        <div id="addPlayer7" class="collapse">
+            <table class="table table-bordered table-active table-sm table-striped">
+                <tr>
+                    <td>
+                        position
+                    </td>
+                    <td>
+                        <input value="GK" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        special
+                    </td>
+                    <td>
+                        <input value="null" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        player_img_id
+                    </td>
+                    <td>
+                        <input value="000" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueYellowCards
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueRedCards
+                    </td>
+                    <td>
+                        <input value="false" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        injured
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        EXP
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        goalsScored
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        substitute
+                    </td>
+                    <td>
+                        <input value="true" type="text" disabled>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- player8 -->
+        <div style="display: flex;align-items: baseline;">
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#addPlayer8">player
+                8</button>
+            <div class="ml-2" id="stars-container8">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+            </div>
+        </div>
+        <div id="addPlayer8" class="collapse">
+            <table class="table table-bordered table-active table-sm table-striped">
+                <tr>
+                    <td>
+                        position
+                    </td>
+                    <td>
+                        <input value="GK" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        special
+                    </td>
+                    <td>
+                        <input value="null" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        player_img_id
+                    </td>
+                    <td>
+                        <input value="000" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueYellowCards
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueRedCards
+                    </td>
+                    <td>
+                        <input value="false" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        injured
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        EXP
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        goalsScored
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        substitute
+                    </td>
+                    <td>
+                        <input value="true" type="text" disabled>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- player9 -->
+        <div style="display: flex;align-items: baseline;">
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#addPlayer9">player
+                9</button>
+            <div class="ml-2" id="stars-container9">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+            </div>
+        </div>
+        <div id="addPlayer9" class="collapse">
+            <table class="table table-bordered table-active table-sm table-striped">
+                <tr>
+                    <td>
+                        position
+                    </td>
+                    <td>
+                        <input value="DF" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        special
+                    </td>
+                    <td>
+                        <input value="null" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        player_img_id
+                    </td>
+                    <td>
+                        <input value="000" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueYellowCards
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueRedCards
+                    </td>
+                    <td>
+                        <input value="false" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        injured
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        EXP
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        goalsScored
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        substitute
+                    </td>
+                    <td>
+                        <input value="true" type="text" disabled>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- player10 -->
+        <div style="display: flex;align-items: baseline;">
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#addPlayer10">player
+                10</button>
+            <div class="ml-2" id="stars-container10">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+            </div>
+        </div>
+        <div id="addPlayer10" class="collapse">
+            <table class="table table-bordered table-active table-sm table-striped">
+                <tr>
+                    <td>
+                        position
+                    </td>
+                    <td>
+                        <input value="DF" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        special
+                    </td>
+                    <td>
+                        <input value="null" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        player_img_id
+                    </td>
+                    <td>
+                        <input value="000" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueYellowCards
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueRedCards
+                    </td>
+                    <td>
+                        <input value="false" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        injured
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        EXP
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        goalsScored
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        substitute
+                    </td>
+                    <td>
+                        <input value="false" type="text" disabled>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- player11 -->
+        <div style="display: flex;align-items: baseline;">
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#addPlayer11">player
+                11</button>
+            <div class="ml-2" id="stars-container11">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+            </div>
+        </div>
+        <div id="addPlayer11" class="collapse">
+            <table class="table table-bordered table-active table-sm table-striped">
+                <tr>
+                    <td>
+                        position
+                    </td>
+                    <td>
+                        <input value="DF" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        special
+                    </td>
+                    <td>
+                        <input value="null" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        player_img_id
+                    </td>
+                    <td>
+                        <input value="000" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueYellowCards
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueRedCards
+                    </td>
+                    <td>
+                        <input value="false" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        injured
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        EXP
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        goalsScored
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        substitute
+                    </td>
+                    <td>
+                        <input value="false" type="text" disabled>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- player12 -->
+        <div style="display: flex;align-items: baseline;">
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#addPlayer12">player
+                12</button>
+            <div class="ml-2" id="stars-container12">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+            </div>
+        </div>
+        <div id="addPlayer12" class="collapse">
+            <table class="table table-bordered table-active table-sm table-striped">
+                <tr>
+                    <td>
+                        position
+                    </td>
+                    <td>
+                        <input value="DF" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        special
+                    </td>
+                    <td>
+                        <input value="null" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        player_img_id
+                    </td>
+                    <td>
+                        <input value="000" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueYellowCards
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueRedCards
+                    </td>
+                    <td>
+                        <input value="false" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        injured
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        EXP
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        goalsScored
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        substitute
+                    </td>
+                    <td>
+                        <input value="false" type="text" disabled>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- player13 -->
+        <div style="display: flex;align-items: baseline;">
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#addPlayer13">player
+                13</button>
+            <div class="ml-2" id="stars-container13">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+            </div>
+        </div>
+        <div id="addPlayer13" class="collapse">
+            <table class="table table-bordered table-active table-sm table-striped">
+                <tr>
+                    <td>
+                        position
+                    </td>
+                    <td>
+                        <input value="MD" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        special
+                    </td>
+                    <td>
+                        <input value="null" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        player_img_id
+                    </td>
+                    <td>
+                        <input value="000" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueYellowCards
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueRedCards
+                    </td>
+                    <td>
+                        <input value="false" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        injured
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        EXP
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        goalsScored
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        substitute
+                    </td>
+                    <td>
+                        <input value="false" type="text" disabled>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- player14 -->
+        <div style="display: flex;align-items: baseline;">
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#addPlayer14">player
+                14</button>
+            <div class="ml-2" id="stars-container14">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+            </div>
+        </div>
+        <div id="addPlayer14" class="collapse">
+            <table class="table table-bordered table-active table-sm table-striped">
+                <tr>
+                    <td>
+                        position
+                    </td>
+                    <td>
+                        <input value="MD" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        special
+                    </td>
+                    <td>
+                        <input value="null" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        player_img_id
+                    </td>
+                    <td>
+                        <input value="000" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueYellowCards
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueRedCards
+                    </td>
+                    <td>
+                        <input value="false" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        injured
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        EXP
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        goalsScored
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        substitute
+                    </td>
+                    <td>
+                        <input value="false" type="text" disabled>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- player15 -->
+        <div style="display: flex;align-items: baseline;">
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#addPlayer15">player
+                15</button>
+            <div class="ml-2" id="stars-container15">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+            </div>
+        </div>
+        <div id="addPlayer15" class="collapse">
+            <table class="table table-bordered table-active table-sm table-striped">
+                <tr>
+                    <td>
+                        position
+                    </td>
+                    <td>
+                        <input value="MD" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        special
+                    </td>
+                    <td>
+                        <input value="null" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        player_img_id
+                    </td>
+                    <td>
+                        <input value="000" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueYellowCards
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueRedCards
+                    </td>
+                    <td>
+                        <input value="false" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        injured
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        EXP
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        goalsScored
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        substitute
+                    </td>
+                    <td>
+                        <input value="false" type="text" disabled>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- player16 -->
+        <div style="display: flex;align-items: baseline;">
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#addPlayer16">player
+                16</button>
+            <div class="ml-2" id="stars-container16">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+            </div>
+        </div>
+        <div id="addPlayer16" class="collapse">
+            <table class="table table-bordered table-active table-sm table-striped">
+                <tr>
+                    <td>
+                        position
+                    </td>
+                    <td>
+                        <input value="MD" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        special
+                    </td>
+                    <td>
+                        <input value="null" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        player_img_id
+                    </td>
+                    <td>
+                        <input value="000" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueYellowCards
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueRedCards
+                    </td>
+                    <td>
+                        <input value="false" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        injured
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        EXP
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        goalsScored
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        substitute
+                    </td>
+                    <td>
+                        <input value="true" type="text" disabled>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- player17 -->
+        <div style="display: flex;align-items: baseline;">
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#addPlayer17">player
+                17</button>
+            <div class="ml-2" id="stars-container17">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+            </div>
+        </div>
+        <div id="addPlayer17" class="collapse">
+            <table class="table table-bordered table-active table-sm table-striped">
+                <tr>
+                    <td>
+                        position
+                    </td>
+                    <td>
+                        <input value="F" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        special
+                    </td>
+                    <td>
+                        <input value="null" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        player_img_id
+                    </td>
+                    <td>
+                        <input value="000" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueYellowCards
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueRedCards
+                    </td>
+                    <td>
+                        <input value="false" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        injured
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        EXP
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        goalsScored
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        substitute
+                    </td>
+                    <td>
+                        <input value="true" type="text" disabled>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- player18 -->
+        <div style="display: flex;align-items: baseline;">
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#addPlayer18">player
+                18</button>
+            <div class="ml-2" id="stars-container18">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+                <img src="images/main-1/star.png" class="player-power-stars">
+            </div>
+        </div>
+        <div id="addPlayer18" class="collapse">
+            <table class="table table-bordered table-active table-sm table-striped">
+                <tr>
+                    <td>
+                        position
+                    </td>
+                    <td>
+                        <input value="F" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        defense_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_current
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_full
+                    </td>
+                    <td>
+                        <input value="" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        attack_color
+                    </td>
+                    <td>
+                        <select>
+                            <option></option>
+                            <option style="background: #FF1D00">RED</option>
+                            <option style="background: #3052FF">BLUE</option>
+                            <option style="background: #2F7F07">GREEN</option>
+                            <option style="background: #E2D841">YELLOW</option>
+                            <option style="background: #B200FF">PURPLE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        special
+                    </td>
+                    <td>
+                        <input value="null" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        player_img_id
+                    </td>
+                    <td>
+                        <input value="000" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueYellowCards
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        leagueRedCards
+                    </td>
+                    <td>
+                        <input value="false" type="text" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        injured
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        EXP
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        goalsScored
+                    </td>
+                    <td>
+                        <input value="0" type="number" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        substitute
+                    </td>
+                    <td>
+                        <input value="true" type="text" disabled>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+
+        <button type="button" class="btn-lg m-2" style="position: absolute;left: 0px;  bottom: 0px;"
+            onclick="back()">Back</button>
+        <button type="button" class="btn-lg m-2" style="position: absolute;right: 0px;  bottom: 0px;"
+            onclick="save()">Save</button>
+    </form>
+
+    <div id="selection" class="col-6">
+        <button type="button" class="btn-lg m-2" onclick="add()">Add new team</button>
+        <button type="button" class="btn-lg m-2" onclick="loadAllTeams()">Load team</button>
+    </div>
+
+    <div id="all-teams" class="col-6">
+        <button id="back" type="button" class="btn-lg m-2" style="position: absolute;left: 0px;  bottom: 0px;"
+            onclick="back()">Back</button>
+    </div>
+
+    <script>
+        calcPlayerPower = (playerIdx, totalPower) => {
+            let container = document.getElementById(`stars-container${playerIdx}`);// loop all players here...
+            let stars = container.querySelectorAll("img");
+            let finalPower;
+
+            if (totalPower <= 25) {
+                finalPower = 7;
+            }
+            else if (totalPower === 26 || totalPower === 27) {
+                finalPower = 6;
+            }
+            else if (totalPower === 28 || totalPower === 29) {
+                finalPower = 5;
+            }
+            else if (totalPower === 30 || totalPower === 31) {
+                finalPower = 4;
+            }
+            else if (totalPower === 32 || totalPower === 33) {
+                finalPower = 3;
+            }
+            else if (totalPower === 34 || totalPower === 35) {
+                finalPower = 2;
+            }
+            else if (totalPower > 35 && totalPower < 100) {
+                finalPower = 1;
+            } else {
+                finalPower = 0;
+            }
+            // console.log(finalPower);
+            for (let starIdx = 0; starIdx < stars.length; starIdx++) {
+                const opacityLevel = finalPower > starIdx ? 1 : 0.4;
+                stars[starIdx].style.opacity = opacityLevel;
+            }
+        }
+
+        calcTotalTeamPower = () => {
+            let container = document.getElementById(`stars-container-club`);
+            let stars = container.querySelectorAll("img");
+            let totalPower = 0;
+            for (let playerIdx = 1; playerIdx <= 18; playerIdx++) {
+                let rows = document.getElementById(`addPlayer${playerIdx}`).querySelectorAll("tr");
+                let defense_full = [...rows].filter(r => r.querySelectorAll("td")[0].innerHTML.trim() === "defense_full");
+                let attack_full = [...rows].filter(r => r.querySelectorAll("td")[0].innerHTML.trim() === "attack_full");
+                let finalDefenseFull = defense_full[0].querySelectorAll("td")[1].children[0].value;
+                let finalAttackFull = attack_full[0].querySelectorAll("td")[1].children[0].value;
+                // if (!+finalDefenseFull || !+finalAttackFull) {
+                //     debugger
+                // }
+                totalPower += +finalDefenseFull + +finalAttackFull;
+            }
+            console.log(`total players power => ${totalPower}`);
+            totalPower /= 18;
+            console.log(`average players' power => ${totalPower}`);
+
+            if (totalPower <= 25) {
+                totalPower = 7;
+            }
+            else if (totalPower > 25 && totalPower <= 27) {
+                totalPower = 6;
+            }
+            else if (totalPower > 27 && totalPower <= 29) {
+                totalPower = 5;
+            }
+            else if (totalPower > 29 && totalPower <= 31) {
+                totalPower = 4;
+            }
+            else if (totalPower > 31 && totalPower <= 33) {
+                totalPower = 3;
+            }
+            else if (totalPower > 33 && totalPower <= 35) {
+                totalPower = 2;
+            }
+            else if (totalPower > 35) {
+                totalPower = 1;
+            } else {
+                totalPower = 0;
+            }
+
+            for (let starIdx = 0; starIdx < stars.length; starIdx++) {
+                const opacityLevel = totalPower > starIdx ? 1 : 0.4;
+                stars[starIdx].style.opacity = opacityLevel;
+            }
+            document.getElementById("power").value = totalPower;
+            console.log(`team power => ${totalPower}`);
+        }
+
+        loadAllTeams = () => {
+            let parent = document.getElementById("all-teams");
+
+            document.getElementById("add-team-section").style.display = "none";
+            document.getElementById("selection").style.display = "none";
+            document.getElementById("all-teams").style.display = "flex";
+
+            if (parent.children.length > 1) {
+                return;
+            }
+            $.ajax({
+                url: "getAllClubsData",
+                type: 'POST',
+                contentType: 'application/json'
+            }).then(res => {
+                let allClubs = res.clubs;
+                res.clubs.forEach(club => {
+                    console.log(club.name);
+                    let element = document.createElement("div");
+                    element.innerHTML = (club.name);
+                    parent.appendChild(element);
+                    element.style.fontSize = "2rem";
+                    element.addEventListener('click', function (e) {
+                        loadTeam(club);
+                    });
+                });
+                console.log(res.clubs);
+            }).catch(err => {
+                console.log(err);
+            })
+        }
+
+        loadTeam = (team) => {
+            add();
+            document.getElementById("clubName").value = team.clubData.name;
+            document.getElementById("colors");
+            document.getElementById("power").value = team.clubData.power;
+            document.getElementById("logo").value = team.clubData.logo;
+
+            for (let playerIdx = 1; playerIdx <= 18; playerIdx++) {
+                let rows = document.getElementById(`addPlayer${playerIdx}`).querySelectorAll("tr");
+                let player = team.players[playerIdx - 1];
+                let totalPower = player.attack_full + player.defense_full;
+                calcPlayerPower(playerIdx, totalPower);
+                // addListeners(playerIdx);
+                for (let row = 0; row < rows.length; row++) {
+                    let key = rows[row].querySelectorAll("td")[0].innerHTML.trim();
+                    let value = rows[row].querySelectorAll("td")[1];
+                    let x;
+                    if (value.querySelectorAll("input")[0]) {
+                        value.querySelectorAll("input")[0].value = player[key];
+                    } else {
+                        if (player[key] === "FF1D00") {
+                            x = "RED";
+                        } else if (player[key] === "3052FF") {
+                            x = "BLUE";
+
+                        } else if (player[key] === "2F7F07") {
+                            x = "GREEN";
+
+                        } else if (player[key] === "E2D841") {
+                            x = "YELLOW";
+
+                        } else if (player[key] === "B200FF") {
+                            x = "PURPLE";
+                        }
+                        value.querySelectorAll("select")[0].value = x;
+                    }
+                }
+            }
+            for (let playerIdx = 1; playerIdx <= 18; playerIdx++) {
+                addListeners(playerIdx);
+            }
+        }
+
+        add = () => {
+            document.getElementById("add-team-section").style.display = "flex";
+            document.getElementById("selection").style.display = "none";
+            document.getElementById("all-teams").style.display = "none";
+        }
+
+        back = () => {
+            // document.getElementById("add-team-section").style.display = "none";
+            // document.getElementById("selection").style.display = "flex";
+            // document.getElementById("all-teams").style.display = "none";
+            location.reload();
+        }
+
+        save = () => {
+            const throwErrorOnEmptyProperty = true;
+            let clubData = {
+                name: document.getElementById("clubName").value,
+                colors: document.getElementById("colors"),
+                power: +document.getElementById("power").value,
+                logo: document.getElementById("logo").value
+            }
+            Object.keys(clubData).forEach(element => {
+                if ((clubData[element] === "" || clubData[element] === 0) && throwErrorOnEmptyProperty) {
+                    throw `property ==>> ${element.toLocaleUpperCase()} is empty!`;
+                }
+            });
+
+            let allPlayers = [];
+            for (let playerIdx = 1; playerIdx <= 18; playerIdx++) {
+                let rows = document.getElementById(`addPlayer${playerIdx}`).querySelectorAll("tr");
+                let playerData = {};
+                for (let row = 0; row < rows.length; row++) {
+                    let key = rows[row].querySelectorAll("td")[0].innerHTML;
+                    let value = rows[row].querySelectorAll("td")[1]
+                    let x;
+                    if (value.querySelectorAll("input")[0]) {
+                        x = value.querySelectorAll("input")[0].value;
+                    } else {
+                        let select = value.querySelectorAll("select")[0]
+                        x = select.options[select.selectedIndex].text;
+                        if (x === "RED") {
+                            x = "FF1D00";
+                        } else if (x === "BLUE") {
+                            x = "3052FF";
+                        } else if (x === "GREEN") {
+                            x = "2F7F07";
+
+                        } else if (x === "YELLOW") {
+                            x = "E2D841";
+
+                        } else if (x === "PURPLE") {
+                            x = "B200FF";
+                        }
+                    }
+                    if (x === "" && throwErrorOnEmptyProperty) {
+                        throw `property ==>> ${key.trim().toLocaleUpperCase()} for player ${playerIdx} is empty!`;
+                    }
+
+                    //check type => important, coz all input data is string... 
+                    // this is stupid workaround, but will do for now
+                    let el = value.querySelectorAll("input")[0];
+                    if (el) {
+                        if (el.type === "number") {
+                            x = +x;
+                        } else if (el.type === "text" && x === "false") {
+                            x = false;
+                        } else if (el.type === "text" && x === "true") {
+                            x = true;
+                        }
+                    }
+
+                    playerData[key.trim()] = x;
+                }
+                allPlayers.push(playerData);
+            }
+            console.log(allPlayers);
+            // return;    //uncomment if testing - prevent recording in DB 
+            $.ajax({
+                url: "addClub",
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(
+                    {
+                        name: clubData.name,
+                        clubData: clubData,
+                        players: allPlayers
+                    }
+                )
+            }).then(x => {
+                alert('Successfully added')
+            }).catch(err => {
+                console.log(err);
+            })
+        }
+
+        addListeners = (playerIdx) => {
+            let rows = document.getElementById(`addPlayer${playerIdx}`).querySelectorAll("tr");
+            let defense_full = [...rows].filter(r => r.querySelectorAll("td")[0].innerHTML.trim() === "defense_full");
+            let attack_full = [...rows].filter(r => r.querySelectorAll("td")[0].innerHTML.trim() === "attack_full");
+            let defenseEl = defense_full[0].querySelectorAll("td")[1];
+            let attackEl = attack_full[0].querySelectorAll("td")[1];
+            defenseEl.addEventListener('input', function (e) {
+                let finalDefenseFull = defense_full[0].querySelectorAll("td")[1].children[0].value;
+                let finalAttackFull = attack_full[0].querySelectorAll("td")[1].children[0].value;
+                let totalPower = +finalDefenseFull + +finalAttackFull;
+                if (+finalDefenseFull && +finalAttackFull) {
+                    calcPlayerPower(playerIdx, totalPower);
+                    calcTotalTeamPower();
+                }
+            });
+            attackEl.addEventListener('input', function (e) {
+                let finalDefenseFull = defense_full[0].querySelectorAll("td")[1].children[0].value;
+                let finalAttackFull = attack_full[0].querySelectorAll("td")[1].children[0].value;
+                let totalPower = +finalDefenseFull + +finalAttackFull;
+                if (+finalDefenseFull && +finalAttackFull) {
+                    calcPlayerPower(playerIdx, totalPower);
+                    calcTotalTeamPower();
+                }
+            });
+            calcTotalTeamPower();
+        }
+        // calcTotalTeamPower();
+
+    </script>
+</body>
+
+</html>

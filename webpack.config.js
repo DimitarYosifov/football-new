@@ -21,7 +21,7 @@ module.exports = (env, argv) => {
             static: false,
             client: {
                 logging: "warn",
-                overlay: { 
+                overlay: {
                     errors: true,
                     warnings: false,
                 },
@@ -64,6 +64,10 @@ module.exports = (env, argv) => {
                             loader: "html-loader"
                         }
                     ]
+                },
+                {
+                    test: /\.css$/i,
+                    use: ['style-loader', 'css-loader']
                 }
             ]
         },
@@ -71,7 +75,8 @@ module.exports = (env, argv) => {
             extensions: [
                 '.tsx',
                 '.ts',
-                '.js'
+                '.js',
+                '.css'
             ]
         },
 

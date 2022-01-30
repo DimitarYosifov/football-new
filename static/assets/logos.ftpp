@@ -1,0 +1,76 @@
+{
+  "meta": {
+    "version": "0.6.4"
+  },
+  "savePath": "C:\\Users\\User\\Desktop\\football\\assets",
+  "images": [
+    {
+      "name": "testlogo1.png",
+      "path": "C:/Users/User/Desktop/football/images/logos/testlogo1.png",
+      "folder": ""
+    },
+    {
+      "name": "testlogo2.png",
+      "path": "C:/Users/User/Desktop/football/images/logos/testlogo2.png",
+      "folder": ""
+    },
+    {
+      "name": "testlogo3.png",
+      "path": "C:/Users/User/Desktop/football/images/logos/testlogo3.png",
+      "folder": ""
+    },
+    {
+      "name": "testlogo4.png",
+      "path": "C:/Users/User/Desktop/football/images/logos/testlogo4.png",
+      "folder": ""
+    },
+    {
+      "name": "testlogo5.png",
+      "path": "C:/Users/User/Desktop/football/images/logos/testlogo5.png",
+      "folder": ""
+    },
+    {
+      "name": "testlogo6.png",
+      "path": "C:/Users/User/Desktop/football/images/logos/testlogo6.png",
+      "folder": ""
+    },
+    {
+      "name": "testlogo7.png",
+      "path": "C:/Users/User/Desktop/football/images/logos/testlogo7.png",
+      "folder": ""
+    },
+    {
+      "name": "testlogo8.png",
+      "path": "C:/Users/User/Desktop/football/images/logos/testlogo8.png",
+      "folder": ""
+    }
+  ],
+  "folders": [],
+  "packOptions": {
+    "textureName": "logos",
+    "textureFormat": "png",
+    "removeFileExtension": true,
+    "prependFolderName": true,
+    "base64Export": false,
+    "tinify": false,
+    "tinifyKey": "",
+    "scale": 1,
+    "filter": "none",
+    "exporter": "JSON (hash)",
+    "fileName": "pack-result",
+    "savePath": "C:\\Users\\User\\Desktop\\football\\assets",
+    "width": 2048,
+    "height": 2048,
+    "fixedSize": false,
+    "powerOfTwo": false,
+    "padding": 0,
+    "extrude": 0,
+    "allowRotation": true,
+    "allowTrim": true,
+    "trimMode": "trim",
+    "alphaThreshold": "0",
+    "detectIdentical": true,
+    "packer": "MaxRectsBin",
+    "packerMethod": "BestShortSideFit"
+  }
+}

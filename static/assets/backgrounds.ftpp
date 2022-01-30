@@ -1,0 +1,71 @@
+{
+  "meta": {
+    "version": "0.6.4"
+  },
+  "savePath": "C:\\Users\\User\\Desktop\\football\\assets",
+  "images": [
+    {
+      "name": "bg33.jpg",
+      "path": "C:/Users/User/Desktop/football/images/backgrounds/bg33.jpg",
+      "folder": ""
+    },
+    {
+      "name": "bg435.jpg",
+      "path": "C:/Users/User/Desktop/football/images/backgrounds/bg435.jpg",
+      "folder": ""
+    },
+    {
+      "name": "bg55.jpg",
+      "path": "C:/Users/User/Desktop/football/images/backgrounds/bg55.jpg",
+      "folder": ""
+    },
+    {
+      "name": "bg909.jpg",
+      "path": "C:/Users/User/Desktop/football/images/backgrounds/bg909.jpg",
+      "folder": ""
+    },
+    {
+      "name": "pitch.png",
+      "path": "C:/Users/User/Desktop/football/images/backgrounds/pitch.png",
+      "folder": ""
+    },
+    {
+      "name": "scorer.png",
+      "path": "C:/Users/User/Desktop/football/images/backgrounds/scorer.png",
+      "folder": ""
+    },
+    {
+      "name": "yellowCardsBG.png",
+      "path": "C:/Users/User/Desktop/football/images/backgrounds/yellowCardsBG.png",
+      "folder": ""
+    }
+  ],
+  "folders": [],
+  "packOptions": {
+    "textureName": "backgrounds",
+    "textureFormat": "png",
+    "removeFileExtension": true,
+    "prependFolderName": true,
+    "base64Export": false,
+    "tinify": false,
+    "tinifyKey": "",
+    "scale": 1,
+    "filter": "none",
+    "exporter": "JSON (hash)",
+    "fileName": "pack-result",
+    "savePath": "C:\\Users\\User\\Desktop\\football\\assets",
+    "width": 2048,
+    "height": 2048,
+    "fixedSize": false,
+    "powerOfTwo": false,
+    "padding": 0,
+    "extrude": 0,
+    "allowRotation": true,
+    "allowTrim": true,
+    "trimMode": "trim",
+    "alphaThreshold": "0",
+    "detectIdentical": true,
+    "packer": "MaxRectsBin",
+    "packerMethod": "BestShortSideFit"
+  }
+}

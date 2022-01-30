@@ -1,0 +1,63 @@
+{
+  "frames": {
+    "btn1": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 680,
+        "h": 229
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 55,
+        "w": 680,
+        "h": 229
+      },
+      "sourceSize": {
+        "w": 680,
+        "h": 340
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "save": {
+      "frame": {
+        "x": 680,
+        "y": 0,
+        "w": 300,
+        "h": 117
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 300,
+        "h": 117
+      },
+      "sourceSize": {
+        "w": 300,
+        "h": 117
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  },
+  "meta": {
+    "app": "http://free-tex-packer.com",
+    "version": "0.6.4",
+    "image": "buttons.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 980,
+      "h": 229
+    },
+    "scale": 1
+  }
+}

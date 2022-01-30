@@ -1,0 +1,146 @@
+{
+  "meta": {
+    "version": "0.6.4"
+  },
+  "savePath": "C:\\Users\\User\\Desktop\\football\\assets",
+  "images": [
+    {
+      "name": "ball_blue.png",
+      "path": "C:/Users/User/Desktop/football/images/main-1/ball_blue.png",
+      "folder": ""
+    },
+    {
+      "name": "ball_green.png",
+      "path": "C:/Users/User/Desktop/football/images/main-1/ball_green.png",
+      "folder": ""
+    },
+    {
+      "name": "ball_orange.png",
+      "path": "C:/Users/User/Desktop/football/images/main-1/ball_orange.png",
+      "folder": ""
+    },
+    {
+      "name": "ball_prototype.png",
+      "path": "C:/Users/User/Desktop/football/images/main-1/ball_prototype.png",
+      "folder": ""
+    },
+    {
+      "name": "ball_purple.png",
+      "path": "C:/Users/User/Desktop/football/images/main-1/ball_purple.png",
+      "folder": ""
+    },
+    {
+      "name": "ball_red.png",
+      "path": "C:/Users/User/Desktop/football/images/main-1/ball_red.png",
+      "folder": ""
+    },
+    {
+      "name": "ball_yellow.png",
+      "path": "C:/Users/User/Desktop/football/images/main-1/ball_yellow.png",
+      "folder": ""
+    },
+    {
+      "name": "coin.png",
+      "path": "C:/Users/User/Desktop/football/images/main-1/coin.png",
+      "folder": ""
+    },
+    {
+      "name": "container4.png",
+      "path": "C:/Users/User/Desktop/football/images/main-1/container4.png",
+      "folder": ""
+    },
+    {
+      "name": "flame.png",
+      "path": "C:/Users/User/Desktop/football/images/main-1/flame.png",
+      "folder": ""
+    },
+    {
+      "name": "glove1.png",
+      "path": "C:/Users/User/Desktop/football/images/main-1/glove1.png",
+      "folder": ""
+    },
+    {
+      "name": "glove2.png",
+      "path": "C:/Users/User/Desktop/football/images/main-1/glove2.png",
+      "folder": ""
+    },
+    {
+      "name": "info.png",
+      "path": "C:/Users/User/Desktop/football/images/main-1/info.png",
+      "folder": ""
+    },
+    {
+      "name": "next.png",
+      "path": "C:/Users/User/Desktop/football/images/main-1/next.png",
+      "folder": ""
+    },
+    {
+      "name": "prev.png",
+      "path": "C:/Users/User/Desktop/football/images/main-1/prev.png",
+      "folder": ""
+    },
+    {
+      "name": "rain.png",
+      "path": "C:/Users/User/Desktop/football/images/main-1/rain.png",
+      "folder": ""
+    },
+    {
+      "name": "red_card.png",
+      "path": "C:/Users/User/Desktop/football/images/main-1/red_card.png",
+      "folder": ""
+    },
+    {
+      "name": "red_cross.png",
+      "path": "C:/Users/User/Desktop/football/images/main-1/red_cross.png",
+      "folder": ""
+    },
+    {
+      "name": "shoe.png",
+      "path": "C:/Users/User/Desktop/football/images/main-1/shoe.png",
+      "folder": ""
+    },
+    {
+      "name": "star-particle.png",
+      "path": "C:/Users/User/Desktop/football/images/main-1/star-particle.png",
+      "folder": ""
+    },
+    {
+      "name": "star.png",
+      "path": "C:/Users/User/Desktop/football/images/main-1/star.png",
+      "folder": ""
+    },
+    {
+      "name": "yellow_card.png",
+      "path": "C:/Users/User/Desktop/football/images/main-1/yellow_card.png",
+      "folder": ""
+    }
+  ],
+  "folders": [],
+  "packOptions": {
+    "textureName": "main-1",
+    "textureFormat": "png",
+    "removeFileExtension": true,
+    "prependFolderName": true,
+    "base64Export": false,
+    "tinify": false,
+    "tinifyKey": "",
+    "scale": 1,
+    "filter": "none",
+    "exporter": "JSON (hash)",
+    "fileName": "pack-result",
+    "savePath": "C:\\Users\\User\\Desktop\\football\\assets",
+    "width": 2048,
+    "height": 2048,
+    "fixedSize": false,
+    "powerOfTwo": false,
+    "padding": 0,
+    "extrude": 0,
+    "allowRotation": true,
+    "allowTrim": true,
+    "trimMode": "trim",
+    "alphaThreshold": "0",
+    "detectIdentical": true,
+    "packer": "MaxRectsBin",
+    "packerMethod": "BestShortSideFit"
+  }
+}

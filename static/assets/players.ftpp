@@ -1,0 +1,531 @@
+{
+  "meta": {
+    "version": "0.6.4"
+  },
+  "savePath": "C:\\Users\\User\\Desktop\\football\\assets",
+  "images": [
+    {
+      "name": "player_id_001.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_001.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_002.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_002.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_003.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_003.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_004.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_004.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_005.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_005.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_006.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_006.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_007.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_007.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_008.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_008.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_009.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_009.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_010.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_010.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_011.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_011.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_012.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_012.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_013.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_013.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_014.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_014.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_015.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_015.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_016.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_016.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_017.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_017.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_018.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_018.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_019.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_019.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_020.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_020.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_021.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_021.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_022.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_022.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_023.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_023.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_024.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_024.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_025.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_025.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_026.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_026.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_027.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_027.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_028.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_028.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_029.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_029.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_030.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_030.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_031.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_031.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_032.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_032.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_033.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_033.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_034.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_034.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_035.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_035.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_036.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_036.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_037.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_037.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_038.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_038.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_039.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_039.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_040.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_040.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_041.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_041.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_042.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_042.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_043.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_043.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_044.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_044.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_045.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_045.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_046.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_046.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_047.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_047.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_048.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_048.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_049.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_049.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_050.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_050.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_051.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_051.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_052.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_052.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_053.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_053.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_054.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_054.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_055.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_055.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_056.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_056.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_057.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_057.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_058.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_058.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_059.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_059.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_060.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_060.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_061.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_061.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_062.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_062.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_063.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_063.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_064.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_064.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_065.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_065.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_066.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_066.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_067.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_067.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_068.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_068.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_069.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_069.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_070.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_070.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_071.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_071.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_072.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_072.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_073.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_073.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_074.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_074.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_075.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_075.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_076.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_076.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_077.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_077.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_078.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_078.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_079.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_079.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_080.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_080.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_081.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_081.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_082.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_082.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_083.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_083.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_084.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_084.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_085.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_085.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_086.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_086.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_087.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_087.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_088.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_088.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_089.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_089.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_090.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_090.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_091.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_091.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_092.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_092.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_093.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_093.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_094.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_094.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_095.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_095.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_096.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_096.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_097.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_097.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_098.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_098.png",
+      "folder": ""
+    },
+    {
+      "name": "player_id_099.png",
+      "path": "C:/Users/User/Desktop/football/images/players/player_id_099.png",
+      "folder": ""
+    }
+  ],
+  "folders": [],
+  "packOptions": {
+    "textureName": "players",
+    "textureFormat": "png",
+    "removeFileExtension": true,
+    "prependFolderName": true,
+    "base64Export": false,
+    "tinify": false,
+    "tinifyKey": "",
+    "scale": 1,
+    "filter": "none",
+    "exporter": "JSON (hash)",
+    "fileName": "pack-result",
+    "savePath": "C:\\Users\\User\\Desktop\\football\\assets",
+    "width": 2048,
+    "height": 2048,
+    "fixedSize": false,
+    "powerOfTwo": false,
+    "padding": 0,
+    "extrude": 0,
+    "allowRotation": true,
+    "allowTrim": true,
+    "trimMode": "trim",
+    "alphaThreshold": "0",
+    "detectIdentical": true,
+    "packer": "MaxRectsBin",
+    "packerMethod": "BestShortSideFit"
+  }
+}

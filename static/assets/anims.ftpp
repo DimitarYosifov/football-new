@@ -1,0 +1,86 @@
+{
+  "meta": {
+    "version": "0.6.4"
+  },
+  "savePath": "C:\\Users\\User\\Desktop\\football\\assets",
+  "images": [
+    {
+      "name": "coins_anim_1.png",
+      "path": "C:/Users/User/Desktop/football/images/anims/coin_anim/coins_anim_1.png",
+      "folder": ""
+    },
+    {
+      "name": "coins_anim_10.png",
+      "path": "C:/Users/User/Desktop/football/images/anims/coin_anim/coins_anim_10.png",
+      "folder": ""
+    },
+    {
+      "name": "coins_anim_2.png",
+      "path": "C:/Users/User/Desktop/football/images/anims/coin_anim/coins_anim_2.png",
+      "folder": ""
+    },
+    {
+      "name": "coins_anim_3.png",
+      "path": "C:/Users/User/Desktop/football/images/anims/coin_anim/coins_anim_3.png",
+      "folder": ""
+    },
+    {
+      "name": "coins_anim_4.png",
+      "path": "C:/Users/User/Desktop/football/images/anims/coin_anim/coins_anim_4.png",
+      "folder": ""
+    },
+    {
+      "name": "coins_anim_5.png",
+      "path": "C:/Users/User/Desktop/football/images/anims/coin_anim/coins_anim_5.png",
+      "folder": ""
+    },
+    {
+      "name": "coins_anim_6.png",
+      "path": "C:/Users/User/Desktop/football/images/anims/coin_anim/coins_anim_6.png",
+      "folder": ""
+    },
+    {
+      "name": "coins_anim_7.png",
+      "path": "C:/Users/User/Desktop/football/images/anims/coin_anim/coins_anim_7.png",
+      "folder": ""
+    },
+    {
+      "name": "coins_anim_8.png",
+      "path": "C:/Users/User/Desktop/football/images/anims/coin_anim/coins_anim_8.png",
+      "folder": ""
+    },
+    {
+      "name": "coins_anim_9.png",
+      "path": "C:/Users/User/Desktop/football/images/anims/coin_anim/coins_anim_9.png",
+      "folder": ""
+    }
+  ],
+  "folders": [],
+  "packOptions": {
+    "textureName": "anims",
+    "textureFormat": "png",
+    "removeFileExtension": true,
+    "prependFolderName": true,
+    "base64Export": false,
+    "tinify": false,
+    "tinifyKey": "",
+    "scale": 1,
+    "filter": "none",
+    "exporter": "JSON (hash)",
+    "fileName": "pack-result",
+    "savePath": "C:\\Users\\User\\Desktop\\football\\assets",
+    "width": 2048,
+    "height": 2048,
+    "fixedSize": false,
+    "powerOfTwo": false,
+    "padding": 0,
+    "extrude": 0,
+    "allowRotation": true,
+    "allowTrim": true,
+    "trimMode": "trim",
+    "alphaThreshold": "0",
+    "detectIdentical": true,
+    "packer": "MaxRectsBin",
+    "packerMethod": "BestShortSideFit"
+  }
+}
