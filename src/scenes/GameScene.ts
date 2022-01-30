@@ -11,7 +11,7 @@ export class GameScene extends Container implements IScene {
 
         this.clampy.anchor.set(0.5);
         this.clampy.x = 0;
-        this.clampy.y = Manager.height / 2;
+        this.clampy.y =0// Manager.height / 2;
         this.addChild(this.clampy);
 
         gsap.to(this.clampy, 4, {
