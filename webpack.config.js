@@ -6,8 +6,8 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = (env, argv) => {
     return ({
-        stats: 'minimal', // Keep console output easy to read.
-        entry: './src/index.ts', // Your program entry point
+        // stats: 'minimal', // Keep console output easy to read.
+        // entry: './src/index.ts', // Your program entry point
 
         // Your build destination
         output: {
@@ -16,19 +16,19 @@ module.exports = (env, argv) => {
         },
 
         // Config for your testing server
-        devServer: {
-            compress: true,
-            static: false,
-            client: {
-                logging: "warn",
-                overlay: {
-                    errors: true,
-                    warnings: false,
-                },
-                progress: true,
-            },
-            port: 8000, host: '0.0.0.0'
-        },
+        // devServer: {
+        //     compress: true,
+        //     static: false,
+        //     client: {
+        //         logging: "warn",
+        //         overlay: {
+        //             errors: true,
+        //             warnings: false,
+        //         },
+        //         progress: true,
+        //     },
+        //     port: 8000, host: '0.0.0.0'
+        // },
 
         // Web games are bigger than pages, disable the warnings that our game is too big.
         performance: { hints: false },
@@ -56,6 +56,14 @@ module.exports = (env, argv) => {
                     test: /\.ts(x)?$/,
                     loader: 'ts-loader',
                     exclude: /node_modules/
+                },
+                {
+                    test: /\.html$/,
+                    use: [
+                        {
+                            loader: "html-loader"
+                        }
+                    ]
                 }
             ]
         },
