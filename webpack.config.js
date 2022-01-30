@@ -16,19 +16,19 @@ module.exports = (env, argv) => {
         },
 
         // Config for your testing server
-        // devServer: {
-        //     compress: true,
-        //     static: false,
-        //     client: {
-        //         logging: "warn",
-        //         overlay: {
-        //             errors: true,
-        //             warnings: false,
-        //         },
-        //         progress: true,
-        //     },
-        //     port: 8000, host: '0.0.0.0'
-        // },
+        devServer: {
+            compress: true,
+            static: false,
+            client: {
+                logging: "warn",
+                overlay: { 
+                    errors: true,
+                    warnings: false,
+                },
+                progress: true,
+            },
+            port: 8000, host: '0.0.0.0'
+        },
 
         // Web games are bigger than pages, disable the warnings that our game is too big.
         performance: { hints: false },
