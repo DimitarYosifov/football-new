@@ -27,7 +27,7 @@ module.exports = (env, argv) => {
                 },
                 progress: true,
             },
-            port: 8080, host: '0.0.0.0'
+            port: 8000, host: '0.0.0.0'
         },
 
         // Web games are bigger than pages, disable the warnings that our game is too big.
