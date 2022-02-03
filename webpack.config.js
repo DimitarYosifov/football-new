@@ -8,7 +8,8 @@ module.exports = (env, argv) => {
     return ({
         // stats: 'minimal', // Keep console output easy to read.
         // entry: './src/index.ts', // Your program entry point
-
+        // target: 'node',   // THIS IS THE IMPORTANT PART
+        // externals: [nodeExternals()],
         // Your build destination
         output: {
             path: path.resolve(__dirname, 'dist'),

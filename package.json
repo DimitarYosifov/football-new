@@ -2,18 +2,22 @@
   "license": "",
   "main": "server.js",
   "scripts": {
-    "dev": "webpack serve --mode=development",
+    "dev": "webpack serve --mode=development&& node server.js",
     "start": "node server.js",
     "build": "webpack --mode production"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "express": "^4.17.2",
     "gsap": "^3.9.1",
-    "pixi.js": "^6.2.0"
+    "pixi.js": "^6.2.0",
+    "firebase": "^7.21.1",
+    "pixi-filters": "^2.7.1"
   },
   "devDependencies": {
     "@babel/core": "^7.16.12",
     "@babel/preset-env": "^7.16.11",
+    "@types/jquery": "^3.5.13",
     "babel-loader": "^8.2.3",
     "copy-webpack-plugin": "^9.1.0",
     "css-loader": "^6.5.1",

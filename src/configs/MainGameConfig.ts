@@ -53,5 +53,6 @@ export const config: any = {
     predefinedBlockColor: null,
 
     maxInjuryDuration: 5,
-    yellowCardsToMissGame: 5
+    yellowCardsToMissGame: 5,
+    APIEndPoint: `https://football-match3-api.herokuapp.com/`
 }
