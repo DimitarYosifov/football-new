@@ -92,6 +92,10 @@ module.exports = (env, argv) => {
                 template: 'src/index.ejs',
                 hash: true,
                 minify: false
+            }),
+
+            new webpack.ProvidePlugin({
+                PIXI: 'pixi.js'
             })
         ]
     });
