@@ -1,7 +1,9 @@
-import { Application } from "@pixi/app";
-import { DisplayObject } from "@pixi/display";
+import { Application, DisplayObject } from "pixi.js";
 
 export class App {
+
+    public static user: string = ""
+
     private constructor() { }
 
     private static app: Application;
@@ -55,22 +57,22 @@ export class App {
     }
 
     public static setScene(newScene: IScene): void {
-        if (App.currentScene) {
-            App.app.stage.removeChild(App.currentScene);
-            App.currentScene.destroy();
-        }
         App.currentScene = newScene;
         App.app.stage.addChild(App.currentScene);
     }
 
+    public static removeScene(scene: IScene = App.currentScene) {
+        if (scene) {
+            App.app.stage.removeChild(App.currentScene);
+            App.currentScene.destroy();
+        }
+    }
+
     // This update will be called by a pixi ticker and tell the scene that a tick happened
     private static update(framesPassed: number): void {
-        // Let the current scene know that we updated it...
         if (App.currentScene) {
             App.currentScene.update(framesPassed);
         }
-
-        // as I said before, I HATE the "frame passed" approach. I would rather use `Manager.app.ticker.deltaMS`
     }
 }
 

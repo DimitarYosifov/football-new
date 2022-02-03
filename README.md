@@ -34,8 +34,6 @@ if we want to add new club go to =>  localhost:3000/add-players.html
                 add usage for players' exp points
                 add players' price
                 make name generator
-                add bundle 
-                migrate to typescript ! 
     -->
 
 <!--       
@@ -48,9 +46,6 @@ if we want to add new club go to =>  localhost:3000/add-players.html
                ORANGE 'FF9702'   //removed
                PURPLE: 'B200FF'
         
-        INSIDE "PUBLIC_HTML" FOLDER
-<!-- firebase serve                  //local -->
-<!-- firebase deploy                 //deploy -->
-
+  
 <!--    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     https://www.youtube.com/watch?v=LOeioOKUKI8     - firebase nose -express server tutorial!!!!!!!-->

@@ -1,13 +1,24 @@
 import { config } from "./configs/MainGameConfig";
 
 export function ServerRequest(name: string, data: any = {}, method: string = "GET") {
-    const headers = {}
+
+    let headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    }
+
     const url = `${config.APIEndPoint}${name}`;
+
+    let params = {
+        method: method,
+        headers: headers,
+        body: data
+    }
+
+    if (method === "GET") delete params.body;
+    
     return new Promise<void>((resolve, reject) => {
-        fetch(url, {
-            method: method,
-            headers: headers
-        })
+        fetch(url, params)
             .then((response) => {
                 return response.json();
             })

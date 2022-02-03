@@ -2,7 +2,7 @@ import { Container, Graphics, Loader, Text, TextStyle } from "pixi.js";
 import { assets } from "../Assets";
 import { IScene, App } from "../App";
 import { config } from "../configs/MainGameConfig";
-// import LogIn from ".//LogIn";
+// import LogIn from "./LogIn";
 import { GameScene } from "./GameScene";
 
 export class LoadingScene extends Container implements IScene {
@@ -76,10 +76,9 @@ export class LoadingScene extends Container implements IScene {
         /** 
          * TODO- determine which scene to show: login/register, standigs view
          */
-
-        // Change scene to the game scene!
+        App.removeScene(this);
         App.setScene(new GameScene());
-        // new LogIn( );
+        // new LogIn();
     }
 
     public update(framesPassed: number): void {

@@ -1,64 +1,45 @@
-// import { serverRequest } from "./Request.js"
-// import { config } from "../configs/MainGameConfig";
+import { ServerRequest } from "../ServerRequest"
+import { config } from "../configs/MainGameConfig";
 import gsap from "gsap";
+import { App } from "../App";
 
 export default class LogIn {
 
     private wrapper: HTMLElement = document.querySelector("#wrapper")!;
-    private userName: HTMLElement = document.querySelector("#username")!;
-    private password: HTMLElement = document.querySelector("#password")!;
+    private userName: HTMLInputElement = document.querySelector("#username")!;
+    private password: HTMLInputElement = document.querySelector("#password")!;
     private go: HTMLElement = document.querySelector("#go")!;
     private login: HTMLElement = document.querySelector("#login")!;
     private register: HTMLElement = document.querySelector("#register")!;
-    // private action: string;
+    protected action: string;
     private picked: boolean;
 
     constructor() {
 
-        // setTimeout(() => {
-        //     document.getElementById("loading-wrapper").remove();
-        // }, 1000);
-
-        // this.stage = app.stage;
-        // this.stage.visible = false;
-        // this.stage.alpha = 0;
-        // this.app = app;
-        // this.config = config;
-
-        //apply inputs style
-        // this.wrapper = document.querySelector("#wrapper");
-        // this.wrapper.style.width = this.app.width * 0.8 + "px";
-        // this.wrapper.style.height = this.app.height / 5 + "px";
         this.wrapper.style.opacity = "0";
         this.wrapper.style.pointerEvents = "none";
 
-        // this.username = document.querySelector("#username");
-        // this.username.style.marginBottom = app.height * 0.05 + "px";
-        // this.username.oninput = this.inputLength;
+        this.userName.oninput = this.inputLength.bind(this);
         this.userName.style.opacity = "0.6";
         this.userName.style.pointerEvents = "none";
 
-        // this.password = document.querySelector("#password");
-        // this.password.oninput = this.inputLength;
+        this.password.oninput = this.inputLength.bind(this);
         this.password.style.opacity = "0.6";
         this.password.style.pointerEvents = "none";
 
-        // this.go = document.querySelector("#go");
         this.go.style.opacity = "0.6";
         this.go.style.pointerEvents = "none";
-        this.go.addEventListener("click", this.goPressed);
+        this.go.addEventListener("click", this.goPressed.bind(this));
 
         this.wrapper.addEventListener("submit", (() => {
             this.goPressed();
         }));
 
-        // this.login = document.querySelector("#login");
         this.login.style.pointerEvents = "auto";
-        this.login.addEventListener("click", this.loginPressed);
+        this.login.addEventListener("click", this.loginPressed.bind(this));
 
-        // this.register = document.querySelector("#register");
         this.register.style.pointerEvents = "auto";
-        this.register.addEventListener("click", this.registerPressed);
+        this.register.addEventListener("click", this.registerPressed.bind(this));
 
         this.go.style.display = "block";
         this.login.style.display = "block";
@@ -73,33 +54,22 @@ export default class LogIn {
 
     }
 
-    loginPressed = () => {
-        // this.action = "login";
-        // this.enableInputs();
-        // gsap.to(this.register, 0.5, { opacity: 0.5 });
-        // gsap.to(this.login, 0.5, { opacity: 1 });
-        // gsap.to(this.userName, 0.5, { opacity: 1 });
-        // gsap.to(this.password, 0.5, { opacity: 1 });
-        // this.userName.style.pointerEvents = "auto";
-        // this.password.style.pointerEvents = "auto";
+    private loginPressed() {
+        this.action = "login";
+        this.enableInputs();
+        gsap.to(this.register, 0.5, { opacity: 0.5 });
+        gsap.to(this.login, 0.5, { opacity: 1 });
+        gsap.to(this.userName, 0.5, { opacity: 1 });
+        gsap.to(this.password, 0.5, { opacity: 1 });
+        this.userName.style.pointerEvents = "auto";
+        this.password.style.pointerEvents = "auto";
     };
 
-    goPressed = () => {
-        // this.validate();
+    private goPressed = () => {
+        this.validate();
     };
 
-    registerPressed = () => {
-        // this.action = "register";
-        // this.enableInputs();
-        // gsap.to(this.register, 0.5, { opacity: 1 });
-        // gsap.to(this.login, 0.5, { opacity: 0.5 });
-        // gsap.to(this.userName, 0.5, { opacity: 1 });
-        // gsap.to(this.password, 0.5, { opacity: 1 });
-        // this.userName.style.pointerEvents = "auto";
-        // this.password.style.pointerEvents = "auto";
-    };
-
-    enableInputs = () => {
+    private enableInputs() {
         gsap.to(this.wrapper, 0.5, { opacity: 1 });
         if (!this.picked) {
             gsap.to(this.go, 1, { alpha: 0.6 });
@@ -107,50 +77,56 @@ export default class LogIn {
         this.picked = true;
     }
 
-    // validate() {
-    //     serverRequest(
-    //         this.action, //login or register,
-    //         'POST',
-    //         'application/json',
-    //         JSON.stringify({ user: this.username.value, pass: this.password.value }),
-    //     ).then(res => {
-    //         if (res.nameInUse) {
-    //             this.clearUserInput();
-    //             window.alert("name in use!"); //TODO... 
-    //             return;
-    //         }
-    //         if (res.authorized) {
-    //             this.app.user = this.username.value;
-    //             localStorage.setItem("match3football", res.storageItem);
-    //             localStorage.setItem("user", this.app.user);
-    //             gsap.to(this.wrapper, config.fadeTimeBetweenPhases, { opacity: 0 });
-    //             gsap.to(this.stage, config.fadeTimeBetweenPhases, {
-    //                 alpha: 0, onComplete: () => {
-    //                     this.stage.removeChildren();
-    //                     this.app.checkGameInProgress();
-    //                     gsap.killTweensOf("*");
-    //                     this.wrapper.remove();
-    //                     this.wrapper.style.display = "none";
-    //                     this.stage.visible = true;
-    //                 }
-    //             });
-    //         }
-    //         else if (!res.authorized) {
-    //             this.clearUserInput();
-    //             window.alert("invalid username or password!"); //TODO...
-    //         }
-    //     })
-    // }
+    private registerPressed() {
+        this.action = "register";
+        this.enableInputs();
+        gsap.to(this.register, 0.5, { opacity: 1 });
+        gsap.to(this.login, 0.5, { opacity: 0.5 });
+        gsap.to(this.userName, 0.5, { opacity: 1 });
+        gsap.to(this.password, 0.5, { opacity: 1 });
+        this.userName.style.pointerEvents = "auto";
+        this.password.style.pointerEvents = "auto";
+    };
 
-    clearUserInput() {
+    private validate() {
+        ServerRequest(
+            this.action, //login or register,
+            JSON.stringify({ user: this.userName.value, pass: this.password.value }),
+            'POST',
+        ).then((res: any) => {
+            if (res.nameInUse) {
+                this.clearUserInput();
+                window.alert("name in use!"); //TODO... 
+                return;
+            }
+            if (res.authorized) {
+                App.user = this.userName.value;
+                localStorage.setItem("match3football", res.storageItem);
+                localStorage.setItem("user", App.user);
+                gsap.to(this.wrapper, config.fadeTimeBetweenPhases, {
+                    opacity: 0, onComplete: () => {
+                        // this.app.checkGameInProgress();
+                        this.wrapper.style.display = "none";
+                        this.wrapper.remove();
+                    }
+                });
+            }
+            else if (!res.authorized) {
+                this.clearUserInput();
+                window.alert("invalid username or password!"); //TODO...
+            }
+        })
+    }
+
+    private clearUserInput() {
         (this.userName as HTMLInputElement).value = "";
         (this.password as HTMLInputElement).value = "";
-        this.inputLength();
+        this.inputLength.bind(this);
     }
 
     //on input change. if any is empty, disable GO btn
-    inputLength = () => {
-        if ((this.userName as HTMLInputElement).value === "" || (this.userName as HTMLInputElement).value === "") {
+    private inputLength() {
+        if (this.userName.value === "" || this.userName.value === "") {
             this.go.style.pointerEvents = "auto"
             gsap.to(this.go, 0.15, { alpha: 0.6, interactive: false });
             return;
