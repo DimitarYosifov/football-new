@@ -1,4 +1,5 @@
 import { Application, DisplayObject } from "pixi.js";
+import gsap from "gsap";
 
 export class App {
 
@@ -61,6 +62,15 @@ export class App {
         App.app.stage.addChild(App.currentScene);
     }
 
+    public static fade(from: number, to: number) {
+        return new Promise<void>((resolve, reject) => {
+            gsap.fromTo(App,
+                { alpha: from },
+                { alpha: to, duration: 1, onComplete: () => { resolve() } }
+            );
+        })
+    }
+
     public static removeScene(scene: IScene = App.currentScene) {
         if (scene) {
             App.app.stage.removeChild(App.currentScene);
@@ -80,4 +90,5 @@ export class App {
 // Also, this could be in its own file...
 export interface IScene extends DisplayObject {
     update(framesPassed: number): void;
+    addBG(): void;
 }

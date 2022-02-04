@@ -3,7 +3,8 @@ import { assets } from "../Assets";
 import { IScene, App } from "../App";
 import { config } from "../configs/MainGameConfig";
 // import LogIn from "./LogIn";
-import { GameScene } from "./GameScene";
+// import { GameScene } from "./GameScene";
+import { ModeSelection } from "./ModeSelection";
 
 export class LoadingScene extends Container implements IScene {
 
@@ -77,12 +78,14 @@ export class LoadingScene extends Container implements IScene {
          * TODO- determine which scene to show: login/register, standigs view
          */
         App.removeScene(this);
-        App.setScene(new GameScene());
+        // App.setScene(new GameScene());
+        App.setScene(new ModeSelection());
         // new LogIn();
     }
 
     public update(framesPassed: number): void {
         framesPassed = framesPassed;
-        // To be a scene we must have the update method even if we don't use it.
     }
+
+    public addBG(){};
 }

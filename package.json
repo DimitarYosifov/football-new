@@ -10,7 +10,8 @@
     "cors": "^2.8.5",
     "express": "^4.17.2",
     "gsap": "^3.9.1",
-    "pixi.js": "^6.2.0"
+    "pixi.js": "^6.2.0",
+    "pixi-particles": "^4.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.16.12",

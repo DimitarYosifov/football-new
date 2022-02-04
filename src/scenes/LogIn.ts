@@ -49,7 +49,6 @@ export default class LogIn {
 
         gsap.delayedCall(1.2, () => {
             gsap.to(this.wrapper, 0.5, { opacity: 1 });
-            // gsap.to(this.stage, 0.5, { alpha: 1 });
         })
 
     }

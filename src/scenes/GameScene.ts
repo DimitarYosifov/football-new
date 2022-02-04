@@ -24,19 +24,7 @@ export class GameScene extends Container implements IScene {
         })
     }
     public update(framesPassed: number): void {
-
         framesPassed = framesPassed;
-        // Lets move clampy!
-        // this.clampy.x += this.clampyVelocity * framesPassed;
-
-        // if (this.clampy.x > Manager.width) {
-        //     this.clampy.x = Manager.width;
-        //     this.clampyVelocity = -this.clampyVelocity;
-        // }
-
-        // if (this.clampy.x < 0) {
-        //     this.clampy.x = 0;
-        //     this.clampyVelocity = -this.clampyVelocity; 
-        // }
     }
+    public addBG(){};
 }
