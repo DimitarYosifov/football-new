@@ -104,7 +104,7 @@ export default class LogIn {
                 localStorage.setItem("user", App.user);
                 gsap.to(this.wrapper, config.fadeTimeBetweenPhases, {
                     opacity: 0, onComplete: () => {
-                        // this.app.checkGameInProgress();
+                        App.checkGameInProgress();
                         this.wrapper.style.display = "none";
                         this.wrapper.remove();
                     }

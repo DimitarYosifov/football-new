@@ -2,9 +2,8 @@ import { Container, Graphics, Loader, Text, TextStyle } from "pixi.js";
 import { assets } from "../Assets";
 import { IScene, App } from "../App";
 import { config } from "../configs/MainGameConfig";
-// import LogIn from "./LogIn";
-// import { GameScene } from "./GameScene";
-import { ModeSelection } from "./ModeSelection";
+import LogIn from "./LogIn";
+import gsap from "gsap";
 
 export class LoadingScene extends Container implements IScene {
 
@@ -75,17 +74,26 @@ export class LoadingScene extends Container implements IScene {
 
     private gameLoaded(): void {
         /** 
-         * TODO- determine which scene to show: login/register, standigs view
+         *   determine which scene to show: login/register, standigs view or mode selection
          */
+        App.storageData = localStorage.getItem('match3football');
         App.removeScene(this);
-        // App.setScene(new GameScene());
-        App.setScene(new ModeSelection());
-        // new LogIn();
+        if (!config.hasLogin) {
+            // REMOVES LOGIN PHASE..FOR TESTS ONLY
+            App.checkGameInProgress();
+        } else {
+            if (App.storageData) {
+                App.checkUserData();
+            } else {
+                new LogIn();
+            }
+        }
+        gsap.delayedCall(0.01, () => {
+            App.fade(0, 1).then(() => { });
+        })
     }
 
-    public update(framesPassed: number): void {
-        framesPassed = framesPassed;
-    }
+    public update(framesPassed: number): void {};
 
-    public addBG(){};
+    public addBG() { };
 }

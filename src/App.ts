@@ -1,9 +1,12 @@
 import { Application, DisplayObject } from "pixi.js";
 import gsap from "gsap";
+import { ServerRequest } from "./ServerRequest"
+import LogIn from "./scenes/LogIn";
+import { ModeSelection } from "./scenes/ModeSelection";
 
 export class App {
 
-    public static user: string = ""
+    public static user: string | null;
 
     private constructor() { }
 
@@ -13,6 +16,15 @@ export class App {
     private static _width: number;
     private static _height: number;
 
+    // G A M E   D A T A ---
+    public static storageData: any; // TODO - interface
+    public static allClubs: any;
+    public static playerClubData: any;
+    public static opponentClubData: any;
+    public static friendly: boolean;
+    public static isPlayerHome: boolean;
+    public static isPlayerTurn: boolean = true;
+    // G A M E   D A T A ---
 
     public static get width(): number {
         return App._width;
@@ -63,10 +75,16 @@ export class App {
     }
 
     public static fade(from: number, to: number) {
+        App.currentScene.alpha = from;
         return new Promise<void>((resolve, reject) => {
-            gsap.fromTo(App,
-                { alpha: from },
-                { alpha: to, duration: 1, onComplete: () => { resolve() } }
+            gsap.to(App.currentScene, 1,
+                {
+                    delay: 0.1,
+                    alpha: to,
+                    onComplete: () => {
+                        resolve();
+                    },
+                }
             );
         })
     }
@@ -83,6 +101,39 @@ export class App {
         if (App.currentScene) {
             App.currentScene.update(framesPassed);
         }
+    }
+
+    public static checkUserData() {
+        ServerRequest(
+            "storageData",
+            JSON.stringify({
+                data: App.storageData
+            }),
+            'POST',
+        ).then((res: any) => {
+            if (!res.authorized) {
+                new LogIn();
+            } else {
+                App.user = localStorage.getItem('user');
+                this.checkGameInProgress();
+            }
+        })
+    }
+
+    public static checkGameInProgress = () => {
+        ServerRequest(
+            "getFixtures",
+            JSON.stringify({
+                user: App.user
+            }),
+            'POST',
+        ).then((res: any) => {
+            if (res.data) {
+                // standingsView.bind(this)(res.data);// setSCene
+            } else {
+                this.setScene(new ModeSelection());
+            }
+        })
     }
 }
 

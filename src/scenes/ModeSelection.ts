@@ -1,7 +1,4 @@
-// import { clubSelection } from "./clubSelection.js";
-// import Background from "./Background.js";
-// import GameTexture from "./GameTexture.js";
-// import Particles from "./AddParticles.js";
+import { ClubSelection } from "./ClubSelection";
 import { IScene, App } from "../App";
 import { Container, Sprite, Graphics, Loader, Text, TextStyle, Texture, ParticleContainer } from "pixi.js";
 import { Emitter, EmitterConfig } from "pixi-particles";
@@ -36,10 +33,10 @@ export class ModeSelection extends Container implements IScene {
             strokeThickness: 6
         });
 
+        this.addBG();
         App.fade(0, 1).then(() => {
             const loadingWrapper = document.getElementById("loading-wrapper");
             if (loadingWrapper) { loadingWrapper.remove() };
-            this.addBG();
             this.createFlyingBall();
             this.createflyingBallTimeline();
             this.addFriendly();
@@ -133,15 +130,15 @@ export class ModeSelection extends Container implements IScene {
                     x: -this.friendly.width / 2
                 }
             );
-
-            App.fade(1, 0).then(() => {
-                // set new scene TODO...
-                // alert(`peoceed to clubSelection - TODO`);
-                // clubSelection(this.app, mode);
-            });
+        })
+        gsap.delayedCall(2.5, () => {
+            App.removeScene(this);
+            App.setScene(new ClubSelection(mode));
+            gsap.delayedCall(0.01, () => {
+                App.fade(0, 1).then(() => { });
+            })
         })
     }
-
 
     private startParticles() {
         let container = new ParticleContainer;
