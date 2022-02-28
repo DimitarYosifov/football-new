@@ -115,7 +115,7 @@ export class App {
                 new LogIn();
             } else {
                 App.user = localStorage.getItem('user');
-                this.checkGameInProgress();
+                this.checkGameInProgress(); 
             }
         })
     }
