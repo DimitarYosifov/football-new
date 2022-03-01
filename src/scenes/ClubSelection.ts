@@ -1,8 +1,10 @@
 import { IScene, App } from "../App";
+import { recordClubPlayersParams } from "../recordClubPlayersParams";
 import { Container, Sprite, Graphics, Loader, Text, TextStyle, Texture, ParticleContainer } from "pixi.js";
 import gsap from "gsap";
 import { config } from "../configs/MainGameConfig";
 import { ServerRequest } from "../ServerRequest"
+import { StandingsView } from "./StandingsView"
 
 export class ClubSelection extends Container implements IScene {
 
@@ -162,13 +164,13 @@ export class ClubSelection extends Container implements IScene {
                                             ease: "Bounce.easeOut",
                                             onComplete: () => {
                                                 gsap.delayedCall(1, () => {
-                                                    // recordClubPlayersParams(app);
-                                                    // app.stage.removeChildren();
-                                                    // standingsView.bind(app)();
-                                                    // app.stage.width = w;
-                                                    // app.stage.height = h;
-                                                    // app.stage.x = 0;
-                                                    // app.stage.y = 0;
+                                                    recordClubPlayersParams(false, () => {
+                                                        App.removeScene(this);
+                                                        App.setScene(new StandingsView());
+                                                        gsap.delayedCall(0.01, () => {
+                                                            App.fade(0, 1).then(() => { });
+                                                        })
+                                                    });
                                                 })
                                             }
                                         },

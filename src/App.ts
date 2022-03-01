@@ -3,12 +3,13 @@ import gsap from "gsap";
 import { ServerRequest } from "./ServerRequest"
 import LogIn from "./scenes/LogIn";
 import { ModeSelection } from "./scenes/ModeSelection";
+import { SeasonFixtures } from "./SeasonFixtures";
 
 export class App {
 
     public static user: string | null;
 
-    private constructor() { }
+    // private constructor() { }
 
     private static app: Application;
     private static currentScene: IScene;
@@ -18,12 +19,21 @@ export class App {
 
     // G A M E   D A T A ---
     public static storageData: any; // TODO - interface
-    public static allClubs: any;
+    public static allClubs: any;// TODO - interface
+    public static teams: ITeamData[];
     public static playerClubData: any;
     public static opponentClubData: any;
     public static friendly: boolean;
     public static isPlayerHome: boolean;
     public static isPlayerTurn: boolean = true;
+    public static allClubNames: string[];
+    public static seasonFixtures: any; // TODO - interface
+    public static topScorers: ITopScorers;
+    public static mostYellowCards: IMostYellowCards;
+    public static playerCash: number;
+    public static leagueRounds: number;
+    public static level: any;// TODO - interface
+    public static lastGameWinnings: number;
     // G A M E   D A T A ---
 
     public static get width(): number {
@@ -115,7 +125,7 @@ export class App {
                 new LogIn();
             } else {
                 App.user = localStorage.getItem('user');
-                this.checkGameInProgress(); 
+                this.checkGameInProgress();
             }
         })
     }
@@ -135,11 +145,32 @@ export class App {
             }
         })
     }
+
+    public static createSeasonFixtures() {
+        this.seasonFixtures = SeasonFixtures.create(App.allClubNames);
+    }
 }
 
-// This could have a lot more generic functions that you force all your scenes to have. Update is just an example.
-// Also, this could be in its own file...
 export interface IScene extends DisplayObject {
     update(framesPassed: number): void;
     addBG(): void;
+}
+
+export interface ITeamData {
+    name: string,
+    won: number,
+    ties: number,
+    lost: number,
+    goalsFor: number,
+    goalsAgainst: number,
+    goalsDifference: string,
+    points: number
+}
+
+export interface ITopScorers {
+    [key: string]: number[];
+}
+
+export interface IMostYellowCards {
+    [key: string]: number[];
 }

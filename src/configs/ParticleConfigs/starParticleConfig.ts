@@ -10,10 +10,10 @@ export function starParticleConfig() {
             "start": 0.3,
             "end": 0.15
         },
-        "color": {
-            "start": "#6c6c6c",
-            "end": "#ababab"
-        },
+        // "color": {
+        //     "start": "#6c6c6c",
+        //     "end": "#ababab"
+        // },
         "speed": {
             "start": 700,
             "end": 0
