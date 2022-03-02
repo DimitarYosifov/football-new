@@ -3,8 +3,8 @@ import { IScene, App } from "../App";
 import { Container, Sprite, Graphics, Loader, Text, TextStyle, Texture, ParticleContainer } from "pixi.js";
 import { Emitter, EmitterConfig } from "pixi-particles";
 import gsap from "gsap";
-import { friendlyParticleConfig } from "../configs/particleConfigs/friendlyParticleConfig";
-import { leagueParticleConfig } from "../configs/particleConfigs/leagueParticleConfig";
+import { friendlyParticleConfig } from "../configs/ParticleConfigs/friendlyParticleConfig";
+import { leagueParticleConfig } from "../configs/ParticleConfigs/leagueParticleConfig";
 import { config } from "../configs/MainGameConfig";
 import { starParticleConfig } from "../configs/ParticleConfigs/starParticleConfig";
 
