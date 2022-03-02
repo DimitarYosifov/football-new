@@ -1,6 +1,9 @@
 {
   "license": "",
   "main": "server.js",
+  "engines": {
+    "node": "12.14.1"
+  },
   "scripts": {
     "dev": "webpack serve --mode=development",
     "start": "node server.js",
