@@ -7,6 +7,7 @@ import { config } from "../configs/MainGameConfig";
 import { ballParticleConfig } from "../configs/ParticleConfigs/ballParticleConfig";
 import { Emitter, EmitterConfig } from "pixi-particles";
 import { AnimatedSprite } from "pixi.js";
+import { GenerateResult } from "../GenerateResult";
 
 export class StandingsView extends Container implements IScene {
     private fixturesHeader: any; //???  interface!!!!
@@ -26,12 +27,12 @@ export class StandingsView extends Container implements IScene {
     private topScorerBtn: RotatingButton;
     private mostYellowCardsBtn: RotatingButton;
     private lastGameRersult: string;
-    private generateResults: boolean;
+    private shouldGenerateResults: boolean;
     private playerLineUp: any;//???  interface!!!!
     private emitters: Emitter[] = [];
     private coin: AnimatedSprite;
 
-    constructor(increaseRound: boolean = false, lastGameRersult: string = "", generateResults: boolean = false) {
+    constructor(increaseRound: boolean = false, lastGameRersult: string = "", shouldGenerateResults: boolean = false) {
         super();
         // if (!this.topScorers && this.data) this.topScorers = this.data.topScorers;
         // if (!this.mostYellowCards && this.data) this.mostYellowCards = this.data.mostYellowCards;
@@ -41,7 +42,7 @@ export class StandingsView extends Container implements IScene {
         this.increaseRound = increaseRound;
         increaseRound ? this.currentRound++ : null;
         this.lastGameRersult = lastGameRersult;
-        this.generateResults = generateResults;
+        this.shouldGenerateResults = shouldGenerateResults;
 
         this.getPLayerLineUp();
         this.getClubsData();
@@ -137,7 +138,7 @@ export class StandingsView extends Container implements IScene {
             }
             else if (this.selectedRound === 1 && this.currentRound === 1) {//this is lame but works
                 this.getNextOpponent();
-                this.ballParticle();
+                this.ballParticle("");
 
                 App.removeScene(this);
                 // App.setScene();
@@ -147,8 +148,9 @@ export class StandingsView extends Container implements IScene {
             else if (this.selectedRound !== this.currentRound || (this.selectedRound === 2 && this.currentRound === 1)) {
                 this.increaseRound = false;
                 this.lastGameRersult = '';
-                this.generateResults = false;
-                this.scrollToCurrentRound(0, this.selectedRound === this.currentRound);
+                this.shouldGenerateResults = false;
+                this.scrollToCurrentRound(0, this.selectedRound);//!!!!!!!!BUG HERE - TODO!
+                // this.scrollToCurrentRound(0, this.selectedRound === this.currentRound);
             }
             else {
                 this.getNextOpponent();
@@ -160,7 +162,7 @@ export class StandingsView extends Container implements IScene {
             }
         }
 
-        this.continueBtn = new RotatingButton(null, null, continueOnPointerDown);
+        this.continueBtn = new RotatingButton("", "", continueOnPointerDown);
         this.addChild(this.continueBtn);
         this.continueBtn.setButtonSize(this.height * 0.2, this.width / 2, this.height * 0.87);
         this.continueBtn.addLabel(`Continue`, 0.24);
@@ -171,7 +173,7 @@ export class StandingsView extends Container implements IScene {
             // new EditTeam(this);
         }
 
-        this.editTeameBtn = new RotatingButton(null, null, editTeamOnPointerDown);
+        this.editTeameBtn = new RotatingButton("", "", editTeamOnPointerDown);
         this.addChild(this.editTeameBtn);
         this.editTeameBtn.setButtonSize(this.height * 0.15, this.width * 0.84, this.height * 0.89);
         this.editTeameBtn.addLabel(`Edit\nTeam`, 0.24);
@@ -183,7 +185,7 @@ export class StandingsView extends Container implements IScene {
             // this.addChild(this.topScorersContainer);
         }
 
-        this.topScorerBtn = new RotatingButton(null, null, topScorersOnPointerDown);
+        this.topScorerBtn = new RotatingButton("", "", topScorersOnPointerDown);
         this.addChild(this.topScorerBtn);
         this.topScorerBtn.setButtonSize(this.height * 0.10, this.width * 0.16, this.height * 0.91);
         this.topScorerBtn.addLabel(`Top\nScorers`, 0.24);
@@ -195,7 +197,7 @@ export class StandingsView extends Container implements IScene {
             // this.addChild(this.mostYellowCardsContainer);
         }
 
-        this.mostYellowCardsBtn = new RotatingButton(null, null, mostYellowCardsOnPointerDown);
+        this.mostYellowCardsBtn = new RotatingButton("", "", mostYellowCardsOnPointerDown);
         this.addChild(this.mostYellowCardsBtn);
         this.mostYellowCardsBtn.setButtonSize(this.height * 0.10, this.width * 0.16, this.height * 0.81);
         this.mostYellowCardsBtn.addLabel(`Yellow\nCards`, 0.24);
@@ -212,7 +214,7 @@ export class StandingsView extends Container implements IScene {
         });
     }
 
-    private createText = (_text: string, x: number, y: number, anchorX?: number = 0.5, isPlayerClub?: boolean) => {
+    private createText = (_text: string, x: number, y: number, anchorX: number = 0.5, isPlayerClub?: boolean) => {
         let text = new Text(_text, {
             fontFamily: config.mainFont,
             fontSize: this.height / 50,
@@ -360,7 +362,7 @@ export class StandingsView extends Container implements IScene {
         return clubLogo;
     }
 
-    private scrollToCurrentRound = (delay: number, additionalScroll = 0) => {
+    private scrollToCurrentRound = (delay: number, additionalScroll: number = 0) => {
         this.prev.interactive = false;
         this.next.interactive = false;
         this.prev.alpha = 0.35;
@@ -387,7 +389,7 @@ export class StandingsView extends Container implements IScene {
                     this.next.interactive = true;
                     this.next.alpha = 1;
                     this.prev.interactive = this.selectedRound !== 1;
-                    this.next.interactive = this.selectedRound !== this.leagueRounds;
+                    this.next.interactive = this.selectedRound !== App.leagueRounds;
                 }
             }
         );
@@ -428,11 +430,10 @@ export class StandingsView extends Container implements IScene {
                 let row = new Container;
                 let y = this.height * 0.1 + this.height * 0.05 * i
 
-                let generateResult = this.generateResults;
                 let result;
 
                 if (firstClub !== playerClub && secondClub !== playerClub) {
-                    if (generateResult && round === this.currentRound) {
+                    if (this.shouldGenerateResults && round === this.currentRound) {
                         result = this.randomResult(firstClub, secondClub, i);
                     } else {
                         result = App.seasonFixtures[round][i].split(" ")[1];
@@ -449,9 +450,9 @@ export class StandingsView extends Container implements IScene {
                         App.seasonFixtures[round][i] = App.seasonFixtures[round][i].split(" ")[0];
                         App.seasonFixtures[round][i] += ` ${result}`;
                     } else {
-                        result = this.seasonFixtures[round][i].split(" ")[1];
+                        result = App.seasonFixtures[round][i].split(" ")[1];
                     }
-                    if (this.generateResults && round === this.currentRound) {
+                    if (this.shouldGenerateResults && round === this.currentRound) {
                         this.calculatePoints(firstClub, secondClub, result)
                     }
                 }
@@ -514,40 +515,40 @@ export class StandingsView extends Container implements IScene {
         this.createStandings();
     }
 
+    private randomResult = (firstClub: string, secondClub: string, i: number) => {
+        let result = GenerateResult(
+            App.allClubs.find((club: { name: string; }) => club.name === firstClub).clubData.power,
+            App.allClubs.find((club: { name: string; }) => club.name === secondClub).clubData.power
+        );
+        this.lastRoundGoals[firstClub] = result.split("-")[0];
+        this.lastRoundGoals[secondClub] = result.split("-")[1];
+
+        App.seasonFixtures[this.currentRound][i] += ` ${result}`;
+        this.calculatePoints(firstClub, secondClub, result);
+        return result;
+    }
+
+    private calculatePoints = (firstClub: string, secondClub: string, result: string) => {
+        let first = App.teams.find((t: { name: any; }) => t.name === firstClub) as ITeamData;
+        first.won += +result.split('-')[0] > +result.split('-')[1] ? 1 : 0;
+        first.ties += +result.split('-')[0] === +result.split('-')[1] ? 1 : 0;
+        first.lost += +result.split('-')[0] < +result.split('-')[1] ? 1 : 0;
+        first.goalsFor += +result.split('-')[0];
+        first.goalsAgainst += +result.split('-')[1];
+        first.goalsDifference = (first.goalsFor - first.goalsAgainst).toString();
+        first.points = first.won * 3 + first.ties;
+
+        let second = App.teams.find((t: { name: any; }) => t.name === secondClub) as ITeamData;
+        second.won += +result.split('-')[0] < +result.split('-')[1] ? 1 : 0;
+        second.ties += +result.split('-')[0] === +result.split('-')[1] ? 1 : 0;
+        second.lost += +result.split('-')[0] > +result.split('-')[1] ? 1 : 0;
+        second.goalsFor += +result.split('-')[1];
+        second.goalsAgainst += +result.split('-')[0];
+        second.goalsDifference = (second.goalsFor - second.goalsAgainst).toString();
+        second.points = second.won * 3 + second.ties;
+    }
+
     private createFixtures = () => {
-        let randomResult = (firstClub: string, secondClub: string, i: number) => {
-            let result = this.generateResult(
-                App.allClubs.find((club: { name: string; }) => club.name === firstClub).clubData.power,
-                App.allClubs.find((club: { name: string; }) => club.name === secondClub).clubData.power
-            );
-            this.lastRoundGoals[firstClub] = result.split("-")[0];
-            this.lastRoundGoals[secondClub] = result.split("-")[1];
-
-            App.seasonFixtures[this.currentRound][i] += ` ${result}`;
-            calculatePoints(firstClub, secondClub, result);
-            return result;
-        }
-
-        let calculatePoints = (firstClub: string, secondClub: string, result: string) => {
-            let first = App.teams.find((t: { name: any; }) => t.name === firstClub) as ITeamData;
-            first.won += +result.split('-')[0] > +result.split('-')[1] ? 1 : 0;
-            first.ties += +result.split('-')[0] === +result.split('-')[1] ? 1 : 0;
-            first.lost += +result.split('-')[0] < +result.split('-')[1] ? 1 : 0;
-            first.goalsFor += +result.split('-')[0];
-            first.goalsAgainst += +result.split('-')[1];
-            first.goalsDifference = (first.goalsFor - first.goalsAgainst).toString();
-            first.points = first.won * 3 + first.ties;
-
-            let second = App.teams.find((t: { name: any; }) => t.name === secondClub) as ITeamData;
-            second.won += +result.split('-')[0] < +result.split('-')[1] ? 1 : 0;
-            second.ties += +result.split('-')[0] === +result.split('-')[1] ? 1 : 0;
-            second.lost += +result.split('-')[0] > +result.split('-')[1] ? 1 : 0;
-            second.goalsFor += +result.split('-')[1];
-            second.goalsAgainst += +result.split('-')[0];
-            second.goalsDifference = (second.goalsFor - second.goalsAgainst).toString();
-            second.points = second.won * 3 + second.ties;
-        }
-
         this.displayFixtures();
         this.addPagination();
         this.scrollToCurrentRound(1.2);

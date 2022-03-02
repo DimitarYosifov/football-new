@@ -136,7 +136,7 @@ export class App {
             JSON.stringify({
                 user: App.user
             }),
-            'POST',
+             
         ).then((res: any) => {
             if (res.data) {
                 // standingsView.bind(this)(res.data);// setSCene
