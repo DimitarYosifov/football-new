@@ -1,33 +1,33 @@
 import { RotatingButton } from "../buttons/RotatingButton";
-import { IScene, App, IPlayerLineUp } from "../App";
+import { IScene, App , IPlayerLineUp} from "../App";
 import { Container, Sprite, Text } from "pixi.js";
 import { config } from "../configs/MainGameConfig";
 import gsap from "gsap";
 
-export default class MostYellowCards extends Container implements IScene {
+export default class TopScorers extends Container {
 
-    private mostYellowCardsData: IMostYellowCardsData;
-    private playerClub: string;
-    private players: IPlayerLineUp[];
-    private allYellowCards: IPlayerData[] = [];
-    private containers: Container[] = [];
     private backgroundImg: Sprite;
     private header: Text;
-    private backBtn: RotatingButton;
+    private scorersData: IScorersData;
     private finalData: IPlayerData[];
+    private playerClub: string;
+    private players: IPlayerData[];
+    private containers: Container[] = [];
+    private allScorers: IPlayerData[] = [];
+    private backBtn: RotatingButton;
 
     constructor() {
         super();
-        this.mostYellowCardsData = App.mostYellowCards;
+        this.scorersData = App.topScorers;
         this.playerClub = App.playerClubData.name;
         this.players = App.playerLineUp;
-        this.mostYellowCardsData[this.playerClub] = this.players.map((p => p.leagueYellowCards));
-        Object.keys(this.mostYellowCardsData).forEach((team, index) => {
-            for (let index = 0; index < this.mostYellowCardsData[team].length; index++) {
+        this.scorersData[this.playerClub] = this.players.map((player => player.goalsScored));
+        Object.keys(this.scorersData).forEach((team, index) => {
+            for (let index = 0; index < this.scorersData[team].length; index++) {
                 let player = {} as IPlayerData;
                 player.club = team;
                 player.index = index;
-                player.yellowCards = this.mostYellowCardsData[team][index];
+                player.goals = this.scorersData[team][index];
                 let players;
                 if (this.playerClub === team) {
                     players = this.players;
@@ -36,20 +36,19 @@ export default class MostYellowCards extends Container implements IScene {
                     players = App.allClubs.find((c: { name: string; }) => c.name === team).players;
                 }
                 player.img = players[index].player_img_id;
-                this.allYellowCards.push(player);
+                this.allScorers.push(player);
             }
         })
-        this.finalData = this.allYellowCards.sort((a, b) => a.yellowCards - b.yellowCards).reverse().slice(0, 10);
-        console.log(this.finalData);
+        console.log(this.allScorers);
+        this.finalData = this.allScorers.sort((a, b) => (a as any).goals - (b as any).goals).reverse().slice(0, 10);
         this.addBG();
         this.addHeader();
         this.addPlayers();
         this.addButtons();
-
     }
 
-    public addBG(): void {
-        this.backgroundImg = Sprite.from("yellowCardsBG");
+    public addBG() {
+        this.backgroundImg = Sprite.from("scorer");
         this.backgroundImg.x = 0;
         this.backgroundImg.y = 0;
         this.backgroundImg.width = App.width;
@@ -60,7 +59,7 @@ export default class MostYellowCards extends Container implements IScene {
     public update(framesPassed: number): void { }
 
     private addHeader() {
-        this.header = new Text("YELLOW CARDS", {
+        this.header = new Text("TOP SCORERS", {
             fontFamily: config.mainFont,
             fontSize: App.height / 20,
             // fill: isPlayerClub ? "#6ddd48" : '#dbb7b7',
@@ -116,7 +115,7 @@ export default class MostYellowCards extends Container implements IScene {
             team.anchor.set(0, 0);
             cont.addChild(team);
 
-            let yellowCards = new Text(data.yellowCards, {
+            let goals = new Text(data.goals, {
                 fontFamily: config.mainFont,
                 fontSize: App.height / 25,
                 fill: '#dbb7b7',
@@ -124,9 +123,9 @@ export default class MostYellowCards extends Container implements IScene {
                 stroke: '#000000',
                 strokeThickness: 3
             });
-            yellowCards.position.set(App.width * 0.75, y + App.height * 0.01);
-            yellowCards.anchor.set(0, 0);
-            cont.addChild(yellowCards);
+            goals.position.set(App.width * 0.75, y + App.height * 0.01);
+            goals.anchor.set(0, 0);
+            cont.addChild(goals);
             this.addChild(cont);
             this.containers.push(cont);
             cont.x -= App.width;
@@ -162,11 +161,8 @@ export default class MostYellowCards extends Container implements IScene {
                 onComplete: () => { }
             });
             gsap.delayedCall(1, () => {
-                gsap.delayedCall(0.01, () => {
-                    App.app.stage.removeChild(this);
-                    App.fade(0, 1).then(() => {
-                    });
-                })
+                this.removeChildren();
+                this.parent.removeChild(this);
             })
         }
         this.backBtn = new RotatingButton("", "", backOnPointerDown);
@@ -183,34 +179,16 @@ export default class MostYellowCards extends Container implements IScene {
     }
 }
 
-export interface IPlayerData {
+export interface IPlayerData extends IPlayerLineUp {
     club: string;
+    img: string;
     index: number;
     yellowCards: number;
-    img: string;
-}
-
-export interface IMostYellowCardsData {
-    [key: string]: number[];
-}
-
-export interface IPlayersStats {
     leagueYellowCards: number;
-    [key: number]: {
-        EXP: number
-        attack_color: string;
-        attack_current: number;
-        attack_full: number;
-        defense_color: string;
-        defense_current: number;
-        defense_full: number;
-        goalsScored: number;
-        injured: number;
-        leagueRedCards: boolean;
-        leagueYellowCards: number;
-        player_img_id: string;
-        position: string;
-        special: undefined;
-        substitute: boolean;
-    }
+    goals: number;
+    goalsScored: number;
+}
+
+export interface IScorersData {
+    [key: string]: number[];
 }

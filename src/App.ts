@@ -19,8 +19,8 @@ export class App {
     private static _height: number;
 
     // G A M E   D A T A ---
-    public static storageData: any; // TODO - interface
-    public static allClubs: any;// TODO - interface
+    public static storageData: string | null;
+    public static allClubs: any;
     public static teams: ITeamData[];
     public static playerClubData: any;
     public static opponentClubData: any;
@@ -33,9 +33,9 @@ export class App {
     public static mostYellowCards: IMostYellowCards;
     public static playerCash: number;
     public static leagueRounds: number;
-    public static level: any;// TODO - interface
+    public static level: any;// TODO - interface when level is implemented
     public static lastGameWinnings: number;
-    public static playerLineUp:any; // TODO - interface
+    public static playerLineUp: IPlayerLineUp[];
     // G A M E   D A T A ---
 
     public static get width(): number {
@@ -160,14 +160,14 @@ export interface IScene extends DisplayObject {
 }
 
 export interface ITeamData {
-    name: string,
-    won: number,
-    ties: number,
-    lost: number,
-    goalsFor: number,
-    goalsAgainst: number,
-    goalsDifference: string,
-    points: number
+    name: string;
+    won: number;
+    ties: number;
+    lost: number;
+    goalsFor: number;
+    goalsAgainst: number;
+    goalsDifference: string;
+    points: number;
 }
 
 export interface ITopScorers {
@@ -176,4 +176,31 @@ export interface ITopScorers {
 
 export interface IMostYellowCards {
     [key: string]: number[];
+}
+
+export interface IPlayerLineUp {
+    club: any;
+    img: any;
+    index: any;
+    yellowCards: any;
+    goals: any;
+    goalsScored: any;
+    leagueYellowCards: any,
+    [key: number]: {
+        EXP: number;
+        attack_color: string;
+        attack_current: number;
+        attack_full: number;
+        defense_color: string;
+        defense_current: number;
+        defense_full: number;
+        goalsScored: number;
+        injured: number;
+        leagueRedCards: boolean;
+        leagueYellowCards: number;
+        player_img_id: string;
+        position: string;
+        special: undefined;
+        substitute: boolean;
+    }
 }

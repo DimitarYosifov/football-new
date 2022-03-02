@@ -213,6 +213,6 @@ export class ClubSelection extends Container implements IScene {
 }
 
 export interface IPositions {
-    x: number,
-    y: number
+    x: number;
+    y: number;
 }

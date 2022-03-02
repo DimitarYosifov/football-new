@@ -10,12 +10,13 @@ import { AnimatedSprite } from "pixi.js";
 import { GenerateResult } from "../GenerateResult";
 import gsap from "gsap";
 import MostYellowCards from "./MostYellowCards";
+import TopScorers from "./TopScorers";
 
 export class StandingsView extends Container implements IScene {
-    private fixturesHeader: any; //???  interface!!!!
+    private fixturesHeader: Text;
     private fixturesContainer: Container = new Container;
     private moneySectionContainer: Container = new Container;
-    private lastRoundGoals: any = {}; //???  interface!!!!
+    private lastRoundGoals: any = {}; //TODO  interface!!!!
     private backgroundImg: Sprite;
     private prev: Sprite;
     private next: Sprite;
@@ -30,7 +31,6 @@ export class StandingsView extends Container implements IScene {
     private mostYellowCardsBtn: RotatingButton;
     private lastGameRersult: string;
     private shouldGenerateResults: boolean;
-    private playerLineUp: any;//???  interface!!!!
     private emitters: Emitter[] = [];
     private coin: AnimatedSprite;
 
@@ -176,8 +176,7 @@ export class StandingsView extends Container implements IScene {
 
         //-----EDIT TEAM BTN
         let editTeamOnPointerDown = () => {
-            //App.fade...
-            // new EditTeam(this);
+            // App.setScene(new EditTeam());
         }
 
         this.editTeameBtn = new RotatingButton("", "", editTeamOnPointerDown);
@@ -187,9 +186,7 @@ export class StandingsView extends Container implements IScene {
 
         //-----TOP SCORERS BTN
         let topScorersOnPointerDown = () => {
-            //App.fade...
-            // this.topScorersContainer = new TopScorers(this);
-            // this.addChild(this.topScorersContainer);
+            App.setScene(new TopScorers());
         }
 
         this.topScorerBtn = new RotatingButton("", "", topScorersOnPointerDown);
@@ -199,7 +196,7 @@ export class StandingsView extends Container implements IScene {
 
         //-----MOST YELLOW CARDS BTN
         let mostYellowCardsOnPointerDown = () => {
-            App.setScene(new MostYellowCards())
+            App.setScene(new MostYellowCards());
         }
 
         this.mostYellowCardsBtn = new RotatingButton("", "", mostYellowCardsOnPointerDown);
@@ -788,9 +785,9 @@ export class StandingsView extends Container implements IScene {
 }
 
 export interface IAnimationData extends AnimationEffect {
-    name: string,
-    frames: number,
-    speed: number,
-    loop: boolean,
-    paused: boolean
+    name: string;
+    frames: number;
+    speed: number;
+    loop: boolean;
+    paused: boolean;
 }
