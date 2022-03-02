@@ -208,8 +208,6 @@ export class ClubSelection extends Container implements IScene {
             star.anchor.set(1, 1);
             container.addChild(star);
         }
-        console.log(this);
-
         this.clubContainers.push(container);
     }
 }

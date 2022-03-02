@@ -8,6 +8,8 @@ import { ballParticleConfig } from "../configs/ParticleConfigs/ballParticleConfi
 import { Emitter, EmitterConfig } from "pixi-particles";
 import { AnimatedSprite } from "pixi.js";
 import { GenerateResult } from "../GenerateResult";
+import gsap from "gsap";
+import MostYellowCards from "./MostYellowCards";
 
 export class StandingsView extends Container implements IScene {
     private fixturesHeader: any; //???  interface!!!!
@@ -37,6 +39,7 @@ export class StandingsView extends Container implements IScene {
         // if (!this.topScorers && this.data) this.topScorers = this.data.topScorers;
         // if (!this.mostYellowCards && this.data) this.mostYellowCards = this.data.mostYellowCards;
         // if (this.playerCash === undefined && this.data) this.playerCash = this.data.playerCash;
+        this.addBG();
         const loadingWrapper = document.getElementById("loading-wrapper");
         if (loadingWrapper) { loadingWrapper.remove() };
         this.increaseRound = increaseRound;
@@ -46,7 +49,6 @@ export class StandingsView extends Container implements IScene {
 
         this.getPLayerLineUp();
         this.getClubsData();
-        this.addMoneySection();
         gsap.delayedCall(1, () => { this.ballParticle("add") });
     }
 
@@ -70,6 +72,7 @@ export class StandingsView extends Container implements IScene {
     }
 
     private checkContinueAllowed = () => {
+
         // const continueDisabled = this.playerLineUp
         //     .slice(0, 6)
         //     .find(el => el.leagueRedCards || el.leagueYellowCards === 5 || el.injured > 0);
@@ -113,6 +116,10 @@ export class StandingsView extends Container implements IScene {
                     })
                     this.currentRound = 1;
                     App.createSeasonFixtures();
+                    this.addMoneySection();
+                }
+                else {
+                    this.addMoneySection();
                 }
                 this.createFixtures();
                 if (this.selectedRound !== 1 && this.increaseRound) this.selectedRound--;
@@ -149,8 +156,8 @@ export class StandingsView extends Container implements IScene {
                 this.increaseRound = false;
                 this.lastGameRersult = '';
                 this.shouldGenerateResults = false;
-                this.scrollToCurrentRound(0, this.selectedRound);//!!!!!!!!BUG HERE - TODO!
-                // this.scrollToCurrentRound(0, this.selectedRound === this.currentRound);
+                // this.scrollToCurrentRound(0, this.selectedRound);//!!!!!!!!BUG HERE - TODO!
+                this.scrollToCurrentRound(0, this.selectedRound === this.currentRound);
             }
             else {
                 this.getNextOpponent();
@@ -163,8 +170,8 @@ export class StandingsView extends Container implements IScene {
         }
 
         this.continueBtn = new RotatingButton("", "", continueOnPointerDown);
-        this.addChild(this.continueBtn);
-        this.continueBtn.setButtonSize(this.height * 0.2, this.width / 2, this.height * 0.87);
+        this.continueBtn.setButtonSize(App.height * 0.2, App.width / 2, App.height * 0.87);
+        this.addChild(this.continueBtn.finalTexture);
         this.continueBtn.addLabel(`Continue`, 0.24);
 
         //-----EDIT TEAM BTN
@@ -174,8 +181,8 @@ export class StandingsView extends Container implements IScene {
         }
 
         this.editTeameBtn = new RotatingButton("", "", editTeamOnPointerDown);
-        this.addChild(this.editTeameBtn);
-        this.editTeameBtn.setButtonSize(this.height * 0.15, this.width * 0.84, this.height * 0.89);
+        this.addChild(this.editTeameBtn.finalTexture);
+        this.editTeameBtn.setButtonSize(App.height * 0.15, App.width * 0.84, App.height * 0.89);
         this.editTeameBtn.addLabel(`Edit\nTeam`, 0.24);
 
         //-----TOP SCORERS BTN
@@ -186,29 +193,28 @@ export class StandingsView extends Container implements IScene {
         }
 
         this.topScorerBtn = new RotatingButton("", "", topScorersOnPointerDown);
-        this.addChild(this.topScorerBtn);
-        this.topScorerBtn.setButtonSize(this.height * 0.10, this.width * 0.16, this.height * 0.91);
+        this.addChild(this.topScorerBtn.finalTexture);
+        this.topScorerBtn.setButtonSize(App.height * 0.10, App.width * 0.16, App.height * 0.91);
         this.topScorerBtn.addLabel(`Top\nScorers`, 0.24);
 
         //-----MOST YELLOW CARDS BTN
         let mostYellowCardsOnPointerDown = () => {
-            //App.fade...
-            // this.mostYellowCardsContainer = new MostYellowCards(this);
-            // this.addChild(this.mostYellowCardsContainer);
+            App.setScene(new MostYellowCards())
         }
 
         this.mostYellowCardsBtn = new RotatingButton("", "", mostYellowCardsOnPointerDown);
-        this.addChild(this.mostYellowCardsBtn);
-        this.mostYellowCardsBtn.setButtonSize(this.height * 0.10, this.width * 0.16, this.height * 0.81);
+        this.addChild(this.mostYellowCardsBtn.finalTexture);
+        this.mostYellowCardsBtn.setButtonSize(App.height * 0.10, App.width * 0.16, App.height * 0.81);
         this.mostYellowCardsBtn.addLabel(`Yellow\nCards`, 0.24);
     }
 
     private getPLayerLineUp() {
         ServerRequest(
             "getPlayerLineUp",
-            JSON.stringify({ user: App.user })
+            JSON.stringify({ user: App.user }),
+            "POST"
         ).then((res) => {
-            this.playerLineUp = (res as any).players;
+            App.playerLineUp = (res as any).players;
             this.addButtons();
             this.checkContinueAllowed();
         });
@@ -315,22 +321,22 @@ export class StandingsView extends Container implements IScene {
             standingsContainer.addChild(createSeparator(
                 this.width * 0.02,
                 y + row.height,
-                row.width,
+                row.width * 0.75,
                 this.height * 0.00001
             ));
         });
 
         standingsContainer.y = this.height * 0.65 - standingsContainer.height / 2;
 
-        Object.keys(headersPositionsX).forEach((prop, index) => {
-            let separator = createSeparator(
-                (separatorsPositionsX as any)[prop],
-                0,
-                this.width * 0.00001,
-                standingsContainer.height
-            )
-            standingsContainer.addChild(separator);
-        });
+        // Object.keys(headersPositionsX).forEach((prop, index) => {
+        //     let separator = createSeparator(
+        //         (separatorsPositionsX as any)[prop],
+        //         0,
+        //         this.width * 0.00001,
+        //         standingsContainer.height
+        //     )
+        //     standingsContainer.addChild(separator);
+        // });
 
         this.addChild(standingsContainer);
     }
@@ -347,7 +353,8 @@ export class StandingsView extends Container implements IScene {
                 topScorers: App.topScorers,
                 mostYellowCards: App.mostYellowCards,
                 playerCash: App.playerCash
-            })
+            }),
+            "POST"
         ).then((res) => { });
     }
 
@@ -362,20 +369,20 @@ export class StandingsView extends Container implements IScene {
         return clubLogo;
     }
 
-    private scrollToCurrentRound = (delay: number, additionalScroll: number = 0) => {
+    private scrollToCurrentRound = (delay: number, additionalScroll: any = 0) => {
         this.prev.interactive = false;
         this.next.interactive = false;
         this.prev.alpha = 0.35;
         this.prev.alpha = 0.35;
         this.selectedRound = this.currentRound;
         if (additionalScroll) this.selectedRound++;
-        let x = this.width * (this.currentRound - 1 + additionalScroll) * -1;
+        let x = App.width * (this.currentRound - 1 + additionalScroll) * -1;
 
         if (this.increaseRound) {
-            x += this.width;
+            x += App.width;
             delay = 0;
         }
-        TweenMax.to(this.fixturesContainer, 0.75,
+        gsap.to(this.fixturesContainer, 0.75,
             {
                 delay: delay,
                 // ease: Back.easeIn,
@@ -398,6 +405,7 @@ export class StandingsView extends Container implements IScene {
     private displayFixtures() {
 
         let playerClub = App.playerClubData.name;
+        console.log(App.seasonFixtures);
 
         App.leagueRounds = Array.isArray(App.seasonFixtures) ? App.seasonFixtures.length - 1 : [null, ...Object.values(App.seasonFixtures)].length - 1;
         for (let round = 1; round <= App.leagueRounds; round++) {
@@ -556,9 +564,9 @@ export class StandingsView extends Container implements IScene {
 
     private addPagination = () => {
         this.prev = Sprite.from(`prev`);
-        this.prev.x = this.width * 0.02;
-        this.prev.y = this.height * 0.18;
-        this.prev.width = this.width * 0.075;
+        this.prev.x = App.width * 0.02;
+        this.prev.y = App.height * 0.18;
+        this.prev.width = App.width * 0.075;
         this.prev.scale.y = this.prev.scale.x;
         this.prev.anchor.set(0, 0);
         this.addChild(this.prev);
@@ -567,10 +575,10 @@ export class StandingsView extends Container implements IScene {
         this.prev.on('pointerdown', () => {
             let x = this.fixturesContainer.x;
             this.selectedRound--;
-            TweenMax.to(this.fixturesContainer, 0.5,
+            gsap.to(this.fixturesContainer, 0.5,
                 {
-                    x: x += this.width,
-                    ease: Back.easeInOut,
+                    x: x += App.width,
+                    ease: "Back.easeInOut",
                     onStart: () => {
                         this.prev.interactive = false;
                         this.next.interactive = false;
@@ -590,9 +598,9 @@ export class StandingsView extends Container implements IScene {
         })
 
         this.next = Sprite.from(`next`);
-        this.next.x = this.width * 0.98;
-        this.next.y = this.height * 0.18;
-        this.next.width = this.width * 0.075;
+        this.next.x = App.width * 0.98;
+        this.next.y = App.height * 0.18;
+        this.next.width = App.width * 0.075;
         this.next.scale.y = this.next.scale.x;
         this.next.anchor.set(1, 0);
         this.addChild(this.next);
@@ -601,10 +609,10 @@ export class StandingsView extends Container implements IScene {
         this.next.on('pointerdown', () => {
             let x = this.fixturesContainer.x;
             this.selectedRound++;
-            TweenMax.to(this.fixturesContainer, 0.5,
+            gsap.to(this.fixturesContainer, 0.5,
                 {
-                    x: x -= this.width,
-                    ease: Back.easeInOut,
+                    x: x -= App.width,
+                    ease: "Back.easeInOut",
                     onStart: () => {
                         this.prev.interactive = false;
                         this.next.interactive = false;
@@ -733,7 +741,7 @@ export class StandingsView extends Container implements IScene {
         let coinAnimData = {
             name: "coins_anim",
             frames: 10,
-            speed: 0.2,
+            speed: 0.25,
             loop: true,
             paused: false
         }
@@ -749,12 +757,15 @@ export class StandingsView extends Container implements IScene {
         this.coin.width = App.width * 0.06;
         this.coin.scale.y = this.coin.scale.x;
         this.moneySectionContainer.addChild(this.coin);
+        this.coin.animationSpeed = coinAnimData.speed;
         this.coin.play();
 
         // money amount text
+        console.log(App.playerCash);
+
         this.cashText = new Text(App.playerCash.toString() || "0", {
             fontFamily: config.mainFont,
-            fontSize: this.height / 45,
+            fontSize: App.height / 45,
             fill: '#dbb7b7',
             align: 'center',
             stroke: '#000000',

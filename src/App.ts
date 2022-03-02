@@ -4,6 +4,7 @@ import { ServerRequest } from "./ServerRequest"
 import LogIn from "./scenes/LogIn";
 import { ModeSelection } from "./scenes/ModeSelection";
 import { SeasonFixtures } from "./SeasonFixtures";
+import { StandingsView } from "./scenes/StandingsView";
 
 export class App {
 
@@ -11,7 +12,7 @@ export class App {
 
     // private constructor() { }
 
-    private static app: Application;
+    public static app: Application;
     private static currentScene: IScene;
 
     private static _width: number;
@@ -34,6 +35,7 @@ export class App {
     public static leagueRounds: number;
     public static level: any;// TODO - interface
     public static lastGameWinnings: number;
+    public static playerLineUp:any; // TODO - interface
     // G A M E   D A T A ---
 
     public static get width(): number {
@@ -49,7 +51,7 @@ export class App {
 
         App.app = new Application({
             view: document.getElementById("pixi-canvas") as HTMLCanvasElement,
-            resolution: window.devicePixelRatio || 1,
+            resolution: window.devicePixelRatio || 2,
             autoDensity: true,
             backgroundColor: background,
             width: width,
@@ -136,10 +138,11 @@ export class App {
             JSON.stringify({
                 user: App.user
             }),
-             
+            "POST"
         ).then((res: any) => {
             if (res.data) {
-                // standingsView.bind(this)(res.data);// setSCene
+                this.playerClubData = res.data.playerClubData;
+                this.setScene(new StandingsView());
             } else {
                 this.setScene(new ModeSelection());
             }

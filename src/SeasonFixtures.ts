@@ -36,9 +36,10 @@ export class SeasonFixtures {
             for (let n = 0; n < data.length; n += 2) {
                 let team1 = (data as any)[n] - 1;
                 let team2 = Number((data as any)[n + 1] - 1);
-                (seasonFixtures as any).push(`${teams[team1]}:${teams[team2]}`);
+                (seasonFixtures as any)[index + 1].push(`${teams[team1]}:${teams[team2]}`);
             }
         }
         console.log(seasonFixtures);
+        return seasonFixtures;
     }
 }
