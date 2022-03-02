@@ -10,10 +10,6 @@ export function leagueParticleConfig() {
             "start": 0.1,
             "end": 0.45
         },
-        // "color": {
-        //     "start": "#929191",
-        //     "end": "#929191"
-        // },
         "speed": {
             "start": 450,
             "end": 2
