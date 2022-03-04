@@ -1,5 +1,5 @@
 import { RotatingButton } from "../buttons/RotatingButton";
-import { IScene, App , IPlayerLineUp} from "../App";
+import { IScene, App, IPlayerLineUp } from "../App";
 import { Container, Sprite, Text } from "pixi.js";
 import { config } from "../configs/MainGameConfig";
 import gsap from "gsap";
@@ -40,7 +40,7 @@ export default class TopScorers extends Container {
             }
         })
         console.log(this.allScorers);
-        this.finalData = this.allScorers.sort((a, b) => (a as any).goals - (b as any).goals).reverse().slice(0, 10);
+        this.finalData = this.allScorers.sort((a, b) => a.goals - b.goals).reverse().slice(0, 10);
         this.addBG();
         this.addHeader();
         this.addPlayers();

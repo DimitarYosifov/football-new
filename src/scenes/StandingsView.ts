@@ -1,6 +1,6 @@
 import BangUp from "../BangUp";
 import { ServerRequest } from "../ServerRequest"
-import { IScene, App, ITeamData, ITopScorers } from "../App";
+import { IScene, App, ITeamData, ITopScorers, IPlayerLineUp } from "../App";
 import { Container, Sprite, Graphics, Loader, Text, TextStyle, Texture, ParticleContainer } from "pixi.js";
 import { RotatingButton } from "../buttons/RotatingButton";
 import { config } from "../configs/MainGameConfig";
@@ -11,6 +11,7 @@ import { GenerateResult } from "../GenerateResult";
 import gsap from "gsap";
 import MostYellowCards from "./MostYellowCards";
 import TopScorers from "./TopScorers";
+import { EditTeam } from "./EditTeam";
 
 export class StandingsView extends Container implements IScene {
     private fixturesHeader: Text;
@@ -110,7 +111,7 @@ export class StandingsView extends Container implements IScene {
 
 
                         App.teams.push(team);
-                        (App.topScorers as any)[club] = [0, 0, 0, 0, 0, 0];
+                        App.topScorers[club] = [0, 0, 0, 0, 0, 0];
                         App.mostYellowCards[club] = [0, 0, 0, 0, 0, 0];
                         App.playerCash = 0;
                     })
@@ -176,7 +177,7 @@ export class StandingsView extends Container implements IScene {
 
         //-----EDIT TEAM BTN
         let editTeamOnPointerDown = () => {
-            // App.setScene(new EditTeam());
+            App.setScene(new EditTeam());
         }
 
         this.editTeameBtn = new RotatingButton("", "", editTeamOnPointerDown);
@@ -210,8 +211,8 @@ export class StandingsView extends Container implements IScene {
             "getPlayerLineUp",
             JSON.stringify({ user: App.user }),
             "POST"
-        ).then((res) => {
-            App.playerLineUp = (res as any).players;
+        ).then((res: any) => {
+            (App.playerLineUp as IPlayerLineUp[]) = res.players;
             this.addButtons();
             this.checkContinueAllowed();
         });
@@ -231,7 +232,7 @@ export class StandingsView extends Container implements IScene {
 
     private createStandings = () => {
         let standingsContainer = new Container;
-        let positionsX = {
+        let positionsX: IPositionsX = {
             name: App.width * 0.08,
             won: App.width * 0.35,
             ties: App.width * 0.43,
@@ -241,7 +242,7 @@ export class StandingsView extends Container implements IScene {
             goalsDifference: App.width * 0.83,
             points: App.width * 0.93
         }
-        let headersPositionsX = {
+        let headersPositionsX: IHeadersPositionsX = {
             club: App.width * 0.08,
             W: App.width * 0.35,
             T: App.width * 0.43,
@@ -299,7 +300,7 @@ export class StandingsView extends Container implements IScene {
             Object.keys(headersPositionsX).forEach((prop, index) => {
                 let isName = prop === "club";
                 let anchorX = isName ? 0 : 0.5;
-                row.addChild(this.createText(prop, (headersPositionsX as any)[prop], y, anchorX));
+                row.addChild(this.createText(prop, headersPositionsX[prop], y, anchorX));
             });
             standingsContainer.addChild(row);
         }
@@ -312,7 +313,9 @@ export class StandingsView extends Container implements IScene {
             Object.keys(club).forEach((prop, index) => {
                 let isName = prop === "name";
                 let anchorX = isName ? 0 : 0.5;
-                row.addChild(this.createText((club as any)[prop], (positionsX as any)[prop], y, anchorX, club.name === App.playerClubData.name));
+                let text = club[prop as keyof ITeamData].toString();
+                let pos = positionsX[prop];
+                row.addChild(this.createText(text, pos, y, anchorX, club.name === App.playerClubData.name));
             });
             standingsContainer.addChild(row);
             standingsContainer.addChild(createSeparator(
@@ -631,7 +634,7 @@ export class StandingsView extends Container implements IScene {
 
     private getNextOpponent = () => {
         let playerClub = App.playerClubData.name;
-        let game = App.seasonFixtures[this.currentRound].find((x: string | any[]) => x.includes(playerClub));
+        let game: string = App.seasonFixtures[this.currentRound].find((x: string | any[]) => x.includes(playerClub))!;
         let firstClub = game.split(":")[0];
         let secondClub = game.split(":")[1];
 
@@ -790,4 +793,12 @@ export interface IAnimationData extends AnimationEffect {
     speed: number;
     loop: boolean;
     paused: boolean;
+}
+
+export interface IHeadersPositionsX {
+    [key: string]: number;
+}
+
+export interface IPositionsX {
+    [key: string]: number;
 }

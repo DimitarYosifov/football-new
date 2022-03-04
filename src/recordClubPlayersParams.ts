@@ -9,6 +9,7 @@ export async function recordClubPlayersParams(matchEnd: boolean, callBack: Funct
     let initialParamsPlayers = App.allClubs.find((t: { name: string }) => t.name === team).players;
 
     if (matchEnd) {
+        //TODO...
         // // players = initialParamsPlayers;
         // //app.level.children.find(child => child.clubName === team).lineUps.player;
         // players = Аpp.level.children.find((child: { clubName: string; }) => child.clubName === team).lineUps.player;

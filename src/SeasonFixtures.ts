@@ -7,7 +7,7 @@ export class SeasonFixtures {
             [teams[i], teams[j]] = [teams[j], teams[i]];
         }
         const rounds = teams.length * 2 - 2;
-        let seasonFixtures = {};
+        let seasonFixtures: ISeasonFixtures = {};
 
         //8 clubs tournament schedule ... https://tournamentscheduler.net/
         let matrix = [
@@ -31,15 +31,19 @@ export class SeasonFixtures {
         });
 
         for (let index = 0; index < matrix.length; index++) {
-            let data = matrix[index];
-            (seasonFixtures as any)[index + 1] = [];
+            let data: string[] = matrix[index];
+            seasonFixtures[index + 1] = [];
             for (let n = 0; n < data.length; n += 2) {
-                let team1 = (data as any)[n] - 1;
-                let team2 = Number((data as any)[n + 1] - 1);
-                (seasonFixtures as any)[index + 1].push(`${teams[team1]}:${teams[team2]}`);
+                let team1: number = +data[n] - 1;
+                let team2: number = +data[n + 1] - 1;
+                seasonFixtures[index + 1].push(`${teams[team1]}:${teams[team2]}`);
             }
         }
         console.log(seasonFixtures);
         return seasonFixtures;
     }
+}
+
+export interface ISeasonFixtures {
+    [key: number | string]: string[];
 }

@@ -1,6 +1,6 @@
 import { config } from "./configs/MainGameConfig";
 import ExactResultConfig from "./configs/ExactResultConfig";
-
+import { IExactWin } from "./configs/ExactResultConfig";
 //club power is in range 1-7 
 export function GenerateResult(power1: number, power2: number) {
 
@@ -29,7 +29,7 @@ export function GenerateResult(power1: number, power2: number) {
     while (!exactResult) {
         let chances = result === "tie" ?
             ExactResultConfig.exactTie :
-            (ExactResultConfig.exactWin as any)[powerDifference];
+            (ExactResultConfig.exactWin as IExactWin)[powerDifference];
         while (!exactResult) {
             Object.keys(chances).forEach((element, index) => {
                 let percentChance = chances[element];
@@ -49,9 +49,9 @@ export function GenerateResult(power1: number, power2: number) {
         exactResult = exactResult.split("").reverse().join("");
     }
 
-    let a = 0
+    let a = 0;
     Object.keys(ExactResultConfig.exactWin[5]).forEach((element, index) => {
-        a += (ExactResultConfig.exactWin[5] as any)[element];
+        a += (ExactResultConfig.exactWin as IExactWin)[5][element];
     });
     console.log(exactResult);
     return exactResult;

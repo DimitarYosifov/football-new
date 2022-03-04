@@ -3,7 +3,7 @@ import gsap from "gsap";
 import { ServerRequest } from "./ServerRequest"
 import LogIn from "./scenes/LogIn";
 import { ModeSelection } from "./scenes/ModeSelection";
-import { SeasonFixtures } from "./SeasonFixtures";
+import { SeasonFixtures, ISeasonFixtures } from "./SeasonFixtures";
 import { StandingsView } from "./scenes/StandingsView";
 
 export class App {
@@ -28,7 +28,7 @@ export class App {
     public static isPlayerHome: boolean;
     public static isPlayerTurn: boolean = true;
     public static allClubNames: string[];
-    public static seasonFixtures: any; // TODO - interface
+    public static seasonFixtures: ISeasonFixtures;
     public static topScorers: ITopScorers;
     public static mostYellowCards: IMostYellowCards;
     public static playerCash: number;
@@ -179,28 +179,24 @@ export interface IMostYellowCards {
 }
 
 export interface IPlayerLineUp {
-    club: any;
-    img: any;
-    index: any;
-    yellowCards: any;
-    goals: any;
-    goalsScored: any;
-    leagueYellowCards: any,
-    [key: number]: {
-        EXP: number;
-        attack_color: string;
-        attack_current: number;
-        attack_full: number;
-        defense_color: string;
-        defense_current: number;
-        defense_full: number;
-        goalsScored: number;
-        injured: number;
-        leagueRedCards: boolean;
-        leagueYellowCards: number;
-        player_img_id: string;
-        position: string;
-        special: undefined;
-        substitute: boolean;
-    }
+    position: keyof IPlayerLineUp;
+    club: string;
+    img: string;
+    index: number;
+    yellowCards: number;
+    goals: number;
+    goalsScored: number;
+    leagueYellowCards: number,
+    EXP: number;
+    attack_color: string;
+    attack_current: number;
+    attack_full: number;
+    defense_color: string;
+    defense_current: number;
+    defense_full: number;
+    injured: number;
+    leagueRedCards: boolean;
+    player_img_id: string;
+    special: undefined;
+    substitute: boolean;
 }

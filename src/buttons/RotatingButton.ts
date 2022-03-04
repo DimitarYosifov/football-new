@@ -1,4 +1,4 @@
-import { Sprite, Texture, Text } from "pixi.js";
+import { Sprite, Texture, Text, TextStyle } from "pixi.js";
 import { App } from "../App";
 import gsap from "gsap";
 import { config } from "../configs/MainGameConfig";
@@ -41,19 +41,18 @@ export class RotatingButton extends Sprite {
         this.finalTexture.y = y;
     }
 
-    addLabel(text: string, fontSize: number, options = {}) {
-        let style = {
-            ...{
-                fontFamily: config.mainFont,
-                fontSize: this.finalTexture.height * fontSize,
-                fill: '#f5f5dc',
-                align: 'center',
-                stroke: '#000000',
-                fontWeight: 200,
-                strokeThickness: 4
-            }, options
-        }
-        this.label = new Text(text, style as any);
+    addLabel(text: string, fontSize: number) {
+        let style: TextStyle = new TextStyle({
+            fontFamily: config.mainFont,
+            fontSize: this.finalTexture.height * fontSize,
+            fill: '#f5f5dc',
+            align: 'center',
+            stroke: '#000000',
+            fontWeight: "200",
+            strokeThickness: 4
+
+        })
+        this.label = new Text(text, style);
         this.label.anchor.set(0.5, 0.5);
         this.label.position.set(
             this.finalTexture.x,
