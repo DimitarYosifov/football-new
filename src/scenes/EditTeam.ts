@@ -1,14 +1,15 @@
-import { App, IScene, IPlayerLineUp } from "../App.js";
+import { App, IScene, IPlayerLineUp } from "../App";
 import { RotatingButton } from "../buttons/RotatingButton";
 import { recordClubPlayersParams } from "../recordClubPlayersParams";
 import gsap from "gsap";
 import { Container, Graphics, Sprite, Text, TextStyle } from "pixi.js";
 import { config } from "../configs/MainGameConfig";
 import { Card } from "../game level/Card";
-import { createText } from "../createText.js";
+import { createText } from "../createText";
 
 export class EditTeam extends Container implements IScene {
-
+    private a: any
+    private b: any
     private backgroundImg: Sprite;
     private container: Container;
     private bg: Graphics;
@@ -24,7 +25,6 @@ export class EditTeam extends Container implements IScene {
     constructor() {
         super();
         this.container = new Container;
-        this.addChild(this.container);
 
         //BG
         this.bg = new Graphics();
@@ -41,7 +41,7 @@ export class EditTeam extends Container implements IScene {
         this.bg.on('pointerdown', () => { });
         this.clubName = App.playerClubData.name;
 
-        this.players = App.playerLineUp.slice()// [].concat(App.playerLineUp);
+        this.players = App.playerLineUp.slice();
         this.stageWidth = App.width;
         this.stageHeight = App.height;
         this.addBG();
@@ -49,6 +49,7 @@ export class EditTeam extends Container implements IScene {
         this.createPlayers();
         this.addButtons();
         this.checkSaveAllowed();
+        this.addChild(this.container);
     }
 
     public update(time: number): void { }
@@ -60,7 +61,6 @@ export class EditTeam extends Container implements IScene {
         this.backgroundImg.width = App.width;
         this.backgroundImg.height = App.height;
         this.addChild(this.backgroundImg);
-        this.backgroundImg.alpha = 0.5;
     }
 
     private createHeader() {
@@ -91,15 +91,15 @@ export class EditTeam extends Container implements IScene {
             MD: 0,
             F: 0
         }
-
-        const textStyle = new TextStyle({
-            fontFamily: config.mainFont,
-            fill: "#ffffff",
-            align: 'center'
-        });
+        const getStyle = () => {
+            return new TextStyle({
+                fontFamily: config.mainFont,
+                fill: "#ffffff",
+                align: 'center'
+            });
+        }
 
         for (let i = 0; i < this.players.length; i++) {
-            console.log(playersCount);
             let player = this.players[i];
             const playerPosition = player.position;
             const isSub = player.substitute;
@@ -111,7 +111,7 @@ export class EditTeam extends Container implements IScene {
             let card = new Card({
                 index: i,
                 stats: player,
-                font_size: this.stageHeight / 45 + 'px',  //change this shit!!
+                font_size: this.stageHeight / 45,// + 'px',  //change this shit!!
 
                 cardTexture: `player_id_${player.player_img_id}`,
                 card_x: card_x,
@@ -163,21 +163,23 @@ export class EditTeam extends Container implements IScene {
             card.playerPosition = playerPosition;
             card.isSub = isSub;
 
-            let goals = createText(`${player.goalsScored}`, textStyle, card, card_y + card_height * 1.035, card_x + card_width * 0.4, 1, 0, App.height / 75);
+            let goals = createText(`${player.goalsScored}`, getStyle(), card, card_y + card_height * 1.035, card_x + card_width * 0.4, 1, 0, App.height / 75);
             card.addGoalsScored(goals.x - goals.width);
-            createText(`exp ${player.EXP}`, textStyle, card, card_y + card_height * 1.03, card_x + card_width * 0.5, 0, 0, App.height / 90);
-            createText(`${player.leagueYellowCards}`, textStyle, card, card_y + card_height * 1.2, card_x + card_width * 0.5, 0, 0, App.height / 75);
+            this.a = createText(`exp ${player.EXP}`, getStyle(), card, card_y + card_height * 1.05, card_x + card_width * 0.55, 0, 0, App.height / 90);
+            console.log(this.a.style.fontSize);
+
+            this.b = createText(`${player.leagueYellowCards}`, getStyle(), card, card_y + card_height * 1.2, card_x + card_width * 0.5, 0, 0, App.height / 75);
             card.addLeagueCardsAndInjury(player.leagueYellowCards, player.leagueRedCards, player.injured);
             isSub ? playersCount[playerPosition as keyof IPlayersCount]++ : playersCount.starting++;
         }
 
         this.makeInteractive();
 
-        createText('goalkeepers', textStyle, this, App.height * 0.05, 0, 0, 0.5, App.height / 45);
-        createText('defenders', textStyle, this, App.height * 0.24, 0, 0, 0.5, App.height / 45);
-        createText('midfielders', textStyle, this, App.height * 0.43, 0, 0, 0.5, App.height / 45);
-        createText('forwards', textStyle, this, App.height * 0.62, 0, 0, 0.5, App.height / 45);
-        createText('starting line-up', textStyle, this, App.height * 0.81, 0, 0, 0.5, App.height / 45);
+        createText('goalkeepers', getStyle(), this, App.height * 0.05, 0, 0, 0.5, App.height / 145);
+        createText('defenders', getStyle(), this, App.height * 0.24, 0, 0, 0.5, App.height / 45);
+        createText('midfielders', getStyle(), this, App.height * 0.43, 0, 0, 0.5, App.height / 45);
+        createText('forwards', getStyle(), this, App.height * 0.62, 0, 0, 0.5, App.height / 45);
+        createText('starting line-up', getStyle(), this, App.height * 0.81, 0, 0, 0.5, App.height / 45);
     }
 
     private makeInteractive() {
@@ -253,8 +255,8 @@ export class EditTeam extends Container implements IScene {
         this.container.setChildIndex(card1, this.container.children.length - 1);
         this.container.setChildIndex(card2, this.container.children.length - 2);
 
-        gsap.to(card1.children, 0.5, { x: card1newX, y: card1newY, ease: Back.easeInOut });
-        gsap.to(card2.children, 0.5, { x: card2newX, y: card2newY, ease: Back.easeInOut });
+        gsap.to(card1.children, 0.5, { x: card1newX, y: card1newY, ease: "Back.easeInOut" });
+        gsap.to(card2.children, 0.5, { x: card2newX, y: card2newY, ease: "Back.easeInOut" });
 
         const card1Index = this.players.indexOf(this.players.find(x => x === card1.stats)!);
         const card2Index = this.players.indexOf(this.players.find(x => x === card2.stats)!);
@@ -284,12 +286,12 @@ export class EditTeam extends Container implements IScene {
             this.addSavedtext();
         }
         this.saveBtn = new RotatingButton("", "", saveOnPointerDown);
-        this.container.addChild(this.saveBtn);
+        this.container.addChild(this.saveBtn.finalTexture);
         this.saveBtn.setButtonSize(App.height * 0.1, App.width * 1.2, this.container.height * 0.2);
         this.saveBtn.addLabel(`Save`, 0.4);
         gsap.to([this.saveBtn.finalTexture, this.saveBtn.label], 0.3, {
             delay: 0.8,
-            ease: Back.easeOut,
+            ease: "Back.easeOut",
             x: App.width * 0.9,
             onComplete: () => { }
         });
@@ -302,27 +304,27 @@ export class EditTeam extends Container implements IScene {
             }
             gsap.to([this.saveBtn.finalTexture, this.saveBtn.label], 0.3, {
                 delay: 0.1,
-                ease: Back.easeIn,
+                ease: "Back.easeIn",
                 x: App.width * 1.2,
                 onComplete: () => {
                     gsap.delayedCall(0.25, () => {
-                        // App.checkContinueAllowed();// ???????????????
-                        // exit this scene here !!!!!!!!!!!!!!!!!!!!!!
+                        // App.checkContinueAllowed();// ??????????????? // PROBLEM
+                        App.removeScene(this);
                     });
                 }
             });
             gsap.to([this.backBtn.finalTexture, this.backBtn.label], 0.3, {
                 // delay: 0.2,
-                ease: Back.easeIn,
+                ease: "Back.easeIn",
                 x: App.width * 1.2,
                 onComplete: () => { }
             });
         }
         this.backBtn = new RotatingButton("", "", backOnPointerDown);
-        this.container.addChild(this.backBtn);
+        this.container.addChild(this.backBtn.finalTexture);
         this.backBtn.setButtonSize(App.height * 0.1, App.width * 1.2, this.container.height * 0.1);
         this.backBtn.addLabel(`Back`, 0.4);
-        gsap.to([this.backBtn, this.backBtn.label], 0.3, {
+        gsap.to([this.backBtn.finalTexture, this.backBtn.label], 0.3, {
             delay: 0.9,
             ease: "Back.easeOut",
             x: App.width * 0.9,
@@ -356,7 +358,7 @@ export class EditTeam extends Container implements IScene {
             ease: "Back.easeIn",
             x: App.width + 400,
             onComplete: () => {
-                App.stage.removeChild(changesSaved);
+                // App.stage.removeChild(changesSaved);
                 this.saveBtn.interactive = true;
             }
         });
@@ -367,7 +369,7 @@ export class EditTeam extends Container implements IScene {
         // this.app.stage.removeChild(changesSaved);
         // });
     }
-    
+
     private recordData() {
         let club = App.allClubs.find((t: { name: string; }) => t.name === this.clubName)
         club.players = this.players;

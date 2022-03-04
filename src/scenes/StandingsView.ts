@@ -73,17 +73,16 @@ export class StandingsView extends Container implements IScene {
     }
 
     private checkContinueAllowed = () => {
-
-        // const continueDisabled = this.playerLineUp
-        //     .slice(0, 6)
-        //     .find(el => el.leagueRedCards || el.leagueYellowCards === 5 || el.injured > 0);
-        // if (continueDisabled) {
-        //     this.continueBtn.interactive = false;
-        //     this.continueBtn.alpha = 0.4;
-        // } else {
-        //     this.continueBtn.interactive = true;
-        //     this.continueBtn.alpha = 1;
-        // }
+        const continueDisabled = App.playerLineUp
+            .slice(0, 6)
+            .find(el => el.leagueRedCards || el.leagueYellowCards === 5 || el.injured > 0);
+        if (continueDisabled) {
+            this.continueBtn.interactive = false;
+            this.continueBtn.alpha = 0.4;
+        } else {
+            this.continueBtn.interactive = true;
+            this.continueBtn.alpha = 1;
+        }
     }
 
     private getClubsData() {
