@@ -12,6 +12,7 @@ import gsap from "gsap";
 import MostYellowCards from "./MostYellowCards";
 import TopScorers from "./TopScorers";
 import { EditTeam } from "./EditTeam";
+import { Level } from "./Level";
 
 export class StandingsView extends Container implements IScene {
     private fixturesHeader: Text;
@@ -146,11 +147,11 @@ export class StandingsView extends Container implements IScene {
             else if (this.selectedRound === 1 && this.currentRound === 1) {//this is lame but works
                 this.getNextOpponent();
                 this.ballParticle("");
-
                 App.removeScene(this);
-                // App.setScene();
-                // this.startLevel();
-                //App.fade.......
+                App.setScene(new Level());
+                gsap.delayedCall(0.01, () => {
+                    App.fade(0, 1).then(() => { });
+                })
             }
             else if (this.selectedRound !== this.currentRound || (this.selectedRound === 2 && this.currentRound === 1)) {
                 this.increaseRound = false;
@@ -162,10 +163,11 @@ export class StandingsView extends Container implements IScene {
             else {
                 this.getNextOpponent();
                 this.ballParticle("");
-                App.removeScene(this);
-                // App.setScene();
-                // this.startLevel();
-                //App.fade.......
+                // App.removeScene(this); // PROBLEM
+                // App.setScene(new Level());
+                // gsap.delayedCall(0.01, () => {
+                //     App.fade(0, 1).then(() => { });
+                // })
             }
         }
 

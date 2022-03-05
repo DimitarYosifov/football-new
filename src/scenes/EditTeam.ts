@@ -166,7 +166,6 @@ export class EditTeam extends Container implements IScene {
             let goals = createText(`${player.goalsScored}`, getStyle(), card, card_y + card_height * 1.035, card_x + card_width * 0.4, 1, 0, App.height / 75);
             card.addGoalsScored(goals.x - goals.width);
             this.a = createText(`exp ${player.EXP}`, getStyle(), card, card_y + card_height * 1.05, card_x + card_width * 0.55, 0, 0, App.height / 90);
-            console.log(this.a.style.fontSize);
 
             this.b = createText(`${player.leagueYellowCards}`, getStyle(), card, card_y + card_height * 1.2, card_x + card_width * 0.5, 0, 0, App.height / 75);
             card.addLeagueCardsAndInjury(player.leagueYellowCards, player.leagueRedCards, player.injured);
