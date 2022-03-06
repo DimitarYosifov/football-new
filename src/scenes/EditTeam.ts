@@ -8,8 +8,6 @@ import { Card } from "../game level/Card";
 import { createText } from "../createText";
 
 export class EditTeam extends Container implements IScene {
-    private a: any
-    private b: any
     private backgroundImg: Sprite;
     private container: Container;
     private bg: Graphics;
@@ -165,9 +163,9 @@ export class EditTeam extends Container implements IScene {
 
             let goals = createText(`${player.goalsScored}`, getStyle(), card, card_y + card_height * 1.035, card_x + card_width * 0.4, 1, 0, App.height / 75);
             card.addGoalsScored(goals.x - goals.width);
-            this.a = createText(`exp ${player.EXP}`, getStyle(), card, card_y + card_height * 1.05, card_x + card_width * 0.55, 0, 0, App.height / 90);
+            createText(`exp ${player.EXP}`, getStyle(), card, card_y + card_height * 1.05, card_x + card_width * 0.55, 0, 0, App.height / 90);
 
-            this.b = createText(`${player.leagueYellowCards}`, getStyle(), card, card_y + card_height * 1.2, card_x + card_width * 0.5, 0, 0, App.height / 75);
+            createText(`${player.leagueYellowCards}`, getStyle(), card, card_y + card_height * 1.2, card_x + card_width * 0.5, 0, 0, App.height / 75);
             card.addLeagueCardsAndInjury(player.leagueYellowCards, player.leagueRedCards, player.injured);
             isSub ? playersCount[playerPosition as keyof IPlayersCount]++ : playersCount.starting++;
         }

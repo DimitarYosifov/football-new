@@ -4,6 +4,8 @@ import gsap from "gsap";
 import { config } from "../configs/MainGameConfig";
 import { MatchStartPopup } from "../popups/MatchStartPopup";
 import LevelCardsSet from "../game level/LevelCardsSet";
+import Grid from "../game level/Grid";
+import NewRoundPopup from "../popups/NewRoundPopup";
 
 export class Level extends Container implements IScene {
 
@@ -25,6 +27,7 @@ export class Level extends Container implements IScene {
     protected playerCards: LevelCardsSet;
     protected opponentCards: LevelCardsSet;
     private matchStartPopup: MatchStartPopup;
+    private infoPopup: NewRoundPopup;
 
     constructor() {
         super();
@@ -92,8 +95,8 @@ export class Level extends Container implements IScene {
         this.addChild(this.info);
         this.info.interactive = true;
         this.info.on('pointerdown', () => {
-            // this.infoPopup = new NewRoundPopup(false, false);  // PROBLEM
-            // this.addChild(this.infoPopup);
+            this.infoPopup = new NewRoundPopup(false, false);  // PROBLEM
+            this.addChild(this.infoPopup);
         });
 
         this.spinningBall = Sprite.from("ball_prototype");
@@ -111,8 +114,8 @@ export class Level extends Container implements IScene {
     }
 
     public onIntroFinish = () => {
-        // this.grid = new Grid(this.app); // PROBLEM
-        // this.addChild(this.grid);
+        this.grid = new Grid(); // PROBLEM
+        this.addChild(this.grid);
         // // this.addSnow();
     }
 

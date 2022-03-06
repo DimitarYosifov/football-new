@@ -13,7 +13,7 @@ export class App {
     // private constructor() { }
 
     public static app: Application;
-    private static currentScene: IScene;
+    public static currentScene: IScene;
 
     private static _width: number;
     private static _height: number;

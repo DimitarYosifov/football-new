@@ -54,7 +54,13 @@ export class StandingsView extends Container implements IScene {
         gsap.delayedCall(1, () => { this.ballParticle("add") });
     }
 
-    public update(time: number): void { }
+    public update(time: number): void {
+        this.emitters.forEach((emitter) => {
+            if (emitter.parent) {
+                emitter.update((time * 0.01))
+            }
+        });
+     }
 
     public addBG(): void {
         this.backgroundImg = Sprite.from("bg33");
@@ -714,18 +720,16 @@ export class StandingsView extends Container implements IScene {
         ]
 
         let emitter: Emitter = new Emitter(container, textures, ballParticleConfig());
-        return (action: string) => {
             if (action === "add") {
-                this.addChildAt(container, 1);
-                emitter.emit = true;
-                this.emitters.push(emitter);
+                // this.addChildAt(container, 1);
+                // emitter.emit = true;
+                // this.emitters.push(emitter);
 
             } else {
-                emitter.destroy();
-                emitter.cleanup();
-                emitter.update = (): void => { };
+                // emitter.destroy();
+                // emitter.cleanup();
+                // emitter.update = (): void => { };
             }
-        }
     }
 
     private addMoneySection = () => {

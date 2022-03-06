@@ -10,10 +10,6 @@ export function ballParticleConfig() {
             "start": 0.035,
             "end": 0.035
         },
-        "color": {
-            "start": "#6c6c6c",
-            "end": "#ababab"
-        },
         "speed": {
             "start": 65,
             "end": 45
