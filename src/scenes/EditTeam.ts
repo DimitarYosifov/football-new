@@ -4,7 +4,7 @@ import { recordClubPlayersParams } from "../recordClubPlayersParams";
 import gsap from "gsap";
 import { Container, Graphics, Sprite, Text, TextStyle } from "pixi.js";
 import { config } from "../configs/MainGameConfig";
-import { Card } from "../game level/Card";
+import { Card } from "../game_level/Card";
 import { createText } from "../createText";
 
 export class EditTeam extends Container implements IScene {
@@ -327,6 +327,19 @@ export class EditTeam extends Container implements IScene {
             x: App.width * 0.9,
             onComplete: () => { }
         });
+    }
+
+    private checkContinueAllowed = () => {
+        // const continueDisabled = App.playerLineUp
+        //     .slice(0, 6)
+        //     .find(el => el.leagueRedCards || el.leagueYellowCards === 5 || el.injured > 0);
+        // if (continueDisabled) {
+        //     this.continueBtn.interactive = false;
+        //     this.continueBtn.alpha = 0.4;
+        // } else {
+        //     this.continueBtn.interactive = true;
+        //     this.continueBtn.alpha = 1;
+        // }
     }
 
     private addSavedtext() {

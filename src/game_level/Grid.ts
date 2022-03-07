@@ -1,10 +1,3 @@
-
-// import NoMovesPopup from "./NoMovesPopup.js";
-// import NewRoundPopup from "./NewRoundPopup.js";
-// import Block from "./Block.js";
-// import Row from "./Row.js";
-// import GameTexture from "../GameTexture.js";
-
 import { Container, Graphics, InteractionEvent, Sprite, Text, Texture } from "pixi.js";
 import { App } from "../App";
 import { config } from "../configs/MainGameConfig";
@@ -13,13 +6,16 @@ import gsap from "gsap";
 import { Card } from "./Card";
 import { ActiveDefense } from "./ActiveDefense";
 import NewRoundPopup from "../popups/NewRoundPopup";
+import NoMovesPopup from "../popups/NoMovesPopup";
+import Block from "./Block";
+import Row from "./Row";
 
 export default class Grid extends Container {
 
     private moveCoordinates: grid_interfaces.IMoveCoordinates;
-    private gridArrays: [Sprite | null][]
-    private globalBlocksPositions: [grid_interfaces.IBlockPositions][];
-    private blocks: Block[] | [][];
+    private gridArrays: [Sprite | null][] = [];
+    public globalBlocksPositions: any[][] = [[], [], [], [], [], [], [], []];
+    public blocks: grid_interfaces.IBlockPositions[][] = [[], [], [], [], [], [], [], []];
     private dragging: boolean;
     private swapDirection: string;  //???
     private selectedBlock: grid_interfaces.ISelectedBlock;
@@ -32,10 +28,9 @@ export default class Grid extends Container {
     private hintMatch: grid_interfaces.IPossibleMoves;
     private bestMatchAtRandom: grid_interfaces.IPossibleMoves;
     private noMoves: boolean;
-    private NoMovesPopup: NoMovesPopupp;
     private hasGoalsInThisRound: boolean;
     private goalText: Text;
-    private popup: NewRoundPopup;
+    private popup: NoMovesPopup | NewRoundPopup;
     private holesInColumns: grid_interfaces.IHolesInColumns[];
     gridPosition_x: number;
     gridPosition_y: number;
@@ -51,24 +46,27 @@ export default class Grid extends Container {
 
     private createGrid() {
         for (let row = 0; row < 8; row++) {
-            let rowContainer = new Row(row, this);
+            let rowContainer = new Row(row);
             this.addChild(rowContainer);
-            this.gridArrays.push(rowContainer.children.map(c => c.type));
+            this.gridArrays.push((rowContainer.children as any).map((c: { type: any }) => c.type));
         }
 
-        // TODO - FIX THIS FUCKING SHIT!!!
-        const mask = new Graphics();
-        mask.beginFill(0xffffff, 1);
-        mask.drawRect(
-            this.globalBlocksPositions[0][0].x - this.blocks[0][0].width! / 2,
-            this.globalBlocksPositions[0][0].y - this.blocks[0][0].height! / 2,
-            this.width,
-            this.height
-        );
-        mask.endFill();
-        this.mask = mask;
-        // this.addChild(this.mask);
-        this.checkPossibleMove(2, true);
+
+        setTimeout(() => {
+            // TODO - FIX THIS FUCKING SHIT!!!
+            const mask = new Graphics();
+            mask.beginFill(0xffffff, 1);
+            mask.drawRect(
+                this.globalBlocksPositions[0][0].x - this.blocks[0][0].width! / 2,
+                this.globalBlocksPositions[0][0].y - this.blocks[0][0].height! / 2,
+                this.width,
+                this.height
+            );
+            mask.endFill();
+            this.mask = mask;
+            // this.addChild(this.mask);
+            this.checkPossibleMove(2, true);  // PROBLEM - THIS SHOULD BE UNCOMMENT!
+        }, 0);
     }
 
     private swapBlocks(block1_x: number, block1_y: number, dir: string) {
@@ -78,7 +76,7 @@ export default class Grid extends Container {
         let itemOneOldImg = item1.img;
         let itemTwoOldImg: Sprite | null = null;
         this.selectedBlock = { row: block1_y, col: block1_x, type: item1.type, oldX: item1.blockImg.x, oldY: item1.blockImg.y };
-        let item2: Block;
+        let item2: any;
         switch (dir) {
             case "down":
                 item2 = this.blocks[block1_y + 1][block1_x];
@@ -97,12 +95,12 @@ export default class Grid extends Container {
                 this.blockBeingSwappedWith = { row: block1_y, col: block1_x + 1, type: item2.type, oldX: item2.blockImg.x, oldY: item2.blockImg.y };
         }
 
-        itemTwoOldImg = item2.img;
+        (itemTwoOldImg as any) = item2.img;
 
         gsap.to(item1.children[0], 0.2, {
             y: item2.children[0].y,
             x: item2.children[0].x,
-            ease: Linear.easeNone,
+            ease: "Linear.easeNone",
             onComplete: () => {
 
             }
@@ -111,7 +109,7 @@ export default class Grid extends Container {
         gsap.to(item2.children[0], 0.2, {
             y: item1.children[0].y,
             x: item1.children[0].x,
-            ease: Linear.easeNone,
+            ease: "Linear.easeNone",
             onComplete: () => {
                 let type1 = item1.type;
                 let gridPosition1 = item1.gridPosition;
@@ -149,11 +147,12 @@ export default class Grid extends Container {
                     item2.children[0].x = this.globalBlocksPositions[this.blockBeingSwappedWith.row][this.blockBeingSwappedWith.col].x;
                     item2.children[0].y = this.globalBlocksPositions[this.blockBeingSwappedWith.row][this.blockBeingSwappedWith.col].y;
                     item2.type = this.blocks[this.blockBeingSwappedWith.row][this.blockBeingSwappedWith.col].type;
-                    item2.children[0].texture = Sprite.from(`${item2.type}`);
+
+                    item2.children[0].texture = Texture.from(`${item2.type || item2.img}`);
                     item1.children[0].x = item_2_Old_X;
                     item1.children[0].y = item_2_Old_Y;
                     item1.type = item_2_OldType;
-                    item1.children[0].texture = Sprite.from(`${item1.type}`);
+                    item1.children[0].texture = Texture.from(`${item1.type || item1.img}`);
 
 
                     gsap.delayedCall(0.5, () => {
@@ -165,20 +164,20 @@ export default class Grid extends Container {
                     let type1 = item1.type;
                     item1.type = item2.type;
                     item2.type = type1;
-                    TweenMax.to(item1.children[0], 0.2, {
+                    gsap.to(item1.children[0], 0.2, {
                         y: this.selectedBlock.oldY,
                         x: this.selectedBlock.oldX,
-                        ease: Linear.easeNone,
+                        ease: "Linear.easeNone",
                         onComplete: () => {
-                            this.app.level.animationInProgress = false;
+                            this.level.animationInProgress = false;
                         }
                     });
-                    TweenMax.to(item2.children[0], 0.2, {
+                    gsap.to(item2.children[0], 0.2, {
                         y: this.blockBeingSwappedWith.oldY,
                         x: this.blockBeingSwappedWith.oldX,
-                        ease: Linear.easeNone,
+                        ease: "Linear.easeNone",
                         onComplete: () => {
-                            this.app.level.animationInProgress = false;
+                            this.level.animationInProgress = false;
                         }
                     });
                 }
@@ -186,7 +185,7 @@ export default class Grid extends Container {
         })
     }
 
-    private checkGridForMatches() :grid_interfaces.IMatches[]{
+    private checkGridForMatches(): grid_interfaces.IMatches[] {
         let matches: grid_interfaces.IMatches[] = [];
         for (let row = 0; row < 8; row++) {
             for (let col = 0; col < 6; col++) {
@@ -314,12 +313,12 @@ export default class Grid extends Container {
                         x: newX,
                         y: newY,
                         alpha: 0,
-                        ease: Linear.easeNone,
+                        ease: "Linear.easeNone",
                         onComplete: () => { }
                     });
                 }
                 else {
-                    TweenMax.to(tweenTarget.blockImg, .2, {
+                    gsap.to(tweenTarget.blockImg, .2, {
                         alpha: 0,
                         delay: .2,
                         onComplete: () => { }
@@ -399,7 +398,7 @@ export default class Grid extends Container {
         }
     }
 
-    private checkForInjurymatches(matches: grid_interfaces.IMatches[], deck: string) {
+    private checkForInjury(matches: grid_interfaces.IMatches[], deck: string) {
         let injuries = Math.floor(matches.map(m => m.type).filter(m => m === "red_cross").length / 3);
         if (!injuries) { return };
         //array of all players who do not have red cards and are not injured
@@ -638,7 +637,7 @@ export default class Grid extends Container {
                 this.level.playerCards.children[tweenTarget.initiatorIndex].goalsScored++;
             }
             let finalY = App.isPlayerTurn ? App.height * 0.12 : App.height * 0.88
-            TweenMax.to(tweenTarget, .5, {
+            gsap.to(tweenTarget, .5, {
                 delay: 1.1,
                 y: finalY,
                 alpha: 0,
@@ -729,7 +728,7 @@ export default class Grid extends Container {
         }
     }
 
-    private newRound() {
+    public newRound() {
         let defaultRoundToShowPopup = [0, 5, 10, 15].includes(this.level.currentRound);
         if (
             (
@@ -773,18 +772,18 @@ export default class Grid extends Container {
                     } else {
                         target2 = this.blocks[this.hintMatch.row + 1][this.hintMatch.col];
                     }
-                    let width1 = target1.width * 1.1;
-                    let height1 = target1.height * 1.1;
-                    let width2 = target2.width * 1.1;
-                    let height2 = target2.height * 1.1;
+                    let width1 = target1.width! * 1.1;
+                    let height1 = target1.height! * 1.1;
+                    let width2 = target2.width! * 1.1;
+                    let height2 = target2.height! * 1.1;
 
-                    TweenMax.to(target1.blockImg, 0.3, {
+                    gsap.to(target1.blockImg, 0.3, {
                         width: width1,
                         height: height1,
                         yoyo: true,
                         repeat: 1
                     });
-                    TweenMax.to(target2.blockImg, 0.3, {
+                    gsap.to(target2.blockImg, 0.3, {
                         width: width2,
                         height: height2,
                         yoyo: true,
@@ -843,23 +842,23 @@ export default class Grid extends Container {
         */
         this.blocks.forEach((row, rowIndex) => {
 
-            row.forEach((el: Block, colIndex: number) => {
+            row.forEach((el: any, colIndex: number) => {
                 this.blocks[rowIndex][colIndex].shouldFall = 0;
                 if (this.gridArrays[rowIndex][colIndex] !== null) {
                     this.blocks[rowIndex][colIndex].shouldFall = this.holesInColumns[colIndex].onRow.filter(h => h >= el.row).length;
                 }
                 let shouldFall = this.blocks[rowIndex][colIndex].shouldFall;
-                if (shouldFall > 0) {
+                if (shouldFall! > 0) {
 
-                    let newY = this.globalBlocksPositions[rowIndex + shouldFall][colIndex].y;
-                    let tweenTarget = this.blocks[rowIndex][colIndex].blockImg;
+                    let newY = this.globalBlocksPositions[rowIndex + shouldFall!][colIndex].y;
+                    let tweenTarget: any = this.blocks[rowIndex][colIndex].blockImg;
 
-                    TweenMax.to(tweenTarget, .3 * shouldFall, {
+                    gsap.to(tweenTarget, .3 * shouldFall!, {
                         y: newY,
                         // delay: fallDelay,
                         onComplete: () => {
                             // gsap.globalTimeline.clear();
-                            this.gridArrays[rowIndex + shouldFall][colIndex] = tweenTarget.parent.type;
+                            this.gridArrays[rowIndex + shouldFall!][colIndex] = tweenTarget.parent.type;
                         }
                     });
                 }
@@ -877,7 +876,7 @@ export default class Grid extends Container {
                     let row = el.onRow[hole];
                     let block = this.blocks[row][colIndex].blockImg;
 
-                    let img = block.parent.generateRandomColorBlock();
+                    let img = (block.parent as any).generateRandomColorBlock();
 
                     block.texture = Texture.from(`${img}`);
                     let startY = this.globalBlocksPositions[el.holes - hole - 1][colIndex].y;
@@ -888,7 +887,7 @@ export default class Grid extends Container {
                         y: startY,
                         onComplete: () => {
                             // gsap.globalTimeline.clear();
-                            this.gridArrays[el.holes - hole - 1][colIndex] = block.parent.img = img;
+                            this.gridArrays[el.holes - hole - 1][colIndex] = (block.parent as any).img = img;
                         }
                     });
                 }
@@ -918,7 +917,7 @@ export default class Grid extends Container {
         this.checkAutomaticMatch();
     }
 
-    private onDragStart = (e: InteractionEvent) => {
+    public onDragStart = (e: InteractionEvent) => {
         this.moveCoordinates.startX = e.data.global.x;
         this.moveCoordinates.startY = e.data.global.y;
         this.moveCoordinates.lastX = e.data.global.x;
@@ -930,7 +929,7 @@ export default class Grid extends Container {
         this.dragging = true;
     }
 
-    private onDragMove = (e: InteractionEvent) => {
+    public onDragMove = (e: InteractionEvent) => {
         if (this.dragging && !this.level.animationInProgress) {
             /**
              *  gets block height and divides it by 3,
@@ -941,7 +940,7 @@ export default class Grid extends Container {
             this.moveCoordinates.lastX = e.data.global.x;
             this.moveCoordinates.lastY = e.data.global.y;
 
-            let dist = this.blocks[0][0].height / 3;
+            let dist = this.blocks[0][0].height! / 3;
 
             let directions: grid_interfaces.IDirections = {
                 left: this.moveCoordinates.startX - this.moveCoordinates.lastX,
@@ -969,7 +968,7 @@ export default class Grid extends Container {
         }
     }
 
-    private onDragEnd(e: InteractionEvent) {
+    public onDragEnd(e: InteractionEvent) {
         this.dragging = false;
     }
 }

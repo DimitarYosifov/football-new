@@ -8,14 +8,14 @@ export interface IMoveCoordinates {
 }
 
 export interface IBlockPositions {
-    img: any;
-    type: any;
-    blockImg: any;
-    children: any;
-    gridPosition: any;
-    row: number;
-    col: number;
-    shouldFall: number;
+    img?: any;
+    type?: any;
+    blockImg?: any;
+    children?: any;
+    gridPosition?: any;
+    row?: number;
+    col?: number;
+    shouldFall?: number;
     x: number;
     y: number;
     width?:number;

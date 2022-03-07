@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { config } from "../configs/MainGameConfig";
 import { ServerRequest } from "../ServerRequest"
 import { StandingsView } from "./StandingsView"
+import { Level } from "./Level";
 
 export class ClubSelection extends Container implements IScene {
 
@@ -191,9 +192,12 @@ export class ClubSelection extends Container implements IScene {
                      * friendly game starts here
                      */
 
-                    // App.stage.removeChildren();
                     App.isPlayerHome = true;
-                    // App.startLevel();
+                    App.removeScene(this);
+                    App.setScene(new Level());
+                    gsap.delayedCall(0.01, () => {
+                        App.fade(0, 1).then(() => { });
+                    })
                 }
             }
         })

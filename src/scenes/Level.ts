@@ -3,13 +3,13 @@ import { Container, Graphics, Sprite } from "pixi.js";
 import gsap from "gsap";
 import { config } from "../configs/MainGameConfig";
 import { MatchStartPopup } from "../popups/MatchStartPopup";
-import LevelCardsSet from "../game level/LevelCardsSet";
-import Grid from "../game level/Grid";
+import LevelCardsSet from "../game_level/LevelCardsSet";
+import Grid from "../game_level/Grid";
 import NewRoundPopup from "../popups/NewRoundPopup";
 
 export class Level extends Container implements IScene {
 
-    private grid: null;
+    private grid: Grid | null;
     private clubNames: string[];
     private goalAttempts: []; //????
     protected isPlayerHome: boolean;
@@ -70,7 +70,7 @@ export class Level extends Container implements IScene {
     }
 
     private dataRecieved = () => {
-        this.matchStartPopup = new MatchStartPopup(); // PROBLEM?
+        this.matchStartPopup = new MatchStartPopup(); 
         this.addChild(this.matchStartPopup);
     }
 
@@ -95,7 +95,7 @@ export class Level extends Container implements IScene {
         this.addChild(this.info);
         this.info.interactive = true;
         this.info.on('pointerdown', () => {
-            this.infoPopup = new NewRoundPopup(false, false);  // PROBLEM
+            this.infoPopup = new NewRoundPopup(false, false);  
             this.addChild(this.infoPopup);
         });
 
@@ -114,7 +114,7 @@ export class Level extends Container implements IScene {
     }
 
     public onIntroFinish = () => {
-        this.grid = new Grid(); // PROBLEM
+        this.grid = new Grid(); 
         this.addChild(this.grid);
         // // this.addSnow();
     }

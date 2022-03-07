@@ -8,7 +8,7 @@
         // Rules for your code
         "strict": true,
         "noImplicitAny": true,
-        "noImplicitReturns": true,
+        "noImplicitReturns": false,
         "noUnusedParameters": false,
         "noUnusedLocals": false,
         "noFallthroughCasesInSwitch": true,

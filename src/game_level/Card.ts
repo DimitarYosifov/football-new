@@ -1,10 +1,11 @@
 
-import { FullAttack } from "../game level/FullAttack"
-import { ActiveDefense } from "../game level/ActiveDefense"
+import { FullAttack } from "./FullAttack"
+import { ActiveDefense } from "./ActiveDefense"
 import { config } from "../configs/MainGameConfig";
 import { Container, TextStyle, Text, Sprite, Graphics, Texture } from "pixi.js";
 import { createText } from "../createText";
 import { App } from "../App";
+import gsap from "gsap";
 
 export class Card extends Container {
 
@@ -266,13 +267,12 @@ export class Card extends Container {
         this.addChild(this.border);
     }
 
-    private increasePoints(matches: []) {//TODO - interface
+    private increasePoints(matches: []) {
 
-        let defenceColor = this.colors[this.stats.defense_color as keyof IColors];
+        let defenceColor = this.colors[this.stats.defense_color];
         let attackColor = this.colors[this.stats.attack_color];
         let def_points = matches.filter(e => e["type"] === defenceColor).length;
         let atk_points = matches.filter(e => e["type"] === attackColor).length;
-
         let initialScaleX = this.cardImg.scale.x;
         let initialScaley = this.cardImg.scale.y;
 
@@ -304,7 +304,7 @@ export class Card extends Container {
                     this.card_y + this.card_height / 2,
                     this.colors[this.stats.defense_color]
                 );
-                App.level.addChild(glove);
+                this.parent.addChild(glove);
             }
             this.defenseValuesText.text = `${this.stats.defense_current}/${this.stats.defense_full}`;
 
@@ -317,13 +317,10 @@ export class Card extends Container {
                 strokeThickness: 2
             })
 
-            let def_text = createText("+" + def_points, style2, this, this.cardImg.y + this.cardImg.height / 2, this.cardImg.width / 2, 0.5, 0.5, this.cardImg.height / 2);
-
-            // this.parent.parent.addChild(def_text);// TODO add picture to +3 for example!!!
+            let def_text = createText("+" + def_points, style2, this.parent.parent, this.cardImg.y + this.cardImg.height / 2, this.cardImg.x + this.cardImg.width / 2, 0.5, 0.5, this.cardImg.height / 2);
             gsap.to(def_text, 1.5, {
                 y: this.parent.parent.height / 2,
-                // alpha: 0.75,
-                ease: Linear.easeNone,  //TODO... change ease
+                ease: "Linear.easeNone",  //TODO... change ease
                 onComplete: () => {
                     def_text.alpha = 0;
                     this.parent.parent.removeChild(def_text);
@@ -359,25 +356,26 @@ export class Card extends Container {
                     this.colors[this.stats.attack_color],
                     this.index
                 );
-                // this.app.level.goalAttempts.push(fullAttackShoe);// PROBLEM
-                // this.app.level.addChild(fullAttackShoe);// this should be App.currentScene // PROBLEM
-
+                let level = App.app.stage.getChildByName("level");
+                (level as any).goalAttempts.push(fullAttackShoe);
+                (level as any).addChild(fullAttackShoe);
             }
             this.attackValuesText.text = `${this.stats.attack_current}/${this.stats.attack_full}`;
 
             const style2 = new TextStyle({
                 fontFamily: config.mainFont,
-                fill: '#' + this.stats.defense_color,
+                fill: '#' + this.stats.attack_color,
                 align: 'center',
                 stroke: '#000000',
                 strokeThickness: 2
             })
-            let atk_text = createText("+" + atk_points, style2, this, this.cardImg.y + this.cardImg.height / 2, this.cardImg.x + this.cardImg.width / 2, 0.5, 0.5, this.cardImg.height / 2);
+            let atk_text = createText("+" + atk_points, style2, this.parent.parent, this.cardImg.y + this.cardImg.height / 2, this.cardImg.x + this.cardImg.width / 2, 0.5, 0.5, this.cardImg.height / 2);
             // this.parent.parent.addChild(atk_text);// TODO add picture to +3 for example!!!
-
             gsap.to(atk_text, 1.5, {
                 delay: def_points > 0 ? 0.25 : 0,
                 y: this.parent.parent.height / 2,
+                // x: this.cardImg.width / 2,
+
                 // alpha: 0.75,
                 ease: "Linear.easeNone",  //TODO... change ease
                 onComplete: () => {

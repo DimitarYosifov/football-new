@@ -3,7 +3,6 @@ import { Container, Sprite } from "pixi.js";
 import gsap from "gsap";
 import { App } from "../App";
 
-// export default class MatchStartPopup extends PIXI.Container {
 export class MatchStartPopup extends Container {
 
     private delayBetweenSteps: number;

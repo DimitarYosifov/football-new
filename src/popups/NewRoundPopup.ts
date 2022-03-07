@@ -1,11 +1,8 @@
-// import { standingsView } from "./../standingsView.js";
-// import { recordClubPlayersParams } from "../recordClubPlayersParams.js";
-// import GameTexture from "./../GameTexture.js";
-// import MatchEndWinningsPopup from "./MatchEndWinningsPopup.js";
-
-import { Container, Graphics ,Sprite,Text} from "pixi.js";
+import { Container, Graphics, Sprite, Text } from "pixi.js";
 import { App } from "../App";
 import { config } from "../configs/MainGameConfig";
+import MatchEndWinningsPopup from "./MatchEndWinningsPopup";
+import gsap from "gsap";
 
 export default class NewRoundPopup extends Container {
 
@@ -57,7 +54,7 @@ export default class NewRoundPopup extends Container {
         if (this.matchFinished) {
             // GAME IS OVER
             this.currentRound = new Text(`FINAL SCORE`, {
-                fontFamily:  config.mainFont,
+                fontFamily: config.mainFont,
                 fontSize: App.height / 10,
                 fill: '#000000',
                 align: 'center',
@@ -73,7 +70,7 @@ export default class NewRoundPopup extends Container {
             // CURRENT ROUND TEXT
             let text = this.lastRound ? "Last Round" : `Round ${this.level.currentRound}/20`
             this.currentRound = new Text(`${text}`, {
-                fontFamily:  config.mainFont,
+                fontFamily: config.mainFont,
                 fontSize: App.height / 10,
                 fill: '#000000',
                 align: 'center',
@@ -82,7 +79,7 @@ export default class NewRoundPopup extends Container {
                 lineJoin: "bevel",
                 strokeThickness: 6
             });
-            this.currentRound.position.set(App.width / 2,App.height * 0.25);
+            this.currentRound.position.set(App.width / 2, App.height * 0.25);
             this.currentRound.anchor.set(0.5, 0.5);
             this.addChild(this.currentRound);
         }
@@ -119,7 +116,7 @@ export default class NewRoundPopup extends Container {
         this.addChild(this.playerTeamName);
 
         //PLAYER CLUB LOGO
-        this.playerClubLogo =Sprite.from(`${App.playerClubData.logo}`);
+        this.playerClubLogo = Sprite.from(`${App.playerClubData.logo}`);
         this.playerClubLogo.x = this.playerTeamName.x;
         this.playerClubLogo.y = this.playerTeamName.y - this.playerTeamName.height / 2;
         this.playerClubLogo.height = App.height / 6;
@@ -130,7 +127,7 @@ export default class NewRoundPopup extends Container {
         //PLAYER CLUB STARS
         this.playerClubPower = App.playerClubData.power;
         for (let s = 0; s < this.playerClubPower; s++) {
-            const star =Sprite.from("star")  ;
+            const star = Sprite.from("star");
             star.height = App.height * 0.025;
             star.scale.x = star.scale.y;
             star.x = this.playerClubLogo.x - star.width * s + star.width * this.playerClubPower / 2;
@@ -142,13 +139,13 @@ export default class NewRoundPopup extends Container {
         //-----------------------------------------------------------------------------------------------
 
         //OPPONENT CLUB NAME
-        this.opponentTeamName = new  Text(`${this.level.clubNames[1]}`, {
+        this.opponentTeamName = new Text(`${this.level.clubNames[1]}`, {
             fontFamily: config.mainFont,
             fontSize: App.height / 20,
             fill: '#ffffff',
             align: 'center',
             stroke: '#000000',
-            fontWeight:"800" ,
+            fontWeight: "800",
             lineJoin: "bevel",
             strokeThickness: 6
         });
@@ -160,7 +157,7 @@ export default class NewRoundPopup extends Container {
         this.addChild(this.opponentTeamName);
 
         //OPPONENT CLUB LOGO
-        this.opponentClubLogo =Sprite.from(`${App.opponentClubData.logo}`); 
+        this.opponentClubLogo = Sprite.from(`${App.opponentClubData.logo}`);
         this.opponentClubLogo.x = this.opponentTeamName.x;
         this.opponentClubLogo.y = this.opponentTeamName.y - this.opponentTeamName.height / 2;
         this.opponentClubLogo.height = App.height / 6;
@@ -171,7 +168,7 @@ export default class NewRoundPopup extends Container {
         //OPPONENT CLUB STARS
         this.opponentClubPower = App.opponentClubData.power; // should be taken from level!!  TODO............
         for (let s = 0; s < this.opponentClubPower; s++) {
-            const star =Sprite.from("star");  
+            const star = Sprite.from("star");
             star.height = App.height * 0.025;
             star.scale.x = star.scale.y;
             star.x = this.opponentClubLogo.x - star.width * s + star.width * this.opponentClubPower / 2;
@@ -184,7 +181,7 @@ export default class NewRoundPopup extends Container {
             gsap.globalTimeline.clear();
             //continue button
             this.level.grid.interactive = false;
-            this.continueBtn =Sprite.from("btn1");   
+            this.continueBtn = Sprite.from("btn1");
             this.continueBtn.height = App.height * 0.1;
             this.continueBtn.scale.x = this.continueBtn.scale.y;
             this.continueBtn.x = App.width / 2;
@@ -197,8 +194,13 @@ export default class NewRoundPopup extends Container {
                     location.reload();
                 } else {
                     // match end
-                    // let matchEndWinningsPopup = new MatchEndWinningsPopup();
+                    let matchEndWinningsPopup = new MatchEndWinningsPopup();
+                    this.parent.addChild(matchEndWinningsPopup);
+
                     this.parent.removeChild(this);
+                    console.log(this);
+                    console.log(this.parent);
+
                     gsap.delayedCall(0.01, () => {
                         App.fade(0, 1).then(() => { });
                     })
@@ -206,8 +208,8 @@ export default class NewRoundPopup extends Container {
             });
             this.addChild(this.continueBtn);
 
-            this.continueBtnLabel = new  Text(`Continue`, {
-                fontFamily:  config.mainFont,
+            this.continueBtnLabel = new Text(`Continue`, {
+                fontFamily: config.mainFont,
                 fontSize: this.continueBtn.height / 2.5,
                 fill: '#ffffff',
                 align: 'center',

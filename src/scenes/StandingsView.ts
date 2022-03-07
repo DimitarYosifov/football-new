@@ -169,11 +169,11 @@ export class StandingsView extends Container implements IScene {
             else {
                 this.getNextOpponent();
                 this.ballParticle("");
-                // App.removeScene(this); // PROBLEM
-                // App.setScene(new Level());
-                // gsap.delayedCall(0.01, () => {
-                //     App.fade(0, 1).then(() => { });
-                // })
+                App.removeScene(this); 
+                App.setScene(new Level());
+                gsap.delayedCall(0.01, () => {
+                    App.fade(0, 1).then(() => { });
+                })
             }
         }
 

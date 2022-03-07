@@ -22,16 +22,16 @@ export const config: any = {
     isPlayerHome: true,
 
     debugGrid: [
-        ["red_cross", "red_cross", "ball_red", "red_cross", "red_cross", "red_cross"],
-        ["yellow_card", "yellow_card", "yellow_card", "ball_red", "red_card", "red_cross"],
-        ["red_card", "yellow_card", "red_cross", "ball_red", "red_card", "ball_green"],
-        ["ball_purple", "red_cross", "yellow_card", "red_cross", "red_card", "ball_blue"],
+        ["red_card", "red_card", "ball_red", "red_card", "red_cross", "ball_red"],
+        ["yellow_card", "yellow_card", "yellow_card", "ball_red", "red_card", "ball_red"],
+        ["red_card", "yellow_card", "ball_red", "ball_red", "red_card", "ball_green"],
+        ["ball_purple", "red_card", "yellow_card", "ball_red", "red_card", "ball_blue"],
         ["ball_yellow", "red_cross", "ball_blue", "ball_yellow", "ball_blue", "yellow_card"],
-        ["ball_red", "ball_red", "red_card", "yellow_card", "red_card", "red_card"],
+        ["ball_red", "ball_red", "red_card", "yellow_card", "red_card", "ball_red"],
         ["ball_red", "red_card", "ball_red", "ball_red", "red_cross", "red_card"],
         ["red_card", "red_card", "red_card", "red_cross", "red_card", "red_cross"]
     ],
-    roundsInMatch: 20,
+    roundsInMatch: 1,
 
     // this may be for debug and test or may be default
     randomCardColors: true,
