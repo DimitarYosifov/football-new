@@ -304,7 +304,8 @@ export class Card extends Container {
                     this.card_y + this.card_height / 2,
                     this.colors[this.stats.defense_color]
                 );
-                this.parent.addChild(glove);
+                let level = App.app.stage.getChildByName("level");
+                (level as any).addChild(glove);
             }
             this.defenseValuesText.text = `${this.stats.defense_current}/${this.stats.defense_full}`;
 

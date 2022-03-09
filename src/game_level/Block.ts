@@ -98,12 +98,12 @@ export default class Block extends Container {
             case x <= 17:
                 a = "ball_blue";
                 break;
+            // case (x > 17 && x <= 100): //TEST
+            //     a = "ball_green";
+            //     break;
             case (x > 17 && x <= 34):
                 a = "ball_green";
                 break;
-            // case x > 28 && x <= 42:
-            //     a = "ball_orange";
-            //     break;
             case x > 34 && x <= 51:
                 a = "ball_purple";
                 break;

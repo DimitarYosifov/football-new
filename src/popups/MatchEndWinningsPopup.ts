@@ -69,10 +69,13 @@ export default class MatchEndWinningsPopup extends Container {
     private injuryCoinImg: Sprite;
     private contionueBtn: RotatingButton;
     private totalYellowCardsFineText: Text;
+    private totalGoalsWinningText: Text;
+    private opponentCards: []; //???
 
     constructor() {
         super();
         this.level = App.app.stage.getChildByName("level");
+        this.opponentCards = this.level.opponentCards;
         this.result = `${this.level.playerScore}-${this.level.opponentScore}`;
         if (!App.isPlayerHome) this.result = this.result.split("").reverse().join("");
         this.totalWinnings = 0;
@@ -184,7 +187,6 @@ export default class MatchEndWinningsPopup extends Container {
                 alpha: 1,
                 onStart: () => { },
                 onComplete: () => {
-                    this.totalWinnings += this.totalPointsWinnings
                     this.startGoalsBangUps();
                 }
             }
@@ -195,11 +197,11 @@ export default class MatchEndWinningsPopup extends Container {
                 alpha: 1,
                 onStart: () => { },
                 onComplete: () => {
-                    this.totalWinnings += this.totalGoalsWinnings;
                     this.startTicketsBangUps();
                 }
             }
         );
+
         this.timeline.to(this.yellowCardsRowContainer, 1.5,
             {
                 delay: 1,
@@ -233,34 +235,40 @@ export default class MatchEndWinningsPopup extends Container {
     }
 
     private startPointsBangUps() {
-        const pointsBangUp = new BangUp(this.pointsText, 1, this.pointsText.text, 0, 0);
-        const totalWinningsBangUp1 = new BangUp(this.totalWinningsText, 1, "" + 0, +this.pointsText.text + this.totalWinnings, 0);
+        const pointsBangUp = new BangUp(this.totalPointsWinningText, 1, this.totalPointsWinnings, 0, 0);
+        const totalWinningsBangUp1 = new BangUp(this.totalWinningsText, 1, 0, this.totalPointsWinnings + this.totalWinnings, 0);
+        this.totalWinnings += this.totalPointsWinnings;
     }
 
     private startGoalsBangUps() {
-        const goalsBangUp = new BangUp(this.goalsText, 1, this.goalsText.text, 0, 0);
-        const totalWinningsBangUp = new BangUp(this.totalWinningsText, 1, "" + this.totalWinnings, +this.goalsText.text + this.totalWinnings, 0);
+        const goalsBangUp = new BangUp(this.totalGoalsWinningText, 1, this.totalGoalsWinnings, 0, 0);
+        const totalWinningsBangUp = new BangUp(this.totalWinningsText, 1, this.totalWinnings, this.totalGoalsWinnings + this.totalWinnings, 0);
+        this.totalWinnings += this.totalGoalsWinnings;
     }
 
     private startTicketsBangUps() {
-        const ticketssBangUp = new BangUp(this.ticketsText, 1, this.ticketsText.text, 0, 0);
-        const totalWinningsBangUp = new BangUp(this.totalWinningsText, 1, "" + this.totalWinnings, +this.ticketsText.text + this.totalWinnings, 0);
+        const ticketssBangUp = new BangUp(this.totalTicketsWinningsText, 1, this.totalTicketsWinnings, 0, 0);
+        const totalWinningsBangUp = new BangUp(this.totalWinningsText, 1, this.totalWinnings, this.totalTicketsWinnings + this.totalWinnings, 0);
+        this.totalWinnings += this.totalTicketsWinnings;
     }
 
     private startYellowCardsBangUps() {
-        const yellowCardsBangUp = new BangUp(this.totalYellowCardsFineText, 1, "" + this.totalYellowCardsFine, 0, 0);
-        const totalWinningsBangUp = new BangUp(this.totalWinningsText, 1, this.totalWinningsText.text, +this.totalWinningsText.text - Math.abs(+this.totalYellowCardsFine), 0);
+        const yellowCardsBangUp = new BangUp(this.totalYellowCardsFineText, 1, this.totalYellowCardsFine, 0, 0);
+        const totalWinningsBangUp = new BangUp(this.totalWinningsText, 1, this.totalWinnings, this.totalWinnings - Math.abs(+this.totalYellowCardsFine), 0);
+        this.totalWinnings -= this.totalYellowCardsFine;
     }
 
     private startRedCardsBangUps() {
-        const redCardsBangUp = new BangUp(this.totalRedCardsFineText, 1, "" + this.totalRedCardsFine, 0, 0);
-        const totalWinningsBangUp = new BangUp(this.totalWinningsText, 1, this.totalWinningsText.text, +this.totalWinningsText.text - Math.abs(+this.totalRedCardsFine), 0);
+        const redCardsBangUp = new BangUp(this.totalRedCardsFineText, 1, this.totalRedCardsFine, 0, 0);
+        const totalWinningsBangUp = new BangUp(this.totalWinningsText, 1, this.totalWinnings, this.totalWinnings - Math.abs(+this.totalRedCardsFine), 0);
+        this.totalWinnings -= this.totalRedCardsFine;
     }
 
     private startInjuriesBangUps() {
         this.continue();
-        const injurisBangUp = new BangUp(this.totalInjuriesExpensesText, 1, "" + this.totalInjuriesExpensesText.text, 0, 0);
-        const totalWinningsBangUp = new BangUp(this.totalWinningsText, 1, this.totalWinningsText.text, +this.totalWinningsText.text - Math.abs(+this.totalInjuriesExpensesText.text), 0);
+        const injurisBangUp = new BangUp(this.totalInjuriesExpensesText, 1, this.totalInjuriesExpenses, 0, 0);
+        const totalWinningsBangUp = new BangUp(this.totalWinningsText, 1, this.totalWinnings, this.totalWinnings - Math.abs(+this.totalInjuriesExpenses), 0);
+        this.totalWinnings -= this.totalInjuriesExpenses;
     }
 
     private addCoinAnimation() {
@@ -354,12 +362,12 @@ export default class MatchEndWinningsPopup extends Container {
         this.goalsValueText = createText(`${this.goals} x ${this.cashPerGoal}`, getStyle(), this.goalsRowContainer, App.height * 0.385, App.width * 0.35, 0, 0, App.height / 30);
 
         // TOTAL POINTS WINNINGS  
-        this.totalPointsWinningText = createText(`${this.totalGoalsWinnings}`, getStyle(), this.goalsRowContainer, App.height * 0.385, App.width * 0.85, 1, 0, App.height / 30);
+        this.totalGoalsWinningText = createText(`${this.totalGoalsWinnings}`, getStyle(), this.goalsRowContainer, App.height * 0.385, App.width * 0.85, 1, 0, App.height / 30);
 
         // COIN IMG
         this.goalsCoinImg = Sprite.from(`coin`);
         this.goalsCoinImg.height = App.height * 0.03;
-        this.goalsCoinImg.x = this.totalPointsWinningText.x;
+        this.goalsCoinImg.x = this.totalGoalsWinningText.x;
         this.goalsCoinImg.y = App.height * 0.3925;
         this.goalsCoinImg.scale.x = this.goalsCoinImg.scale.y;
         this.goalsRowContainer.addChild(this.goalsCoinImg);
@@ -394,7 +402,7 @@ export default class MatchEndWinningsPopup extends Container {
         // COIN IMG
         this.ticketsCoinImg = Sprite.from(`coin`);
         this.ticketsCoinImg.height = App.height * 0.03;
-        this.ticketsCoinImg.x = this.ticketsText.x;
+        this.ticketsCoinImg.x = this.totalTicketsWinningsText.x;
         this.ticketsCoinImg.y = App.height * 0.4725;
         this.ticketsCoinImg.scale.x = this.ticketsCoinImg.scale.y;
         this.ticketsRowContainer.addChild(this.ticketsCoinImg);
@@ -433,7 +441,7 @@ export default class MatchEndWinningsPopup extends Container {
         // COIN IMG
         this.yellowCardsCoinImg = Sprite.from(`coin`);
         this.yellowCardsCoinImg.height = App.height * 0.03;
-        this.yellowCardsCoinImg.x = this.ticketsText.x;
+        this.yellowCardsCoinImg.x = this.totalYellowCardsFineText.x;
         this.yellowCardsCoinImg.y = App.height * 0.5525;
         this.yellowCardsCoinImg.scale.x = this.yellowCardsCoinImg.scale.y;
         this.yellowCardsRowContainer.addChild(this.yellowCardsCoinImg);
@@ -472,7 +480,7 @@ export default class MatchEndWinningsPopup extends Container {
         // COIN IMG
         this.redCardsCoinImg = Sprite.from(`coin`);
         this.redCardsCoinImg.height = App.height * 0.03;
-        this.redCardsCoinImg.x = this.ticketsText.x;
+        this.redCardsCoinImg.x = this.totalRedCardsFineText.x;
         this.redCardsCoinImg.y = App.height * 0.6325;
         this.redCardsCoinImg.scale.x = this.redCardsCoinImg.scale.y;
         this.redCardsRowContainer.addChild(this.redCardsCoinImg);
@@ -511,7 +519,7 @@ export default class MatchEndWinningsPopup extends Container {
         // COIN IMG
         this.injuryCoinImg = Sprite.from(`coin`);
         this.injuryCoinImg.height = App.height * 0.03;
-        this.injuryCoinImg.x = this.ticketsText.x;
+        this.injuryCoinImg.x = this.totalInjuriesExpensesText.x;
         this.injuryCoinImg.y = App.height * 0.7125;
         this.injuryCoinImg.scale.x = this.injuryCoinImg.scale.y;
         this.injuriesExpensesRowContainer.addChild(this.injuryCoinImg);
@@ -522,20 +530,23 @@ export default class MatchEndWinningsPopup extends Container {
     private continue() {
         //  CONTINUE BUTTON
         let continueOnPointerDown = () => {
+            console.log("exit match winnings popup");
+            
+            this.contionueBtn.interactive = false;
             App.lastGameWinnings = +this.totalWinningsText.text;
             recordClubPlayersParams(true, () => { });
             App.removeScene(this.level);
-            App.setScene(new StandingsView());
+            App.setScene(new StandingsView(true, this.result, true, this.opponentCards));
             gsap.delayedCall(0.01, () => {
                 App.fade(0, 1).then(() => { });
             })
         }
         this.contionueBtn = new RotatingButton("", "", continueOnPointerDown);
-        this.addChild(this.contionueBtn);
+        this.addChild(this.contionueBtn.finalTexture);
         this.contionueBtn.setButtonSize(App.height * 0.2, App.width * 0.5, App.height * 1.25);
         this.contionueBtn.addLabel(`Continue`, 0.25);
         this.contionueBtn.interactive = false;
-        gsap.to([this.contionueBtn, this.contionueBtn.label], 0.35, {
+        gsap.to([this.contionueBtn.finalTexture, this.contionueBtn.label], 0.35, {
             delay: 1.2,
             ease: "Back.easeOut",
             y: App.height * 0.85,

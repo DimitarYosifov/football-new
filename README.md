@@ -25,7 +25,7 @@
         });
     </script>
 
-if we want to add new club go to =>  localhost:3000/add-players.html
+if we want to add new club or change existing double click add-players.html and open it in a local browser
 <!-- 
     TODO LIST:
 

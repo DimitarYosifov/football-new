@@ -31,7 +31,7 @@ export const config: any = {
         ["ball_red", "red_card", "ball_red", "ball_red", "red_cross", "red_card"],
         ["red_card", "red_card", "red_card", "red_cross", "red_card", "red_cross"]
     ],
-    roundsInMatch: 1,
+    roundsInMatch: 20,
 
     // this may be for debug and test or may be default
     randomCardColors: true,

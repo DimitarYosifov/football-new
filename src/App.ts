@@ -1,4 +1,4 @@
-import { Application, DisplayObject } from "pixi.js";
+import { Application, DisplayObject, utils } from "pixi.js";
 import gsap from "gsap";
 import { ServerRequest } from "./ServerRequest"
 import LogIn from "./scenes/LogIn";
@@ -36,6 +36,8 @@ export class App {
     public static level: any;// TODO - interface when level is implemented
     public static lastGameWinnings: number;
     public static playerLineUp: IPlayerLineUp[];
+    public static EE: utils.EventEmitter;
+    public static currentRound : number = 1;
     // G A M E   D A T A ---
 
     public static get width(): number {
@@ -141,6 +143,12 @@ export class App {
             "POST"
         ).then((res: any) => {
             if (res.data) {
+                this.currentRound = res.data.currentRound;
+                this.mostYellowCards = res.data.mostYellowCards;
+                this.topScorers = res.data.topScorers;
+                this.teams = res.data.teams;
+                this.playerCash = res.data.playerCash;
+                this.seasonFixtures = res.data.seasonFixtures;
                 this.playerClubData = res.data.playerClubData;
                 this.setScene(new StandingsView());
             } else {

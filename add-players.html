@@ -8,7 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Girassol&display=swap" rel="stylesheet">
-    <link href="css/css-main.css" rel="stylesheet" type="text/css" />
+    <link href="css-add-players.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -2930,9 +2930,10 @@
             if (parent.children.length > 1) {
                 return;
             }
+
             $.ajax({
-                url: "getAllClubsData",
-                type: 'POST',
+                url: "https://football-match3-api.herokuapp.com/getAllClubsData",
+                type: 'GET',
                 contentType: 'application/json'
             }).then(res => {
                 let allClubs = res.clubs;
@@ -3073,7 +3074,7 @@
             console.log(allPlayers);
             // return;    //uncomment if testing - prevent recording in DB 
             $.ajax({
-                url: "addClub",
+                url: "https://football-match3-api.herokuapp.com/addClub",
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify(

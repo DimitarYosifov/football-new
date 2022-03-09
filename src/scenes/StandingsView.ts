@@ -24,9 +24,8 @@ export class StandingsView extends Container implements IScene {
     private next: Sprite;
     private cashText: Text;
     private moneySectionBG: Sprite;
-    private selectedRound: number;
+    private selectedRound: number = 1;
     private increaseRound: boolean;
-    private currentRound: number = 0;
     private continueBtn: RotatingButton;
     private editTeameBtn: RotatingButton;
     private topScorerBtn: RotatingButton;
@@ -35,17 +34,19 @@ export class StandingsView extends Container implements IScene {
     private shouldGenerateResults: boolean;
     private emitters: Emitter[] = [];
     private coin: AnimatedSprite;
+    private level: any;
+    private opponentCards: [];
 
-    constructor(increaseRound: boolean = false, lastGameRersult: string = "", shouldGenerateResults: boolean = false) {
+    constructor(increaseRound: boolean = false, lastGameRersult: string = "", shouldGenerateResults: boolean = false, opponentCards: [] = []) {
         super();
         // if (!this.topScorers && this.data) this.topScorers = this.data.topScorers;
         // if (!this.mostYellowCards && this.data) this.mostYellowCards = this.data.mostYellowCards;
         // if (this.playerCash === undefined && this.data) this.playerCash = this.data.playerCash;
         this.addBG();
+        this.opponentCards = opponentCards;
         const loadingWrapper = document.getElementById("loading-wrapper");
         if (loadingWrapper) { loadingWrapper.remove() };
         this.increaseRound = increaseRound;
-        increaseRound ? this.currentRound++ : null;
         this.lastGameRersult = lastGameRersult;
         this.shouldGenerateResults = shouldGenerateResults;
 
@@ -60,7 +61,7 @@ export class StandingsView extends Container implements IScene {
                 emitter.update((time * 0.01))
             }
         });
-     }
+    }
 
     public addBG(): void {
         this.backgroundImg = Sprite.from("bg33");
@@ -80,6 +81,9 @@ export class StandingsView extends Container implements IScene {
     }
 
     private checkContinueAllowed = () => {
+
+        if (!App.playerLineUp) return;//new game started, no need to check
+
         const continueDisabled = App.playerLineUp
             .slice(0, 6)
             .find(el => el.leagueRedCards || el.leagueYellowCards === 5 || el.injured > 0);
@@ -93,45 +97,38 @@ export class StandingsView extends Container implements IScene {
     }
 
     private getClubsData() {
-        // TODO - CHECK IF allClubs EXIST IN APP, IF SO CANCEL THIS REQUEST
-        if (App.seasonFixtures && App.playerClubData) {
-            //TODO
-        } else {
-            ServerRequest("getAllClubsData").then((res) => {
-                App.allClubs = (res as any).clubs;
-                App.allClubNames = App.allClubs.map((club: { name: any; }) => club.name);
-                if (!App.seasonFixtures) {
-                    App.teams = [];
-                    App.topScorers = {} as ITopScorers;
-                    App.mostYellowCards = {};
-                    App.allClubNames.forEach((club: string, clubIdx: any) => {
-                        let team = {} as ITeamData;
-                        team.name = club;
-                        team.won = 0;
-                        team.ties = 0;
-                        team.lost = 0;
-                        team.goalsFor = 0;
-                        team.goalsAgainst = 0;
-                        team.goalsDifference = "0";
-                        team.points = 0;
+        ServerRequest("getAllClubsData").then((res) => {
+            App.allClubs = (res as any).clubs;
+            App.allClubNames = App.allClubs.map((club: { name: any; }) => club.name);
+            if (!App.seasonFixtures) {
+                App.teams = [];
+                App.topScorers = {} as ITopScorers;
+                App.mostYellowCards = {};
+                App.allClubNames.forEach((club: string, clubIdx: any) => {
+                    let team = {} as ITeamData;
+                    team.name = club;
+                    team.won = 0;
+                    team.ties = 0;
+                    team.lost = 0;
+                    team.goalsFor = 0;
+                    team.goalsAgainst = 0;
+                    team.goalsDifference = "0";
+                    team.points = 0;
 
 
-                        App.teams.push(team);
-                        App.topScorers[club] = [0, 0, 0, 0, 0, 0];
-                        App.mostYellowCards[club] = [0, 0, 0, 0, 0, 0];
-                        App.playerCash = 0;
-                    })
-                    this.currentRound = 1;
-                    App.createSeasonFixtures();
-                    this.addMoneySection();
-                }
-                else {
-                    this.addMoneySection();
-                }
-                this.createFixtures();
-                if (this.selectedRound !== 1 && this.increaseRound) this.selectedRound--;
-            });
-        }
+                    App.teams.push(team);
+                    App.topScorers[club] = [0, 0, 0, 0, 0, 0];
+                    App.mostYellowCards[club] = [0, 0, 0, 0, 0, 0];
+                    App.playerCash = 0;
+                })
+                App.currentRound = 1;
+                App.createSeasonFixtures();
+                this.addMoneySection();
+            }
+            this.addMoneySection();
+            this.createFixtures();
+        });
+        // }
     }
 
 
@@ -139,7 +136,7 @@ export class StandingsView extends Container implements IScene {
         //---CONTIONUE BUTTON
         let continueOnPointerDown = () => {
             if (
-                !App.seasonFixtures[this.currentRound] && this.lastGameRersult
+                !App.seasonFixtures[App.currentRound] && this.lastGameRersult
 
             ) {
                 /*
@@ -150,7 +147,7 @@ export class StandingsView extends Container implements IScene {
                 alert("You have reached the end of the season.Thank you for playing :)");
                 location.reload();
             }
-            else if (this.selectedRound === 1 && this.currentRound === 1) {//this is lame but works
+            else if (this.selectedRound === 1 && App.currentRound === 1) {//this is lame but works
                 this.getNextOpponent();
                 this.ballParticle("");
                 App.removeScene(this);
@@ -159,17 +156,16 @@ export class StandingsView extends Container implements IScene {
                     App.fade(0, 1).then(() => { });
                 })
             }
-            else if (this.selectedRound !== this.currentRound || (this.selectedRound === 2 && this.currentRound === 1)) {
+            else if (this.selectedRound !== App.currentRound || (this.selectedRound === 2 && App.currentRound === 1)) {
                 this.increaseRound = false;
                 this.lastGameRersult = '';
                 this.shouldGenerateResults = false;
-                // this.scrollToCurrentRound(0, this.selectedRound);//!!!!!!!!BUG HERE - TODO!
-                this.scrollToCurrentRound(0, this.selectedRound === this.currentRound);
+                this.scrollToCurrentRound(0);//!!!!!!!!BUG HERE - TODO!
             }
             else {
                 this.getNextOpponent();
                 this.ballParticle("");
-                App.removeScene(this); 
+                App.removeScene(this);
                 App.setScene(new Level());
                 gsap.delayedCall(0.01, () => {
                     App.fade(0, 1).then(() => { });
@@ -220,8 +216,6 @@ export class StandingsView extends Container implements IScene {
             "POST"
         ).then((res: any) => {
             (App.playerLineUp as IPlayerLineUp[]) = res.players;
-            this.addButtons();
-            this.checkContinueAllowed();
         });
     }
 
@@ -291,7 +285,11 @@ export class StandingsView extends Container implements IScene {
                     return 1;
                 }
                 if (club1.goalsDifference > club2.goalsDifference) {
-                    return -1;
+                    if (+club1.goalsDifference < 0 && +club2.goalsDifference < 0) {
+                        return 1;
+                    } else {
+                        return -1;
+                    }
                 }
                 return 0;
             }
@@ -303,7 +301,7 @@ export class StandingsView extends Container implements IScene {
         let createHeaders = () => {
             let row = new Container;
             let y = 0;
-            row.addChild(this.createText("#", this.width * 0.03, y)); //this is position of the club
+            row.addChild(this.createText("#", App.width * 0.02, y)); //this is position of the club
             Object.keys(headersPositionsX).forEach((prop, index) => {
                 let isName = prop === "club";
                 let anchorX = isName ? 0 : 0.5;
@@ -346,6 +344,8 @@ export class StandingsView extends Container implements IScene {
         // });
 
         this.addChild(standingsContainer);
+        this.addButtons();
+        this.checkContinueAllowed();
     }
 
     private recordFixtures() {
@@ -354,7 +354,7 @@ export class StandingsView extends Container implements IScene {
             JSON.stringify({
                 seasonFixtures: App.seasonFixtures,
                 user: App.user,
-                currentRound: this.currentRound,
+                currentRound: App.currentRound,
                 playerClubData: App.playerClubData,
                 teams: App.teams,
                 topScorers: App.topScorers,
@@ -376,17 +376,23 @@ export class StandingsView extends Container implements IScene {
         return clubLogo;
     }
 
-    private scrollToCurrentRound = (delay: number, additionalScroll: any = 0) => {
+    private scrollToCurrentRound = (delay: number) => {
         this.prev.interactive = false;
         this.next.interactive = false;
         this.prev.alpha = 0.35;
         this.prev.alpha = 0.35;
-        this.selectedRound = this.currentRound;
-        if (additionalScroll) this.selectedRound++;
-        let x = App.width * (this.currentRound - 1 + additionalScroll) * -1;
+
+        let diff = (this.selectedRound || App.currentRound) - App.currentRound;
+        let x = this.fixturesContainer.x + App.width * diff;
+        this.selectedRound = App.currentRound;
+        if (this.lastGameRersult) this.selectedRound--;
 
         if (this.increaseRound) {
             x += App.width;
+            delay = 0;
+        }
+
+        if (!this.lastGameRersult) {
             delay = 0;
         }
         gsap.to(this.fixturesContainer, 0.75,
@@ -434,10 +440,10 @@ export class StandingsView extends Container implements IScene {
                 let firstClub = splitGame.split(":")[0];
                 let secondClub = splitGame.split(":")[1];
 
-                // if (firstClub === playerClub && round === this.currentRound) {
+                // if (firstClub === playerClub && round === App.currentRound) {
                 //     this.opponentClubData = this.allClubs.find(c => c.name === secondClub).clubData;
                 //     this.isPlayerHome = true;
-                // } else if (secondClub === playerClub && round === this.currentRound) {
+                // } else if (secondClub === playerClub && round === App.currentRound) {
                 //     this.opponentClubData = this.allClubs.find(c => c.name === firstClub).clubData;
                 //     this.isPlayerHome = false;
                 // }
@@ -448,13 +454,13 @@ export class StandingsView extends Container implements IScene {
                 let result;
 
                 if (firstClub !== playerClub && secondClub !== playerClub) {
-                    if (this.shouldGenerateResults && round === this.currentRound) {
+                    if (this.shouldGenerateResults && round === App.currentRound) {
                         result = this.randomResult(firstClub, secondClub, i);
                     } else {
                         result = App.seasonFixtures[round][i].split(" ")[1];
                     }
                 } else {
-                    if (this.lastGameRersult && round === this.currentRound) {
+                    if (this.lastGameRersult && round === App.currentRound) {
                         result = this.lastGameRersult;
                         if (firstClub !== playerClub) {
                             this.lastRoundGoals[firstClub] = result.split("-")[0];
@@ -467,7 +473,7 @@ export class StandingsView extends Container implements IScene {
                     } else {
                         result = App.seasonFixtures[round][i].split(" ")[1];
                     }
-                    if (this.shouldGenerateResults && round === this.currentRound) {
+                    if (this.shouldGenerateResults && round === App.currentRound) {
                         this.calculatePoints(firstClub, secondClub, result)
                     }
                 }
@@ -522,7 +528,7 @@ export class StandingsView extends Container implements IScene {
             this.generateRoundScorers();
             this.generateRoundYellowCards();
         }
-        this.increaseRound ? this.currentRound++ : null;
+        this.increaseRound ? App.currentRound++ : null;
         this.recordFixtures();
 
         this.fixturesContainer.y = this.height * 0.33 - this.fixturesContainer.height / 2;
@@ -538,7 +544,7 @@ export class StandingsView extends Container implements IScene {
         this.lastRoundGoals[firstClub] = result.split("-")[0];
         this.lastRoundGoals[secondClub] = result.split("-")[1];
 
-        App.seasonFixtures[this.currentRound][i] += ` ${result}`;
+        App.seasonFixtures[App.currentRound][i] += ` ${result}`;
         this.calculatePoints(firstClub, secondClub, result);
         return result;
     }
@@ -578,7 +584,7 @@ export class StandingsView extends Container implements IScene {
         this.prev.anchor.set(0, 0);
         this.addChild(this.prev);
         this.prev.interactive = true;
-        this.prev.alpha = this.currentRound === 1 ? 0.35 : 1;
+        this.prev.alpha = App.currentRound === 1 ? 0.35 : 1;
         this.prev.on('pointerdown', () => {
             let x = this.fixturesContainer.x;
             this.selectedRound--;
@@ -612,7 +618,7 @@ export class StandingsView extends Container implements IScene {
         this.next.anchor.set(1, 0);
         this.addChild(this.next);
         this.next.interactive = true;
-        this.next.alpha = this.currentRound === App.leagueRounds ? 0.35 : 1;
+        this.next.alpha = App.currentRound === App.leagueRounds ? 0.35 : 1;
         this.next.on('pointerdown', () => {
             let x = this.fixturesContainer.x;
             this.selectedRound++;
@@ -641,7 +647,7 @@ export class StandingsView extends Container implements IScene {
 
     private getNextOpponent = () => {
         let playerClub = App.playerClubData.name;
-        let game: string = App.seasonFixtures[this.currentRound].find((x: string | any[]) => x.includes(playerClub))!;
+        let game: string = App.seasonFixtures[App.currentRound].find((x: string | any[]) => x.includes(playerClub))!;
         let firstClub = game.split(":")[0];
         let secondClub = game.split(":")[1];
 
@@ -691,8 +697,9 @@ export class StandingsView extends Container implements IScene {
             if (club === playerClub) {
                 continue;
             } else if (club === opponentClub) {
-                for (let x = 0; x < App.level.opponentCards.children.length; x++) {
-                    let card = App.level.opponentCards.children[x];
+                let opponentCards = (this.opponentCards as any).children;
+                for (let x = 0; x < opponentCards.length; x++) {
+                    let card = opponentCards[x];
                     if (card.hasRedCard || card.hasYellowCard) {
                         App.mostYellowCards[club][x]++;
                     }
@@ -720,16 +727,16 @@ export class StandingsView extends Container implements IScene {
         ]
 
         let emitter: Emitter = new Emitter(container, textures, ballParticleConfig());
-            if (action === "add") {
-                // this.addChildAt(container, 1);
-                // emitter.emit = true;
-                // this.emitters.push(emitter);
+        if (action === "add") {
+            // this.addChildAt(container, 1);
+            // emitter.emit = true;
+            // this.emitters.push(emitter);
 
-            } else {
-                // emitter.destroy();
-                // emitter.cleanup();
-                // emitter.update = (): void => { };
-            }
+        } else {
+            // emitter.destroy();
+            // emitter.cleanup();
+            // emitter.update = (): void => { };
+        }
     }
 
     private addMoneySection = () => {
@@ -786,7 +793,7 @@ export class StandingsView extends Container implements IScene {
 
         if (this.lastGameRersult) {
             App.playerCash += App.lastGameWinnings;
-            let cashBangUp = new BangUp(this.cashText, 1, this.cashText.text, App.playerCash, 1);
+            let cashBangUp = new BangUp(this.cashText, 1, +this.cashText.text, App.playerCash, 1);
         }
 
     }

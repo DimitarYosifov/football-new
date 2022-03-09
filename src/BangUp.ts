@@ -3,7 +3,7 @@ import { Text } from "pixi.js";
 import gsap from "gsap";
 
 export default class BangUp {
-    constructor(target: Text, duration: number, startVal: string, endVal: number, delay = 0, onStart = null, onUpdate = null, onComplete = null) {
+    constructor(target: Text, duration: number, startVal: number, endVal: number, delay = 0, onStart = null, onUpdate = null, onComplete = null) {
         let tween = gsap.to(target, duration,
             {
                 delay: delay,
