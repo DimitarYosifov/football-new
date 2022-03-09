@@ -281,17 +281,16 @@ export class StandingsView extends Container implements IScene {
             }
 
             if (club1.points == club2.points) {
-                if (club1.goalsDifference < club2.goalsDifference) {
+                if (+club1.goalsDifference < +club2.goalsDifference) {
                     return 1;
                 }
-                if (club1.goalsDifference > club2.goalsDifference) {
+                if (+club1.goalsDifference > +club2.goalsDifference) {
                     if (+club1.goalsDifference < 0 && +club2.goalsDifference < 0) {
-                        return 1;
+                        return +club1.goalsDifference < +club2.goalsDifference ? 1 : -1;
                     } else {
                         return -1;
                     }
                 }
-                return 0;
             }
             return 1; //this is bug!
         };

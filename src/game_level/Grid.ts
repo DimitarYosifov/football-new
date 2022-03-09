@@ -355,7 +355,7 @@ export default class Grid extends Container {
     private checkForRedCard(matches: grid_interfaces.IMatches[], deck: string) {
         let redCards = Math.floor(matches.map(m => m.type).filter(m => m === "red_card").length / 3);
         if (!redCards) { return };
-        let redCardTargets = (this.parent as any).children.filter((player: Card) => !player.hasRedCard);
+        let redCardTargets = (this.parent as any)[deck].children.filter((player: Card) => !player.hasRedCard);
         for (let redCard = 0; redCard < redCards; redCard++) {
 
             //random target
@@ -841,7 +841,6 @@ export default class Grid extends Container {
             how many rows each block should fall
         */
         this.blocks.forEach((row, rowIndex) => {
-
             row.forEach((el: any, colIndex: number) => {
                 this.blocks[rowIndex][colIndex].shouldFall = 0;
                 if (this.gridArrays[rowIndex][colIndex] !== null) {
@@ -849,10 +848,8 @@ export default class Grid extends Container {
                 }
                 let shouldFall = this.blocks[rowIndex][colIndex].shouldFall;
                 if (shouldFall! > 0) {
-
                     let newY = this.globalBlocksPositions[rowIndex + shouldFall!][colIndex].y;
                     let tweenTarget: any = this.blocks[rowIndex][colIndex].blockImg;
-
                     gsap.to(tweenTarget, .3 * shouldFall!, {
                         y: newY,
                         // delay: fallDelay,

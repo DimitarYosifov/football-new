@@ -22,14 +22,14 @@ export const config: any = {
     isPlayerHome: true,
 
     debugGrid: [
-        ["red_card", "red_card", "ball_red", "red_card", "red_cross", "ball_red"],
-        ["yellow_card", "yellow_card", "yellow_card", "ball_red", "red_card", "ball_red"],
-        ["red_card", "yellow_card", "ball_red", "ball_red", "red_card", "ball_green"],
-        ["ball_purple", "red_card", "yellow_card", "ball_red", "red_card", "ball_blue"],
+        ["ball_purple", "red_card", "ball_purple", "ball_blue", "red_cross", "ball_yellow"],
+        ["yellow_card", "yellow_card", "yellow_card", "ball_red", "ball_purple", "ball_red"],
+        ["red_card", "yellow_card", "ball_red", "ball_yellow", "red_card", "ball_green"],
+        ["ball_purple", "ball_purple", "yellow_card", "ball_red", "ball_purple", "ball_blue"],
         ["ball_yellow", "red_cross", "ball_blue", "ball_yellow", "ball_blue", "yellow_card"],
-        ["ball_red", "ball_red", "red_card", "yellow_card", "red_card", "ball_red"],
-        ["ball_red", "red_card", "ball_red", "ball_red", "red_cross", "red_card"],
-        ["red_card", "red_card", "red_card", "red_cross", "red_card", "red_cross"]
+        ["ball_yellow", "ball_red", "red_card", "yellow_card", "red_card", "ball_red"],
+        ["ball_red", "ball_blue", "ball_red", "ball_red", "red_cross", "red_card"],
+        ["ball_blue", "red_card", "ball_purple", "red_cross", "ball_blue", "red_cross"]
     ],
     roundsInMatch: 20,
 
@@ -51,6 +51,7 @@ export const config: any = {
     // color of every newly created block - for tests!
     // if this is not null - set isGridInDebug to true, otherwise game will crash!!!!
     predefinedBlockColor: null,
+    // predefinedBlockColor: "red_card",
 
     maxInjuryDuration: 5,
     yellowCardsToMissGame: 5,
