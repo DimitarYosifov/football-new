@@ -33,6 +33,7 @@ export default class MatchEndWinningsPopup extends Container {
     private tickets: number;
     private totalTicketsWinnings: number;
     private bg: Graphics;
+    private cover: Graphics;
     private summatyText: Text;
     private timeline: GSAPTimeline;
     private pointsRowContainer: Container;
@@ -68,9 +69,11 @@ export default class MatchEndWinningsPopup extends Container {
     private totalInjuriesExpensesText: Text;
     private injuryCoinImg: Sprite;
     private contionueBtn: RotatingButton;
+    private skipBtn: RotatingButton;
     private totalYellowCardsFineText: Text;
     private totalGoalsWinningText: Text;
     private opponentCards: []; //???
+    private currentTimelineLabel: string;
 
     constructor() {
         super();
@@ -140,7 +143,6 @@ export default class MatchEndWinningsPopup extends Container {
         this.yellowCardsFine();
         this.redCardsFine();
         this.injuriesExpenses();
-
         this.createTimeLine();
     }
 
@@ -176,62 +178,77 @@ export default class MatchEndWinningsPopup extends Container {
         this.timeline.to(this.pointsRowContainer, 1.5,
             {
                 alpha: 1,
+                onStart: () => {
+                    this.skip();
+                    this.currentTimelineLabel = "goalsRow";
+                },
                 onComplete: () => {
                     this.startPointsBangUps();
                 }
             }
-        );
+        ).addLabel("pointsRow");
         this.timeline.to(this.goalsRowContainer, 1.5,
             {
                 delay: 1,
                 alpha: 1,
-                onStart: () => { },
+                onStart: () => {
+                    this.currentTimelineLabel = "ticketsRow";
+                },
                 onComplete: () => {
                     this.startGoalsBangUps();
                 }
             }
-        );
+        ).addLabel("goalsRow");;
         this.timeline.to(this.ticketsRowContainer, 1.5,
             {
                 delay: 1,
                 alpha: 1,
-                onStart: () => { },
+                onStart: () => {
+                    this.currentTimelineLabel = "yellowCardsRow";
+                },
                 onComplete: () => {
                     this.startTicketsBangUps();
                 }
             }
-        );
-
+        ).addLabel("ticketsRow");
         this.timeline.to(this.yellowCardsRowContainer, 1.5,
             {
                 delay: 1,
                 alpha: 1,
-                onStart: () => { },
+                onStart: () => {
+                    this.currentTimelineLabel = "redCardsRow";
+                },
                 onComplete: () => {
                     this.startYellowCardsBangUps();
                 }
             }
-        );
+        ).addLabel("yellowCardsRow");
         this.timeline.to(this.redCardsRowContainer, 1.5,
             {
                 delay: 1,
                 alpha: 1,
-                onStart: () => { },
+                onStart: () => {
+                    this.currentTimelineLabel = "redCardsRow";
+                },
                 onComplete: () => {
                     this.startRedCardsBangUps();
                 }
             }
-        );
+        ).addLabel("injuriesExpensesRow");
         this.timeline.to(this.injuriesExpensesRowContainer, 1.5,
             {
                 delay: 1,
                 alpha: 1,
-                onStart: () => { },
+                onStart: () => {
+                    this.currentTimelineLabel = "injuriesExpensesRow";
+                },
                 onComplete: () => {
                     this.startInjuriesBangUps();
+                    this.skipOnPointerDown();
                 }
             }
-        );
+        ).addLabel("");
+        this.addCover();
     }
 
     private startPointsBangUps() {
@@ -265,7 +282,6 @@ export default class MatchEndWinningsPopup extends Container {
     }
 
     private startInjuriesBangUps() {
-        this.continue();
         const injurisBangUp = new BangUp(this.totalInjuriesExpensesText, 1, this.totalInjuriesExpenses, 0, 0);
         const totalWinningsBangUp = new BangUp(this.totalWinningsText, 1, this.totalWinnings, this.totalWinnings - Math.abs(+this.totalInjuriesExpenses), 0);
         this.totalWinnings -= this.totalInjuriesExpenses;
@@ -527,11 +543,42 @@ export default class MatchEndWinningsPopup extends Container {
         this.addChild(this.injuriesExpensesRowContainer);
     }
 
+    private skipOnPointerDown = () => {
+        this.timeline.progress(1);
+        this.skipBtn.interactive = false;
+        this.continue();
+        gsap.to([this.skipBtn.finalTexture, this.skipBtn.label], 0.35, {
+            // delay: 1.2,
+            ease: "Back.easeOut",
+            y: App.height * 1.2,
+            onComplete: () => {
+                this.removeChild(this.skipBtn.finalTexture);
+            }
+        });
+    }
+
+    private skip() {
+        //  SKIP BUTTON
+        this.skipBtn = new RotatingButton("", "", this.skipOnPointerDown);
+        this.addChild(this.skipBtn.finalTexture);
+        this.skipBtn.setButtonSize(App.height * 0.2, App.width * 0.5, App.height * 1.25);
+        this.skipBtn.addLabel(`Skip`, 0.25);
+        this.skipBtn.interactive = false;
+        gsap.to([this.skipBtn.finalTexture, this.skipBtn.label], 0.35, {
+            delay: 1.2,
+            ease: "Back.easeOut",
+            y: App.height * 0.85,
+            onComplete: () => {
+                this.skipBtn.interactive = true;
+            }
+        });
+    }
+
     private continue() {
         //  CONTINUE BUTTON
         let continueOnPointerDown = () => {
             console.log("exit match winnings popup");
-            
+
             this.contionueBtn.interactive = false;
             App.lastGameWinnings = +this.totalWinningsText.text;
             recordClubPlayersParams(true, () => { });
@@ -547,7 +594,7 @@ export default class MatchEndWinningsPopup extends Container {
         this.contionueBtn.addLabel(`Continue`, 0.25);
         this.contionueBtn.interactive = false;
         gsap.to([this.contionueBtn.finalTexture, this.contionueBtn.label], 0.35, {
-            delay: 1.2,
+            delay: 0.35,
             ease: "Back.easeOut",
             y: App.height * 0.85,
             onComplete: () => {
@@ -561,4 +608,23 @@ export default class MatchEndWinningsPopup extends Container {
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
+
+    private addCover() {
+        // this.cover = new Graphics();
+        // this.cover.beginFill(0x00ffff, 0.4);
+        // this.cover.drawRect(
+        //     0,
+        //     0,
+        //     App.width,
+        //     App.height
+        // );
+        // this.cover.endFill();
+        // this.addChild(this.cover);
+        // this.cover.interactive = true;
+        // this.cover.on('pointerdown', this.skip, this);
+    }
+
+    // private skip() {
+    //     this.timeline.seek(this.currentTimelineLabel);
+    // }
 }

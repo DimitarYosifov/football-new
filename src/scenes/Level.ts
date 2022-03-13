@@ -1,5 +1,5 @@
 import { App, IScene } from "../App";
-import { Container, Graphics, Sprite } from "pixi.js";
+import { Container, DisplayObject, Graphics, Sprite } from "pixi.js";
 import gsap from "gsap";
 import { config } from "../configs/MainGameConfig";
 import { MatchStartPopup } from "../popups/MatchStartPopup";
@@ -28,11 +28,21 @@ export class Level extends Container implements IScene {
     protected opponentCards: LevelCardsSet;
     private matchStartPopup: MatchStartPopup;
     private infoPopup: NewRoundPopup;
+    private autoplayImg: Sprite;
+    public autoplayMode: boolean;
 
     constructor() {
         super();
         this.name = "level";
-        gsap.killTweensOf("*");
+
+        /**
+         * "remnant" below aims to clear previous scene,
+         * due to untracked bug, sometimes it does not get distroyed...
+         */
+        const remnant: DisplayObject = App.app.stage.getChildByName("standingsView");
+        if (remnant) App.app.stage.removeChild(remnant);
+
+        // gsap.killTweensOf("*");
         this.grid = null;
         this.clubNames = [App.playerClubData.name, App.opponentClubData.name]; //first is players club
         this.goalAttempts = [];
@@ -49,7 +59,6 @@ export class Level extends Container implements IScene {
         // this.opponentActiveDefensesY = this.height * 0.155;
         // this.playerActiveDefensesY = this.height * 0.84;
         this.addBG();
-        this.addAdditionalChildren();
 
         //NOT SURE IF I NEED MASK HERE.... TODO...
         // const mask = new Graphics();
@@ -70,7 +79,7 @@ export class Level extends Container implements IScene {
     }
 
     private dataRecieved = () => {
-        this.matchStartPopup = new MatchStartPopup(); 
+        this.matchStartPopup = new MatchStartPopup();
         this.addChild(this.matchStartPopup);
     }
 
@@ -86,6 +95,7 @@ export class Level extends Container implements IScene {
     }
 
     private addAdditionalChildren = () => {
+        //info
         this.info = Sprite.from("info");
         this.info.anchor.set(1, 0.5);
         this.info.x = App.width;
@@ -95,26 +105,44 @@ export class Level extends Container implements IScene {
         this.addChild(this.info);
         this.info.interactive = true;
         this.info.on('pointerdown', () => {
-            this.infoPopup = new NewRoundPopup(false, false);  
+            this.infoPopup = new NewRoundPopup(false, false);
             this.addChild(this.infoPopup);
         });
 
+        //spinning ball
         this.spinningBall = Sprite.from("ball_prototype");
         this.spinningBall.anchor.set(0.5, 0.5);
         this.spinningBall.x = App.width * 0.96;
         this.spinningBall.y = App.height * (this.isPlayerHome ? 0.85 : 0.15);
-        // this.spinningBall.width = this.app.width / 11;
-        // this.spinningBall.scale.y = this.info.scale.x;
         this.spinningBall.height = App.height * 0.04;
         this.spinningBall.scale.x = this.spinningBall.scale.y;
         this.addChild(this.spinningBall);
         gsap.to(this.spinningBall, 3000, {
             rotation: 3600
         });
+
+        //autoplay
+        this.autoplayImg = Sprite.from("icon-auto");
+        this.autoplayImg.anchor.set(1, 0.5);
+        this.autoplayImg.x = App.width;
+        this.autoplayImg.y = App.height * 0.45;
+        this.autoplayImg.width = App.width / 12;
+        this.autoplayImg.scale.y = this.autoplayImg.scale.x;
+        this.addChild(this.autoplayImg);
+        this.autoplayImg.interactive = true;
+        this.autoplayImg.tint = 0xffffff;
+
+        this.autoplayImg.on('pointerdown', () => {
+            this.autoplayMode = !this.autoplayMode;
+            this.autoplayImg.tint = this.autoplayMode ? 0x2cb62c : 0xffffff;
+            if(App.isPlayerTurn){
+                this.grid!.proceedToNextRound();
+            }
+        });
     }
 
     public onIntroFinish = () => {
-        this.grid = new Grid(); 
+        this.grid = new Grid();
         this.addChild(this.grid);
         // // this.addSnow();
     }

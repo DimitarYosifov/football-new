@@ -39,6 +39,7 @@ export class StandingsView extends Container implements IScene {
 
     constructor(increaseRound: boolean = false, lastGameRersult: string = "", shouldGenerateResults: boolean = false, opponentCards: [] = []) {
         super();
+        this.name = "standingsView";
         // if (!this.topScorers && this.data) this.topScorers = this.data.topScorers;
         // if (!this.mostYellowCards && this.data) this.mostYellowCards = this.data.mostYellowCards;
         // if (this.playerCash === undefined && this.data) this.playerCash = this.data.playerCash;
@@ -53,6 +54,9 @@ export class StandingsView extends Container implements IScene {
         this.getPLayerLineUp();
         this.getClubsData();
         gsap.delayedCall(1, () => { this.ballParticle("add") });
+        App.EE.on("edit_team_complete", () => {
+            this.checkContinueAllowed();
+        });
     }
 
     public update(time: number): void {
@@ -76,23 +80,22 @@ export class StandingsView extends Container implements IScene {
     private deleteProgress() {
         ServerRequest(
             "deleteProgress",
-            JSON.stringify({ user: App.user })
+            JSON.stringify({ user: App.user }),
+            "POST"
         ).then((res) => { console.log("progress deleted successfully") });
     }
 
     private checkContinueAllowed = () => {
-
         if (!App.playerLineUp) return;//new game started, no need to check
-
         const continueDisabled = App.playerLineUp
             .slice(0, 6)
             .find(el => el.leagueRedCards || el.leagueYellowCards === 5 || el.injured > 0);
         if (continueDisabled) {
-            this.continueBtn.interactive = false;
-            this.continueBtn.alpha = 0.4;
+            this.continueBtn.finalTexture.interactive = false;
+            this.continueBtn.finalTexture.alpha = 0.4;
         } else {
-            this.continueBtn.interactive = true;
-            this.continueBtn.alpha = 1;
+            this.continueBtn.finalTexture.interactive = true;
+            this.continueBtn.finalTexture.alpha = 1;
         }
     }
 
@@ -128,7 +131,6 @@ export class StandingsView extends Container implements IScene {
             this.addMoneySection();
             this.createFixtures();
         });
-        // }
     }
 
 
@@ -216,6 +218,8 @@ export class StandingsView extends Container implements IScene {
             "POST"
         ).then((res: any) => {
             (App.playerLineUp as IPlayerLineUp[]) = res.players;
+            this.addButtons();
+            this.checkContinueAllowed();
         });
     }
 
@@ -343,8 +347,6 @@ export class StandingsView extends Container implements IScene {
         // });
 
         this.addChild(standingsContainer);
-        this.addButtons();
-        this.checkContinueAllowed();
     }
 
     private recordFixtures() {

@@ -30,12 +30,11 @@ export class LoadingScene extends Container implements IScene {
         const loaderBarWidth = App.width * 0.7;
 
         this.loaderBarFill.beginFill(0x5a5a5a, 1)
-        this.loaderBarFill.drawRoundedRect(0, 0, loaderBarWidth, 5, 3);
+        this.loaderBarFill.drawRoundedRect(0, 0, loaderBarWidth, 10, 11);
         this.loaderBarFill.endFill();
-        this.loaderBarFill.scale.x = 0;
 
-        this.loaderBarBorder.lineStyle(10, 0xedef4e, 1);
-        this.loaderBarBorder.drawRoundedRect(0, 0, loaderBarWidth, 5, 3);
+        this.loaderBarBorder.beginFill(0xedef4e, 1);// yellow
+        this.loaderBarBorder.drawRoundedRect(0, 0, App.width * 0.7, 10, 11);
 
         this.loaderBar.addChild(this.loaderBarFill);
         this.loaderBar.addChild(this.loaderBarBorder);
@@ -68,7 +67,9 @@ export class LoadingScene extends Container implements IScene {
 
     private downloadProgress(loader: Loader): void {
         const progressRatio = loader.progress / 100;
-        this.loaderBarFill.scale.x = progressRatio;
+        this.loaderBarBorder.width = App.width * 0.7 * progressRatio;
+        console.log("width=>" + App.width * 0.7 * progressRatio);
+
         this.loadingValue.text = `${Math.ceil(progressRatio * 100)}%`;
     }
 
@@ -93,7 +94,7 @@ export class LoadingScene extends Container implements IScene {
         })
     }
 
-    public update(framesPassed: number): void {};
+    public update(framesPassed: number): void { };
 
     public addBG() { };
 }

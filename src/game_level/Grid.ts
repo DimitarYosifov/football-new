@@ -554,7 +554,7 @@ export default class Grid extends Container {
         } else {
             setTimeout(() => {
                 if (!App.isPlayerTurn && this.level.currentRound === 0) {
-                    gsap.delayedCall(3 + this.nextRoundDelay, () => {
+                    gsap.delayedCall(2 + this.nextRoundDelay, () => {
                         this.proceedToNextRound();
                     })
                 }
@@ -569,7 +569,7 @@ export default class Grid extends Container {
             gsap.delayedCall(2, () => {
                 this.parent.removeChild(this.popup);
                 gsap.delayedCall(5, () => {
-                    if (!this.noMoves && !App.isPlayerTurn) {
+                    if (!this.noMoves && (!App.isPlayerTurn || this.level.autoplayMode)) {
                         this.proceedToNextRound();
                     }
                 })
@@ -721,15 +721,24 @@ export default class Grid extends Container {
         });
     }
 
-    private proceedToNextRound() {
+    public proceedToNextRound() {
         this.level.goalAttempts = [];
-        if (!App.isPlayerTurn) {
-            this.swapBlocks(this.bestMatchAtRandom.col, this.bestMatchAtRandom.row, this.bestMatchAtRandom.dir);
+        const delay = this.level.autoplayMode ? 1 : 0;
+        if (!App.isPlayerTurn || this.level.autoplayMode) {
+            gsap.delayedCall(delay, () => {
+                this.swapBlocks(this.bestMatchAtRandom.col, this.bestMatchAtRandom.row, this.bestMatchAtRandom.dir);
+            })
         }
     }
 
     public newRound() {
+
+        if (this.level.currentRound === 0) {
+            this.level.addAdditionalChildren();
+        }
+
         let defaultRoundToShowPopup = [0, 5, 10, 15].includes(this.level.currentRound);
+       
         if (
             (
                 App.isPlayerTurn && this.level.isPlayerHome ||

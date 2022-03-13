@@ -63,6 +63,7 @@ export class App {
         App.app.ticker.add(App.update);
         window.addEventListener("resize", App.resize);
         App.resize();
+        App.EE = new utils.EventEmitter;
     }
 
     public static resize(): void {

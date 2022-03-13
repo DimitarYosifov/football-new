@@ -1,17 +1,17 @@
 {
   "meta": {
-    "version": "0.6.4"
+    "version": "0.6.7"
   },
-  "savePath": "C:\\Users\\User\\Desktop\\football\\assets",
+  "savePath": "C:\\Users\\User\\Desktop\\football-new\\static\\assets",
   "images": [
     {
       "name": "btn1.png",
-      "path": "C:/Users/User/Desktop/football/images/buttons/btn1.png",
+      "path": "C:/Users/User/Desktop/football-new/images/buttons/btn1.png",
       "folder": ""
     },
     {
-      "name": "save.png",
-      "path": "C:/Users/User/Desktop/football/images/buttons/save.png",
+      "name": "icon-auto.png",
+      "path": "C:/Users/User/Desktop/football-new/images/buttons/icon-auto.png",
       "folder": ""
     }
   ],
@@ -28,7 +28,7 @@
     "filter": "none",
     "exporter": "JSON (hash)",
     "fileName": "pack-result",
-    "savePath": "C:\\Users\\User\\Desktop\\football\\assets",
+    "savePath": "C:\\Users\\User\\Desktop\\football-new\\static\\assets",
     "width": 2048,
     "height": 2048,
     "fixedSize": false,

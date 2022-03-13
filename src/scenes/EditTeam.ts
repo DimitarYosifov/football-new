@@ -281,6 +281,8 @@ export class EditTeam extends Container implements IScene {
         let saveOnPointerDown = () => {
             this.recordData();
             this.addSavedtext();
+            this.checkContinueAllowed();
+            App.EE.emit("edit_team_complete");
         }
         this.saveBtn = new RotatingButton("", "", saveOnPointerDown);
         this.container.addChild(this.saveBtn.finalTexture);
@@ -305,7 +307,7 @@ export class EditTeam extends Container implements IScene {
                 x: App.width * 1.2,
                 onComplete: () => {
                     gsap.delayedCall(0.25, () => {
-                        // App.checkContinueAllowed();// ??????????????? // PROBLEM
+                        // this.checkContinueAllowed();// ??????????????? // PROBLEM
                         App.removeScene(this);
                     });
                 }
@@ -321,6 +323,7 @@ export class EditTeam extends Container implements IScene {
         this.container.addChild(this.backBtn.finalTexture);
         this.backBtn.setButtonSize(App.height * 0.1, App.width * 1.2, this.container.height * 0.1);
         this.backBtn.addLabel(`Back`, 0.4);
+        this.checkContinueAllowed();
         gsap.to([this.backBtn.finalTexture, this.backBtn.label], 0.3, {
             delay: 0.9,
             ease: "Back.easeOut",
@@ -330,16 +333,18 @@ export class EditTeam extends Container implements IScene {
     }
 
     private checkContinueAllowed = () => {
-        // const continueDisabled = App.playerLineUp
-        //     .slice(0, 6)
-        //     .find(el => el.leagueRedCards || el.leagueYellowCards === 5 || el.injured > 0);
-        // if (continueDisabled) {
-        //     this.continueBtn.interactive = false;
-        //     this.continueBtn.alpha = 0.4;
-        // } else {
-        //     this.continueBtn.interactive = true;
-        //     this.continueBtn.alpha = 1;
-        // }
+        const continueDisabled = App.playerLineUp
+            .slice(0, 6)
+            .find(el => el.leagueRedCards || el.leagueYellowCards === 5 || el.injured > 0);
+        if (continueDisabled) {
+            gsap.delayedCall(0.1, () => {
+                this.backBtn.finalTexture.interactive = false;
+                this.backBtn.finalTexture.alpha = 0.4;
+            })
+        } else {
+            this.backBtn.finalTexture.interactive = true;
+            this.backBtn.finalTexture.alpha = 1;
+        }
     }
 
     private addSavedtext() {

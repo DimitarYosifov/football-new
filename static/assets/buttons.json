@@ -24,24 +24,24 @@
         "y": 0.5
       }
     },
-    "save": {
+    "icon-auto": {
       "frame": {
         "x": 680,
         "y": 0,
-        "w": 300,
-        "h": 117
+        "w": 150,
+        "h": 150
       },
       "rotated": false,
       "trimmed": false,
       "spriteSourceSize": {
         "x": 0,
         "y": 0,
-        "w": 300,
-        "h": 117
+        "w": 150,
+        "h": 150
       },
       "sourceSize": {
-        "w": 300,
-        "h": 117
+        "w": 150,
+        "h": 150
       },
       "pivot": {
         "x": 0.5,
@@ -51,11 +51,11 @@
   },
   "meta": {
     "app": "http://free-tex-packer.com",
-    "version": "0.6.4",
+    "version": "0.6.7",
     "image": "buttons.png",
     "format": "RGBA8888",
     "size": {
-      "w": 980,
+      "w": 830,
       "h": 229
     },
     "scale": 1
