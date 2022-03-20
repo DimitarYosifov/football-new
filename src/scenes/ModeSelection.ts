@@ -158,9 +158,9 @@ export class ModeSelection extends Container implements IScene {
         );
         friendlyEmitter.emit = true;
         this.emitters.push(friendlyEmitter);
-        gsap.delayedCall(0.2, () => {
+        gsap.delayedCall(0.35, () => {
             friendlyEmitter!.emit = false;
-            gsap.delayedCall(1, () => {
+            gsap.delayedCall(3, () => {
                 friendlyEmitter.destroy();
                 friendlyEmitter.cleanup();
                 friendlyEmitter.update = (): void => { };
@@ -190,9 +190,9 @@ export class ModeSelection extends Container implements IScene {
             );
             leagueEmitter.emit = true;
             this.emitters.push(leagueEmitter);
-            gsap.delayedCall(0.2, () => {
+            gsap.delayedCall(0.35, () => {
                 leagueEmitter.emit = false;
-                gsap.delayedCall(1, () => {
+                gsap.delayedCall(3, () => {
                     leagueEmitter.destroy();
                     leagueEmitter.cleanup();
                     leagueEmitter.update = (): void => { };
@@ -319,9 +319,9 @@ export class ModeSelection extends Container implements IScene {
         );
         starEmitter.emit = true;
         this.emitters.push(starEmitter);
-        gsap.delayedCall(0.75, () => {
+        gsap.delayedCall(1.25, () => {
             starEmitter.emit = false;
-            gsap.delayedCall(1.5, () => {
+            gsap.delayedCall(2.5, () => {
                 starEmitter.destroy();
                 starEmitter.cleanup();
                 starEmitter.update = (): void => { };

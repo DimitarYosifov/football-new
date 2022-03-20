@@ -68,8 +68,6 @@ export class LoadingScene extends Container implements IScene {
     private downloadProgress(loader: Loader): void {
         const progressRatio = loader.progress / 100;
         this.loaderBarBorder.width = App.width * 0.7 * progressRatio;
-        console.log("width=>" + App.width * 0.7 * progressRatio);
-
         this.loadingValue.text = `${Math.ceil(progressRatio * 100)}%`;
     }
 

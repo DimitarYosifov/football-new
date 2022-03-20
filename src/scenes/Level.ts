@@ -135,7 +135,8 @@ export class Level extends Container implements IScene {
         this.autoplayImg.on('pointerdown', () => {
             this.autoplayMode = !this.autoplayMode;
             this.autoplayImg.tint = this.autoplayMode ? 0x2cb62c : 0xffffff;
-            if(App.isPlayerTurn){
+            if (App.isPlayerTurn && !this.animationInProgress) {
+                this.animationInProgress = true;
                 this.grid!.proceedToNextRound();
             }
         });

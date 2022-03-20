@@ -48,4 +48,11 @@ if we want to add new club or change existing double click add-players.html and 
         
   
 <!--    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    https://www.youtube.com/watch?v=LOeioOKUKI8     - firebase nose -express server tutorial!!!!!!!-->
+    https://www.youtube.com/watch?v=LOeioOKUKI8     - firebase nose -express server tutorial!!!!!!!-->  this.cardImg.filters = [new GlowFilter({
+            distance: 25,
+            outerStrength: 5,
+            innerStrength: 0,
+            color: 0xffffff,
+            quality: 1,
+            knockout: false,
+        })]

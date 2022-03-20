@@ -312,6 +312,30 @@
         "y": 0.5
       }
     },
+    "flame": {
+      "frame": {
+        "x": 546,
+        "y": 0,
+        "w": 97,
+        "h": 95
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 2,
+        "y": 2,
+        "w": 97,
+        "h": 95
+      },
+      "sourceSize": {
+        "w": 100,
+        "h": 100
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
     "ball_prototype": {
       "frame": {
         "x": 844,
@@ -498,30 +522,6 @@
       "sourceSize": {
         "w": 150,
         "h": 150
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "flame": {
-      "frame": {
-        "x": 1039,
-        "y": 190,
-        "w": 128,
-        "h": 128
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 128,
-        "h": 128
-      },
-      "sourceSize": {
-        "w": 128,
-        "h": 128
       },
       "pivot": {
         "x": 0.5,

@@ -2,10 +2,11 @@ import { App, IScene, IPlayerLineUp } from "../App";
 import { RotatingButton } from "../buttons/RotatingButton";
 import { recordClubPlayersParams } from "../recordClubPlayersParams";
 import gsap from "gsap";
-import { Container, Graphics, Sprite, Text, TextStyle } from "pixi.js";
+import { Container, Graphics, Sprite, Text, TextStyle, CanvasResource, utils } from "pixi.js";
 import { config } from "../configs/MainGameConfig";
 import { Card } from "../game_level/Card";
 import { createText } from "../createText";
+import { GlowFilter } from "pixi-filters";
 
 export class EditTeam extends Container implements IScene {
     private backgroundImg: Sprite;
@@ -180,27 +181,35 @@ export class EditTeam extends Container implements IScene {
     }
 
     private makeInteractive() {
+
         this.allCards.forEach((child, childIdx) => {
             if (child.selectable) {
                 child.interactive = true;
                 child.selected = false;
                 child.on('pointerdown', (e) => {
                     // const isSub = this.checkIfSubstitute(childIdx);
+
                     const selectedPlayerFound = this.allCards.filter(pl => pl.selected).length > 0;
                     const samePlayerSelected = child.selected;
                     const successfulSubstitution = !samePlayerSelected && selectedPlayerFound;
 
                     if (successfulSubstitution) {
-                        console.log(this.allCards.filter(pl => pl.selected)[0].cardImg.x);
-                        console.log(child.cardImg.x);
-                    }
-
-                    if (successfulSubstitution) {
-                        this.switchCardsonSuccessfulSubstitution(this.allCards.filter(pl => pl.selected)[0], child)
+                        this.switchCardsonSuccessfulSubstitution(this.allCards.filter(pl => pl.selected)[0], child);
+                    } else {
+                        let filter = new GlowFilter({
+                            distance: 17,// higher value is not working on mobile !!!!
+                            outerStrength: 5,
+                            innerStrength: 0,
+                            color: 0x4af74a,
+                            quality: 1,
+                            knockout: false,
+                        })
+                        child.cardImg.filters = [filter];
                     }
 
                     this.allCards.forEach((card, cardIdx) => {
                         if (successfulSubstitution) {
+                            card.cardImg.filters = [];
                             card.alpha = 1;
                             card.interactive = true;
                             card.selected = false;
@@ -208,19 +217,28 @@ export class EditTeam extends Container implements IScene {
                         else if ((card.playerPosition === child.playerPosition) || samePlayerSelected) {
                             card.alpha = 1;
                             card.interactive = true;
+
                         } else {
                             card.alpha = 0.35;
                             card.selected = false;
                             card.interactive = false;
                         }
+
+                        if (samePlayerSelected) {
+                            card.cardImg.filters = [];
+                        }
+
                         child.alpha = 1;
                     })
                     if (samePlayerSelected || successfulSubstitution) {
                         child.selected = false;
+                        // child.cardImg.filter = [];
                     } else {
                         child.selected = true;
                     }
                     child.interactive = true;
+                    // alert(JSON.stringify(child.cardImg.filters))
+
                 })
             } else {
                 // if (!child.selectable) { 
@@ -230,6 +248,7 @@ export class EditTeam extends Container implements IScene {
             }
         })
         this.allCards = this.allCards.filter(el => el.selectable);
+
     }
 
     private switchCardsonSuccessfulSubstitution(card1: Card, card2: Card) {

@@ -738,7 +738,7 @@ export default class Grid extends Container {
         }
 
         let defaultRoundToShowPopup = [0, 5, 10, 15].includes(this.level.currentRound);
-       
+
         if (
             (
                 App.isPlayerTurn && this.level.isPlayerHome ||

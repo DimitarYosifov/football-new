@@ -2,10 +2,13 @@
 import { FullAttack } from "./FullAttack"
 import { ActiveDefense } from "./ActiveDefense"
 import { config } from "../configs/MainGameConfig";
-import { Container, TextStyle, Text, Sprite, Graphics, Texture } from "pixi.js";
+import { Container, TextStyle, Text, Sprite, Graphics, Texture, Filter } from "pixi.js";
 import { createText } from "../createText";
 import { App } from "../App";
 import gsap from "gsap";
+import { DotFilter } from "pixi-filters";
+import { DropShadowFilter } from '@pixi/filter-drop-shadow';
+import { GlowFilter } from "pixi-filters";
 
 export class Card extends Container {
 

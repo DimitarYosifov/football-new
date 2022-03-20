@@ -3,28 +3,28 @@ import { App } from "../../App";
 export function leagueParticleConfig() {
     return {
         "alpha": {
-            "start": 0.8,
+            "start": 0.3,
             "end": 0
         },
         "scale": {
             "start": 0.1,
-            "end": 0.45
+            "end": 1 
         },
         "speed": {
-            "start": 450,
-            "end": 2
+            "start": 200,
+            "end": 30
         },
         "startRotation": {
             "min": 270,
             "max": 270
         },
         "rotationSpeed": {
-            "min": 0,
-            "max": 0
+            "min": 110,
+            "max": 360
         },
         "lifetime": {
-            "min": 1,
-            "max": 1.3
+            "min": 0.5,
+            "max": 1
         },
         "blendMode": "normal",
         "frequency": 0.0007,

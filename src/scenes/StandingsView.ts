@@ -419,7 +419,6 @@ export class StandingsView extends Container implements IScene {
     private displayFixtures() {
 
         let playerClub = App.playerClubData.name;
-        console.log(App.seasonFixtures);
 
         App.leagueRounds = Array.isArray(App.seasonFixtures) ? App.seasonFixtures.length - 1 : [null, ...Object.values(App.seasonFixtures)].length - 1;
         for (let round = 1; round <= App.leagueRounds; round++) {

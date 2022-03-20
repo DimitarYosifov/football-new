@@ -1,8 +1,8 @@
 {
   "meta": {
-    "version": "0.6.4"
+    "version": "0.6.7"
   },
-  "savePath": "C:\\Users\\User\\Desktop\\football\\assets",
+  "savePath": "C:\\Users\\User\\Desktop\\football-new\\static\\assets",
   "images": [
     {
       "name": "ball_blue.png",
@@ -51,7 +51,7 @@
     },
     {
       "name": "flame.png",
-      "path": "C:/Users/User/Desktop/football/images/main-1/flame.png",
+      "path": "C:/Users/User/Desktop/football-new/images/main-1/flame.png",
       "folder": ""
     },
     {
@@ -128,7 +128,7 @@
     "filter": "none",
     "exporter": "JSON (hash)",
     "fileName": "pack-result",
-    "savePath": "C:\\Users\\User\\Desktop\\football\\assets",
+    "savePath": "C:\\Users\\User\\Desktop\\football-new\\static\\assets",
     "width": 2048,
     "height": 2048,
     "fixedSize": false,

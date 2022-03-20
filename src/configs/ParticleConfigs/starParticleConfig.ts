@@ -3,11 +3,11 @@ import { App } from "../../App";
 export function starParticleConfig() {
     return {
         "alpha": {
-            "start": 0.85,
+            "start": 1,
             "end": 0.15
         },
         "scale": {
-            "start": 0.3,
+            "start": 0.35,
             "end": 0.15
         },
         // "color": {
@@ -33,7 +33,7 @@ export function starParticleConfig() {
         "blendMode": "normal",
         "frequency": 0.0005,
         "emitterLifetime": 0,
-        "maxParticles": 1000,
+        "maxParticles": 2000,
         "pos": {
             "x": App.width * 0.5,
             "y": App.height * 0.5
