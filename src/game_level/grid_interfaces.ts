@@ -18,45 +18,49 @@ export interface IBlockPositions {
     shouldFall?: number;
     x: number;
     y: number;
-    width?:number;
-    height?:number;
+    width?: number;
+    height?: number;
 }
 
-export interface ISelectedBlock{
-    row: number; 
-    col: number; 
+export interface ISelectedBlock {
+    row: number;
+    col: number;
     type: string;
-     oldX: number;
-      oldY: number;
+    oldX: number;
+    oldY: number;
 }
 
-export interface IMatches{
-    row: number; 
-    col: number; 
+export interface IMatches {
+    row: number;
+    col: number;
     dir: string;
-    beingSwapped:boolean;
-    type:string;
-    id:number
+    beingSwapped: boolean;
+    type: string;
+    id: number
 }
 
-export interface IPossibleMoves{
+export interface IPossibleMoves {
     col: number;
     row: number;
     dir: string;
     matches: number;
-    types:string[];
+    types: string[];
 }
 
-export interface IHolesInColumns{
+export interface IHolesInColumns {
     holes: number;
-     onRow: number[];
+    onRow: number[];
 }
 
-export interface IDirections{
+export interface IDirections {
     left: number;
-    right:  number;
+    right: number;
     up: number;
-    down:  number;
+    down: number;
+    leftUp: number;
+    rightUp: number;
+    leftDown: number;
+    rightDown: number;
 }
 
 // export interface IEvent extends InteractionEvent{

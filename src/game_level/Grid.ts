@@ -93,6 +93,24 @@ export default class Grid extends Container {
             case "right":
                 item2 = this.blocks[block1_y][block1_x + 1];
                 this.blockBeingSwappedWith = { row: block1_y, col: block1_x + 1, type: item2.type, oldX: item2.blockImg.x, oldY: item2.blockImg.y };
+                break;
+            //------------
+            case "leftUp":
+                item2 = this.blocks[block1_y - 1][block1_x - 1];
+                this.blockBeingSwappedWith = { row: block1_y - 1, col: block1_x - 1, type: item2.type, oldX: item2.blockImg.x, oldY: item2.blockImg.y };
+                break;
+            case "rightUp":
+                item2 = this.blocks[block1_y - 1][block1_x + 1];
+                this.blockBeingSwappedWith = { row: block1_y - 1, col: block1_x + 1, type: item2.type, oldX: item2.blockImg.x, oldY: item2.blockImg.y };
+                break;
+            case "leftDown":
+                item2 = this.blocks[block1_y + 1][block1_x - 1];
+                this.blockBeingSwappedWith = { row: block1_y + 1, col: block1_x - 1, type: item2.type, oldX: item2.blockImg.x, oldY: item2.blockImg.y };
+                break;
+            case "rightDown":
+                item2 = this.blocks[block1_y + 1][block1_x + 1];
+                this.blockBeingSwappedWith = { row: block1_y + 1, col: block1_x + 1, type: item2.type, oldX: item2.blockImg.x, oldY: item2.blockImg.y };
+                break;
         }
 
         (itemTwoOldImg as any) = item2.img;
@@ -471,6 +489,49 @@ export default class Grid extends Container {
         this.nextRoundDelay = delay;
         for (let row = 0; row < 8; row++) {
             for (let col = 0; col < 6; col++) {
+
+                //         check left-up
+                if (col > 0 && row > 0) {
+                    let tempType = this.blocks[row][col].type;
+                    this.blocks[row][col].type = this.blocks[row - 1][col - 1].type;
+                    this.blocks[row - 1][col - 1].type = tempType;
+                    let matches = this.checkGridForMatches();
+                    if (matches.length > 0) {
+                        possibleMoves.push(
+                            {
+                                col: col,
+                                row: row,
+                                dir: "leftUp",
+                                matches: matches.length,
+                                types: Array.from(new Set(matches.map(m => m.type)))
+                            }
+                        );
+                    }
+                    this.blocks[row - 1][col - 1].type = this.blocks[row][col].type;
+                    this.blocks[row][col].type = tempType;
+                }
+
+                //         check right-up
+                if (col < 5 && row > 0) {
+                    let tempType = this.blocks[row][col].type;
+                    this.blocks[row][col].type = this.blocks[row - 1][col + 1].type;
+                    this.blocks[row - 1][col + 1].type = tempType;
+                    let matches = this.checkGridForMatches();
+                    if (matches.length > 0) {
+                        possibleMoves.push(
+                            {
+                                col: col,
+                                row: row,
+                                dir: "rightUp",
+                                matches: matches.length,
+                                types: Array.from(new Set(matches.map(m => m.type)))
+                            }
+                        );
+                    }
+                    this.blocks[row - 1][col + 1].type = this.blocks[row][col].type;
+                    this.blocks[row][col].type = tempType;
+                }
+
                 //         check right
                 if (col < 5) {
                     let tempType = this.blocks[row][col].type;
@@ -778,9 +839,17 @@ export default class Grid extends Container {
                     let target2;
                     if (this.hintMatch.dir === "right") {
                         target2 = this.blocks[this.hintMatch.row][this.hintMatch.col + 1];
-                    } else {
+                    }
+                    else if (this.hintMatch.dir === "down") {
                         target2 = this.blocks[this.hintMatch.row + 1][this.hintMatch.col];
                     }
+                    else if (this.hintMatch.dir === "leftUp") {
+                        target2 = this.blocks[this.hintMatch.row - 1][this.hintMatch.col - 1];
+                    }
+                    else {// rightUp
+                        target2 = this.blocks[this.hintMatch.row - 1][this.hintMatch.col + 1];
+                    }
+
                     let width1 = target1.width! * 1.1;
                     let height1 = target1.height! * 1.1;
                     let width2 = target2.width! * 1.1;
@@ -936,6 +1005,8 @@ export default class Grid extends Container {
     }
 
     public onDragMove = (e: InteractionEvent) => {
+        // console.log(e);
+
         if (this.dragging && !this.level.animationInProgress) {
             /**
              *  gets block height and divides it by 3,
@@ -946,13 +1017,29 @@ export default class Grid extends Container {
             this.moveCoordinates.lastX = e.data.global.x;
             this.moveCoordinates.lastY = e.data.global.y;
 
-            let dist = this.blocks[0][0].height! / 3;
+            let dist = this.blocks[0][0].height! / 1.5;
 
             let directions: grid_interfaces.IDirections = {
                 left: this.moveCoordinates.startX - this.moveCoordinates.lastX,
                 right: this.moveCoordinates.lastX - this.moveCoordinates.startX,
                 up: this.moveCoordinates.startY - this.moveCoordinates.lastY,
-                down: this.moveCoordinates.lastY - this.moveCoordinates.startY
+                down: this.moveCoordinates.lastY - this.moveCoordinates.startY,
+                leftUp: (this.moveCoordinates.startX -
+                    this.moveCoordinates.lastX +
+                    this.moveCoordinates.startY -
+                    this.moveCoordinates.lastY) / 1.5,
+                rightUp: (this.moveCoordinates.lastX -
+                    this.moveCoordinates.startX +
+                    this.moveCoordinates.startY -
+                    this.moveCoordinates.lastY) / 1.5,
+                leftDown: (this.moveCoordinates.startX -
+                    this.moveCoordinates.lastX +
+                    this.moveCoordinates.lastY -
+                    this.moveCoordinates.startY) / 1.5,
+                rightDown: (this.moveCoordinates.lastX -
+                    this.moveCoordinates.startX +
+                    this.moveCoordinates.lastY -
+                    this.moveCoordinates.startY) / 1.5
             };
 
             let arr = Object.values(directions);
@@ -965,10 +1052,15 @@ export default class Grid extends Container {
                 (dir === "up" && this.gridPosition_y === 0) ||
                 (dir === "right" && this.gridPosition_x === 5) ||
                 (dir === "left" && this.gridPosition_x === 0) ||
-                max < dist) {
+                (dir === "leftUp" && this.gridPosition_y === 0 && this.gridPosition_x === 0) ||
+                (dir === "rightUp" && this.gridPosition_y === 0 && this.gridPosition_x === 5) ||
+                (dir === "leftDown" && this.gridPosition_y === 7 && this.gridPosition_x === 0) ||
+                (dir === "rightDown" && this.gridPosition_y === 7 && this.gridPosition_x === 5) ||
+                max < dist
+            ) {
                 return;
             }
-
+            // console.log(dir)
             // this.app.level.animationInProgress = true;
             this.swapBlocks(this.gridPosition_x, this.gridPosition_y, dir!);
         }
