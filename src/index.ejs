@@ -17,7 +17,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Risque&display=swap" rel="stylesheet">
 
-	
+
 </head>
 
 <body style="display: none;">
@@ -31,6 +31,17 @@
 		<button type="button" id="login" class="ml-auto">Login</button>
 		<button type="button" id="register" class="ml-auto">Register</button>
 	</form>
+	<script>
+		window.addEventListener("error", handleError, true);
+		function handleError(evt) {
+			// alert msg for mobile debug
+			if (evt.message) { // Chrome sometimes provides this
+				alert("error: " + evt.message + " at linenumber: " + evt.lineno + " of file: " + evt.filename);
+			} else {
+				alert("error: " + evt.type + " from element: " + (evt.srcElement || evt.target));
+			}
+		}
+	</script>
 </body>
 
 </html>

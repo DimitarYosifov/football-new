@@ -36,7 +36,7 @@ export class ActiveDefense extends Sprite {
 
         if (App.isPlayerTurn) {
             let firstEmpty = this.level.playerActiveDefenses.findIndex((i: null) => i === null);
-            this.zIndex = firstEmpty;
+            this.index = firstEmpty;
             this.height = App.height * 0.05;
             this.width = this.height;
             this.newY = this.level.height * 0.84; //this.app.level.playerActiveDefensesY; ///WTF

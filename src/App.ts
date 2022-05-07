@@ -53,7 +53,7 @@ export class App {
 
         App.app = new Application({
             view: document.getElementById("pixi-canvas") as HTMLCanvasElement,
-            resolution: window.devicePixelRatio || 2,
+            resolution: window.devicePixelRatio || 1,
             autoDensity: true,
             backgroundColor: background,
             width: width,

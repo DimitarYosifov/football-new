@@ -38,7 +38,7 @@ export default class Block extends Container {
             while (figureMissing) {
                 this.img = this.generateRandomColorBlock();
                 // console.log(this.img);
-                this.type= this.img;  
+                this.type = this.img;
                 figureMissing = this.createNonMatchingGrid(this.row, this.col, this.img);
             }
         } else {
@@ -129,7 +129,7 @@ export default class Block extends Container {
         return a;
     }
 
-    public createNonMatchingGrid(_row: number, _col: number, img: string| Sprite): boolean | undefined {
+    public createNonMatchingGrid(_row: number, _col: number, img: string | Sprite): boolean | undefined {
         let checkLeft = () => {
             if (_col < 2) {
                 return false;
@@ -167,9 +167,11 @@ export default class Block extends Container {
     }
 
     public onDragStart = (e: InteractionEvent) => {
-        (e as any).gridPosition_x = this.col;
-        (e as any).gridPosition_y = this.row;
-        this.grid.onDragStart(e);
+        if (!this.level.autoplayMode) {
+            (e as any).gridPosition_x = this.col;
+            (e as any).gridPosition_y = this.row;
+            this.grid.onDragStart(e);
+        }
     }
 
     public onDragMove = (e: InteractionEvent) => {
