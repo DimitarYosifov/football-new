@@ -94,32 +94,30 @@ export default class Block extends Container {
         if (config.predefinedBlockColor) { return config.predefinedBlockColor };
         let x = Math.floor(Math.random() * 100) + 1;
         let a;
-        switch (true) {  //blocks - 17%       yellow card - 7%     red card- 4%      injury - 4%
-            case x <= 17:
+        switch (true) {
+            //blocks - 18%       yellow card - 6%     red card- 2%      injury - 2%
+            case x <= 18:
                 a = "ball_blue";
                 break;
-            // case (x > 17 && x <= 100): //TEST
-            //     a = "ball_green";
-            //     break;
-            case (x > 17 && x <= 34):
+            case (x > 18 && x <= 36):
                 a = "ball_green";
                 break;
-            case x > 34 && x <= 51:
+            case x > 36 && x <= 54:
                 a = "ball_purple";
                 break;
-            case x > 51 && x <= 68:
+            case x > 54 && x <= 72:
                 a = "ball_red";
                 break;
-            case x > 68 && x <= 85:
+            case x > 72 && x <= 90:
                 a = "ball_yellow";
                 break;
-            case x > 85 && x <= 92:
+            case x > 90 && x <= 96:
                 a = "yellow_card";
                 break;
-            case x > 92 && x <= 96:
+            case x > 96 && x <= 98:
                 a = "red_card";
                 break;
-            case x > 96 && x <= 100:
+            case x > 98 && x <= 100:
                 a = "red_cross";
                 break;
             default:
