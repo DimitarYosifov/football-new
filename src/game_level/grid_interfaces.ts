@@ -45,6 +45,7 @@ export interface IPossibleMoves {
     dir: string;
     matches: number;
     types: string[];
+    colors: { [x: string]: string };
 }
 
 export interface IHolesInColumns {
@@ -63,6 +64,3 @@ export interface IDirections {
     rightDown: number;
 }
 
-// export interface IEvent extends InteractionEvent{
-//     gridPosition_x:number;
-// }

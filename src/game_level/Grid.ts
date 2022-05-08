@@ -9,6 +9,7 @@ import NewRoundPopup from "../popups/NewRoundPopup";
 import NoMovesPopup from "../popups/NoMovesPopup";
 import Block from "./Block";
 import Row from "./Row";
+import { smartMove } from "./smartMove";
 
 export default class Grid extends Container {
 
@@ -26,7 +27,7 @@ export default class Grid extends Container {
     private matchingSwappedItem: number;
     private nextRoundDelay: number;
     private hintMatch: grid_interfaces.IPossibleMoves;
-    private bestMatchAtRandom: grid_interfaces.IPossibleMoves;
+    private bestPossibleMove: grid_interfaces.IPossibleMoves;
     private noMoves: boolean;
     private hasGoalsInThisRound: boolean;
     private goalText: Text;
@@ -496,14 +497,27 @@ export default class Grid extends Container {
                     this.blocks[row][col].type = this.blocks[row - 1][col - 1].type;
                     this.blocks[row - 1][col - 1].type = tempType;
                     let matches = this.checkGridForMatches();
+
                     if (matches.length > 0) {
+
+                        let colors: any = {};
+                        matches.forEach(m => {
+                            if (colors[m.type] !== undefined) {
+                                colors[m.type]++
+                            }
+                            else {
+                                colors[m.type] = 1;
+                            }
+                        });
+
                         possibleMoves.push(
                             {
                                 col: col,
                                 row: row,
                                 dir: "leftUp",
                                 matches: matches.length,
-                                types: Array.from(new Set(matches.map(m => m.type)))
+                                types: Array.from(new Set(matches.map(m => m.type))),
+                                colors: colors
                             }
                         );
                     }
@@ -518,13 +532,23 @@ export default class Grid extends Container {
                     this.blocks[row - 1][col + 1].type = tempType;
                     let matches = this.checkGridForMatches();
                     if (matches.length > 0) {
+                        let colors: any = {};
+                        matches.forEach(m => {
+                            if (colors[m.type] !== undefined) {
+                                colors[m.type]++
+                            }
+                            else {
+                                colors[m.type] = 1;
+                            }
+                        });
                         possibleMoves.push(
                             {
                                 col: col,
                                 row: row,
                                 dir: "rightUp",
                                 matches: matches.length,
-                                types: Array.from(new Set(matches.map(m => m.type)))
+                                types: Array.from(new Set(matches.map(m => m.type))),
+                                colors: colors
                             }
                         );
                     }
@@ -539,13 +563,23 @@ export default class Grid extends Container {
                     this.blocks[row][col + 1].type = tempType;
                     let matches = this.checkGridForMatches();
                     if (matches.length > 0) {
+                        let colors: any = {};
+                        matches.forEach(m => {
+                            if (colors[m.type] !== undefined) {
+                                colors[m.type]++
+                            }
+                            else {
+                                colors[m.type] = 1;
+                            }
+                        });
                         possibleMoves.push(
                             {
                                 col: col,
                                 row: row,
                                 dir: "right",
                                 matches: matches.length,
-                                types: Array.from(new Set(matches.map(m => m.type)))
+                                types: Array.from(new Set(matches.map(m => m.type))),
+                                colors: colors
                             }
                         );
                     }
@@ -560,13 +594,23 @@ export default class Grid extends Container {
                     this.blocks[row + 1][col].type = tempType;
                     let matches = this.checkGridForMatches();
                     if (matches.length > 0) {
+                        let colors: any = {};
+                        matches.forEach(m => {
+                            if (colors[m.type] !== undefined) {
+                                colors[m.type]++
+                            }
+                            else {
+                                colors[m.type] = 1;
+                            }
+                        });
                         possibleMoves.push(
                             {
                                 col: col,
                                 row: row,
                                 dir: "down",
                                 matches: matches.length,
-                                types: Array.from(new Set(matches.map(m => m.type)))
+                                types: Array.from(new Set(matches.map(m => m.type))),
+                                colors: colors
                             }
                         );
                     }
@@ -602,9 +646,8 @@ export default class Grid extends Container {
             }
         }
 
-        let bestMatches = possibleMoves.filter(f => f.matches === Math.max(...possibleMoves.map(m => m.matches)));
         this.hintMatch = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
-        this.bestMatchAtRandom = bestMatches[Math.floor(Math.random() * bestMatches.length)];
+        this.bestPossibleMove = smartMove(possibleMoves);
 
         this.noMoves = possibleMoves.length === 0;
         console.log(`possible moves => ${JSON.stringify(possibleMoves)}`);
@@ -787,7 +830,7 @@ export default class Grid extends Container {
         const delay = this.level.autoplayMode ? 1 : 0;
         if (!App.isPlayerTurn || this.level.autoplayMode) {
             gsap.delayedCall(delay, () => {
-                this.swapBlocks(this.bestMatchAtRandom.col, this.bestMatchAtRandom.row, this.bestMatchAtRandom.dir);
+                this.swapBlocks(this.bestPossibleMove.col, this.bestPossibleMove.row, this.bestPossibleMove.dir);
             })
         }
     }
