@@ -7,6 +7,7 @@ import { friendlyParticleConfig } from "../configs/ParticleConfigs/friendlyParti
 import { leagueParticleConfig } from "../configs/ParticleConfigs/leagueParticleConfig";
 import { config } from "../configs/MainGameConfig";
 import { starParticleConfig } from "../configs/ParticleConfigs/starParticleConfig";
+import { pvpParticleConfig } from "../configs/ParticleConfigs/pvpParticleConfig";
 
 export class ModeSelection extends Container implements IScene {
 
@@ -18,6 +19,7 @@ export class ModeSelection extends Container implements IScene {
     private league: Text;
     private textStyles: TextStyle;
     private emitters: Emitter[] = [];
+    pvp: Text;
 
     constructor() {
         super();
@@ -41,6 +43,7 @@ export class ModeSelection extends Container implements IScene {
             this.createflyingBallTimeline();
             this.addFriendly();
             this.addLeague();
+            this.addPvP();
         });
     }
 
@@ -55,7 +58,7 @@ export class ModeSelection extends Container implements IScene {
 
     private addFriendly() {
         this.friendly = new Text('Friendly', this.textStyles);
-        this.friendly.position.set(-this.friendly.width / 2, App.height * 0.45);
+        this.friendly.position.set(-this.friendly.width / 2, App.height * 0.49);
         this.friendly.anchor.set(0.5, 0.5);
         this.friendly.interactive = true;
         const friendlyScale = this.friendly.scale.x;
@@ -81,7 +84,7 @@ export class ModeSelection extends Container implements IScene {
 
     private addLeague() {
         this.league = new Text('League', this.textStyles);
-        this.league.position.set(App.width + this.league.width / 2, App.height * 0.55);
+        this.league.position.set(App.width + this.league.width / 2, App.height * 0.59);
         this.league.anchor.set(0.5, 0.5);
         this.league.interactive = true;
         this.league.on('pointerup', (e: Event) => {
@@ -105,16 +108,59 @@ export class ModeSelection extends Container implements IScene {
         this.addChild(this.league);
     }
 
+    private addPvP() {
+        this.pvp = new Text('PvP', this.textStyles);
+        this.pvp.position.set(App.width / 2, App.height * -0.2);
+        this.pvp.anchor.set(0.5, 0.5);
+        this.pvp.interactive = true;
+        this.pvp.on('pointerup', (e: Event) => {
+            this.modeSelected("PvP");
+        })
+        const scale = this.friendly.scale.x;
+        this.pvp.on('pointerover', (e: Event) => {
+            gsap.to(this.pvp.scale, 0.15,
+                {
+                    x: scale * 1.05,
+                    y: scale * 1.05
+                });
+        })
+        this.pvp.on('pointerout', (e: Event) => {
+            gsap.to(this.pvp.scale, 0.15,
+                {
+                    x: scale,
+                    y: scale
+                });
+        })
+        this.addChild(this.pvp);
+    }
+
     private modeSelected(mode: string) {
 
         this.friendly.interactive = false;
         this.league.interactive = false;
+        this.pvp.interactive = false;
 
         this.star_Particles();
 
-        const target = mode === "friendly" ? this.league : this.friendly;
+        // const target ; //= mode === "friendly" ? this.league : this.friendly;
 
-        gsap.to(target, 0.35, { alpha: 0.3 });
+        switch (mode) {
+            case "friendly":
+                gsap.to(this.pvp, 0.35, { alpha: 0.3 });
+                gsap.to(this.league, 0.35, { alpha: 0.3 });
+                break;
+            case "league":
+                gsap.to(this.pvp, 0.35, { alpha: 0.3 });
+                gsap.to(this.friendly, 0.35, { alpha: 0.3 });
+                break;
+            case "PvP":
+                gsap.to(this.league, 0.35, { alpha: 0.3 });
+                gsap.to(this.friendly, 0.35, { alpha: 0.3 });
+                break;
+
+            default:
+                break;
+        }
 
         gsap.delayedCall(1, () => {
             gsap.to(this.league, 0.3,
@@ -130,6 +176,13 @@ export class ModeSelection extends Container implements IScene {
                     x: -this.friendly.width / 2
                 }
             );
+            gsap.to(this.pvp, 0.3,
+                {
+                    delay: 0.2,
+                    ease: " Back.easeOut",
+                    y: App.height * -0.2
+                }
+            );
         })
         gsap.delayedCall(2.5, () => {
             App.removeScene(this);
@@ -142,7 +195,31 @@ export class ModeSelection extends Container implements IScene {
 
     private startParticles() {
         let container = new ParticleContainer;
-        this.addChild(container)
+        this.addChild(container);
+
+        //tween PvP text
+        gsap.to(this.pvp, 0.4,
+            {
+                ease: "Back.easeOut",
+                y: App.height * 0.39
+            });
+        //PvP particle
+        let pvpEmitter: Emitter = new Emitter(
+            container,
+            ["flame"],
+            pvpParticleConfig()
+        );
+        pvpEmitter.emit = true;
+        this.emitters.push(pvpEmitter);
+        gsap.delayedCall(0.35, () => {
+            pvpEmitter!.emit = false;
+            gsap.delayedCall(3, () => {
+                pvpEmitter.destroy();
+                pvpEmitter.cleanup();
+                pvpEmitter.update = (): void => { };
+            }); 
+        });
+
         //tween friendly text
         gsap.to(this.friendly, 0.4,
             {

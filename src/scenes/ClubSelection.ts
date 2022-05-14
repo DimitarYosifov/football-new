@@ -6,6 +6,7 @@ import { config } from "../configs/MainGameConfig";
 import { ServerRequest } from "../ServerRequest"
 import { StandingsView } from "./StandingsView"
 import { Level } from "./Level";
+import PvPRoom from "./PvPRoom";
 
 export class ClubSelection extends Container implements IScene {
 
@@ -134,7 +135,8 @@ export class ClubSelection extends Container implements IScene {
             App.isPlayerTurn ? App.playerClubData = club.clubData : App.opponentClubData = club.clubData;
             this.removeChild(this.selectClub);
             App.friendly = this.mode === "friendly";
-            if (!App.friendly) {
+            App.pvpGame = this.mode === "PvP";
+            if (!App.friendly && !App.pvpGame) {
                 this.clubContainers.forEach(element => {
                     if (element !== container) {
                         gsap.to(element, 1,
@@ -182,7 +184,7 @@ export class ClubSelection extends Container implements IScene {
                     }
                 });
             }
-            else {
+            else if (!App.pvpGame) {
                 if (App.isPlayerTurn) {
                     container.alpha = 0;
                     App.isPlayerTurn = false;
@@ -199,6 +201,13 @@ export class ClubSelection extends Container implements IScene {
                         App.fade(0, 1).then(() => { });
                     })
                 }
+            } else {
+                App.isPlayerHome = true; // this is wrong - should be determined later!!!!!
+                App.removeScene(this);
+                App.setScene(new PvPRoom());
+                gsap.delayedCall(0.01, () => {
+                    App.fade(0, 1).then(() => { });
+                })
             }
         })
 
