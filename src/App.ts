@@ -37,7 +37,7 @@ export class App {
     public static lastGameWinnings: number;
     public static playerLineUp: IPlayerLineUp[];
     public static EE: utils.EventEmitter;
-    public static currentRound : number = 1;
+    public static currentRound: number = 1;
     static pvpGame: boolean = false;
     // G A M E   D A T A ---
 
@@ -155,6 +155,9 @@ export class App {
                 this.setScene(new StandingsView());
             } else {
                 this.setScene(new ModeSelection());
+                //test
+                // App.setScene(new PvPRoom());
+
             }
         })
     }
