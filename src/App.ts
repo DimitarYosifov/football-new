@@ -15,6 +15,8 @@ export class App {
     public static app: Application;
     public static currentScene: IScene;
 
+    public static ws: WebSocket;
+
     private static _width: number;
     private static _height: number;
 

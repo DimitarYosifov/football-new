@@ -6,7 +6,7 @@ import { config } from "../configs/MainGameConfig";
 import { ServerRequest } from "../ServerRequest"
 import { StandingsView } from "./StandingsView"
 import { Level } from "./Level";
-import PvPRoom from "./PvPRoom";
+import PvPRoom from "./PVP/PvPRoom";
 
 export class ClubSelection extends Container implements IScene {
 
