@@ -41,6 +41,7 @@ export class App {
     public static EE: utils.EventEmitter;
     public static currentRound: number = 1;
     static pvpGame: boolean = false;
+    static PvPSelectedSlotIndex:number = -1;
     // G A M E   D A T A ---
 
     public static get width(): number {

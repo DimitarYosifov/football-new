@@ -19,7 +19,16 @@ export default class EmptySlot extends Sprite {
         this.anchor.set(anchorX, anchorY);
         this.interactive = true;
         this.on('pointerdown', () => {
-            App.ws.send(JSON.stringify({ user: { user: App.user, team: App.playerClubData.name, selectedSlot: this.index } }));
+            App.ws.send(JSON.stringify({
+                user: {
+                    user: App.user,
+                    team: App.playerClubData.name,
+                    selectedSlot: this.index,
+                    readyConfirmed: null,
+                    isHome: this.index % 2 === 0
+                }
+            }));
+            App.PvPSelectedSlotIndex = App.PvPSelectedSlotIndex === this.index ? -1 : this.index;
         })
         this.position.set(x, y);
 

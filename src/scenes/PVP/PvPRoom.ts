@@ -63,7 +63,15 @@ export default class PvPRoom extends Container implements IScene {
 
         App.ws.onopen = (e) => {
             console.log("WS connection succesfully opened");
-            App.ws.send(JSON.stringify({ user: { user: App.user, team: App.playerClubData.name, selectedSlot: -1 } }));
+            App.ws.send(JSON.stringify({
+                user: {
+                    user: App.user,
+                    team: App.playerClubData.name,
+                    selectedSlot: -1,
+                    readyConfirmed: false,
+                    isHome: false
+                }
+            }));
         };
 
         App.ws.onerror = (err) => {
@@ -71,18 +79,25 @@ export default class PvPRoom extends Container implements IScene {
         };
 
         App.ws.onmessage = async (rawMessage) => {
-            console.log(rawMessage);
+            // console.log(rawMessage);
 
             await rawMessage.data.text().then((msg: any) => {
 
                 let message = JSON.parse(msg);
                 let users = message.users;
+                let ok = message.ok;
+
+                console.log(message);
+
 
                 if (users) {
                     let selected = Object.values(users).map((u: any) => u.selectedSlot);
                     this.users = users;
                     this.updatePlayersList();
                     this.updateSlots(selected);
+                }
+                else if (ok) {
+                    alert("ok");
                 }
 
             })
@@ -112,6 +127,41 @@ export default class PvPRoom extends Container implements IScene {
                 slot.setEmpty();
             }
         });
+
+        /**
+         * check for two players ready to play 
+         */
+
+        // const even = App.PvPSelectedSlotIndex % 2 === 0;
+
+        // switch (even) {
+        //     case true:
+        //         if (selected.includes(App.PvPSelectedSlotIndex) && selected.includes(App.PvPSelectedSlotIndex + 1)) {
+        //             const player1: any = Object.keys(this.users).find((user: any) => this.users[user].selectedSlot === App.PvPSelectedSlotIndex);
+        //             const player2: any = Object.keys(this.users).find((user: any) => this.users[user].selectedSlot === App.PvPSelectedSlotIndex + 1);
+        //             App.ws.send(JSON.stringify({
+        //                 newGame: {
+        //                     player1: this.users[player1],
+        //                     player2: this.users[player2]
+        //                 }
+        //             }));
+        //         }
+        //         break;
+        //     case false:
+        //         if (selected.includes(App.PvPSelectedSlotIndex) && selected.includes(App.PvPSelectedSlotIndex - 1)) {
+        //             const player1: any = Object.keys(this.users).find((user: any) => this.users[user].selectedSlot === App.PvPSelectedSlotIndex - 1);
+        //             const player2: any = Object.keys(this.users).find((user: any) => this.users[user].selectedSlot === App.PvPSelectedSlotIndex);
+        //             App.ws.send(JSON.stringify({
+        //                 newGame: {
+        //                     player1: this.users[player1],
+        //                     player2: this.users[player2]
+        //                 }
+        //             }));
+        //         }
+        //         break;
+        //     default:
+        //         break;
+        // }
     }
 
     private updatePlayersList(): void {
