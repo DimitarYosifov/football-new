@@ -334,7 +334,7 @@ export class StandingsView extends Container implements IScene {
             ));
         });
 
-        standingsContainer.y = this.height * 0.65 - standingsContainer.height / 2;
+        standingsContainer.y = this.height * 0.6 - standingsContainer.height / 2;
 
         // Object.keys(headersPositionsX).forEach((prop, index) => {
         //     let separator = createSeparator(
@@ -449,7 +449,7 @@ export class StandingsView extends Container implements IScene {
                 // }
 
                 let row = new Container;
-                let y = this.height * 0.1 + this.height * 0.05 * i
+                let y = this.height * 0.05 + this.height * 0.05 * i
 
                 let result;
 
@@ -531,7 +531,7 @@ export class StandingsView extends Container implements IScene {
         this.increaseRound ? App.currentRound++ : null;
         this.recordFixtures();
 
-        this.fixturesContainer.y = this.height * 0.33 - this.fixturesContainer.height / 2;
+        this.fixturesContainer.y = this.height * 0.25 - this.fixturesContainer.height / 2;
         this.addChild(this.fixturesContainer);
         this.createStandings();
     }

@@ -23,35 +23,52 @@ export class ClubSelection extends Container implements IScene {
         this.alpha = 0;
         this.positions = [
             {
-                x: App.width / 4,
+                x: App.width * 0.15,
                 y: App.height * 0.37
             },
             {
-                x: App.width * 0.75,
+                x: App.width * 0.5,
                 y: App.height * 0.37
             },
             {
-                x: App.width / 4,
+                x: App.width * 0.85,
+                y: App.height * 0.37
+            },
+            /////s
+            {
+                x: App.width * 0.15,
                 y: App.height * 0.55
             },
             {
-                x: App.width * 0.75,
+                x: App.width * 0.5,
                 y: App.height * 0.55
             },
             {
-                x: App.width / 4,
+                x: App.width * 0.85,
+                y: App.height * 0.55
+            },
+            {
+                x: App.width * 0.15,
                 y: App.height * 0.73
             },
             {
-                x: App.width * 0.75,
+                x: App.width * 0.5,
                 y: App.height * 0.73
             },
             {
-                x: App.width / 4,
+                x: App.width * 0.85,
+                y: App.height * 0.73
+            },
+            {
+                x: App.width * 0.15,
                 y: App.height * 0.91
             },
             {
-                x: App.width * 0.75,
+                x: App.width * 0.5,
+                y: App.height * 0.91
+            },
+            {
+                x: App.width * 0.85,
                 y: App.height * 0.91
             }
         ]
