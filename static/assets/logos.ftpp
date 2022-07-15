@@ -1,47 +1,67 @@
 {
   "meta": {
-    "version": "0.6.4"
+    "version": "0.6.0"
   },
-  "savePath": "C:\\Users\\User\\Desktop\\football\\assets",
+  "savePath": "C:\\projects\\football\\football-new\\static\\assets",
   "images": [
     {
-      "name": "testlogo1.png",
-      "path": "C:/Users/User/Desktop/football/images/logos/testlogo1.png",
+      "name": "PAOK.png",
+      "path": "C:/projects/football/football-new/images/logos/PAOK.png",
       "folder": ""
     },
     {
-      "name": "testlogo2.png",
-      "path": "C:/Users/User/Desktop/football/images/logos/testlogo2.png",
+      "name": "atletico_madrid.png",
+      "path": "C:/projects/football/football-new/images/logos/atletico_madrid.png",
       "folder": ""
     },
     {
-      "name": "testlogo3.png",
-      "path": "C:/Users/User/Desktop/football/images/logos/testlogo3.png",
+      "name": "bayern.png",
+      "path": "C:/projects/football/football-new/images/logos/bayern.png",
       "folder": ""
     },
     {
-      "name": "testlogo4.png",
-      "path": "C:/Users/User/Desktop/football/images/logos/testlogo4.png",
+      "name": "besiktas.png",
+      "path": "C:/projects/football/football-new/images/logos/besiktas.png",
       "folder": ""
     },
     {
-      "name": "testlogo5.png",
-      "path": "C:/Users/User/Desktop/football/images/logos/testlogo5.png",
+      "name": "dortmund.png",
+      "path": "C:/projects/football/football-new/images/logos/dortmund.png",
       "folder": ""
     },
     {
-      "name": "testlogo6.png",
-      "path": "C:/Users/User/Desktop/football/images/logos/testlogo6.png",
+      "name": "feyenoord.png",
+      "path": "C:/projects/football/football-new/images/logos/feyenoord.png",
       "folder": ""
     },
     {
-      "name": "testlogo7.png",
-      "path": "C:/Users/User/Desktop/football/images/logos/testlogo7.png",
+      "name": "inter.png",
+      "path": "C:/projects/football/football-new/images/logos/inter.png",
       "folder": ""
     },
     {
-      "name": "testlogo8.png",
-      "path": "C:/Users/User/Desktop/football/images/logos/testlogo8.png",
+      "name": "ludogorets.png",
+      "path": "C:/projects/football/football-new/images/logos/ludogorets.png",
+      "folder": ""
+    },
+    {
+      "name": "man_city.png",
+      "path": "C:/projects/football/football-new/images/logos/man_city.png",
+      "folder": ""
+    },
+    {
+      "name": "rangers.png",
+      "path": "C:/projects/football/football-new/images/logos/rangers.png",
+      "folder": ""
+    },
+    {
+      "name": "real_madrid.png",
+      "path": "C:/projects/football/football-new/images/logos/real_madrid.png",
+      "folder": ""
+    },
+    {
+      "name": "roma.png",
+      "path": "C:/projects/football/football-new/images/logos/roma.png",
       "folder": ""
     }
   ],
@@ -58,7 +78,7 @@
     "filter": "none",
     "exporter": "JSON (hash)",
     "fileName": "pack-result",
-    "savePath": "C:\\Users\\User\\Desktop\\football\\assets",
+    "savePath": "C:\\projects\\football\\football-new\\static\\assets",
     "width": 2048,
     "height": 2048,
     "fixedSize": false,

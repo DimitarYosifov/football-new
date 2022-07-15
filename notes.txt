@@ -56,3 +56,23 @@ if we want to add new club or change existing double click add-players.html and 
             quality: 1,
             knockout: false,
         })]
+
+7:                              total    avrg  starting avrg
+man city                         436  -24.22    133
+bayern   -                       433  -24.05    130
+real madrid                      432  -24.00    129
+
+6:
+roma                             473  -26.27    149
+inter                            468  -26.00    148
+Club Atlético de Madrid          475  -26.38    147 
+
+5:
+rangers                          512  -28.44    164
+dortmund                         511  -28.38    162
+Feyenoord                        516  -28.66    166
+
+4:
+ludogorets                       557  -30.94    179
+Beşiktaş                         559  -31.22    180 
+PAOK FC                          558  -31.11    178

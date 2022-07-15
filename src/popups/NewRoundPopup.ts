@@ -68,7 +68,7 @@ export default class NewRoundPopup extends Container {
             this.addChild(this.currentRound);
         } else {
             // CURRENT ROUND TEXT
-            let text = this.lastRound ? "Last Round" : `Round ${this.level.currentRound}/20`
+            let text = this.lastRound ? "Last Round" : `Round ${this.level.currentRound}/${config.roundsInMatch}`
             this.currentRound = new Text(`${text}`, {
                 fontFamily: config.mainFont,
                 fontSize: App.height / 10,

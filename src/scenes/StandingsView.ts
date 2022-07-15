@@ -272,7 +272,7 @@ export class StandingsView extends Container implements IScene {
         let createSeparator = (x: number, y: number, width: number, height: number) => {
             let separator = new Graphics();
             separator.lineStyle(1, 0xdbb7b7, 1);
-            separator.drawRect(x, y, width, height);
+            separator.drawRect(10, y, width, height);
             return separator;
         }
 
@@ -329,7 +329,7 @@ export class StandingsView extends Container implements IScene {
             standingsContainer.addChild(createSeparator(
                 this.width * 0.02,
                 y + row.height,
-                row.width * 0.75,
+                row.width,
                 this.height * 0.00001
             ));
         });
