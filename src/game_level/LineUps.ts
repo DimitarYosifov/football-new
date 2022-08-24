@@ -34,10 +34,9 @@ export default class LineUps {
 
 
                 this.onCardsData();
-            })
-            // .catch()=> {
-
-            // } ;
+            }).catch((err) => {
+                console.error('err', err)
+            });
         } else {
             console.log(this.targetDeck);
 
@@ -52,6 +51,8 @@ export default class LineUps {
 
 
                 this.onCardsData();
+            }).catch((err) => {
+                console.error('err', err)
             });
         }
     }

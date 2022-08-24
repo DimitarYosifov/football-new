@@ -9,7 +9,7 @@ export function ServerRequest(name: string, data: any = {}, method: string = "GE
 
     const url = `${config.APIEndPoint}${name}`;
     console.log(name);
-    
+
 
     let params = {
         method: method,
@@ -18,7 +18,7 @@ export function ServerRequest(name: string, data: any = {}, method: string = "GE
     }
 
     if (method === "GET") delete params.body;
-    
+
     return new Promise<void>((resolve, reject) => {
         fetch(url, params)
             .then((response) => {
@@ -26,14 +26,11 @@ export function ServerRequest(name: string, data: any = {}, method: string = "GE
             })
             .then(data => {
                 console.log(data);
-                if (name === "getPlayerLineUp") {
-                    debugger
-                }
                 resolve(data);
             })
             .catch(function (error) {
-                 console.log(error);
-                reject(null);
+                console.log(error);
+                reject(error);
             });
     })
 }

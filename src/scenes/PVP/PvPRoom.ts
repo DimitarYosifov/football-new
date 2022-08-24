@@ -5,6 +5,7 @@ import { createText } from "../../createText";
 import { Level } from "../Level";
 import EmptySlot from "./EmptySlot";
 import gsap from "gsap";
+import { recordClubPlayersParams } from "../../recordClubPlayersParams";
 
 export default class PvPRoom extends Container implements IScene {
 
@@ -55,11 +56,11 @@ export default class PvPRoom extends Container implements IScene {
         framesPassed = framesPassed;
     }
     public addBG(): void { };
-// 
+
     public startWS() {
         //TODO - check process env here
         let HOST = "https://football-match3-api.herokuapp.com/".replace(/^http/, 'ws');// for prod -
-        // let HOST = 'ws://localhost:8000/';//  localhost -
+        // let HOST = 'ws://localhost:9000/';//  localhost -
 
         App.ws = new WebSocket(HOST);
 
@@ -111,11 +112,14 @@ export default class PvPRoom extends Container implements IScene {
                     })[0].clubData;
                     App.isPlayerHome = newGame.isHome;
 
-                    App.removeScene(this);
-                    App.setScene(new Level());
-                    gsap.delayedCall(0.01, () => {
-                        App.fade(0, 1).then(() => { });
-                    })
+
+                    recordClubPlayersParams(false, () => {
+                        App.removeScene(this);
+                        App.setScene(new Level());
+                        gsap.delayedCall(0.01, () => {
+                            App.fade(0, 1).then(() => { });
+                        })
+                    });
 
                     /* 
                     OBJECTIVES:
