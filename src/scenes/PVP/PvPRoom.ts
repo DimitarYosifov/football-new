@@ -55,11 +55,11 @@ export default class PvPRoom extends Container implements IScene {
         framesPassed = framesPassed;
     }
     public addBG(): void { };
-
+// 
     public startWS() {
         //TODO - check process env here
-        // let HOST = "https://football-match3-api.herokuapp.com/".replace(/^http/, 'ws');// for prod -
-        let HOST = 'ws://localhost:8000/';//  localhost -
+        let HOST = "https://football-match3-api.herokuapp.com/".replace(/^http/, 'ws');// for prod -
+        // let HOST = 'ws://localhost:8000/';//  localhost -
 
         App.ws = new WebSocket(HOST);
 
