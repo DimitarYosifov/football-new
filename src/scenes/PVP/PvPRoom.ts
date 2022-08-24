@@ -2,7 +2,9 @@ import { Container, Sprite, TextStyle } from "pixi.js";
 import { App, IScene } from "../../App";
 import { config } from "../../configs/MainGameConfig";
 import { createText } from "../../createText";
+import { Level } from "../Level";
 import EmptySlot from "./EmptySlot";
+import gsap from "gsap";
 
 export default class PvPRoom extends Container implements IScene {
 
@@ -56,8 +58,8 @@ export default class PvPRoom extends Container implements IScene {
 
     public startWS() {
         //TODO - check process env here
-        let HOST = "https://football-match3-api.herokuapp.com/".replace(/^http/, 'ws');// for prod -
-        // let HOST = 'ws://localhost:8000/';//  localhost -
+        // let HOST = "https://football-match3-api.herokuapp.com/".replace(/^http/, 'ws');// for prod -
+        let HOST = 'ws://localhost:8000/';//  localhost -
 
         App.ws = new WebSocket(HOST);
 
@@ -85,7 +87,7 @@ export default class PvPRoom extends Container implements IScene {
 
                 let message = JSON.parse(msg);
                 let users = message.users;
-                let ok = message.ok;
+                let newGame = message.newGame;
 
                 console.log(message);
 
@@ -96,8 +98,31 @@ export default class PvPRoom extends Container implements IScene {
                     this.updatePlayersList();
                     this.updateSlots(selected);
                 }
-                else if (ok) {
-                    alert("ok");
+                else if (newGame) {
+                    // alert(newGame.opponent);
+                    // alert(newGame.isHome);
+                    // alert(newGame.id)
+
+
+                    console.log(App.allClubs);
+
+                    App.opponentClubData = App.allClubs.filter((c: any) => {
+                        return c.clubData.name === newGame.opponent
+                    })[0].clubData;
+                    App.isPlayerHome = newGame.isHome;
+
+                    App.removeScene(this);
+                    App.setScene(new Level());
+                    gsap.delayedCall(0.01, () => {
+                        App.fade(0, 1).then(() => { });
+                    })
+
+                    /* 
+                    OBJECTIVES:
+                        1-set is team home or away
+                        2-set opponent team
+
+                    */
                 }
 
             })
@@ -127,41 +152,6 @@ export default class PvPRoom extends Container implements IScene {
                 slot.setEmpty();
             }
         });
-
-        /**
-         * check for two players ready to play 
-         */
-
-        // const even = App.PvPSelectedSlotIndex % 2 === 0;
-
-        // switch (even) {
-        //     case true:
-        //         if (selected.includes(App.PvPSelectedSlotIndex) && selected.includes(App.PvPSelectedSlotIndex + 1)) {
-        //             const player1: any = Object.keys(this.users).find((user: any) => this.users[user].selectedSlot === App.PvPSelectedSlotIndex);
-        //             const player2: any = Object.keys(this.users).find((user: any) => this.users[user].selectedSlot === App.PvPSelectedSlotIndex + 1);
-        //             App.ws.send(JSON.stringify({
-        //                 newGame: {
-        //                     player1: this.users[player1],
-        //                     player2: this.users[player2]
-        //                 }
-        //             }));
-        //         }
-        //         break;
-        //     case false:
-        //         if (selected.includes(App.PvPSelectedSlotIndex) && selected.includes(App.PvPSelectedSlotIndex - 1)) {
-        //             const player1: any = Object.keys(this.users).find((user: any) => this.users[user].selectedSlot === App.PvPSelectedSlotIndex - 1);
-        //             const player2: any = Object.keys(this.users).find((user: any) => this.users[user].selectedSlot === App.PvPSelectedSlotIndex);
-        //             App.ws.send(JSON.stringify({
-        //                 newGame: {
-        //                     player1: this.users[player1],
-        //                     player2: this.users[player2]
-        //                 }
-        //             }));
-        //         }
-        //         break;
-        //     default:
-        //         break;
-        // }
     }
 
     private updatePlayersList(): void {

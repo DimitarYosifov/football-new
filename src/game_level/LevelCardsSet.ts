@@ -8,7 +8,7 @@ export default class LevelCardsSet extends Container {
 
     private targetDeck: string;
     private clubName: string;
-    private lineUps: ILineUp;  
+    private lineUps: ILineUp;
 
     constructor(targetDeck: string, clubName: string) {
         super();
@@ -150,6 +150,8 @@ export default class LevelCardsSet extends Container {
     }
 
     onCardsData = () => {
+        console.log(this.targetDeck);
+
         this.targetDeck === "player" ? this.createPlayerDeck() : this.createOpponentDeck();
     }
 }

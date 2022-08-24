@@ -44,6 +44,9 @@ export class Level extends Container implements IScene {
 
         // gsap.killTweensOf("*");
         this.grid = null;
+        console.log(App.playerClubData);
+        console.log(App.opponentClubData);
+
         this.clubNames = [App.playerClubData.name, App.opponentClubData.name]; //first is players club
         this.goalAttempts = [];
         this.isPlayerHome = App.isPlayerHome;
