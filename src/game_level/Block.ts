@@ -7,6 +7,7 @@ import { App } from "../App";
 import { config } from "../configs/MainGameConfig";
 import Grid from "./Grid";
 import gsap from "gsap";
+import WSConnection from "../scenes/PVP/WSConnection";
 
 export default class Block extends Container {
 
@@ -44,6 +45,7 @@ export default class Block extends Container {
         } else {
             this.img = config.debugGrid[this.row][this.col];
         }
+        this.grid.PVP_grid[this.row][this.col] = (this.img);
 
         this.blockImg = Sprite.from(`${this.img}`);
         this.interactive = true;
@@ -75,14 +77,30 @@ export default class Block extends Container {
         this.addChild(this.blockImg);    ///This not row container!!!!!
 
         let delay = this.row * 90 + this.col * 15 + config.fadeTimeBetweenPhases * 1000 + 1750;
-        gsap.delayedCall(delay / 1000, () => {
-            this.blockImg.alpha = 1;
+        if (App.isPlayerHome && App.pvpGame) {
             if (this.row === 7 && this.col === 5) {
-                this.grid.newRound();
+                WSConnection.PVP_gridCreated(this.grid.PVP_grid);
             }
-        })
+            gsap.delayedCall(delay / 1000, () => {
+                this.blockImg.alpha = 1;
+                if (this.row === 7 && this.col === 5) {
+                    this.grid.newRound();
+                }
+            })
+        }
+        else if (this.row === 7 && this.col === 5 && !App.isPlayerHome && App.pvpGame) {
+            //wait for websocket data!!
+            alert("todo")
+        }
+        else if (!App.pvpGame) {
+            gsap.delayedCall(delay / 1000, () => {
+                this.blockImg.alpha = 1;
+                if (this.row === 7 && this.col === 5) {
+                    this.grid.newRound();
+                }
+            })
+        }
 
-        setTimeout(() => { }, this.row * 90 + this.col * 15 + config.fadeTimeBetweenPhases * 1000 + 1750);
 
         this.on('pointerdown', this.onDragStart);
         this.on('pointerup', this.onDragEnd)

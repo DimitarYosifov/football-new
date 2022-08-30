@@ -1,6 +1,7 @@
 
 import { Container } from "pixi.js";
 import { App } from "../App";
+import { config } from "../configs/MainGameConfig";
 import { Card } from "./Card";
 import LineUps from "./LineUps";
 
@@ -9,6 +10,7 @@ export default class LevelCardsSet extends Container {
     private targetDeck: string;
     private clubName: string;
     private lineUps: ILineUp;
+    private randomColor: boolean;
 
     constructor(targetDeck: string, clubName: string) {
         super();
@@ -16,7 +18,7 @@ export default class LevelCardsSet extends Container {
         this.clubName = clubName;
         this.lineUps = new LineUps(this.clubName, this.onCardsData, this.targetDeck);
         console.log(this.lineUps);
-
+        this.randomColor = App.pvpGame ? false : config.randomCardColors;
         this.interactive = false;
     }
 
@@ -80,7 +82,7 @@ export default class LevelCardsSet extends Container {
                 stars_width: card_width * 0.12,
 
                 totalPower: this.lineUps.player![i].defense_full + this.lineUps.player![i].attack_full
-            }, false, false)
+            }, false, this.randomColor)
             this.addChild(card);
         }
     }
@@ -144,7 +146,7 @@ export default class LevelCardsSet extends Container {
                 stars_width: card_width * 0.12,
 
                 totalPower: this.lineUps.opponent![i].defense_full + this.lineUps.opponent![i].attack_full
-            }, false, true)
+            }, false, this.randomColor)
             this.addChild(card);
         }
     }

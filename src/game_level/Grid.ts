@@ -33,6 +33,7 @@ export default class Grid extends Container {
     private goalText: Text;
     private popup: NoMovesPopup | NewRoundPopup;
     private holesInColumns: grid_interfaces.IHolesInColumns[];
+    public PVP_grid: any =  [...Array(8)].map(e => Array(6));
     gridPosition_x: number;
     gridPosition_y: number;
     data: any;  ///??????????????
@@ -51,7 +52,6 @@ export default class Grid extends Container {
             this.addChild(rowContainer);
             this.gridArrays.push((rowContainer.children as any).map((c: { type: any }) => c.type));
         }
-
 
         setTimeout(() => {
             // TODO - FIX THIS FUCKING SHIT!!!
@@ -828,7 +828,8 @@ export default class Grid extends Container {
     public proceedToNextRound() {
         this.level.goalAttempts = [];
         const delay = this.level.autoplayMode ? 1 : 0;
-        if (!App.isPlayerTurn || this.level.autoplayMode) {
+
+        if ((!App.isPlayerTurn || this.level.autoplayMode) && !App.pvpGame) {
             gsap.delayedCall(delay, () => {
                 this.swapBlocks(this.bestPossibleMove.col, this.bestPossibleMove.row, this.bestPossibleMove.dir);
             })

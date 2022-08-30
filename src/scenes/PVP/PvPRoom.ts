@@ -6,6 +6,8 @@ import { Level } from "../Level";
 import EmptySlot from "./EmptySlot";
 import gsap from "gsap";
 import { recordClubPlayersParams } from "../../recordClubPlayersParams";
+import Grid from "../../game_level/Grid";
+import WSConnection from "./WSConnection";
 
 export default class PvPRoom extends Container implements IScene {
 
@@ -16,13 +18,36 @@ export default class PvPRoom extends Container implements IScene {
 
     constructor() {
         super();
-        this.startWS();
+        WSConnection.startWS();
         this.createHeader();
         this.addChild(this.playersOnlineContainer);
         this.addChild(this.slotsContainer);
         this.createSlots();
         this.slotsContainer.position.set(0, App.height * 0.35);
+
+        App.EE.on("pvp_updateRoom", (data) => {
+             console.log(data);
+            this.users = data.users;
+            this.updatePlayersList();
+            this.updateSlots(data.selected);
+
+        });
+        App.EE.on("pvp_startGame", this.startGame);
     }
+    private startGame(newGame: any) {
+        App.opponentClubData = App.allClubs.filter((c: any) => {
+            return c.clubData.name === newGame.opponent
+        })[0].clubData;
+        App.isPlayerHome = newGame.isHome;
+        recordClubPlayersParams(false, () => {
+            App.removeScene(this);
+            App.setScene(new Level());
+            gsap.delayedCall(0.01, () => {
+                App.fade(0, 1).then(() => { });
+            })
+        });
+    }
+
     private createSlots() {
         const totalSlots = 4;
         for (let index = 0; index < totalSlots; index++) {
@@ -55,83 +80,8 @@ export default class PvPRoom extends Container implements IScene {
     public update(framesPassed: number): void {
         framesPassed = framesPassed;
     }
+
     public addBG(): void { };
-
-    public startWS() {
-        //TODO - check process env here
-        let HOST = "https://football-match3-api.herokuapp.com/".replace(/^http/, 'ws');// for prod -
-        // let HOST = 'ws://localhost:9000/';//  localhost -
-
-        App.ws = new WebSocket(HOST);
-
-        App.ws.onopen = (e) => {
-            console.log("WS connection succesfully opened");
-            App.ws.send(JSON.stringify({
-                user: {
-                    user: App.user,
-                    team: App.playerClubData.name,
-                    selectedSlot: -1,
-                    readyConfirmed: false,
-                    isHome: false
-                }
-            }));
-        };
-
-        App.ws.onerror = (err) => {
-            console.log(err)
-        };
-
-        App.ws.onmessage = async (rawMessage) => {
-            // console.log(rawMessage);
-
-            await rawMessage.data.text().then((msg: any) => {
-
-                let message = JSON.parse(msg);
-                let users = message.users;
-                let newGame = message.newGame;
-
-                console.log(message);
-
-
-                if (users) {
-                    let selected = Object.values(users).map((u: any) => u.selectedSlot);
-                    this.users = users;
-                    this.updatePlayersList();
-                    this.updateSlots(selected);
-                }
-                else if (newGame) {
-                    // alert(newGame.opponent);
-                    // alert(newGame.isHome);
-                    // alert(newGame.id)
-
-
-                    console.log(App.allClubs);
-
-                    App.opponentClubData = App.allClubs.filter((c: any) => {
-                        return c.clubData.name === newGame.opponent
-                    })[0].clubData;
-                    App.isPlayerHome = newGame.isHome;
-
-
-                    recordClubPlayersParams(false, () => {
-                        App.removeScene(this);
-                        App.setScene(new Level());
-                        gsap.delayedCall(0.01, () => {
-                            App.fade(0, 1).then(() => { });
-                        })
-                    });
-
-                    /* 
-                    OBJECTIVES:
-                        1-set is team home or away
-                        2-set opponent team
-
-                    */
-                }
-
-            })
-        };
-    }
 
     private updateSlots(selected: any) {
         this.slots.forEach((slot, index) => {
