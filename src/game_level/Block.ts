@@ -2,7 +2,7 @@
 // import Grid from "./Grid.js";
 // import GameTexture from "../GameTexture.js"
 
-import { Container, InteractionEvent, Sprite } from "pixi.js";
+import { Container, InteractionEvent, Sprite, Texture } from "pixi.js";
 import { App } from "../App";
 import { config } from "../configs/MainGameConfig";
 import Grid from "./Grid";
@@ -79,7 +79,10 @@ export default class Block extends Container {
         let delay = this.row * 90 + this.col * 15 + config.fadeTimeBetweenPhases * 1000 + 1750;
         if (App.isPlayerHome && App.pvpGame) {
             if (this.row === 7 && this.col === 5) {
-                WSConnection.PVP_gridCreated(this.grid.PVP_grid);
+                //  BIG TODO HERE!!!!
+                setTimeout(() => {
+                    WSConnection.PVP_gridCreated(this.grid.PVP_grid);
+                }, 100);
             }
             gsap.delayedCall(delay / 1000, () => {
                 this.blockImg.alpha = 1;
@@ -88,9 +91,18 @@ export default class Block extends Container {
                 }
             })
         }
-        else if (this.row === 7 && this.col === 5 && !App.isPlayerHome && App.pvpGame) {
+        else if (!App.isPlayerHome && App.pvpGame) {
             //wait for websocket data!!
-            alert("todo")
+            App.EE.once("pvp_grid_data", (grid) => {
+                this.img = grid[this.row][this.col];
+                this.blockImg.texture = Texture.from(grid[this.row][this.col]);
+                gsap.delayedCall(delay / 1000, () => {
+                    this.blockImg.alpha = 1;
+                    if (this.row === 7 && this.col === 5) {
+                        this.grid.newRound();
+                    }
+                })
+            });
         }
         else if (!App.pvpGame) {
             gsap.delayedCall(delay / 1000, () => {

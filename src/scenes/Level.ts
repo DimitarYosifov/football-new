@@ -6,6 +6,7 @@ import { MatchStartPopup } from "../popups/MatchStartPopup";
 import LevelCardsSet from "../game_level/LevelCardsSet";
 import Grid from "../game_level/Grid";
 import NewRoundPopup from "../popups/NewRoundPopup";
+import WaitingOpponentPopup from "../popups/WaitingOpponentPopup";
 
 export class Level extends Container implements IScene {
 
@@ -30,6 +31,7 @@ export class Level extends Container implements IScene {
     private infoPopup: NewRoundPopup;
     private autoplayImg: Sprite;
     public autoplayMode: boolean;
+    private waitingOpponentPopup: WaitingOpponentPopup | null;
 
     constructor() {
         super();
@@ -59,25 +61,15 @@ export class Level extends Container implements IScene {
         this.animationInProgress = true;
         this.playerActiveDefenses = Array(13).fill(null);     // 13 is max that fits within screen width
         this.opponentActiveDefenses = Array(13).fill(null);   // 13 is max that fits within screen width
-        // this.opponentActiveDefensesY = this.height * 0.155;
-        // this.playerActiveDefensesY = this.height * 0.84;
         this.addBG();
-
-        //NOT SURE IF I NEED MASK HERE.... TODO...
-        // const mask = new Graphics();
-        // mask.beginFill(0xffffff, 1);
-        // mask.drawRect(
-        //     0,
-        //     0,
-        //     this.width,
-        //     this.height
-        // );
-        // mask.endFill();
-        // this.mask = mask;
 
         this.createCards().catch(err => {
             console.log('Run failed (does not matter which task)!');
             throw err;
+        });
+
+        App.EE.on("waiting_opponent", (showPopup: boolean) => {
+            this.waitingOpponent(showPopup);
         });
     }
 
@@ -172,4 +164,23 @@ export class Level extends Container implements IScene {
         this.addChild(this.opponentCards);
         this.dataRecieved();
     };
+
+    private waitingOpponent(showPopup: boolean) {
+        if (showPopup) {
+            console.log("waiting opponent!!!!!!!!");
+            this.waitingOpponentPopup = new WaitingOpponentPopup();
+            this.addChild(this.waitingOpponentPopup);
+            setTimeout(() => {
+                App.app.ticker.stop();
+            }, 100);
+        }
+        else {
+            console.log(" remove waiting opponent!!!!!!!!");
+            this.removeChild(this.waitingOpponentPopup!);
+            this.waitingOpponentPopup = null;
+            setTimeout(() => {
+                App.app.ticker.start();
+            }, 100);
+        }
+    }
 }

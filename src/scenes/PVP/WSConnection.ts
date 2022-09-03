@@ -8,10 +8,16 @@ export default class WSConnection {
     static opponentID: any;
     constructor() { }
 
+    static appFocusChanged() {
+        App.ws.send(JSON.stringify({
+            appFocusedChanged: {
+                appFocused: App.visibility,
+                opponentID: this.opponentID
+            }
+        }));
+    }
+
     static PVP_gridCreated(grid: any) {
-
-        console.log(grid);
-
         App.ws.send(JSON.stringify({
             grid: grid,
             opponentID: this.opponentID
@@ -50,6 +56,7 @@ export default class WSConnection {
                 let users = message.users;
                 let newGame = message.newGame;
                 let grid = message.grid;
+                let opponentFocused = message.opponentFocusChanged;
 
                 if (users) {
                     console.log("users " + users);
@@ -66,9 +73,44 @@ export default class WSConnection {
                 }
                 else if (grid) {
                     console.log(grid);
-                    alert("TODO - inject grid into away team");//(this teeam)
+                    App.PvP_grid = grid;
+                    App.EE.emit("pvp_grid_data", grid);
+                }
+                else if (opponentFocused.focus !== undefined) {
+                    console.log(`opponentFocused => ${opponentFocused.focus}`);
+                    App.PvP_opponentFocused = opponentFocused.focus;
+
+                    if (App.PvP_opponentFocused) {
+                        App.EE.emit("waiting_opponent", false);
+                    }
+                    else {
+                        App.EE.emit("waiting_opponent", true);
+                    }
                 }
             })
         };
+
+        //this probably shouldn't be here - TODO
+        this.pageVisibilityListener();
+    }
+
+    static pageVisibilityListener() {
+        document.addEventListener('visibilitychange', () => {
+            if (!App.pvpGame) {
+                // user is not in active PvP game, no need to proceed
+                return;
+            }
+
+            console.log(`App visibility is ${document.visibilityState}`);
+
+            if (document.visibilityState === 'hidden') {
+                App.visibility = false;
+                this.appFocusChanged();
+            }
+            else if (document.visibilityState === 'visible') {
+                App.visibility = true;
+                this.appFocusChanged();
+            }
+        });
     }
 }
