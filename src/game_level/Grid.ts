@@ -10,6 +10,7 @@ import NoMovesPopup from "../popups/NoMovesPopup";
 import Block from "./Block";
 import Row from "./Row";
 import { smartMove } from "./smartMove";
+import WSConnection from "../scenes/PVP/WSConnection";
 
 export default class Grid extends Container {
 
@@ -33,10 +34,11 @@ export default class Grid extends Container {
     private goalText: Text;
     private popup: NoMovesPopup | NewRoundPopup;
     private holesInColumns: grid_interfaces.IHolesInColumns[];
-    public PVP_grid: any =  [...Array(8)].map(e => Array(6));
-    gridPosition_x: number;
-    gridPosition_y: number;
-    data: any;  ///??????????????
+    public PVP_grid: any = [...Array(8)].map(e => Array(6));
+    public gridPosition_x: number;
+    public gridPosition_y: number;
+    public data: any;  ///??????????????
+    private PvP_newBlocks: string[];
 
     constructor() {
         super();
@@ -44,6 +46,17 @@ export default class Grid extends Container {
         this.moveCoordinates = { startX: 0, startY: 0, lastX: 0, lastY: 0 }
         this.interactive = true;
         this.createGrid();
+        if (App.pvpGame) {
+            App.EE.on("PvP_moveData_received", (moveData) => {
+                this.PvP_moveData_received(moveData);
+            });
+            App.EE.on("new_blocks_received", (newBlocks) => {
+                this.PvP_newBlocks = newBlocks;
+                //  gsap.delayedCall(0.5, () => {
+                //     this.createNewBlocks();
+                // })
+            });
+        }
     }
 
     private createGrid() {
@@ -138,6 +151,7 @@ export default class Grid extends Container {
                 item2.gridPosition = gridPosition1;
                 let matches: grid_interfaces.IMatches[] = this.checkGridForMatches();
                 if (matches.length !== 0) {
+                    console.log(matches);
                     this.level.animationInProgress = true;
                     if (this.hintTimeout) {
                         this.hintTimeout.kill();
@@ -172,7 +186,6 @@ export default class Grid extends Container {
                     item1.children[0].y = item_2_Old_Y;
                     item1.type = item_2_OldType;
                     item1.children[0].texture = Texture.from(`${item1.type || item1.img}`);
-
 
                     gsap.delayedCall(0.5, () => {
                         this.gatherMatchingBlocks(matches);
@@ -673,7 +686,9 @@ export default class Grid extends Container {
             gsap.delayedCall(2, () => {
                 this.parent.removeChild(this.popup);
                 gsap.delayedCall(5, () => {
+                    // TODO - HANDLE PVP GAME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     if (!this.noMoves && (!App.isPlayerTurn || this.level.autoplayMode)) {
+
                         this.proceedToNextRound();
                     }
                 })
@@ -826,6 +841,7 @@ export default class Grid extends Container {
     }
 
     public proceedToNextRound() {
+        if (App.pvpGame) return;
         this.level.goalAttempts = [];
         const delay = this.level.autoplayMode ? 1 : 0;
 
@@ -834,6 +850,13 @@ export default class Grid extends Container {
                 this.swapBlocks(this.bestPossibleMove.col, this.bestPossibleMove.row, this.bestPossibleMove.dir);
             })
         }
+    }
+
+    public PvP_moveData_received(moveData: any) {
+        this.level.goalAttempts = [];
+        // gsap.delayedCall(0.5, () => {
+        this.swapBlocks(moveData.col, moveData.row, moveData.dir);
+        // })
     }
 
     public newRound() {
@@ -983,20 +1006,33 @@ export default class Grid extends Container {
                 }
             });
         });
-        this.createNewBlocks();
+        if (!App.pvpGame || (App.pvpGame && App.isPlayerTurn)) {
+            this.createNewBlocks();
+        } else {
+            gsap.delayedCall(0.05, () => {
+                this.createNewBlocks();
+            })
+        }
     }
 
     private createNewBlocks() {
         let blockHeight = this.globalBlocksPositions[1][0].y - this.globalBlocksPositions[0][0].y;
         let gridY = this.globalBlocksPositions[0][0].y;
+        let newBlocks: string[] = [];
         this.holesInColumns.forEach((el, colIndex) => {
             if (el.holes > 0) {
                 for (let hole = 0; hole < el.holes; hole++) {
                     let row = el.onRow[hole];
                     let block = this.blocks[row][colIndex].blockImg;
+                    let img = "";
+                    if (App.pvpGame && !App.isPlayerTurn) {
+                        img = this.PvP_newBlocks[0];
+                        this.PvP_newBlocks.shift();
+                    } else {
+                        img = (block.parent as any).generateRandomColorBlock();
+                    }
 
-                    let img = (block.parent as any).generateRandomColorBlock();
-
+                    newBlocks.push(img);
                     block.texture = Texture.from(`${img}`);
                     let startY = this.globalBlocksPositions[el.holes - hole - 1][colIndex].y;
                     block.y = gridY - (blockHeight * (hole + 1));
@@ -1006,12 +1042,17 @@ export default class Grid extends Container {
                         y: startY,
                         onComplete: () => {
                             // gsap.globalTimeline.clear();
-                            this.gridArrays[el.holes - hole - 1][colIndex] = (block.parent as any).img = img;
+                            (this.gridArrays as any)[el.holes - hole - 1][colIndex] = (block.parent as any).img = img;
                         }
                     });
                 }
             }
         });
+
+        if (App.pvpGame) {
+            WSConnection.newBlocks(newBlocks);
+        }
+
         gsap.delayedCall(Math.max(...this.holesInColumns.map(h => h.holes)) * .33, () => {
             this.setAccurateBlocksPositions();
         })
@@ -1104,8 +1145,15 @@ export default class Grid extends Container {
             ) {
                 return;
             }
-            // console.log(dir)
-            // this.app.level.animationInProgress = true;
+            if (App.pvpGame) {
+                //here we send move data to the other player
+                const moveData = {
+                    col: this.gridPosition_x,
+                    row: this.gridPosition_y,
+                    dir: dir
+                }
+                WSConnection.blocksMatched(moveData);
+            }
             this.swapBlocks(this.gridPosition_x, this.gridPosition_y, dir!);
         }
     }

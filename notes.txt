@@ -28,9 +28,13 @@
 if we want to add new club or change existing double click add-players.html and open it in a local browser
 <!-- 
     TODO LIST:
+                IMPORTANT: FOR PVP!
+                yellow cards are on random - make them same  for both players
+                link no moves to get grid from host player.
+                clear backend on conenction close or game finished
 
                 REMOVE ALL CDN - USE NPM!!
-                add autoplay
+                add autoplay - DONE
                 add usage for players' exp points
                 add players' price
                 make name generator

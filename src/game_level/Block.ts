@@ -95,6 +95,7 @@ export default class Block extends Container {
             //wait for websocket data!!
             App.EE.once("pvp_grid_data", (grid) => {
                 this.img = grid[this.row][this.col];
+                this.type = grid[this.row][this.col];
                 this.blockImg.texture = Texture.from(grid[this.row][this.col]);
                 gsap.delayedCall(delay / 1000, () => {
                     this.blockImg.alpha = 1;
@@ -122,6 +123,7 @@ export default class Block extends Container {
 
     private generateRandomColorBlock(): string {
         if (config.predefinedBlockColor) { return config.predefinedBlockColor };
+        // note - same method is used server side for PVP games...
         let x = Math.floor(Math.random() * 100) + 1;
         let a;
         switch (true) {
