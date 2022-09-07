@@ -38,7 +38,7 @@ export default class Grid extends Container {
     public gridPosition_x: number;
     public gridPosition_y: number;
     public data: any;  ///??????????????
-    private PvP_newBlocks: string[];
+    private PvP_newBlocks: string[] = [];
 
     constructor() {
         super();
@@ -1044,7 +1044,22 @@ export default class Grid extends Container {
         });
         if (!App.pvpGame || (App.pvpGame && App.isPlayerTurn)) {
             this.createNewBlocks();
-        } else {
+        }
+        else if (App.pvpGame && !App.isPlayerTurn) {
+
+            if (this.PvP_newBlocks.length > 0) {
+                this.createNewBlocks();
+            }
+            else {
+                App.EE.once("new_blocks_received", (newBlocks) => {
+                    this.PvP_newBlocks = newBlocks;
+                    //  gsap.delayedCall(0.5, () => {
+                        this.createNewBlocks();
+                    // })
+                });
+            }
+        }
+        else {
             gsap.delayedCall(0.05, () => {
                 this.createNewBlocks();
             })
@@ -1085,9 +1100,11 @@ export default class Grid extends Container {
             }
         });
 
-        if (App.pvpGame) {
+        if (App.pvpGame && App.isPlayerTurn) {
             WSConnection.newBlocks(newBlocks);
         }
+
+        newBlocks = [];
 
         gsap.delayedCall(Math.max(...this.holesInColumns.map(h => h.holes)) * .33, () => {
             this.setAccurateBlocksPositions();
