@@ -137,7 +137,10 @@ export class StandingsView extends Container implements IScene {
     private addButtons() {
         //---CONTIONUE BUTTON
         let continueOnPointerDown = () => {
-            if (
+            if (App.pvpGame) {
+                location.reload();
+            }
+            else if (
                 !App.seasonFixtures[App.currentRound] && this.lastGameRersult
 
             ) {

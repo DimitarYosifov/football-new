@@ -45,6 +45,7 @@ export class App {
     static PvP_grid: string[][] = [];
     static visibility: boolean = true;
     static PvP_opponentFocused: boolean = true;
+    static randomIndexes: number[];
     
     // G A M E   D A T A ---
 

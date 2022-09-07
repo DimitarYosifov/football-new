@@ -190,7 +190,7 @@ export default class NewRoundPopup extends Container {
             this.continueBtn.interactive = true;
             this.continueBtn.interactive = true;
             this.continueBtn.on('pointerdown', () => {
-                if (App.friendly) {
+                if (App.friendly || App.pvpGame) {
                     location.reload();
                 } else {
                     // match end

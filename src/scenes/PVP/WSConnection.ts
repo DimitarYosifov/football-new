@@ -19,7 +19,13 @@ export default class WSConnection {
     }
 
     static PVP_gridCreated(grid: any) {
+        App.randomIndexes = [];
+        for (let index = 0; index < 150; index++) {
+            App.randomIndexes[index] = Math.floor(Math.random() * 6);
+        }
+        console.log(App.randomIndexes);
         App.ws.send(JSON.stringify({
+            randomIndexes: App.randomIndexes,
             grid: grid,
             opponentID: this.opponentID
         }));
@@ -31,10 +37,10 @@ export default class WSConnection {
             opponentID: this.opponentID
         }));
     }
-    
+
     static newBlocks(newBlocks: any) {
         console.log("new blocks sent to server");
-        
+
         App.ws.send(JSON.stringify({
             newBlocks: newBlocks,
             opponentID: this.opponentID
@@ -76,6 +82,7 @@ export default class WSConnection {
                 let opponentFocused = message.opponentFocusChanged;
                 let moveData = message.moveData;
                 let newBlocks = message.newBlocks;
+                let opponentLeft = message.opponentLeft;
 
                 if (users) {
                     console.log("users " + users);
@@ -91,6 +98,7 @@ export default class WSConnection {
                 }
                 else if (grid) {
                     App.PvP_grid = grid;
+                    App.randomIndexes = message.randomIndexes;
                     App.EE.emit("pvp_grid_data", grid);
                 }
                 else if (opponentFocused && opponentFocused.focus !== undefined) {
@@ -106,10 +114,15 @@ export default class WSConnection {
                     App.EE.emit("PvP_moveData_received", moveData);
                 }
                 else if (newBlocks) {
-                     App.EE.emit("new_blocks_received", newBlocks);
+                    App.EE.emit("new_blocks_received", newBlocks);
+                }
+                else if (opponentLeft) {
+                    App.EE.emit("waiting_opponent", true, true);
                 }
             })
         };
+
+        App.ws.onclose = (e) => { }
 
         //this probably shouldn't be here - TODO
         this.pageVisibilityListener();

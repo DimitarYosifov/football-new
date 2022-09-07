@@ -394,6 +394,18 @@ export default class Grid extends Container {
             const targetIndex = Math.floor(Math.random() * redCardTargets.length);
             let redCardTarget = redCardTargets[targetIndex];
 
+            let indexFound = false;
+            if (App.pvpGame) {
+                while (!indexFound) {
+                    let randomIndex = App.randomIndexes[0];
+                    App.randomIndexes.shift();
+                    if (!(this.parent as any)[deck].children[randomIndex].hasRedCard) {
+                        indexFound = true;
+                        redCardTarget = (this.parent as any)[deck].children[randomIndex];
+                    }
+                }
+            }
+
             //remove target
             redCardTargets.splice(targetIndex, 1);
 
@@ -420,6 +432,20 @@ export default class Grid extends Container {
 
             //random target
             let yellowCardTarget = yellowCardTargets[Math.floor(Math.random() * yellowCardTargets.length)];
+
+            let indexFound = false;
+            if (App.pvpGame) {
+                while (!indexFound) {
+                    let randomIndex = App.randomIndexes[0];
+                    App.randomIndexes.shift();
+                    let target = (this.parent as any)[deck].children[randomIndex];
+                    if (!target.hasRedCard && !target.hasInjury) {
+                        indexFound = true;
+                        yellowCardTarget = target;
+                    }
+                }
+            }
+
             if (yellowCardTarget.hasYellowCard) {
                 yellowCardTarget.hasRedCard = true;
                 yellowCardTarget.yellowCard.texture = Texture.from("red_card");
@@ -440,6 +466,19 @@ export default class Grid extends Container {
             //random target
             const targetIndex = Math.floor(Math.random() * injuryTargets.length);
             let injuryTarget = injuryTargets[targetIndex];
+
+            let indexFound = false;
+            if (App.pvpGame) {
+                while (!indexFound) {
+                    let randomIndex = App.randomIndexes[0];
+                    App.randomIndexes.shift();
+                    let target = (this.parent as any)[deck].children[randomIndex]
+                    if (!target.hasRedCard && !target.hasInjury) {
+                        indexFound = true;
+                        injuryTarget = target;
+                    }
+                }
+            }
 
             //remove target
             injuryTargets.splice(targetIndex, 1);
@@ -947,9 +986,6 @@ export default class Grid extends Container {
         this.removeChildren();
         this.blocks = [[], [], [], [], [], [], [], []];
         this.gridArrays = [];
-
-        //test!!!!
-        // this.config.isGridInDebug = false;
 
         gsap.delayedCall(1.5, () => {
             this.createGrid();

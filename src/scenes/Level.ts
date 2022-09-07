@@ -68,8 +68,8 @@ export class Level extends Container implements IScene {
             throw err;
         });
 
-        App.EE.on("waiting_opponent", (showPopup: boolean) => {
-            this.waitingOpponent(showPopup);
+        App.EE.on("waiting_opponent", (showPopup: boolean, opponentLeft: boolean) => {
+            this.waitingOpponent(showPopup, opponentLeft);
         });
     }
 
@@ -117,24 +117,26 @@ export class Level extends Container implements IScene {
         });
 
         //autoplay
-        this.autoplayImg = Sprite.from("icon-auto");
-        this.autoplayImg.anchor.set(1, 0.5);
-        this.autoplayImg.x = App.width;
-        this.autoplayImg.y = App.height * 0.45;
-        this.autoplayImg.width = App.width / 12;
-        this.autoplayImg.scale.y = this.autoplayImg.scale.x;
-        this.addChild(this.autoplayImg);
-        this.autoplayImg.interactive = true;
-        this.autoplayImg.tint = 0xffffff;
+        if (!App.pvpGame) {
+            this.autoplayImg = Sprite.from("icon-auto");
+            this.autoplayImg.anchor.set(1, 0.5);
+            this.autoplayImg.x = App.width;
+            this.autoplayImg.y = App.height * 0.45;
+            this.autoplayImg.width = App.width / 12;
+            this.autoplayImg.scale.y = this.autoplayImg.scale.x;
+            this.addChild(this.autoplayImg);
+            this.autoplayImg.interactive = true;
+            this.autoplayImg.tint = 0xffffff;
 
-        this.autoplayImg.on('pointerdown', () => {
-            this.autoplayMode = !this.autoplayMode;
-            this.autoplayImg.tint = this.autoplayMode ? 0x2cb62c : 0xffffff;
-            if (App.isPlayerTurn && !this.animationInProgress) {
-                this.animationInProgress = true;
-                this.grid!.proceedToNextRound();
-            }
-        });
+            this.autoplayImg.on('pointerdown', () => {
+                this.autoplayMode = !this.autoplayMode;
+                this.autoplayImg.tint = this.autoplayMode ? 0x2cb62c : 0xffffff;
+                if (App.isPlayerTurn && !this.animationInProgress) {
+                    this.animationInProgress = true;
+                    this.grid!.proceedToNextRound();
+                }
+            });
+        }
     }
 
     public onIntroFinish = () => {
@@ -165,10 +167,10 @@ export class Level extends Container implements IScene {
         this.dataRecieved();
     };
 
-    private waitingOpponent(showPopup: boolean) {
+    private waitingOpponent(showPopup: boolean, opponentLeft: boolean = false) {
         if (showPopup) {
             console.log("waiting opponent!!!!!!!!");
-            this.waitingOpponentPopup = new WaitingOpponentPopup();
+            this.waitingOpponentPopup = new WaitingOpponentPopup(opponentLeft);
             this.addChild(this.waitingOpponentPopup);
             setTimeout(() => {
                 App.app.ticker.stop();
