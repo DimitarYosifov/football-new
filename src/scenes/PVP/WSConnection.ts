@@ -48,7 +48,8 @@ export default class WSConnection {
     }
 
     static startWS() {
-        let HOST = "https://football-match3-api.herokuapp.com/".replace(/^http/, 'ws');// for prod -
+        // let HOST = "https://football-match3-api.herokuapp.com/".replace(/^http/, 'ws');// for prod on heroku-
+        let HOST = "https://test-qqw1.onrender.com/".replace(/^http/, 'ws');// for prod on render.com-
         // let HOST = 'ws://localhost:9000/';//  localhost -
 
         App.ws = new WebSocket(HOST);
