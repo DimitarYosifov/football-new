@@ -54,6 +54,8 @@ export default class TopScorers extends Container {
         this.backgroundImg.width = App.width;
         this.backgroundImg.height = App.height;
         this.addChild(this.backgroundImg);
+        this.backgroundImg.interactive = true;
+        this.backgroundImg.on('pointerdown', () => { });
     }
 
     public update(framesPassed: number): void { }

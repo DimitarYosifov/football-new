@@ -137,6 +137,7 @@ export class StandingsView extends Container implements IScene {
     private addButtons() {
         //---CONTIONUE BUTTON
         let continueOnPointerDown = () => {
+            this.continueBtn.finalTexture.interactive = false;
             if (App.pvpGame) {
                 location.reload();
             }
@@ -158,7 +159,9 @@ export class StandingsView extends Container implements IScene {
                 App.removeScene(this);
                 App.setScene(new Level());
                 gsap.delayedCall(0.01, () => {
-                    App.fade(0, 1).then(() => { });
+                    App.fade(0, 1).then(() => {
+                        this.continueBtn.finalTexture.interactive = true;
+                    });
                 })
             }
             else if (this.selectedRound !== App.currentRound || (this.selectedRound === 2 && App.currentRound === 1)) {
@@ -173,42 +176,52 @@ export class StandingsView extends Container implements IScene {
                 App.removeScene(this);
                 App.setScene(new Level());
                 gsap.delayedCall(0.01, () => {
-                    App.fade(0, 1).then(() => { });
+                    App.fade(0, 1).then(() => {
+                        this.continueBtn.finalTexture.interactive = true;
+                    });
                 })
             }
         }
 
-        this.continueBtn = new RotatingButton("", "", continueOnPointerDown, true);
+        this.continueBtn = new RotatingButton("", "", continueOnPointerDown);
         this.continueBtn.setButtonSize(App.height * 0.2, App.width / 2, App.height * 0.87);
         this.addChild(this.continueBtn.finalTexture);
         this.continueBtn.addLabel(`Continue`, 0.24);
 
         //-----EDIT TEAM BTN
         let editTeamOnPointerDown = () => {
+            this.editTeameBtn.finalTexture.interactive = false;
             App.setScene(new EditTeam());
+            gsap.delayedCall(1, () => {
+                this.editTeameBtn.finalTexture.interactive = true;
+            })
         }
 
-        this.editTeameBtn = new RotatingButton("", "", editTeamOnPointerDown, true);
+        this.editTeameBtn = new RotatingButton("", "", editTeamOnPointerDown);
         this.addChild(this.editTeameBtn.finalTexture);
         this.editTeameBtn.setButtonSize(App.height * 0.15, App.width * 0.84, App.height * 0.89);
         this.editTeameBtn.addLabel(`Edit\nTeam`, 0.24);
 
         //-----TOP SCORERS BTN
         let topScorersOnPointerDown = () => {
+            this.topScorerBtn.finalTexture.interactive = false;
             App.setScene(new TopScorers());
+            gsap.delayedCall(1, () => { this.topScorerBtn.finalTexture.interactive = true; })
         }
 
-        this.topScorerBtn = new RotatingButton("", "", topScorersOnPointerDown, true);
+        this.topScorerBtn = new RotatingButton("", "", topScorersOnPointerDown);
         this.addChild(this.topScorerBtn.finalTexture);
         this.topScorerBtn.setButtonSize(App.height * 0.10, App.width * 0.16, App.height * 0.91);
         this.topScorerBtn.addLabel(`Top\nScorers`, 0.24);
 
         //-----MOST YELLOW CARDS BTN
         let mostYellowCardsOnPointerDown = () => {
+            this.mostYellowCardsBtn.finalTexture.interactive = false;
             App.setScene(new MostYellowCards());
+            gsap.delayedCall(1, () => { this.mostYellowCardsBtn.finalTexture.interactive = true; })
         }
 
-        this.mostYellowCardsBtn = new RotatingButton("", "", mostYellowCardsOnPointerDown, true);
+        this.mostYellowCardsBtn = new RotatingButton("", "", mostYellowCardsOnPointerDown);
         this.addChild(this.mostYellowCardsBtn.finalTexture);
         this.mostYellowCardsBtn.setButtonSize(App.height * 0.10, App.width * 0.16, App.height * 0.81);
         this.mostYellowCardsBtn.addLabel(`Yellow\nCards`, 0.24);
@@ -406,6 +419,7 @@ export class StandingsView extends Container implements IScene {
                 x: x,
                 onStart: () => { },
                 onComplete: () => {
+                    this.continueBtn.finalTexture.interactive = true;
                     if (this.selectedRound !== 1) {
                         this.prev.interactive = true;
                         this.prev.alpha = 1;
