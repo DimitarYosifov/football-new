@@ -15,6 +15,7 @@ export class ClubSelection extends Container implements IScene {
     private mode: string;
     private selectClub: Text;
     private clubContainers: Container[] = [];
+    private selectionDone: boolean = false;
 
     constructor(mode: string) {
         super();
@@ -147,13 +148,17 @@ export class ClubSelection extends Container implements IScene {
         logo.anchor.set(0.5, 1);
         container.addChild(logo);
         logo.interactive = true;
-        logo.on('pointerup', () => {
+        logo.once('pointerup', () => {
+            if (this.selectionDone) {
+                return;
+            }
             logo.interactive = false;
             App.isPlayerTurn ? App.playerClubData = club.clubData : App.opponentClubData = club.clubData;
             this.removeChild(this.selectClub);
             App.friendly = this.mode === "friendly";
             App.pvpGame = this.mode === "PvP";
             if (!App.friendly && !App.pvpGame) {
+                this.selectionDone = true;
                 this.clubContainers.forEach(element => {
                     if (element !== container) {
                         gsap.to(element, 1,

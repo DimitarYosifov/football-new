@@ -178,7 +178,7 @@ export class StandingsView extends Container implements IScene {
             }
         }
 
-        this.continueBtn = new RotatingButton("", "", continueOnPointerDown);
+        this.continueBtn = new RotatingButton("", "", continueOnPointerDown, true);
         this.continueBtn.setButtonSize(App.height * 0.2, App.width / 2, App.height * 0.87);
         this.addChild(this.continueBtn.finalTexture);
         this.continueBtn.addLabel(`Continue`, 0.24);
@@ -188,7 +188,7 @@ export class StandingsView extends Container implements IScene {
             App.setScene(new EditTeam());
         }
 
-        this.editTeameBtn = new RotatingButton("", "", editTeamOnPointerDown);
+        this.editTeameBtn = new RotatingButton("", "", editTeamOnPointerDown, true);
         this.addChild(this.editTeameBtn.finalTexture);
         this.editTeameBtn.setButtonSize(App.height * 0.15, App.width * 0.84, App.height * 0.89);
         this.editTeameBtn.addLabel(`Edit\nTeam`, 0.24);
@@ -198,7 +198,7 @@ export class StandingsView extends Container implements IScene {
             App.setScene(new TopScorers());
         }
 
-        this.topScorerBtn = new RotatingButton("", "", topScorersOnPointerDown);
+        this.topScorerBtn = new RotatingButton("", "", topScorersOnPointerDown, true);
         this.addChild(this.topScorerBtn.finalTexture);
         this.topScorerBtn.setButtonSize(App.height * 0.10, App.width * 0.16, App.height * 0.91);
         this.topScorerBtn.addLabel(`Top\nScorers`, 0.24);
@@ -208,7 +208,7 @@ export class StandingsView extends Container implements IScene {
             App.setScene(new MostYellowCards());
         }
 
-        this.mostYellowCardsBtn = new RotatingButton("", "", mostYellowCardsOnPointerDown);
+        this.mostYellowCardsBtn = new RotatingButton("", "", mostYellowCardsOnPointerDown, true);
         this.addChild(this.mostYellowCardsBtn.finalTexture);
         this.mostYellowCardsBtn.setButtonSize(App.height * 0.10, App.width * 0.16, App.height * 0.81);
         this.mostYellowCardsBtn.addLabel(`Yellow\nCards`, 0.24);

@@ -18,7 +18,7 @@ export default class LevelCardsSet extends Container {
         this.clubName = clubName;
         this.lineUps = new LineUps(this.clubName, this.onCardsData, this.targetDeck);
         console.log(this.lineUps);
-        this.randomColor = App.pvpGame ? false : config.randomCardColors;
+        this.randomColor = App.pvpGame || App.leagueRounds ? false : config.randomCardColors;
         this.interactive = false;
     }
 

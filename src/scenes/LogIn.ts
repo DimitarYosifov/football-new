@@ -88,6 +88,7 @@ export default class LogIn {
     };
 
     private validate() {
+        this.go.style.pointerEvents = "none";
         ServerRequest(
             this.action, //login or register,
             JSON.stringify({ user: this.userName.value, pass: this.password.value }),
@@ -96,6 +97,7 @@ export default class LogIn {
             if (res.nameInUse) {
                 this.clearUserInput();
                 window.alert("name in use!"); //TODO... 
+                this.go.style.pointerEvents = "auto";
                 return;
             }
             if (res.authorized) {

@@ -169,7 +169,7 @@ export default class MostYellowCards extends Container implements IScene {
                 })
             })
         }
-        this.backBtn = new RotatingButton("", "", backOnPointerDown);
+        this.backBtn = new RotatingButton("", "", backOnPointerDown, true);
         this.addChild(this.backBtn.finalTexture);
         this.backBtn.setButtonSize(App.height * 0.1, App.width * 1.1, App.height * 0.1);
         this.backBtn.addLabel(`Back`, 0.4);

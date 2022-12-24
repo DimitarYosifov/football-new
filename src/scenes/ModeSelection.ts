@@ -62,7 +62,7 @@ export class ModeSelection extends Container implements IScene {
         this.friendly.anchor.set(0.5, 0.5);
         this.friendly.interactive = true;
         const friendlyScale = this.friendly.scale.x;
-        this.friendly.on('pointerup', (e: Event) => {
+        this.friendly.once('pointerup', (e: Event) => {
             this.modeSelected("friendly");
         })
         this.friendly.on('pointerover', (e: Event) => {
@@ -87,7 +87,7 @@ export class ModeSelection extends Container implements IScene {
         this.league.position.set(App.width + this.league.width / 2, App.height * 0.59);
         this.league.anchor.set(0.5, 0.5);
         this.league.interactive = true;
-        this.league.on('pointerup', (e: Event) => {
+        this.league.once('pointerup', (e: Event) => {
             this.modeSelected("league");
         })
         const leagueScale = this.friendly.scale.x;
@@ -113,7 +113,7 @@ export class ModeSelection extends Container implements IScene {
         this.pvp.position.set(App.width / 2, App.height * -0.2);
         this.pvp.anchor.set(0.5, 0.5);
         this.pvp.interactive = true;
-        this.pvp.on('pointerup', (e: Event) => {
+        this.pvp.once('pointerup', (e: Event) => {
             this.modeSelected("PvP");
         })
         const scale = this.friendly.scale.x;

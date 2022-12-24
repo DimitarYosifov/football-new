@@ -7,18 +7,19 @@ export class RotatingButton extends Sprite {
 
     private defaultTexture: string;
     private onInteractionTexture: string;
-    public finalTexture: Sprite;
+    public finalTexture: any;
     public label: Text;
     private btn_rotation: GSAPTween;
 
-    constructor(defaultTexture: string, onInteractionTexture: string, onPointerDown: Function) {
+    constructor(defaultTexture: string, onInteractionTexture: string, onPointerDown: Function, once: boolean = false) {
         super();
         this.defaultTexture = defaultTexture ? defaultTexture : "ball_prototype";
         this.onInteractionTexture = onInteractionTexture ? onInteractionTexture : "ball_green";
         this.finalTexture = Sprite.from(this.defaultTexture);
         this.finalTexture.anchor.set(0.5);
         this.finalTexture.interactive = true;
-        this.finalTexture.on('pointerdown', () => {
+        let event = once ? "once" : "on";
+        this.finalTexture[event]('pointerdown', () => {
             this.activate();
             gsap.delayedCall(0.2, () => {
                 onPointerDown();
