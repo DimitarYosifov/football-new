@@ -419,7 +419,7 @@ export class StandingsView extends Container implements IScene {
                 x: x,
                 onStart: () => { },
                 onComplete: () => {
-                    this.continueBtn.finalTexture.interactive = true;
+                    this.checkContinueAllowed();
                     if (this.selectedRound !== 1) {
                         this.prev.interactive = true;
                         this.prev.alpha = 1;

@@ -46,7 +46,7 @@ export class App {
     static visibility: boolean = true;
     static PvP_opponentFocused: boolean = true;
     static randomIndexes: number[];
-    
+
     // G A M E   D A T A ---
 
     public static get width(): number {
@@ -60,9 +60,11 @@ export class App {
         App._width = width;
         App._height = height;
 
+        const minDPR = 2;
+        
         App.app = new Application({
             view: document.getElementById("pixi-canvas") as HTMLCanvasElement,
-            resolution: window.devicePixelRatio || 1,
+            resolution: window.devicePixelRatio > minDPR ? window.devicePixelRatio : minDPR || 1,
             autoDensity: true,
             backgroundColor: background,
             width: width,
@@ -73,6 +75,9 @@ export class App {
         window.addEventListener("resize", App.resize);
         App.resize();
         App.EE = new utils.EventEmitter;
+
+        // this line enables chrome pixi dev tool
+        (globalThis as any).__PIXI_APP__ = App.app;
     }
 
     public static resize(): void {

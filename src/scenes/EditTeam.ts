@@ -55,6 +55,7 @@ export class EditTeam extends Container implements IScene {
 
     public addBG(): void {
         this.backgroundImg = Sprite.from("bg55");
+        this.backgroundImg.interactive = true;
         this.backgroundImg.x = 0;
         this.backgroundImg.y = 0;
         this.backgroundImg.width = App.width;
@@ -173,11 +174,11 @@ export class EditTeam extends Container implements IScene {
 
         this.makeInteractive();
 
-        createText('goalkeepers', getStyle(), this, App.height * 0.05, 0, 0, 0.5, App.height / 145);
-        createText('defenders', getStyle(), this, App.height * 0.24, 0, 0, 0.5, App.height / 45);
-        createText('midfielders', getStyle(), this, App.height * 0.43, 0, 0, 0.5, App.height / 45);
-        createText('forwards', getStyle(), this, App.height * 0.62, 0, 0, 0.5, App.height / 45);
-        createText('starting line-up', getStyle(), this, App.height * 0.81, 0, 0, 0.5, App.height / 45);
+        createText('goalkeepers', getStyle(), this.container, App.height * 0.05, 0, 0, 0.5, App.height / 145);
+        createText('defenders', getStyle(), this.container, App.height * 0.24, 0, 0, 0.5, App.height / 45);
+        createText('midfielders', getStyle(), this.container, App.height * 0.43, 0, 0, 0.5, App.height / 45);
+        createText('forwards', getStyle(), this.container, App.height * 0.62, 0, 0, 0.5, App.height / 45);
+        createText('starting line-up', getStyle(), this.container, App.height * 0.81, 0, 0, 0.5, App.height / 45);
     }
 
     private makeInteractive() {
