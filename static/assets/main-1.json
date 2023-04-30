@@ -480,33 +480,9 @@
         "y": 0.5
       }
     },
-    "ball_orange": {
-      "frame": {
-        "x": 1382,
-        "y": 0,
-        "w": 194,
-        "h": 190
-      },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 3,
-        "y": 5,
-        "w": 194,
-        "h": 190
-      },
-      "sourceSize": {
-        "w": 200,
-        "h": 200
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
     "ball_purple": {
       "frame": {
-        "x": 1576,
+        "x": 1382,
         "y": 0,
         "w": 194,
         "h": 190
@@ -530,7 +506,7 @@
     },
     "ball_blue": {
       "frame": {
-        "x": 1770,
+        "x": 1576,
         "y": 0,
         "w": 193,
         "h": 190
@@ -555,11 +531,11 @@
   },
   "meta": {
     "app": "http://free-tex-packer.com",
-    "version": "0.6.0",
+    "version": "0.6.7",
     "image": "main-1.png",
     "format": "RGBA8888",
     "size": {
-      "w": 1963,
+      "w": 1769,
       "h": 2048
     },
     "scale": 1

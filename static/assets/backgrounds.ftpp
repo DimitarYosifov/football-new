@@ -1,42 +1,47 @@
 {
   "meta": {
-    "version": "0.6.4"
+    "version": "0.6.7"
   },
-  "savePath": "C:\\Users\\User\\Desktop\\football\\assets",
+  "savePath": "C:\\Users\\User\\Desktop\\football-new\\static\\assets",
   "images": [
     {
       "name": "bg33.jpg",
-      "path": "C:/Users/User/Desktop/football/images/backgrounds/bg33.jpg",
+      "path": "C:/Users/User/Desktop/football-new/images/backgrounds/bg33.jpg",
       "folder": ""
     },
     {
       "name": "bg435.jpg",
-      "path": "C:/Users/User/Desktop/football/images/backgrounds/bg435.jpg",
+      "path": "C:/Users/User/Desktop/football-new/images/backgrounds/bg435.jpg",
       "folder": ""
     },
     {
       "name": "bg55.jpg",
-      "path": "C:/Users/User/Desktop/football/images/backgrounds/bg55.jpg",
+      "path": "C:/Users/User/Desktop/football-new/images/backgrounds/bg55.jpg",
       "folder": ""
     },
     {
       "name": "bg909.jpg",
-      "path": "C:/Users/User/Desktop/football/images/backgrounds/bg909.jpg",
+      "path": "C:/Users/User/Desktop/football-new/images/backgrounds/bg909.jpg",
+      "folder": ""
+    },
+    {
+      "name": "pitch-orig.png",
+      "path": "C:/Users/User/Desktop/football-new/images/backgrounds/pitch-orig.png",
       "folder": ""
     },
     {
       "name": "pitch.png",
-      "path": "C:/Users/User/Desktop/football/images/backgrounds/pitch.png",
+      "path": "C:/Users/User/Desktop/football-new/images/backgrounds/pitch.png",
       "folder": ""
     },
     {
       "name": "scorer.png",
-      "path": "C:/Users/User/Desktop/football/images/backgrounds/scorer.png",
+      "path": "C:/Users/User/Desktop/football-new/images/backgrounds/scorer.png",
       "folder": ""
     },
     {
       "name": "yellowCardsBG.png",
-      "path": "C:/Users/User/Desktop/football/images/backgrounds/yellowCardsBG.png",
+      "path": "C:/Users/User/Desktop/football-new/images/backgrounds/yellowCardsBG.png",
       "folder": ""
     }
   ],
@@ -53,7 +58,7 @@
     "filter": "none",
     "exporter": "JSON (hash)",
     "fileName": "pack-result",
-    "savePath": "C:\\Users\\User\\Desktop\\football\\assets",
+    "savePath": "C:\\Users\\User\\Desktop\\football-new\\static\\assets",
     "width": 2048,
     "height": 2048,
     "fixedSize": false,

@@ -39,6 +39,9 @@ export default class Grid extends Container {
     public gridPosition_y: number;
     public data: any;  ///??????????????
     private PvP_newBlocks: string[] = [];
+    private fallingBlocksOnColumn: any = {};
+    private delayStep: number = 0.05
+    private fallTweenDuration: number = 0.35;
 
     constructor() {
         super();
@@ -844,7 +847,7 @@ export default class Grid extends Container {
                         this.level.playerActiveDefenses[(firstActiveDefenseFound as any).index] = null;
                     }
                     (firstActiveDefenseFound as any).parent.removeChild((firstActiveDefenseFound as any));
-                    this.showText("MISS!");
+                    this.showText("SAVED");
                 }
             });
         }
@@ -1021,7 +1024,25 @@ export default class Grid extends Container {
             loop thru blocks to determine
             how many rows each block should fall
         */
+
+
+
+
+
+
+
+        this.fallingBlocksOnColumn = [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+
+
         this.blocks.forEach((row, rowIndex) => {
+
             row.forEach((el: any, colIndex: number) => {
                 this.blocks[rowIndex][colIndex].shouldFall = 0;
                 if (this.gridArrays[rowIndex][colIndex] !== null) {
@@ -1029,11 +1050,33 @@ export default class Grid extends Container {
                 }
                 let shouldFall = this.blocks[rowIndex][colIndex].shouldFall;
                 if (shouldFall! > 0) {
+
+                    this.fallingBlocksOnColumn[colIndex]++;
+                    let lastHoleInColumn = this.holesInColumns[colIndex].onRow.slice(-1);
+
+                    let previousColumnsWithFallingBlocks = this.fallingBlocksOnColumn.slice(0, colIndex).filter((c: number) => c !== 0).length;
+
+                    let substractImovableBlocks = 7 - lastHoleInColumn[0];
+
                     let newY = this.globalBlocksPositions[rowIndex + shouldFall!][colIndex].y;
                     let tweenTarget: any = this.blocks[rowIndex][colIndex].blockImg;
-                    gsap.to(tweenTarget, .3 * shouldFall!, {
+
+                    let delay = (
+                        8 -
+                        substractImovableBlocks -
+                        this.holesInColumns[colIndex].holes -
+                        this.fallingBlocksOnColumn[colIndex] +
+                        previousColumnsWithFallingBlocks
+                    )
+                        * this.delayStep;
+
+                    console.log(` old blocks falling delay =>`, delay);
+
+
+                    gsap.to(tweenTarget, 0.25, {
                         y: newY,
-                        // delay: fallDelay,
+                        delay: delay,
+                        ease: "Back.easeInOut",
                         onComplete: () => {
                             // gsap.globalTimeline.clear();
                             this.gridArrays[rowIndex + shouldFall!][colIndex] = tweenTarget.parent.type;
@@ -1053,9 +1096,7 @@ export default class Grid extends Container {
             else {
                 App.EE.once("new_blocks_received", (newBlocks) => {
                     this.PvP_newBlocks = newBlocks;
-                    //  gsap.delayedCall(0.5, () => {
-                        this.createNewBlocks();
-                    // })
+                    this.createNewBlocks();
                 });
             }
         }
@@ -1070,9 +1111,21 @@ export default class Grid extends Container {
         let blockHeight = this.globalBlocksPositions[1][0].y - this.globalBlocksPositions[0][0].y;
         let gridY = this.globalBlocksPositions[0][0].y;
         let newBlocks: string[] = [];
+
+        // let totalDelay = 0;
+
+        console.log(this.fallingBlocksOnColumn);
+
+
+        let longestDelay = 0;
         this.holesInColumns.forEach((el, colIndex) => {
+
+            let delay = 0;
+
             if (el.holes > 0) {
+                // totalDelay += this.delayStep;
                 for (let hole = 0; hole < el.holes; hole++) {
+
                     let row = el.onRow[hole];
                     let block = this.blocks[row][colIndex].blockImg;
                     let img = "";
@@ -1089,9 +1142,29 @@ export default class Grid extends Container {
                     block.y = gridY - (blockHeight * (hole + 1));
                     block.x = this.globalBlocksPositions[row][colIndex].x;
                     block.alpha = 1;
-                    gsap.to(block, .31 * el.holes, {
+
+
+                    let previousColumnsWithFallingBlocks = this.fallingBlocksOnColumn.slice(0, colIndex).filter((c: number) => c !== 0).length;
+                    delay = (this.fallingBlocksOnColumn[colIndex] + previousColumnsWithFallingBlocks) * this.delayStep;
+
+
+
+
+                    if (delay + this.fallTweenDuration > longestDelay) {
+                        longestDelay = delay + this.fallTweenDuration + 0.01;
+                    }
+
+                    this.fallingBlocksOnColumn[colIndex]++;
+
+
+                    gsap.to(block, this.fallTweenDuration, {
+                        delay: delay,
                         y: startY,
+                        ease: "Back.easeOut",
                         onComplete: () => {
+
+                            console.log(`fallTweenComplete`);
+
                             // gsap.globalTimeline.clear();
                             (this.gridArrays as any)[el.holes - hole - 1][colIndex] = (block.parent as any).img = img;
                         }
@@ -1106,7 +1179,9 @@ export default class Grid extends Container {
 
         newBlocks = [];
 
-        gsap.delayedCall(Math.max(...this.holesInColumns.map(h => h.holes)) * .33, () => {
+        gsap.delayedCall(longestDelay, () => {
+            console.log(`longestDelay DONE!!!!`);
+
             this.setAccurateBlocksPositions();
         })
     }

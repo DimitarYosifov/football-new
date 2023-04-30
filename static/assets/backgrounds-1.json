@@ -1,9 +1,33 @@
 {
   "frames": {
-    "bg909": {
+    "bg55": {
       "frame": {
         "x": 0,
         "y": 0,
+        "w": 640,
+        "h": 960
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 640,
+        "h": 960
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 960
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "bg909": {
+      "frame": {
+        "x": 0,
+        "y": 960,
         "w": 570,
         "h": 946
       },
@@ -23,16 +47,64 @@
         "x": 0.5,
         "y": 0.5
       }
+    },
+    "bg435": {
+      "frame": {
+        "x": 570,
+        "y": 960,
+        "w": 626,
+        "h": 939
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 626,
+        "h": 939
+      },
+      "sourceSize": {
+        "w": 626,
+        "h": 939
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "bg33": {
+      "frame": {
+        "x": 640,
+        "y": 0,
+        "w": 657,
+        "h": 875
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 657,
+        "h": 875
+      },
+      "sourceSize": {
+        "w": 657,
+        "h": 875
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
     }
   },
   "meta": {
     "app": "http://free-tex-packer.com",
-    "version": "0.6.4",
+    "version": "0.6.7",
     "image": "backgrounds-1.png",
     "format": "RGBA8888",
     "size": {
-      "w": 570,
-      "h": 946
+      "w": 1297,
+      "h": 1906
     },
     "scale": 1
   }
