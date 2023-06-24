@@ -7,6 +7,8 @@ import LevelCardsSet from "../game_level/LevelCardsSet";
 import Grid from "../game_level/Grid";
 import NewRoundPopup from "../popups/NewRoundPopup";
 import WaitingOpponentPopup from "../popups/WaitingOpponentPopup";
+import { ActiveDefense } from "../game_level/ActiveDefense";
+import { InitialRandomBallPoints } from "../game_level/InitialRandomBallPoints";
 
 export class Level extends Container implements IScene {
 
@@ -139,9 +141,10 @@ export class Level extends Container implements IScene {
         }
     }
 
-    public onIntroFinish = () => {
+    public onIntroFinish() {
         this.grid = new Grid();
         this.addChild(this.grid);
+        this.addRandomDefense();
         // // this.addSnow();
     }
 
@@ -151,6 +154,35 @@ export class Level extends Container implements IScene {
     //     this.snowContainer.update();
     // }
 
+    public addRandomDefense() {
+        ///inital defenses and ball points
+      
+       
+
+
+        for (let index = 0; index < 2; index++) {
+            let glove = new ActiveDefense("B200FF", 0, 0, "ball_purple", true, "player");
+            this.addChild(glove);
+        }
+
+        for (let index = 0; index < 2; index++) {
+            let glove = new ActiveDefense("B200FF", 0, 0, "ball_purple", true, "opponent");
+            this.addChild(glove);
+        }
+
+        let randomBallPoints = new InitialRandomBallPoints();
+        this.addChild(randomBallPoints);
+
+        gsap.delayedCall(2, () => {
+            App.EE.emit("initial_random_rewards");
+            // this.removeChild(randomBallPoints);  //??
+        })
+
+        gsap.delayedCall(3, () => {
+            this.grid!.checkPossibleMove(2, true);
+            this.removeChild(randomBallPoints);  //??
+        })
+    }
 
     public createCards = async () => {
         let [player, opponent] = await

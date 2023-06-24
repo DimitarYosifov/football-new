@@ -81,8 +81,7 @@ export default class Grid extends Container {
             );
             mask.endFill();
             this.mask = mask;
-            // this.addChild(this.mask);
-            this.checkPossibleMove(2, true);  // PROBLEM - THIS SHOULD BE UNCOMMENT!
+            // this.checkPossibleMove(2, true);  
         }, 0);
     }
 
@@ -537,7 +536,7 @@ export default class Grid extends Container {
     }
 
     // try to find possible match for move..TODO.. if non are found reshufle!
-    private checkPossibleMove(delay = 0, newlyCreatedGrid = false) {
+    public checkPossibleMove(delay = 0, newlyCreatedGrid = false) {
 
         console.log(`newlyCreatedGrid => ${newlyCreatedGrid}`);
 
@@ -1025,12 +1024,6 @@ export default class Grid extends Container {
             how many rows each block should fall
         */
 
-
-
-
-
-
-
         this.fallingBlocksOnColumn = [
             0,
             0,
@@ -1040,9 +1033,7 @@ export default class Grid extends Container {
             0
         ]
 
-
         this.blocks.forEach((row, rowIndex) => {
-
             row.forEach((el: any, colIndex: number) => {
                 this.blocks[rowIndex][colIndex].shouldFall = 0;
                 if (this.gridArrays[rowIndex][colIndex] !== null) {
@@ -1147,24 +1138,18 @@ export default class Grid extends Container {
                     let previousColumnsWithFallingBlocks = this.fallingBlocksOnColumn.slice(0, colIndex).filter((c: number) => c !== 0).length;
                     delay = (this.fallingBlocksOnColumn[colIndex] + previousColumnsWithFallingBlocks) * this.delayStep;
 
-
-
-
                     if (delay + this.fallTweenDuration > longestDelay) {
                         longestDelay = delay + this.fallTweenDuration + 0.01;
                     }
 
                     this.fallingBlocksOnColumn[colIndex]++;
 
-
                     gsap.to(block, this.fallTweenDuration, {
                         delay: delay,
                         y: startY,
                         ease: "Back.easeOut",
                         onComplete: () => {
-
                             console.log(`fallTweenComplete`);
-
                             // gsap.globalTimeline.clear();
                             (this.gridArrays as any)[el.holes - hole - 1][colIndex] = (block.parent as any).img = img;
                         }

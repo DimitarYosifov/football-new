@@ -106,12 +106,15 @@ export default class Block extends Container {
             });
         }
         else if (!App.pvpGame) {
-            gsap.delayedCall(delay / 1000, () => {
-                this.blockImg.alpha = 1;
-                if (this.row === 7 && this.col === 5) {
-                    this.grid.newRound();
-                }
-            })
+            App.EE.once("initial_random_rewards", () => {
+                gsap.delayedCall(delay / 1000, () => {
+                    this.blockImg.alpha = 1;
+                    if (this.row === 7 && this.col === 5) {
+                        this.grid.newRound();
+                    }
+                })
+            });
+
         }
 
 
