@@ -86,7 +86,7 @@ export class ActiveDefense extends Sprite {
     }
 
     mix() {
-        const iritations = 15;
+        const iterations = 15;
         const interval = 0.1;
         const colors = [
             'FF1D00',   // RED
@@ -95,10 +95,21 @@ export class ActiveDefense extends Sprite {
             'E2D841',   // YELLOW
             'B200FF'    // PURPLE
         ]
-        for (let index = 0; index < iritations; index++) {
+
+        const getColorName: any = {
+            'FF1D00': "ball_red",   // RED
+            '3052FF': "ball_blue",   // BLUE
+            '2F7F07': "ball_green",   // GREEN
+            'E2D841': "ball_yellow",   // YELLOW
+            'B200FF': "ball_purple"    // PURPLE
+        }
+        for (let index = 0; index < iterations; index++) {
             gsap.delayedCall(interval * (index + 1), () => {
                 let rndColor = colors[Math.floor(Math.random() * 5)];
                 this.tint = +`0x${rndColor}`;
+                if (index === iterations - 1) {
+                    this.color = getColorName[rndColor]
+                }
             })
         }
     }

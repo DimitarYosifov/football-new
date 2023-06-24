@@ -156,16 +156,12 @@ export class Level extends Container implements IScene {
 
     public addRandomDefense() {
         ///inital defenses and ball points
-      
-       
-
-
-        for (let index = 0; index < 2; index++) {
+        for (let index = 0; index < config.initialDefensesCount; index++) {
             let glove = new ActiveDefense("B200FF", 0, 0, "ball_purple", true, "player");
             this.addChild(glove);
         }
 
-        for (let index = 0; index < 2; index++) {
+        for (let index = 0; index < config.initialDefensesCount; index++) {
             let glove = new ActiveDefense("B200FF", 0, 0, "ball_purple", true, "opponent");
             this.addChild(glove);
         }
@@ -173,14 +169,16 @@ export class Level extends Container implements IScene {
         let randomBallPoints = new InitialRandomBallPoints();
         this.addChild(randomBallPoints);
 
-        gsap.delayedCall(2, () => {
+        gsap.delayedCall(3, () => {
             App.EE.emit("initial_random_rewards");
-            // this.removeChild(randomBallPoints);  //??
         })
 
-        gsap.delayedCall(3, () => {
+        gsap.delayedCall(4, () => {
             this.grid!.checkPossibleMove(2, true);
-            this.removeChild(randomBallPoints);  //??
+        })
+
+        gsap.delayedCall(5, () => {
+            this.removeChild(randomBallPoints);
         })
     }
 

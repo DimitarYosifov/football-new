@@ -55,6 +55,7 @@ export const config: any = {
 
     maxInjuryDuration: 5,
     yellowCardsToMissGame: 5,
+    initialDefensesCount: 3,
     APIEndPoint: `https://test-qqw1.onrender.com/`
     // APIEndPoint: `https://football-match3-api.herokuapp.com/`
     // APIEndPoint: `http://localhost:9000/`
