@@ -106,17 +106,24 @@ export default class Block extends Container {
             });
         }
         else if (!App.pvpGame) {
-            App.EE.once("initial_random_rewards", () => {
-                gsap.delayedCall(delay / 1000, () => {
-                    this.blockImg.alpha = 1;
-                    if (this.row === 7 && this.col === 5) {
-                        this.grid.newRound();
-                    }
-                })
-            });
-
+            //this is dirty hack here... fix later...
+            // still not sure if working properly...
+            // for sure for ezample if player is acts first and after their move theres no possible move
+            //for the opponent on the first round, block will remain invisible ...TODO...
+            let extraDelay = 0
+            if (this.level.currentRound === 0) {
+                extraDelay += 3;
+            }
+            console.log(this.level.currentRound);
+            // App.EE.once("initial_random_rewards", () => {
+            gsap.delayedCall(extraDelay + (delay / 1000), () => {
+                this.blockImg.alpha = 1;
+                if (this.row === 7 && this.col === 5) {
+                    this.grid.newRound();
+                }
+            })
+            // });
         }
-
 
         this.on('pointerdown', this.onDragStart);
         this.on('pointerup', this.onDragEnd)

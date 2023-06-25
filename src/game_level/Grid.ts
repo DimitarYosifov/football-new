@@ -703,6 +703,7 @@ export default class Grid extends Container {
         this.hintMatch = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
         this.bestPossibleMove = smartMove(possibleMoves);
 
+        // this.noMoves =true// possibleMoves.length === 0; // test...
         this.noMoves = possibleMoves.length === 0;
         console.log(`possible moves => ${JSON.stringify(possibleMoves)}`);
         if (!newlyCreatedGrid) {
