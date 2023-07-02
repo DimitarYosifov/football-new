@@ -559,7 +559,7 @@ export default class MatchEndWinningsPopup extends Container {
 
     private skip() {
         //  SKIP BUTTON
-        this.skipBtn = new RotatingButton("", "", this.skipOnPointerDown);
+        this.skipBtn = new RotatingButton("", "", this.skipOnPointerDown, true);
         this.addChild(this.skipBtn.finalTexture);
         this.skipBtn.setButtonSize(App.height * 0.2, App.width * 0.5, App.height * 1.25);
         this.skipBtn.addLabel(`Skip`, 0.25);
@@ -588,7 +588,7 @@ export default class MatchEndWinningsPopup extends Container {
                 App.fade(0, 1).then(() => { });
             })
         }
-        this.contionueBtn = new RotatingButton("", "", continueOnPointerDown);
+        this.contionueBtn = new RotatingButton("", "", continueOnPointerDown, true);
         this.addChild(this.contionueBtn.finalTexture);
         this.contionueBtn.setButtonSize(App.height * 0.2, App.width * 0.5, App.height * 1.25);
         this.contionueBtn.addLabel(`Continue`, 0.25);
