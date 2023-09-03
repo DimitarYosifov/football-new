@@ -1,57 +1,137 @@
 {
   "meta": {
-    "version": "0.6.4"
+    "version": "0.6.7"
   },
-  "savePath": "C:\\Users\\User\\Desktop\\football\\assets",
+  "savePath": "C:\\Users\\User\\Desktop\\football-new\\static\\assets",
   "images": [
     {
       "name": "coins_anim_1.png",
-      "path": "C:/Users/User/Desktop/football/images/anims/coin_anim/coins_anim_1.png",
+      "path": "C:/Users/User/Desktop/football-new/images/anims/coin_anim/coins_anim_1.png",
       "folder": ""
     },
     {
       "name": "coins_anim_10.png",
-      "path": "C:/Users/User/Desktop/football/images/anims/coin_anim/coins_anim_10.png",
+      "path": "C:/Users/User/Desktop/football-new/images/anims/coin_anim/coins_anim_10.png",
       "folder": ""
     },
     {
       "name": "coins_anim_2.png",
-      "path": "C:/Users/User/Desktop/football/images/anims/coin_anim/coins_anim_2.png",
+      "path": "C:/Users/User/Desktop/football-new/images/anims/coin_anim/coins_anim_2.png",
       "folder": ""
     },
     {
       "name": "coins_anim_3.png",
-      "path": "C:/Users/User/Desktop/football/images/anims/coin_anim/coins_anim_3.png",
+      "path": "C:/Users/User/Desktop/football-new/images/anims/coin_anim/coins_anim_3.png",
       "folder": ""
     },
     {
       "name": "coins_anim_4.png",
-      "path": "C:/Users/User/Desktop/football/images/anims/coin_anim/coins_anim_4.png",
+      "path": "C:/Users/User/Desktop/football-new/images/anims/coin_anim/coins_anim_4.png",
       "folder": ""
     },
     {
       "name": "coins_anim_5.png",
-      "path": "C:/Users/User/Desktop/football/images/anims/coin_anim/coins_anim_5.png",
+      "path": "C:/Users/User/Desktop/football-new/images/anims/coin_anim/coins_anim_5.png",
       "folder": ""
     },
     {
       "name": "coins_anim_6.png",
-      "path": "C:/Users/User/Desktop/football/images/anims/coin_anim/coins_anim_6.png",
+      "path": "C:/Users/User/Desktop/football-new/images/anims/coin_anim/coins_anim_6.png",
       "folder": ""
     },
     {
       "name": "coins_anim_7.png",
-      "path": "C:/Users/User/Desktop/football/images/anims/coin_anim/coins_anim_7.png",
+      "path": "C:/Users/User/Desktop/football-new/images/anims/coin_anim/coins_anim_7.png",
       "folder": ""
     },
     {
       "name": "coins_anim_8.png",
-      "path": "C:/Users/User/Desktop/football/images/anims/coin_anim/coins_anim_8.png",
+      "path": "C:/Users/User/Desktop/football-new/images/anims/coin_anim/coins_anim_8.png",
       "folder": ""
     },
     {
       "name": "coins_anim_9.png",
-      "path": "C:/Users/User/Desktop/football/images/anims/coin_anim/coins_anim_9.png",
+      "path": "C:/Users/User/Desktop/football-new/images/anims/coin_anim/coins_anim_9.png",
+      "folder": ""
+    },
+    {
+      "name": "match-animation-1.png",
+      "path": "C:/Users/User/Desktop/football-new/images/anims/match-animation/match-animation-1.png",
+      "folder": ""
+    },
+    {
+      "name": "match-animation-10.png",
+      "path": "C:/Users/User/Desktop/football-new/images/anims/match-animation/match-animation-10.png",
+      "folder": ""
+    },
+    {
+      "name": "match-animation-11.png",
+      "path": "C:/Users/User/Desktop/football-new/images/anims/match-animation/match-animation-11.png",
+      "folder": ""
+    },
+    {
+      "name": "match-animation-12.png",
+      "path": "C:/Users/User/Desktop/football-new/images/anims/match-animation/match-animation-12.png",
+      "folder": ""
+    },
+    {
+      "name": "match-animation-13.png",
+      "path": "C:/Users/User/Desktop/football-new/images/anims/match-animation/match-animation-13.png",
+      "folder": ""
+    },
+    {
+      "name": "match-animation-14.png",
+      "path": "C:/Users/User/Desktop/football-new/images/anims/match-animation/match-animation-14.png",
+      "folder": ""
+    },
+    {
+      "name": "match-animation-15.png",
+      "path": "C:/Users/User/Desktop/football-new/images/anims/match-animation/match-animation-15.png",
+      "folder": ""
+    },
+    {
+      "name": "match-animation-16.png",
+      "path": "C:/Users/User/Desktop/football-new/images/anims/match-animation/match-animation-16.png",
+      "folder": ""
+    },
+    {
+      "name": "match-animation-2.png",
+      "path": "C:/Users/User/Desktop/football-new/images/anims/match-animation/match-animation-2.png",
+      "folder": ""
+    },
+    {
+      "name": "match-animation-3.png",
+      "path": "C:/Users/User/Desktop/football-new/images/anims/match-animation/match-animation-3.png",
+      "folder": ""
+    },
+    {
+      "name": "match-animation-4.png",
+      "path": "C:/Users/User/Desktop/football-new/images/anims/match-animation/match-animation-4.png",
+      "folder": ""
+    },
+    {
+      "name": "match-animation-5.png",
+      "path": "C:/Users/User/Desktop/football-new/images/anims/match-animation/match-animation-5.png",
+      "folder": ""
+    },
+    {
+      "name": "match-animation-6.png",
+      "path": "C:/Users/User/Desktop/football-new/images/anims/match-animation/match-animation-6.png",
+      "folder": ""
+    },
+    {
+      "name": "match-animation-7.png",
+      "path": "C:/Users/User/Desktop/football-new/images/anims/match-animation/match-animation-7.png",
+      "folder": ""
+    },
+    {
+      "name": "match-animation-8.png",
+      "path": "C:/Users/User/Desktop/football-new/images/anims/match-animation/match-animation-8.png",
+      "folder": ""
+    },
+    {
+      "name": "match-animation-9.png",
+      "path": "C:/Users/User/Desktop/football-new/images/anims/match-animation/match-animation-9.png",
       "folder": ""
     }
   ],
@@ -68,7 +148,7 @@
     "filter": "none",
     "exporter": "JSON (hash)",
     "fileName": "pack-result",
-    "savePath": "C:\\Users\\User\\Desktop\\football\\assets",
+    "savePath": "C:\\Users\\User\\Desktop\\football-new\\static\\assets",
     "width": 2048,
     "height": 2048,
     "fixedSize": false,

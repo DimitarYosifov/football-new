@@ -272,6 +272,12 @@ export class Card extends Container {
 
     private increasePoints(matches: []) {
 
+        let level: any = App.app.stage.getChildByName("level");
+
+        let randomMatchingBlock: any = matches[Math.floor(Math.random() * matches.length)];
+        let tweenStart_x = level.grid.blocks[randomMatchingBlock.row][randomMatchingBlock.col].blockImg.x;
+        let tweenStart_y = level.grid.blocks[randomMatchingBlock.row][randomMatchingBlock.col].blockImg.y;
+
         let defenceColor = this.colors[this.stats.defense_color];
         let attackColor = this.colors[this.stats.attack_color];
         let def_points = matches.filter(e => e["type"] === defenceColor).length;
@@ -321,13 +327,26 @@ export class Card extends Container {
                 strokeThickness: 2
             })
 
-            let def_text = createText("+" + def_points, style2, this.parent.parent, this.cardImg.y + this.cardImg.height / 2, this.cardImg.x + this.cardImg.width / 2, 0.5, 0.5, this.cardImg.height / 2);
-            gsap.to(def_text, 1.5, {
-                y: this.parent.parent.height / 2,
+            let def_text = createText("+" + def_points, style2, this.parent.parent, tweenStart_y, tweenStart_x, 0.5, 0.5, this.cardImg.height / 2.8);
+            let def_sprite = Sprite.from("glove2");
+            def_sprite.y = tweenStart_y;
+            def_sprite.x = tweenStart_x;
+            def_sprite.width = App.width / 23;
+            def_sprite.scale.y = def_sprite.scale.x;
+            this.parent.parent.addChild(def_sprite);
+
+            gsap.to([def_text], 1.5, {
+                x: this.cardImg.x + this.cardImg.width / 2,
+                y: this.cardImg.y + this.cardImg.height / 2,
                 ease: "Linear.easeNone",  //TODO... change ease
+                onUpdate: () => {
+                    def_sprite.y = def_text.y - def_text.height / 3;
+                    def_sprite.x = def_text.x + def_text.width / 2.25;
+                },
                 onComplete: () => {
                     def_text.alpha = 0;
                     this.parent.parent.removeChild(def_text);
+                    this.parent.parent.removeChild(def_sprite);
                 }
             })
         }
@@ -373,18 +392,27 @@ export class Card extends Container {
                 stroke: '#000000',
                 strokeThickness: 2
             })
-            let atk_text = createText("+" + atk_points, style2, this.parent.parent, this.cardImg.y + this.cardImg.height / 2, this.cardImg.x + this.cardImg.width / 2, 0.5, 0.5, this.cardImg.height / 2);
-            // this.parent.parent.addChild(atk_text);// TODO add picture to +3 for example!!!
+            let atk_text = createText("+" + atk_points, style2, this.parent.parent, tweenStart_y, tweenStart_x, 0.5, 0.5, this.cardImg.height / 2.8);
+            let att_sprite = Sprite.from("shoe");
+            att_sprite.y = tweenStart_y;
+            att_sprite.x = tweenStart_x;
+            att_sprite.width = App.width / 17;
+            att_sprite.scale.y = att_sprite.scale.x;
+            this.parent.parent.addChild(att_sprite);
+
             gsap.to(atk_text, 1.5, {
                 delay: def_points > 0 ? 0.25 : 0,
-                y: this.parent.parent.height / 2,
-                // x: this.cardImg.width / 2,
-
-                // alpha: 0.75,
+                x: this.cardImg.x + this.cardImg.width / 2,
+                y: this.cardImg.y + this.cardImg.height / 2,
                 ease: "Linear.easeNone",  //TODO... change ease
+                onUpdate: () => {
+                    att_sprite.y = atk_text.y - atk_text.height / 3.25;
+                    att_sprite.x = atk_text.x + atk_text.width / 2.25;
+                },
                 onComplete: () => {
                     atk_text.alpha = 0;
-                    this.parent.parent.removeChild(atk_text);//TODO..
+                    this.parent.parent.removeChild(atk_text);
+                    this.parent.parent.removeChild(att_sprite);
                 }
             })
         }

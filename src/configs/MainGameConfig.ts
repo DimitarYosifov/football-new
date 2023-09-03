@@ -5,7 +5,7 @@ export const config: any = {
     //skip login phase ...for tests
     hasLogin: true,
 
-    mainFont: 'Girassol',
+    mainFont: 'Risque',
 
     //for tests and adding teams to DB
     // addTeam: false,

@@ -46,11 +46,11 @@ export class RotatingButton extends Sprite {
         let style: TextStyle = new TextStyle({
             fontFamily: config.mainFont,
             fontSize: this.finalTexture.height * fontSize,
-            fill: '#f5f5dc',
+            fill: '#c1c15b',
             align: 'center',
             stroke: '#000000',
             fontWeight: "200",
-            strokeThickness: 4
+            strokeThickness: 2.5
 
         })
         this.label = new Text(text, style);
@@ -63,7 +63,7 @@ export class RotatingButton extends Sprite {
     }
 
     activate() {
-        this.label.style.stroke = "#f5f5dc";
+        this.label.style.stroke = "#c1c15b";
         this.label.style.fill = "#000000";
         if (!this.btn_rotation) {
             this.btn_rotation = gsap.to(this.finalTexture, 3000, {
@@ -77,7 +77,7 @@ export class RotatingButton extends Sprite {
 
     deactivate() {
         this.label.style.stroke = "#000000";
-        this.label.style.fill = "#f5f5dc";
+        this.label.style.fill = "#c1c15b";
         this.btn_rotation.pause();
         this.finalTexture.texture = Texture.from(this.defaultTexture);
     }

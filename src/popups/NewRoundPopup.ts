@@ -55,7 +55,7 @@ export default class NewRoundPopup extends Container {
             // GAME IS OVER
             this.currentRound = new Text(`FINAL SCORE`, {
                 fontFamily: config.mainFont,
-                fontSize: App.height / 10,
+                fontSize: App.height / 11.5,
                 fill: '#000000',
                 align: 'center',
                 stroke: '#dbb7b7',
@@ -71,7 +71,7 @@ export default class NewRoundPopup extends Container {
             let text = this.lastRound ? "Last Round" : `Round ${this.level.currentRound}/${config.roundsInMatch}`
             this.currentRound = new Text(`${text}`, {
                 fontFamily: config.mainFont,
-                fontSize: App.height / 10,
+                fontSize: App.height / 11, 
                 fill: '#000000',
                 align: 'center',
                 stroke: '#dbb7b7',

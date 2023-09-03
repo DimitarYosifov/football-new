@@ -110,7 +110,7 @@ export class InitialRandomBallPoints extends Container {
                     ease: "Linear.easeNone",
                     onComplete: () => {
                         def_text.alpha = 0;
-                        // this.parent.parent.removeChild(def_text);
+                        this.parent.parent.removeChild(def_text);
                     }
                 })
             }
@@ -130,8 +130,8 @@ export class InitialRandomBallPoints extends Container {
                     y: this.parent.parent.height / 2,
                     ease: "Linear.easeNone",
                     onComplete: () => {
-                        attack_text.alpha = 0;
-                        // this.parent.parent.removeChild(attack_text);
+                        attack_text.alpha = 1;
+                        this.parent.parent.removeChild(attack_text);
                     }
                 })
             }

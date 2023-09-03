@@ -1,4 +1,4 @@
-import { Container, Graphics, InteractionEvent, Sprite, Text, Texture } from "pixi.js";
+import { AnimatedSprite, Container, Graphics, InteractionEvent, Sprite, Text, Texture } from "pixi.js";
 import { App } from "../App";
 import { config } from "../configs/MainGameConfig";
 import * as grid_interfaces from "./grid_interfaces"
@@ -74,10 +74,10 @@ export default class Grid extends Container {
             const mask = new Graphics();
             mask.beginFill(0xffffff, 1);
             mask.drawRect(
-                this.globalBlocksPositions[0][0].x - this.blocks[0][0].width! / 2,
+                this.globalBlocksPositions[0][0].x - this.blocks[0][0].width! * 2,
                 this.globalBlocksPositions[0][0].y - this.blocks[0][0].height! / 2,
-                this.width,
-                this.height
+                this.width * + this.blocks[0][0].width! * 2,
+                this.height + this.blocks[0][0].height!
             );
             mask.endFill();
             this.mask = mask;
@@ -131,19 +131,19 @@ export default class Grid extends Container {
 
         (itemTwoOldImg as any) = item2.img;
 
-        gsap.to(item1.children[0], 0.2, {
+        gsap.to(item1.children[0], 0.5, {
             y: item2.children[0].y,
             x: item2.children[0].x,
-            ease: "Linear.easeNone",
+            ease: "Back.easeInOut",
             onComplete: () => {
 
             }
         });
 
-        gsap.to(item2.children[0], 0.2, {
+        gsap.to(item2.children[0], 0.5, {
             y: item1.children[0].y,
             x: item1.children[0].x,
-            ease: "Linear.easeNone",
+            ease: "Back.easeInOut",
             onComplete: () => {
                 let type1 = item1.type;
                 let gridPosition1 = item1.gridPosition;
@@ -189,8 +189,8 @@ export default class Grid extends Container {
                     item1.type = item_2_OldType;
                     item1.children[0].texture = Texture.from(`${item1.type || item1.img}`);
 
-                    gsap.delayedCall(0.5, () => {
-                        this.gatherMatchingBlocks(matches);
+                    gsap.delayedCall(0.35, () => {
+                        this.playMatchAnimations(matches);
                         this.increaseCardsPointsAfterMatch(matches);
                     })
 
@@ -311,10 +311,57 @@ export default class Grid extends Container {
         return matches;
     }
 
-    //animate matching blocks to currently moved block position
-    private gatherMatchingBlocks(matches: grid_interfaces.IMatches[]) {
+    //animate matching blocks to currently moved block position  
+    private playMatchAnimations(matches: grid_interfaces.IMatches[]) {
         this.nullifyMatchesInGridArray(matches);
 
+        matches.forEach(m => {
+            let machingBlock = this.blocks[m.row][m.col];
+            let startScale = machingBlock.blockImg.scale.x;
+            let animData = {
+                name: "match-animation",
+                frames: 16,
+                speed: 0.4,
+                loop: false,
+                paused: false,
+                scale: 1.05
+            }
+            let frames = [];
+            for (let frame = 1; frame <= animData.frames; frame++) {
+                let current = `${animData.name}-${frame}`;
+                frames.push(current);
+            }
+
+            let anim = new AnimatedSprite(frames.map((s) => Texture.from(s)));
+            anim.width = this.width * 0.2;
+            anim.scale.set(animData.scale);
+            anim.x = machingBlock.blockImg.x - anim.width / 2;
+            anim.y = machingBlock.blockImg.y - anim.height / 2;
+            anim.animationSpeed = animData.speed;
+            anim.loop = animData.loop;
+            anim.play();
+            anim.onComplete = () => {
+                this.removeChild(anim)
+            }
+            this.addChildAt(anim, 0);
+
+            gsap.to(machingBlock.blockImg, .4, {
+                delay: 0.2,
+                alpha: 0,
+            })
+            gsap.fromTo(machingBlock.blockImg.scale, .4, {
+                x: startScale * 1.1,
+                y: startScale * 1.1,
+                ease: "Linear.easeNone",
+                onComplete: () => { }
+            },
+                {
+                    x: startScale,
+                    y: startScale,
+                });
+        });
+
+        return;
         let beingSwapped = matches.filter(e => e.beingSwapped);
         const arrTypes = [...new Set(matches.map(m => m.id))];
 
@@ -524,10 +571,10 @@ export default class Grid extends Container {
 
     // check for automatic matches on the grid after manual match - after random blocks arrived
     private checkAutomaticMatch() {
-        gsap.delayedCall(0.5, () => {
+        gsap.delayedCall(0.35, () => {
             let matches = this.checkGridForMatches();
             if (matches.length > 0) {
-                this.gatherMatchingBlocks(matches);
+                this.playMatchAnimations(matches);
                 this.increaseCardsPointsAfterMatch(matches);
             } else {
                 this.checkPossibleMove();
@@ -856,7 +903,7 @@ export default class Grid extends Container {
     private showText(text: string) {
         this.goalText = new Text(text, {
             fontFamily: config.mainFont,
-            fontSize: App.height / 5,
+            fontSize: App.height / 6,
             fill: '#000000',
             align: 'center',
             stroke: '#dbb7b7',
@@ -959,10 +1006,10 @@ export default class Grid extends Container {
                         target2 = this.blocks[this.hintMatch.row - 1][this.hintMatch.col + 1];
                     }
 
-                    let width1 = target1.width! * 1.1;
-                    let height1 = target1.height! * 1.1;
-                    let width2 = target2.width! * 1.1;
-                    let height2 = target2.height! * 1.1;
+                    let width1 = target1.width! * 1.05;
+                    let height1 = target1.height! * 1.05;
+                    let width2 = target2.width! * 1.05;
+                    let height2 = target2.height! * 1.05;
 
                     gsap.to(target1.blockImg, 0.3, {
                         width: width1,
