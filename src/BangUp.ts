@@ -15,7 +15,7 @@ export default class BangUp {
                     target.text = Math.ceil(currentValue).toString();
                 },
                 onComplete: () => {
-                    target.text = endVal.toString();;
+                    target.text = endVal.toString();
                 }
             }
         );

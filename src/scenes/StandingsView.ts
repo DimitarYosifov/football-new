@@ -13,6 +13,8 @@ import MostYellowCards from "./MostYellowCards";
 import TopScorers from "./TopScorers";
 import { EditTeam } from "./EditTeam";
 import { Level } from "./Level";
+import { SpecialsView } from "./SpecialsView";
+import { IShopItemsConfig } from "./SpecialsView";
 
 export class StandingsView extends Container implements IScene {
     private fixturesHeader: Text;
@@ -30,6 +32,7 @@ export class StandingsView extends Container implements IScene {
     private editTeameBtn: RotatingButton;
     private topScorerBtn: RotatingButton;
     private mostYellowCardsBtn: RotatingButton;
+    private specialsBtn: RotatingButton;
     private lastGameRersult: string;
     private shouldGenerateResults: boolean;
     private emitters: Emitter[] = [];
@@ -117,12 +120,60 @@ export class StandingsView extends Container implements IScene {
                     team.goalsAgainst = 0;
                     team.goalsDifference = "0";
                     team.points = 0;
-
-
                     App.teams.push(team);
                     App.topScorers[club] = [0, 0, 0, 0, 0, 0];
                     App.mostYellowCards[club] = [0, 0, 0, 0, 0, 0];
                     App.playerCash = 0;
+                    App.allSpecials = [
+                        {
+                            img: "twoSidedArrow",
+                            name: "Row Collector",
+                            _name: "RowCollector",
+                            price: 123000,
+                            quantity: 10,
+                            description: "N/A"
+                        },
+                        {
+                            img: "twoSidedArrow",
+                            name: "Col Collector",
+                            _name: "ColCollector",
+                            price: 400,
+                            quantity: 22,
+                            description: "dawdaadd dsawdadsaw"
+                        },
+                        {
+                            img: "randomColor",
+                            name: "Random Color Collector",
+                            _name: "randomColorCollector",
+                            price: 4000,
+                            quantity: 33,
+                            description: "colect"
+                        }
+                    ]
+                    App.playerSpecials = [
+
+                        {
+                            img: "twoSidedArrow",
+                            name: "Row Collector",
+                            _name: "RowCollector",
+                            quantity: 3,
+                            inUse: 1
+                        },
+                        {
+                            img: "twoSidedArrow",
+                            name: "Col Collector",
+                            _name: "ColCollector",
+                            quantity: 2,
+                            inUse: 0
+                        },
+                        {
+                            img: "randomColor",
+                            name: "Random Color Collector",
+                            _name: "randomColorCollector",
+                            quantity: 1,
+                            inUse: 0
+                        }
+                    ]
                 })
                 App.currentRound = 1;
                 App.createSeasonFixtures();
@@ -132,7 +183,6 @@ export class StandingsView extends Container implements IScene {
             this.createFixtures();
         });
     }
-
 
     private addButtons() {
         //---CONTIONUE BUTTON
@@ -199,8 +249,25 @@ export class StandingsView extends Container implements IScene {
 
         this.editTeameBtn = new RotatingButton("", "", editTeamOnPointerDown);
         this.addChild(this.editTeameBtn.finalTexture);
-        this.editTeameBtn.setButtonSize(App.height * 0.15, App.width * 0.84, App.height * 0.89);
+        this.editTeameBtn.setButtonSize(App.height * 0.1, App.width * 0.84, App.height * 0.91);
         this.editTeameBtn.addLabel(`Edit\nTeam`, 0.24);
+
+        //-----SPECIALS BTN
+        let specialsOnPointerDown = () => {
+            this.specialsBtn.finalTexture.interactive = false;
+            let specialsView = new SpecialsView()
+            App.setScene(specialsView);
+            this.moneySectionContainer.name = "moneySectionContainer";
+            this.moneySectionContainer.setParent(specialsView);
+            gsap.delayedCall(1, () => {
+                this.specialsBtn.finalTexture.interactive = true;
+            })
+        }
+
+        this.specialsBtn = new RotatingButton("", "", specialsOnPointerDown);
+        this.addChild(this.specialsBtn.finalTexture);
+        this.specialsBtn.setButtonSize(App.height * 0.1, App.width * 0.84, App.height * 0.81);
+        this.specialsBtn.addLabel(`Specials`, 0.24);
 
         //-----TOP SCORERS BTN
         let topScorersOnPointerDown = () => {
@@ -376,7 +443,9 @@ export class StandingsView extends Container implements IScene {
                 teams: App.teams,
                 topScorers: App.topScorers,
                 mostYellowCards: App.mostYellowCards,
-                playerCash: App.playerCash
+                playerCash: App.playerCash,
+                allSpecials: App.allSpecials,
+                playerSpecials: App.playerSpecials,
             }),
             "POST"
         ).then((res) => { });

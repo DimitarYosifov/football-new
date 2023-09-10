@@ -9,6 +9,7 @@ import NewRoundPopup from "../popups/NewRoundPopup";
 import WaitingOpponentPopup from "../popups/WaitingOpponentPopup";
 import { ActiveDefense } from "../game_level/ActiveDefense";
 import { InitialRandomBallPoints } from "../game_level/InitialRandomBallPoints";
+import Specials from "../game_level/Specials";
 
 export class Level extends Container implements IScene {
 
@@ -34,6 +35,8 @@ export class Level extends Container implements IScene {
     private autoplayImg: Sprite;
     public autoplayMode: boolean;
     private waitingOpponentPopup: WaitingOpponentPopup | null;
+    public allSpecials: string[] = [];
+    private opponentSpecials: string[] = [];
 
     constructor() {
         super();
@@ -65,10 +68,7 @@ export class Level extends Container implements IScene {
         this.opponentActiveDefenses = Array(13).fill(null);   // 13 is max that fits within screen width
         this.addBG();
 
-        this.createCards().catch(err => {
-            console.log('Run failed (does not matter which task)!');
-            throw err;
-        });
+        this.createCards()
 
         App.EE.on("waiting_opponent", (showPopup: boolean, opponentLeft: boolean) => {
             this.waitingOpponent(showPopup, opponentLeft);
@@ -141,10 +141,20 @@ export class Level extends Container implements IScene {
         }
     }
 
+     /**
+     * CREATE GAME SPECIALS
+     */
+     private createSpecials(): void {
+        let allSpecialsContainer = new Specials("player");
+        this.addChild(allSpecialsContainer);
+    }
+
     public onIntroFinish() {
         this.grid = new Grid();
+        this.createSpecials();
         this.addChild(this.grid);
         this.addRandomDefense();
+        //TODO - this.addSelectedDefences(); // add player's selected defences
         // // this.addSnow();
     }
 
@@ -182,19 +192,22 @@ export class Level extends Container implements IScene {
         })
     }
 
-    public createCards = async () => {
-        let [player, opponent] = await
-            Promise.all(
-                [
-                    new LevelCardsSet("player", this.clubNames[0]),
-                    new LevelCardsSet("opponent", this.clubNames[1])
-                ]
-            );
-        this.playerCards = player;
-        this.addChild(this.playerCards);
-        this.opponentCards = opponent;
-        this.addChild(this.opponentCards);
-        this.dataRecieved();
+    public createCards = () => {
+        let player = new LevelCardsSet("player", this.clubNames[0]);
+        let opponent = new LevelCardsSet("opponent", this.clubNames[1]);
+        let createdDecks = 0;
+
+        let proceed = () => {
+            createdDecks++;
+            if (createdDecks !== 2) return;
+            App.EE.off("deck_created", proceed);
+            this.playerCards = player;
+            this.addChild(this.playerCards);
+            this.opponentCards = opponent;
+            this.addChild(this.opponentCards);
+            this.dataRecieved();
+        }
+        App.EE.on("deck_created", proceed);
     };
 
     private waitingOpponent(showPopup: boolean, opponentLeft: boolean = false) {

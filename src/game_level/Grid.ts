@@ -69,6 +69,9 @@ export default class Grid extends Container {
             this.gridArrays.push((rowContainer.children as any).map((c: { type: any }) => c.type));
         }
 
+        /**
+         * GRID MASK
+         */
         setTimeout(() => {
             // TODO - FIX THIS FUCKING SHIT!!!
             const mask = new Graphics();
@@ -577,6 +580,10 @@ export default class Grid extends Container {
                 this.playMatchAnimations(matches);
                 this.increaseCardsPointsAfterMatch(matches);
             } else {
+                if (App.specialInProgress) {
+                    this.checkGoalAttemps();
+                    return;
+                }
                 this.checkPossibleMove();
             }
         })
@@ -791,16 +798,25 @@ export default class Grid extends Container {
             this.goalAttempt();
         }
         else if (this.noMoves) {
-            App.isPlayerTurn = !App.isPlayerTurn;
+            if (!App.specialInProgress) {
+                App.isPlayerTurn = !App.isPlayerTurn;
+            }
             this.createNoMovesPopup();
         }
         else {
+
+            if (App.specialInProgress) {
+                App.specialInProgress = false;
+                return;
+            }
+            App.specialInProgress = false;
             App.isPlayerTurn = !App.isPlayerTurn;
             setTimeout(() => {
                 this.newRound();
             }, 1);
             const nextRoundDelay = App.isPlayerTurn ? 0 : 3
             gsap.delayedCall(nextRoundDelay + this.nextRoundDelay, () => {
+                App.specialInProgress = false;
                 this.proceedToNextRound();
             })
         }
@@ -1023,7 +1039,7 @@ export default class Grid extends Container {
                         yoyo: true,
                         repeat: 1
                     });
-                    if (!this.level.animationInProgress) {
+                    if (!this.level.animationInProgress && !App.specialInProgress) {
                         start();
                     }
                 });
@@ -1253,7 +1269,7 @@ export default class Grid extends Container {
     public onDragMove = (e: InteractionEvent) => {
         // console.log(e);
 
-        if (this.dragging && !this.level.animationInProgress) {
+        if (this.dragging && !this.level.animationInProgress && !App.specialInProgress) {
             /**
              *  gets block height and divides it by 3,
              *  the least drag/swipe distance

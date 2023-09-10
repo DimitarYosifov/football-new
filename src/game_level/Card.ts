@@ -356,6 +356,7 @@ export class Card extends Container {
                 atk_points = Math.floor(atk_points / 2)
             }
             this.stats.attack_current += atk_points;
+            // if (this.stats.attack_current >= 5) { // test
             if (this.stats.attack_current >= this.stats.attack_full) {
                 gsap.to(this.cardImg.scale, .15, {
                     x: initialScaleX * 1.05,

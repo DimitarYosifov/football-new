@@ -18,8 +18,8 @@ export default class LevelCardsSet extends Container {
         this.clubName = clubName;
         this.lineUps = new LineUps(this.clubName, this.onCardsData, this.targetDeck);
         console.log(this.lineUps);
-        this.randomColor = App.pvpGame || (App.leagueRounds) < 2  || (targetDeck === "player" && ! App.pvpGame)
-        ? false : config.randomCardColors;
+        this.randomColor = App.pvpGame || (App.leagueRounds) < 2 || (targetDeck === "player" && !App.pvpGame)
+            ? false : config.randomCardColors;
         this.interactive = false;
     }
 
@@ -149,12 +149,12 @@ export default class LevelCardsSet extends Container {
                 totalPower: this.lineUps.opponent![i].defense_full + this.lineUps.opponent![i].attack_full
             }, false, this.randomColor)
             this.addChild(card);
+            App.EE.emit("deck_created");
         }
     }
 
     onCardsData = () => {
         console.log(this.targetDeck);
-
         this.targetDeck === "player" ? this.createPlayerDeck() : this.createOpponentDeck();
     }
 }

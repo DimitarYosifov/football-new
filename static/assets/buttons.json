@@ -28,20 +28,20 @@
       "frame": {
         "x": 680,
         "y": 0,
-        "w": 150,
-        "h": 150
+        "w": 275,
+        "h": 275
       },
       "rotated": false,
       "trimmed": false,
       "spriteSourceSize": {
         "x": 0,
         "y": 0,
-        "w": 150,
-        "h": 150
+        "w": 275,
+        "h": 275
       },
       "sourceSize": {
-        "w": 150,
-        "h": 150
+        "w": 275,
+        "h": 275
       },
       "pivot": {
         "x": 0.5,
@@ -55,8 +55,8 @@
     "image": "buttons.png",
     "format": "RGBA8888",
     "size": {
-      "w": 830,
-      "h": 229
+      "w": 955,
+      "h": 275
     },
     "scale": 1
   }

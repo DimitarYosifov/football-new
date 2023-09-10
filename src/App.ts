@@ -5,6 +5,7 @@ import LogIn from "./scenes/LogIn";
 import { ModeSelection } from "./scenes/ModeSelection";
 import { SeasonFixtures, ISeasonFixtures } from "./SeasonFixtures";
 import { StandingsView } from "./scenes/StandingsView";
+import { IShopItemsConfig } from "./scenes/SpecialsView";
 
 export class App {
 
@@ -34,6 +35,9 @@ export class App {
     public static topScorers: ITopScorers;
     public static mostYellowCards: IMostYellowCards;
     public static playerCash: number;
+    public static allSpecials: IShopItemsConfig[];
+    public static playerSpecials: IShopItemsConfig[];
+
     public static leagueRounds: number;
     public static level: any;// TODO - interface when level is implemented
     public static lastGameWinnings: number;
@@ -46,6 +50,7 @@ export class App {
     static visibility: boolean = true;
     static PvP_opponentFocused: boolean = true;
     static randomIndexes: number[];
+    static specialInProgress: boolean = false;
 
     // G A M E   D A T A ---
 
@@ -61,7 +66,7 @@ export class App {
         App._height = height;
 
         const minDPR = 2;
-        
+
         App.app = new Application({
             view: document.getElementById("pixi-canvas") as HTMLCanvasElement,
             resolution: window.devicePixelRatio > minDPR ? window.devicePixelRatio : minDPR || 1,
@@ -163,6 +168,8 @@ export class App {
                 this.topScorers = res.data.topScorers;
                 this.teams = res.data.teams;
                 this.playerCash = res.data.playerCash;
+                this.allSpecials = res.data.allSpecials;
+                this.playerSpecials = res.data.playerSpecials;
                 this.seasonFixtures = res.data.seasonFixtures;
                 this.playerClubData = res.data.playerClubData;
                 this.setScene(new StandingsView());
