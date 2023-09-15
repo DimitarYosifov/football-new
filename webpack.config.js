@@ -43,7 +43,7 @@ module.exports = (env, argv) => {
             minimizer: [new TerserPlugin({
                 terserOptions: {
                     ecma: 6,
-                    compress: { drop_console: false },
+                    compress: { drop_console: true },
                     output: { comments: false, beautify: false },
                 },
             })],
