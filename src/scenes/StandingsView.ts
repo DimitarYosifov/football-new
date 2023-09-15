@@ -129,25 +129,25 @@ export class StandingsView extends Container implements IScene {
                             img: "twoSidedArrow",
                             name: "Row Collector",
                             _name: "RowCollector",
-                            price: 123000,
+                            price: 75000,
                             quantity: 10,
-                            description: "N/A"
+                            description: "Collects all blocks from a row"
                         },
                         {
                             img: "twoSidedArrow",
                             name: "Col Collector",
                             _name: "ColCollector",
-                            price: 400,
-                            quantity: 22,
-                            description: "dawdaadd dsawdadsaw"
+                            price: 100000,
+                            quantity: 10,
+                            description: "Collects all blocks from a column"
                         },
                         {
                             img: "randomColor",
-                            name: "Random Color Collector",
-                            _name: "randomColorCollector",
-                            price: 4000,
-                            quantity: 33,
-                            description: "colect"
+                            name: "Color Collector",
+                            _name: "ColorCollector",
+                            price: 150000,
+                            quantity: 10,
+                            description: "Collects all blocks of color by choice"
                         }
                     ]
                     App.playerSpecials = [
@@ -156,21 +156,21 @@ export class StandingsView extends Container implements IScene {
                             img: "twoSidedArrow",
                             name: "Row Collector",
                             _name: "RowCollector",
-                            quantity: 3,
-                            inUse: 1
+                            quantity: 0,
+                            inUse: 0
                         },
                         {
                             img: "twoSidedArrow",
                             name: "Col Collector",
                             _name: "ColCollector",
-                            quantity: 2,
+                            quantity: 0,
                             inUse: 0
                         },
                         {
                             img: "randomColor",
-                            name: "Random Color Collector",
-                            _name: "randomColorCollector",
-                            quantity: 1,
+                            name: "Color Collector",
+                            _name: "ColorCollector",
+                            quantity: 0,
                             inUse: 0
                         }
                     ]

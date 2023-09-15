@@ -157,7 +157,7 @@ export class SpecialsView extends Container implements IScene {
 
             App.playerCash -= item.price!;
             this.takePlayerMoney();
-            
+
             if (s.quantity === 0) {
                 //no more items of this kind. remove them visually
                 buyBtn.finalTexture.interactive = false;
@@ -172,6 +172,9 @@ export class SpecialsView extends Container implements IScene {
                 let container = this.availableItemsContainers.find(x => x.name === item.name);
                 let quantityTextField: any = container?.getChildByName("itemQuantity");
                 quantityTextField.text = `Quantity:${ps.quantity}`;
+                container!.alpha = 1;
+                container!.children[4].alpha = 1;
+                container!.children[4].interactive = true;
             }
 
             buyBtn.finalTexture.interactive = App.playerCash >= (item as any).price && (item as any).quantity > 0;

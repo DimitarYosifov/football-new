@@ -6,6 +6,8 @@ import Grid from "./Grid";
 import { gsap } from "gsap";
 import * as grid_interfaces from "./grid_interfaces"
 import { IShopItemsConfig } from "../scenes/SpecialsView";
+import { ServerRequest } from "../ServerRequest";
+import { GlowFilter } from "pixi-filters";
 
 export default class Specials extends Container {
 
@@ -50,12 +52,9 @@ export default class Specials extends Container {
         }
 
         specialSprite.on('pointerdown', () => {
-            console.log(this.level.animationInProgress);
-
-            if (!App.isPlayerTurn || this.level.animationInProgress) {
+            if (!App.isPlayerTurn || this.level.animationInProgress || App.specialInProgress) {
                 return;
             }
-            App.specialInProgress = true;
             App.specialInProgress = true;
             specialSprite.interactive = false;
             specialSprite.buttonMode = false;
@@ -66,10 +65,10 @@ export default class Specials extends Container {
                     this.destroyRow();
                     break;
                 case "Col Collector":
-                    // this.destroyCol();
+                    this.destroyCol();
                     break;
-                case "Random Color Collector":
-                    // this.destroyRandomColor();
+                case "Color Collector":
+                    this.destroyColor();
                     break;
                 default:
                     console.warn("special not found...");
@@ -202,7 +201,9 @@ export default class Specials extends Container {
                 layer.buttonMode = true;
 
                 let selected = (e: InteractionEvent) => {
-                    if (this.isSpecialStarted) return;
+                    let targetColor = (this.level.grid.blocks as any)[row][col].img;
+                    let forbiddenTypes: string[] = ["yellow_card", "red_card", "red_cross"];
+                    if (forbiddenTypes.includes(targetColor) || this.isSpecialStarted) return;
                     this.isSpecialStarted = true;
                     console.log(row, col);
                     gsap.to(this.popupContainer, 1, {
@@ -220,12 +221,22 @@ export default class Specials extends Container {
 
     private destroyRow() {
         this.createPopup();
-        this.createDescription("Select Row", "destroyRow");
+        this.createDescription("Select Row", "RowCollector");
+    }
+
+    private destroyCol(): void {
+        this.createPopup();
+        this.createDescription("Select Col", "ColCollector");
+    }
+
+    private destroyColor(): void {
+        this.createPopup();
+        this.createDescription("Select\nColor", "ColorCollector");
     }
 
     private startSpecial(row: number, col: number, specialType: string): void {
 
-        if (specialType === "destroyRow") {
+        if (specialType === "RowCollector") {
             let matches: grid_interfaces.IMatches[] = [];
             let blocksOnRow = this.level.grid.blocks[row];
             blocksOnRow.forEach((block: any, index: number) => {
@@ -264,10 +275,144 @@ export default class Specials extends Container {
                 alpha: 0,
                 delay: 0.4,
                 onComplete: () => {
+                    let type: any = App.playerSpecials.find(x => x._name === specialType);
+                    type.inUse--;
+                    this.updateBackend();
                     this.popupContainer.destroy();
                 }
             });
 
         }
+
+        else if (specialType === "ColCollector") {
+            let matches: grid_interfaces.IMatches[] = [];
+            let blocksInCol = (this.level.grid.blocks as any).map((x: any[]) => x[col])
+            console.log(blocksInCol);
+            blocksInCol.forEach((block: any, index: number) => {
+                let blockData: grid_interfaces.IMatches = {
+                    beingSwapped: false,
+                    col: block.col,
+                    dir: "",
+                    id: 1, // WTF
+                    row: block.row,
+                    type: block.img
+                }
+                matches.push(blockData);
+            });
+
+            let specialSprite = Sprite.from(`twoSidedArrow`);
+            specialSprite.width = App.width * 0.1;
+            specialSprite.scale.y = specialSprite.scale.x * 1.5;
+            specialSprite.anchor.set(0.5);
+            specialSprite.x = blocksInCol[0].getLocalBounds().x + blocksInCol[0].width / 2;
+            specialSprite.y = this.popupContainer.height / 2;
+            specialSprite.angle = 90;
+
+            this.popupContainer.removeChild();
+            this.popupContainer.alpha = 1;
+            this.popupContainer.addChild(specialSprite);
+
+            gsap.to(specialSprite, 0.4, {
+                ease: "Back.easeIn",
+                width: this.popupContainer.width * 0.9,
+                onComplete: () => {
+                    this.level.grid.playMatchAnimations(matches);
+                    this.level.grid.increaseCardsPointsAfterMatch(matches);
+                    this.isSpecialStarted = false;
+                }
+            });
+            gsap.to(specialSprite, 0.4, {
+                alpha: 0,
+                delay: 0.4,
+                onComplete: () => {
+                    let type: any = App.playerSpecials.find(x => x._name === specialType);
+                    type.inUse--;
+                    this.updateBackend();
+                    this.popupContainer.destroy();
+                }
+            });
+        }
+
+        else if (specialType === "ColorCollector") {
+            let matches: grid_interfaces.IMatches[] = [];
+            let targetColor = (this.level.grid.blocks as any)[row][col].img;
+
+            let colors: any = {
+                "ball_red": "0xFF1D00",     // RED:
+                "ball_blue": "0x3052FF",    // BLUE:
+                "ball_green": "0x2F7F07",   // GREEN:
+                "ball_yellow": "0xE2D841",  // YELLOW:
+                "ball_purple": "0xB200FF"   // PURPLE:
+            }
+            for (let r = 0; r < 8; r++) {
+                for (let c = 0; c < 6; c++) {
+                    let currentBlock = (this.level.grid.blocks as any)[r][c];
+                    let currentColor = currentBlock.img;
+
+                    if (currentColor === targetColor) {
+                        console.log(currentBlock);
+                        let blockData: grid_interfaces.IMatches = {
+                            beingSwapped: false,
+                            col: currentBlock.col,
+                            dir: "",
+                            id: 1,
+                            row: currentBlock.row,
+                            type: currentColor
+                        }
+                        matches.push(blockData);
+                        let startScale = currentBlock.blockImg.scale.x;
+                        gsap.to(currentBlock.blockImg.scale, 0.35, {
+                            ease: "Back.easeIn",
+                            x: startScale * 1.1,
+                            y: startScale * 1.1,
+                            yoyo: true,
+                            repeat: 6,
+                            onStart: () => {
+                                console.log(currentBlock.blockImg);
+                                let filter = new GlowFilter({
+                                    distance: 17,// higher value is not working on mobile !!!!
+                                    outerStrength: 5,
+                                    innerStrength: 0,
+                                    // color: 0xf43636,
+                                    color: colors[currentColor],
+                                    quality: 1,
+                                    knockout: false,
+                                })
+                                currentBlock.blockImg.filters = [filter];
+                            },
+                            onComplete: () => {
+                                currentBlock.blockImg.filters = [];
+                            }
+                        });
+                    }
+                }
+            }
+            console.log(matches);
+            this.popupContainer.removeChildren();
+            this.popupContainer.alpha = 1;
+            gsap.delayedCall(2.15, () => {
+                let type: any = App.playerSpecials.find(x => x._name === specialType);
+                type.inUse--;
+                this.updateBackend();
+                this.popupContainer.destroy();
+                this.level.grid.playMatchAnimations(matches);
+                this.level.grid.increaseCardsPointsAfterMatch(matches);
+                this.isSpecialStarted = false;
+            })
+        }
+    }
+
+    private updateBackend(): void {
+        ServerRequest(
+            "updateSpecials",
+            JSON.stringify({
+                user: App.user,
+                playerCash: App.playerCash,
+                playerSpecials: App.playerSpecials,
+            }),
+            "POST"
+        ).then((res: any) => {
+            console.log(res);
+        });
     }
 }
