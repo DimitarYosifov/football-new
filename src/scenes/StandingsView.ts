@@ -60,6 +60,7 @@ export class StandingsView extends Container implements IScene {
         App.EE.on("edit_team_complete", () => {
             this.checkContinueAllowed();
         });
+        this.addDeleteProgress();
     }
 
     public update(time: number): void {
@@ -897,6 +898,25 @@ export class StandingsView extends Container implements IScene {
             let cashBangUp = new BangUp(this.cashText, 1, +this.cashText.text, App.playerCash, 1);
         }
 
+    }
+
+    private addDeleteProgress(): void {
+        let deleteBtn = Sprite.from("delete");
+        deleteBtn.x = App.width * 0.85;
+        deleteBtn.y = App.height * 0.015;
+        deleteBtn.width = App.width * 0.12;
+        deleteBtn.height = App.width * 0.12;
+        this.addChild(deleteBtn);
+        deleteBtn.alpha = 0.5;
+        deleteBtn.interactive = true;
+        deleteBtn.buttonMode = true;
+
+        deleteBtn.on('pointerdown', (e) => {
+            //TODO - add confirm popup...
+            this.deleteProgress();
+            App.removeScene(this);
+            App.checkGameInProgress();
+        })
     }
 }
 

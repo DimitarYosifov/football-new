@@ -148,25 +148,8 @@ export class SpecialsView extends Container implements IScene {
         container.x = App.width * 0.05 + App.width * 0.225 * idx;
         container.y = this.shopTitle.y + App.height * 0.15 * Math.round(idx / 8);
 
-        //BUY BTN 
-        let buyOnPointerDown = (): void => {
-            //decrease shop item quantity
-            let s: any = App.allSpecials.find(x => x.name === item.name);
-            if (s.quantity === 0) return;
-            s.quantity--;
-            itemQuantity.text = `Quantity:${s.quantity}`;
 
-            App.playerCash -= item.price!;
-            this.takePlayerMoney();
-
-            if (s.quantity === 0) {
-                //no more items of this kind. remove them visually
-                buyBtn.finalTexture.interactive = false;
-                buyBtn.alpha = 0.3;
-                container.alpha = 0.3;
-            }
-
-            //add item to player items
+        App.EE.on("update_buy_special", () => {
             let ps: any = App.playerSpecials.find(x => x.name === item.name);
             if (ps) {
                 ps.quantity++;
@@ -181,6 +164,31 @@ export class SpecialsView extends Container implements IScene {
             buyBtn.finalTexture.interactive = App.playerCash >= (item as any).price && (item as any).quantity > 0;
             buyBtn.alpha = App.playerCash >= (item as any).price && (item as any).quantity > 0 ? 1 : 0.65;
             container.alpha = App.playerCash >= (item as any).price && (item as any).quantity > 0 ? 1 : 0.65;
+        })
+
+
+        //BUY BTN 
+        let buyOnPointerDown = (): void => {
+            //decrease shop item quantity
+            let s: any = App.allSpecials.find(x => x.name === item.name);
+            if (s.quantity === 0 || App.playerCash < item.price!) return;
+            s.quantity--;
+            itemQuantity.text = `Quantity:${s.quantity}`;
+
+            App.playerCash -= item.price!;
+            this.takePlayerMoney();
+
+            if (s.quantity === 0) {
+                //no more items of this kind. remove them visually
+                buyBtn.finalTexture.interactive = false;
+                buyBtn.alpha = 0.3;
+                container.alpha = 0.3;
+            }
+
+            //add item to player items
+
+            
+            App.EE.emit("update_buy_special");
         }
 
         let buyBtn = new RotatingButton("", "", buyOnPointerDown, false);
