@@ -71,6 +71,7 @@ export class SpecialsView extends Container implements IScene {
         return new TextStyle({
             fontFamily: config.mainFont,
             fill: '#ffffff',
+            align: "center"
             // stroke: '#000000',
             // strokeThickness: 1
         });
@@ -172,9 +173,9 @@ export class SpecialsView extends Container implements IScene {
                 let container = this.availableItemsContainers.find(x => x.name === item.name);
                 let quantityTextField: any = container?.getChildByName("itemQuantity");
                 quantityTextField.text = `Quantity:${ps.quantity}`;
-                container!.alpha = 1;
-                container!.children[4].alpha = 1;
-                container!.children[4].interactive = true;
+                container!.alpha = this.specialsInUse === 3 ? 0.65 : 1;
+                container!.children[4].alpha = this.specialsInUse === 3 ? 0.65 : 1;
+                container!.children[4].interactive = this.specialsInUse === 3 ? false : true;
             }
 
             buyBtn.finalTexture.interactive = App.playerCash >= (item as any).price && (item as any).quantity > 0;

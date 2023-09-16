@@ -67,6 +67,9 @@ export default class Specials extends Container {
                 case "Col Collector":
                     this.destroyCol();
                     break;
+                case "Cross Collector":
+                    this.destroyRowAndCol();
+                    break;
                 case "Color Collector":
                     this.destroyColor();
                     break;
@@ -234,8 +237,14 @@ export default class Specials extends Container {
         this.createDescription("Select\nColor", "ColorCollector");
     }
 
+    private destroyRowAndCol(): void {
+        this.createPopup();
+        this.createDescription("Select\nBall", "CrossCollector");
+    }
+
     private startSpecial(row: number, col: number, specialType: string): void {
 
+        // R O W   C O L L E C T O R
         if (specialType === "RowCollector") {
             let matches: grid_interfaces.IMatches[] = [];
             let blocksOnRow = this.level.grid.blocks[row];
@@ -281,9 +290,9 @@ export default class Specials extends Container {
                     this.popupContainer.destroy();
                 }
             });
-
         }
 
+        // C O L   C O L L E C T O R
         else if (specialType === "ColCollector") {
             let matches: grid_interfaces.IMatches[] = [];
             let blocksInCol = (this.level.grid.blocks as any).map((x: any[]) => x[col])
@@ -333,6 +342,91 @@ export default class Specials extends Container {
             });
         }
 
+        // C R O S S   C O L L E C T O R
+        else if (specialType === "CrossCollector") {
+            let matches: grid_interfaces.IMatches[] = [];
+            let blocksOnRow = this.level.grid.blocks[row];
+            blocksOnRow.forEach((block: any, index: number) => {
+                let blockData: grid_interfaces.IMatches = {
+                    beingSwapped: false,
+                    col: block.col,
+                    dir: "",
+                    id: 1, // WTF
+                    row: block.row,
+                    type: block.img
+                }
+                matches.push(blockData);
+            });
+            let blocksInCol = (this.level.grid.blocks as any).map((x: any[]) => x[col])
+            console.log(blocksInCol);
+            blocksInCol.forEach((block: any, index: number) => {
+                let blockData: grid_interfaces.IMatches = {
+                    beingSwapped: false,
+                    col: block.col,
+                    dir: "",
+                    id: 1,
+                    row: block.row,
+                    type: block.img
+                }
+                if (block.col !== col || block.row !== row) {
+                    matches.push(blockData);
+                }
+            });
+
+            let specialSprite = Sprite.from(`twoSidedArrow`);
+            specialSprite.width = App.width * 0.1;
+            specialSprite.scale.y = specialSprite.scale.x * 1.5;
+            specialSprite.anchor.set(0.5);
+            specialSprite.x = blocksInCol[row].getLocalBounds().x + blocksInCol[row].width / 2;
+            specialSprite.y = blocksOnRow[col].getLocalBounds().y + blocksOnRow[col].height / 2;
+
+            let specialSprite2 = Sprite.from(`twoSidedArrow`);
+            specialSprite2.width = App.width * 0.1;
+            specialSprite2.scale.y = specialSprite2.scale.x * 1.5;
+            specialSprite2.anchor.set(0.5);
+            specialSprite2.x = blocksInCol[row].getLocalBounds().x + blocksInCol[row].width / 2;
+            specialSprite2.y = blocksOnRow[col].getLocalBounds().y + blocksOnRow[col].height / 2;
+            specialSprite2.angle = 90;
+
+            // this.popupContainer.removeChildren();
+            this.popupContainer.alpha = 1;
+            this.popupContainer.addChild(specialSprite);
+            this.popupContainer.addChild(specialSprite2);
+
+            gsap.to(specialSprite, 0.4, {
+                ease: "Back.easeIn",
+                width: this.popupContainer.width * 0.8,
+                x: this.popupContainer.width / 2,
+                onComplete: () => { }
+            });
+            gsap.to(specialSprite, 0.4, {
+                alpha: 0,
+                delay: 0.4,
+                onComplete: () => { }
+            });
+            gsap.to(specialSprite2, 0.4, {
+                ease: "Back.easeIn",
+                width: this.popupContainer.height * 0.6,
+                y: this.popupContainer.height / 2,
+                onComplete: () => {
+                    this.level.grid.playMatchAnimations(matches);
+                    this.level.grid.increaseCardsPointsAfterMatch(matches);
+                    this.isSpecialStarted = false;
+                }
+            });
+            gsap.to(specialSprite2, 0.4, {
+                alpha: 0,
+                delay: 0.4,
+                onComplete: () => {
+                    let type: any = App.playerSpecials.find(x => x._name === specialType);
+                    type.inUse--;
+                    // this.updateBackend();
+                    this.popupContainer.destroy();
+                }
+            });
+        }
+
+        // C O L O R    C O L L E C T O R
         else if (specialType === "ColorCollector") {
             let matches: grid_interfaces.IMatches[] = [];
             let targetColor = (this.level.grid.blocks as any)[row][col].img;
@@ -370,7 +464,7 @@ export default class Specials extends Container {
                             onStart: () => {
                                 console.log(currentBlock.blockImg);
                                 let filter = new GlowFilter({
-                                    distance: 17,// higher value is not working on mobile !!!!
+                                    distance: 5,// higher value is not working on mobile !!!!
                                     outerStrength: 5,
                                     innerStrength: 0,
                                     // color: 0xf43636,

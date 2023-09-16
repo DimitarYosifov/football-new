@@ -142,13 +142,21 @@ export class StandingsView extends Container implements IScene {
                             description: "Collects all blocks from a column"
                         },
                         {
+                            img: "crossArrow",
+                            name: "Cross Collector",
+                            _name: "CrossCollector",
+                            price: 150000,
+                            quantity: 10,
+                            description: "Collects blocks in all directions"
+                        },
+                        {
                             img: "randomColor",
                             name: "Color Collector",
                             _name: "ColorCollector",
-                            price: 150000,
+                            price: 200000,
                             quantity: 10,
                             description: "Collects all blocks of color by choice"
-                        }
+                        },
                     ]
                     App.playerSpecials = [
 
@@ -163,6 +171,13 @@ export class StandingsView extends Container implements IScene {
                             img: "twoSidedArrow",
                             name: "Col Collector",
                             _name: "ColCollector",
+                            quantity: 0,
+                            inUse: 0
+                        },
+                        {
+                            img: "crossArrow",
+                            name: "Cross Collector",
+                            _name: "CrossCollector",
                             quantity: 0,
                             inUse: 0
                         },

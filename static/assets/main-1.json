@@ -216,9 +216,57 @@
         "y": 0.5
       }
     },
-    "twoSidedArrow": {
+    "crossArrow": {
       "frame": {
         "x": 417,
+        "y": 1500,
+        "w": 290,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 290,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 290,
+        "h": 290
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "shoe": {
+      "frame": {
+        "x": 562,
+        "y": 1790,
+        "w": 259,
+        "h": 200
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 259,
+        "h": 200
+      },
+      "sourceSize": {
+        "w": 259,
+        "h": 200
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "twoSidedArrow": {
+      "frame": {
+        "x": 821,
         "y": 1500,
         "w": 290,
         "h": 102
@@ -240,106 +288,10 @@
         "y": 0.5
       }
     },
-    "shoe": {
-      "frame": {
-        "x": 519,
-        "y": 1500,
-        "w": 259,
-        "h": 200
-      },
-      "rotated": true,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 259,
-        "h": 200
-      },
-      "sourceSize": {
-        "w": 259,
-        "h": 200
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "cartoonBox": {
-      "frame": {
-        "x": 562,
-        "y": 1759,
-        "w": 125,
-        "h": 200
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 125,
-        "h": 200
-      },
-      "sourceSize": {
-        "w": 125,
-        "h": 200
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "coin": {
-      "frame": {
-        "x": 562,
-        "y": 1959,
-        "w": 84,
-        "h": 91
-      },
-      "rotated": true,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 8,
-        "y": 4,
-        "w": 84,
-        "h": 91
-      },
-      "sourceSize": {
-        "w": 103,
-        "h": 100
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "red_cross": {
-      "frame": {
-        "x": 687,
-        "y": 1759,
-        "w": 198,
-        "h": 198
-      },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 2,
-        "y": 2,
-        "w": 198,
-        "h": 198
-      },
-      "sourceSize": {
-        "w": 200,
-        "h": 200
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
     "star-particle": {
       "frame": {
-        "x": 687,
-        "y": 1957,
+        "x": 707,
+        "y": 0,
         "w": 95,
         "h": 91
       },
@@ -360,33 +312,9 @@
         "y": 0.5
       }
     },
-    "ball_red": {
-      "frame": {
-        "x": 885,
-        "y": 0,
-        "w": 197,
-        "h": 190
-      },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 1,
-        "y": 5,
-        "w": 197,
-        "h": 190
-      },
-      "sourceSize": {
-        "w": 200,
-        "h": 200
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
     "next": {
       "frame": {
-        "x": 719,
+        "x": 546,
         "y": 0,
         "w": 150,
         "h": 150
@@ -408,9 +336,33 @@
         "y": 0.5
       }
     },
+    "coin": {
+      "frame": {
+        "x": 707,
+        "y": 91,
+        "w": 84,
+        "h": 91
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 8,
+        "y": 4,
+        "w": 84,
+        "h": 91
+      },
+      "sourceSize": {
+        "w": 103,
+        "h": 100
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
     "prev": {
       "frame": {
-        "x": 719,
+        "x": 546,
         "y": 150,
         "w": 150,
         "h": 150
@@ -432,10 +384,58 @@
         "y": 0.5
       }
     },
+    "cartoonBox": {
+      "frame": {
+        "x": 821,
+        "y": 1790,
+        "w": 125,
+        "h": 200
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 125,
+        "h": 200
+      },
+      "sourceSize": {
+        "w": 125,
+        "h": 200
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "red_cross": {
+      "frame": {
+        "x": 946,
+        "y": 0,
+        "w": 198,
+        "h": 198
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 2,
+        "y": 2,
+        "w": 198,
+        "h": 198
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 200
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
     "flame": {
       "frame": {
-        "x": 719,
-        "y": 300,
+        "x": 802,
+        "y": 0,
         "w": 128,
         "h": 128
       },
@@ -456,9 +456,33 @@
         "y": 0.5
       }
     },
+    "ball_red": {
+      "frame": {
+        "x": 696,
+        "y": 175,
+        "w": 197,
+        "h": 190
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 5,
+        "w": 197,
+        "h": 190
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 200
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
     "ball_prototype": {
       "frame": {
-        "x": 1082,
+        "x": 1144,
         "y": 0,
         "w": 195,
         "h": 191
@@ -482,8 +506,8 @@
     },
     "randomColor": {
       "frame": {
-        "x": 885,
-        "y": 190,
+        "x": 1339,
+        "y": 0,
         "w": 195,
         "h": 191
       },
@@ -506,8 +530,8 @@
     },
     "ball_yellow": {
       "frame": {
-        "x": 885,
-        "y": 381,
+        "x": 1534,
+        "y": 0,
         "w": 195,
         "h": 190
       },
@@ -530,8 +554,8 @@
     },
     "ball_green": {
       "frame": {
-        "x": 546,
-        "y": 428,
+        "x": 1729,
+        "y": 0,
         "w": 194,
         "h": 190
       },
@@ -554,8 +578,8 @@
     },
     "ball_purple": {
       "frame": {
-        "x": 546,
-        "y": 618,
+        "x": 1534,
+        "y": 190,
         "w": 194,
         "h": 190
       },
@@ -578,12 +602,12 @@
     },
     "ball_blue": {
       "frame": {
-        "x": 546,
-        "y": 808,
+        "x": 1728,
+        "y": 190,
         "w": 193,
         "h": 190
       },
-      "rotated": true,
+      "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
         "x": 4,
@@ -607,8 +631,8 @@
     "image": "main-1.png",
     "format": "RGBA8888",
     "size": {
-      "w": 1277,
-      "h": 2048
+      "w": 1923,
+      "h": 2038
     },
     "scale": 1
   }

@@ -333,6 +333,8 @@ export class Card extends Container {
             def_sprite.x = tweenStart_x;
             def_sprite.width = App.width / 23;
             def_sprite.scale.y = def_sprite.scale.x;
+            def_sprite.tint = +`0x${this.stats.defense_color}`;
+
             this.parent.parent.addChild(def_sprite);
 
             gsap.to([def_text], 1.5, {
@@ -399,6 +401,7 @@ export class Card extends Container {
             att_sprite.x = tweenStart_x;
             att_sprite.width = App.width / 17;
             att_sprite.scale.y = att_sprite.scale.x;
+            att_sprite.tint = +`0x${this.stats.attack_color}`;
             this.parent.parent.addChild(att_sprite);
 
             gsap.to(atk_text, 1.5, {

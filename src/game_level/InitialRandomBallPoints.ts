@@ -58,7 +58,9 @@ export class InitialRandomBallPoints extends Container {
             text.anchor.set(0.5, 0.5);
             ball.addChild(text);
             this.mix(ball);
-            gsap.delayedCall(1.6, () => { this.addPoints(ball) });
+            gsap.delayedCall(1.6, () => {
+                this.addPoints(ball)
+            });
         }
     }
 
@@ -103,14 +105,35 @@ export class InitialRandomBallPoints extends Container {
                 })
                 card.stats.defense_current = +reward;
                 card.defenseValuesText.text = `${reward}/${card.stats.defense_full}`;
-                let def_text = createText(`+${reward}`, style, this.parent.parent, card.cardImg.y + card.height / 2, card.cardImg.x + card.cardImg.width / 2, 0.5, 0.5, card.cardImg.height / 2);
+
+                let startY = this.parent.parent.height / 2;
+                let finalY = card.cardImg.y + card.height / 2;
+                let startX = ball.x;
+                let finalX = card.cardImg.x + card.cardImg.width / 2;
+
+                let def_text = createText(`+${reward}`, style, this.parent.parent, startY, startX, 0.5, 0.5, card.cardImg.height / 2.8);
+
+                let def_sprite = Sprite.from("glove2");
+                def_sprite.y = startY;
+                def_sprite.x = startX;
+                def_sprite.width = App.width / 23;
+                def_sprite.scale.y = def_sprite.scale.x;
+                def_sprite.tint = +`0x${defense_color}`;
+                this.parent.parent.addChild(def_sprite);
+
                 gsap.to(def_text, 1.5, {
                     delay: cardIndex * 0.05,
-                    y: this.parent.parent.height / 2,
+                    y: finalY,
+                    x: finalX,
                     ease: "Linear.easeNone",
+                    onUpdate: () => {
+                        def_sprite.y = def_text.y - def_text.height / 3;
+                        def_sprite.x = def_text.x + def_text.width / 2.25;
+                    },
                     onComplete: () => {
                         def_text.alpha = 0;
                         this.parent.parent.removeChild(def_text);
+                        this.parent.parent.removeChild(def_sprite);
                     }
                 })
             }
@@ -124,14 +147,36 @@ export class InitialRandomBallPoints extends Container {
                 })
                 card.stats.attack_current = +reward;
                 card.attackValuesText.text = `${reward}/${card.stats.attack_full}`;
-                let attack_text = createText(`+${reward}`, style, this.parent.parent, card.cardImg.y + card.height / 2, card.cardImg.x + card.cardImg.width / 2, 0.5, 0.5, card.cardImg.height / 2);
+
+                let startY = this.parent.parent.height / 2;
+                let finalY = card.cardImg.y + card.height / 2;
+                let startX = ball.x;
+                let finalX = card.cardImg.x + card.cardImg.width / 2;
+
+                let attack_text = createText(`+${reward}`, style, this.parent.parent, startY, startX, 0.5, 0.5, card.cardImg.height / 2.8);
+
+                let att_sprite = Sprite.from("shoe");
+                att_sprite.y = startY;
+                att_sprite.x = startX;
+                att_sprite.width = App.width / 17;
+                att_sprite.scale.y = att_sprite.scale.x;
+                att_sprite.tint = +`0x${attack_color}`;
+
+                this.parent.parent.addChild(att_sprite);
+
                 gsap.to(attack_text, 1.5, {
                     delay: 0.15 + (cardIndex * 0.05),
-                    y: this.parent.parent.height / 2,
+                    y: finalY,
+                    x: finalX,
                     ease: "Linear.easeNone",
+                    onUpdate: () => {
+                        att_sprite.y = attack_text.y - attack_text.height / 3.25;
+                        att_sprite.x = attack_text.x + attack_text.width / 2.25;
+                    },
                     onComplete: () => {
                         attack_text.alpha = 1;
                         this.parent.parent.removeChild(attack_text);
+                        this.parent.parent.removeChild(att_sprite);
                     }
                 })
             }

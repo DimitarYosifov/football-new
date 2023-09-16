@@ -11,6 +11,7 @@ import Block from "./Block";
 import Row from "./Row";
 import { smartMove } from "./smartMove";
 import WSConnection from "../scenes/PVP/WSConnection";
+import { GlowFilter } from "pixi-filters";
 
 export default class Grid extends Container {
 
@@ -42,6 +43,8 @@ export default class Grid extends Container {
     private fallingBlocksOnColumn: any = {};
     private delayStep: number = 0.05
     private fallTweenDuration: number = 0.35;
+    private hintTween1: gsap.core.Tween;
+    private hintTween2: gsap.core.Tween;
 
     constructor() {
         super();
@@ -147,6 +150,9 @@ export default class Grid extends Container {
             y: item1.children[0].y,
             x: item1.children[0].x,
             ease: "Back.easeInOut",
+            onStart: () => {
+                this.level.animationInProgress = true;
+            },
             onComplete: () => {
                 let type1 = item1.type;
                 let gridPosition1 = item1.gridPosition;
@@ -157,10 +163,10 @@ export default class Grid extends Container {
                 let matches: grid_interfaces.IMatches[] = this.checkGridForMatches();
                 if (matches.length !== 0) {
                     console.log(matches);
-                    this.level.animationInProgress = true;
-                    if (this.hintTimeout) {
-                        this.hintTimeout.kill();
-                    }
+                    // this.level.animationInProgress = true;
+                    // if (this.hintTimeout) {
+                    //     this.hintTimeout.kill();
+                    // }
                     // clearInterval(this.hintInterval);//WTF
                     for (let m = 0; m < matches.length; m++) {
                         if (matches[m].row === item2.row && matches[m].col === item2.col) {
@@ -193,8 +199,7 @@ export default class Grid extends Container {
                     item1.children[0].texture = Texture.from(`${item1.type || item1.img}`);
 
                     gsap.delayedCall(0.35, () => {
-                        this.playMatchAnimations(matches);
-                        this.increaseCardsPointsAfterMatch(matches);
+                        this.addFilterToBlocks(matches);
                     })
 
                 } else {
@@ -278,7 +283,6 @@ export default class Grid extends Container {
             }
         }
 
-
         let tepmID = 0;
         let checkMatchId = (id: number, currentMatchIndex: number): boolean => {
             let suitableId = false;
@@ -312,6 +316,55 @@ export default class Grid extends Container {
             }
         })
         return matches;
+    }
+
+    private addFilterToBlocks(matches: grid_interfaces.IMatches[]): void {
+
+        let colors: any = {
+            "ball_red": "0xFF1D00",     // RED:
+            "ball_blue": "0x3052FF",    // BLUE:
+            "ball_green": "0x2F7F07",   // GREEN:
+            "ball_yellow": "0xE2D841",  // YELLOW:
+            "ball_purple": "0xB200FF"   // PURPLE:
+        }
+
+        matches.forEach((match, index) => {
+            let currentBlock = (this.blocks as any)[match.row][match.col];
+            let startScale = currentBlock.blockImg.scale.x;
+            let isLast = index == matches.length - 1;
+            gsap.to(currentBlock.blockImg.scale, 0.25, {
+                // ease: "Back.easeIn",
+                x: startScale * 1.1,
+                y: startScale * 1.1,
+                yoyo: true,
+                repeat: 3,
+                onStart: () => {
+                    console.log(currentBlock.blockImg);
+                    let filter = new GlowFilter({
+                        distance: 5,// higher value is not working on mobile !!!!
+                        outerStrength: 5,
+                        innerStrength: 0,
+                        color: colors[match.type],
+                        quality: 1,
+                        knockout: false,
+                    })
+                    currentBlock.blockImg.filters = [filter];
+                },
+                onComplete: () => {
+                    currentBlock.blockImg.filters = [];
+                    if (isLast) {
+                        this.playMatchAnimations(matches);
+                        this.increaseCardsPointsAfterMatch(matches);
+                        matches.forEach((match, index) => {
+                            let currentBlock = (this.blocks as any)[match.row][match.col];
+                            currentBlock.blockImg.filters = [];
+                        })
+
+                    }
+                    // currentBlock.blockImg.filters = [];
+                }
+            });
+        });
     }
 
     //animate matching blocks to currently moved block position  
@@ -349,7 +402,7 @@ export default class Grid extends Container {
             this.addChildAt(anim, 0);
 
             gsap.to(machingBlock.blockImg, .4, {
-                delay: 0.2,
+                // delay: 0.2,
                 alpha: 0,
             })
             gsap.fromTo(machingBlock.blockImg.scale, .4, {
@@ -577,8 +630,7 @@ export default class Grid extends Container {
         gsap.delayedCall(0.35, () => {
             let matches = this.checkGridForMatches();
             if (matches.length > 0) {
-                this.playMatchAnimations(matches);
-                this.increaseCardsPointsAfterMatch(matches);
+                this.addFilterToBlocks(matches);
             } else {
                 if (App.specialInProgress) {
                     this.checkGoalAttemps();
@@ -1027,13 +1079,13 @@ export default class Grid extends Container {
                     let width2 = target2.width! * 1.05;
                     let height2 = target2.height! * 1.05;
 
-                    gsap.to(target1.blockImg, 0.3, {
+                    this.hintTween1 = gsap.to(target1.blockImg, 0.3, {
                         width: width1,
                         height: height1,
                         yoyo: true,
                         repeat: 1
                     });
-                    gsap.to(target2.blockImg, 0.3, {
+                    this.hintTween2 = gsap.to(target2.blockImg, 0.3, {
                         width: width2,
                         height: height2,
                         yoyo: true,
