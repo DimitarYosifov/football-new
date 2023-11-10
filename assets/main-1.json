@@ -408,30 +408,6 @@
         "y": 0.5
       }
     },
-    "ball_orange": {
-      "frame": {
-        "x": 1233,
-        "y": 0,
-        "w": 194,
-        "h": 190
-      },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 3,
-        "y": 5,
-        "w": 194,
-        "h": 190
-      },
-      "sourceSize": {
-        "w": 200,
-        "h": 200
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
     "ball_purple": {
       "frame": {
         "x": 1427,

@@ -823,7 +823,7 @@ export class StandingsView extends Container implements IScene {
             "ball_red",
             "ball_green",
             "ball_blue",
-            "ball_orange",
+            // "ball_orange",
             "ball_purple",
             "ball_yellow"
         ]
