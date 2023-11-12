@@ -809,7 +809,7 @@ export default class Grid extends Container {
         this.hintMatch = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
         this.bestPossibleMove = smartMove(possibleMoves);
 
-        // this.noMoves =true// possibleMoves.length === 0; // test...
+        // this.noMoves =true// possibleMoves.length === 0;
         this.noMoves = possibleMoves.length === 0;
         console.log(`possible moves => ${JSON.stringify(possibleMoves)}`);
         if (!newlyCreatedGrid) {
@@ -835,14 +835,15 @@ export default class Grid extends Container {
                 this.parent.removeChild(this.popup);
                 gsap.delayedCall(5, () => {
                     // TODO - HANDLE PVP GAME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    if (!this.noMoves && (!App.isPlayerTurn || this.level.autoplayMode)) {
-
+                    if (!App.isPlayerTurn || this.level.autoplayMode) {
+                        this.checkPossibleMove()
                         this.proceedToNextRound();
                     }
                 })
             })
         }, 1);
         this.reShufleGrid();
+        this.noMoves = false;
     }
 
     private checkGoalAttemps() {
