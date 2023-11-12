@@ -149,9 +149,9 @@ export class SpecialsView extends Container implements IScene {
         container.y = this.shopTitle.y + App.height * 0.15 * Math.round(idx / 8);
 
 
-        App.EE.on("update_buy_special", () => {
-            let ps: any = App.playerSpecials.find(x => x.name === item.name);
-            if (ps) {
+        App.EE.on("update_buy_special", (name) => {
+            let ps: any = App.playerSpecials.find(x => x.name === name);
+            if (ps && item.name === name) {
                 ps.quantity++;
                 let container = this.availableItemsContainers.find(x => x.name === item.name);
                 let quantityTextField: any = container?.getChildByName("itemQuantity");
@@ -187,8 +187,8 @@ export class SpecialsView extends Container implements IScene {
 
             //add item to player items
 
-            
-            App.EE.emit("update_buy_special");
+
+            App.EE.emit("update_buy_special", item.name);
         }
 
         let buyBtn = new RotatingButton("", "", buyOnPointerDown, false);

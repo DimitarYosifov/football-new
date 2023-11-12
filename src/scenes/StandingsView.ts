@@ -203,6 +203,11 @@ export class StandingsView extends Container implements IScene {
     private addButtons() {
         //---CONTIONUE BUTTON
         let continueOnPointerDown = () => {
+
+            // Dispatch the test banner event.
+            const event = new Event("testbanner");
+            document.dispatchEvent(event);
+
             this.continueBtn.finalTexture.interactive = false;
             if (App.pvpGame) {
                 location.reload();
