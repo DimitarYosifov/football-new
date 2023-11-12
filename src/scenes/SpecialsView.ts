@@ -149,22 +149,22 @@ export class SpecialsView extends Container implements IScene {
         container.y = this.shopTitle.y + App.height * 0.15 * Math.round(idx / 8);
 
 
-        App.EE.on("update_buy_special", (name) => {
-            let ps: any = App.playerSpecials.find(x => x.name === name);
-            if (ps && item.name === name) {
-                ps.quantity++;
-                let container = this.availableItemsContainers.find(x => x.name === item.name);
-                let quantityTextField: any = container?.getChildByName("itemQuantity");
-                quantityTextField.text = `Quantity:${ps.quantity}`;
-                container!.alpha = this.specialsInUse === 3 ? 0.65 : 1;
-                container!.children[4].alpha = this.specialsInUse === 3 ? 0.65 : 1;
-                container!.children[4].interactive = this.specialsInUse === 3 ? false : true;
-            }
+        // App.EE.on("update_buy_special", (name) => {
+        //     let ps: any = App.playerSpecials.find(x => x.name === name);
+        //     if (ps && item.name === name) {
+        //         ps.quantity++;
+        //         let container = this.availableItemsContainers.find(x => x.name === item.name);
+        //         let quantityTextField: any = container?.getChildByName("itemQuantity");
+        //         quantityTextField.text = `Quantity:${ps.quantity}`;
+        //         container!.alpha = this.specialsInUse === 3 ? 0.65 : 1;
+        //         container!.children[4].alpha = this.specialsInUse === 3 ? 0.65 : 1;
+        //         container!.children[4].interactive = this.specialsInUse === 3 ? false : true;
+        //     }
 
-            buyBtn.finalTexture.interactive = App.playerCash >= (item as any).price && (item as any).quantity > 0;
-            buyBtn.alpha = App.playerCash >= (item as any).price && (item as any).quantity > 0 ? 1 : 0.65;
-            container.alpha = App.playerCash >= (item as any).price && (item as any).quantity > 0 ? 1 : 0.65;
-        })
+        //     buyBtn.finalTexture.interactive = App.playerCash >= (item as any).price && (item as any).quantity > 0;
+        //     buyBtn.alpha = App.playerCash >= (item as any).price && (item as any).quantity > 0 ? 1 : 0.65;
+        //     container.alpha = App.playerCash >= (item as any).price && (item as any).quantity > 0 ? 1 : 0.65;
+        // })
 
 
         //BUY BTN 
@@ -188,7 +188,22 @@ export class SpecialsView extends Container implements IScene {
             //add item to player items
 
 
-            App.EE.emit("update_buy_special", item.name);
+            let ps: any = App.playerSpecials.find(x => x.name === item.name);
+            if (ps) {
+                ps.quantity++;
+                let container = this.availableItemsContainers.find(x => x.name === item.name);
+                let quantityTextField: any = container?.getChildByName("itemQuantity");
+                quantityTextField.text = `Quantity:${ps.quantity}`;
+                container!.alpha = this.specialsInUse === 3 ? 0.65 : 1;
+                container!.children[4].alpha = this.specialsInUse === 3 ? 0.65 : 1;
+                container!.children[4].interactive = this.specialsInUse === 3 ? false : true;
+            }
+
+            buyBtn.finalTexture.interactive = App.playerCash >= (item as any).price && (item as any).quantity > 0;
+            buyBtn.alpha = App.playerCash >= (item as any).price && (item as any).quantity > 0 ? 1 : 0.65;
+            container.alpha = App.playerCash >= (item as any).price && (item as any).quantity > 0 ? 1 : 0.65;
+       
+            // App.EE.emit("update_buy_special", item.name);
         }
 
         let buyBtn = new RotatingButton("", "", buyOnPointerDown, false);
@@ -379,12 +394,15 @@ export class SpecialsView extends Container implements IScene {
     }
 
     private updateBackEnd(): void {
+        console.log( App.allSpecials);
+        
         ServerRequest(
             "updateSpecials",
             JSON.stringify({
                 user: App.user,
                 playerCash: App.playerCash,
                 playerSpecials: App.playerSpecials,
+                allSpecials: App.allSpecials
             }),
             "POST"
         ).then((res) => {
