@@ -907,6 +907,19 @@ export default class Grid extends Container {
                 .filter((activeDefense: ActiveDefense) => activeDefense !== null && activeDefense.color === attackColor)[0];
         }
 
+        let hideCardAnim = () => {
+            console.log(this.level.goalAttempts[0])
+            if (App.isPlayerTurn) {
+                let index = tweenTarget.initiatorIndex;
+                this.level.playerCards.children[index].burnAnimation.stop();
+                this.level.playerCards.children[index].burnAnimation.armatureDisplay.visible = false;
+            } else {
+                let index = tweenTarget.initiatorIndex;
+                this.level.opponentCards.children[index].burnAnimation.stop();
+                this.level.opponentCards.children[index].burnAnimation.armatureDisplay.visible = false;
+            }
+        }
+
         if (!firstActiveDefenseFound) {
             //GOAL SCORED!!!
             this.hasGoalsInThisRound = true;
@@ -919,6 +932,7 @@ export default class Grid extends Container {
                 y: finalY,
                 alpha: 0,
                 onComplete: () => {
+                    hideCardAnim();
                     App.isPlayerTurn ? this.level.playerScore++ : this.level.opponentScore++;
                     tweenTarget.parent.removeChild(tweenTarget);
                     this.showText("GOAL!");
@@ -949,6 +963,7 @@ export default class Grid extends Container {
                 y: App.height / 2,
                 alpha: 0,
                 onComplete: () => {
+                    hideCardAnim();
                     tweenTarget.parent.removeChild(tweenTarget);
                 }
             });

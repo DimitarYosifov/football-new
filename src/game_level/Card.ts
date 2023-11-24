@@ -2,13 +2,14 @@
 import { FullAttack } from "./FullAttack"
 import { ActiveDefense } from "./ActiveDefense"
 import { config } from "../configs/MainGameConfig";
-import { Container, TextStyle, Text, Sprite, Graphics, Texture, Filter } from "pixi.js";
+import { Container, TextStyle, Text, Sprite, Graphics, Texture, Filter, Loader } from "pixi.js";
 import { createText } from "../createText";
 import { App } from "../App";
 import gsap from "gsap";
 import { DotFilter } from "pixi-filters";
 import { DropShadowFilter } from '@pixi/filter-drop-shadow';
 import { GlowFilter } from "pixi-filters";
+import DragonBonesAnimation from "../anim_related/DragonBonesAnimation";
 
 export class Card extends Container {
 
@@ -83,6 +84,8 @@ export class Card extends Container {
     public stars: Sprite;
     public starsBG: Graphics = new Graphics();
 
+    public burnAnimation: any;
+
     constructor(data: any, showCurrentValues = true, randomColor: boolean) {
         super();
         this.font_size = data.font_size;
@@ -142,6 +145,7 @@ export class Card extends Container {
         this.randomColor = randomColor;
         this.totalPower = this.calculatePlayerStars(data.totalPower);
         this.createCard();
+        this.addAnimation();
     }
 
     private createCard() {
@@ -360,6 +364,9 @@ export class Card extends Container {
             this.stats.attack_current += atk_points;
             // if (this.stats.attack_current >= 5) { // test
             if (this.stats.attack_current >= this.stats.attack_full) {
+
+                this.burnAnimation.play();
+                this.burnAnimation.armatureDisplay.visible = true;
                 gsap.to(this.cardImg.scale, .15, {
                     x: initialScaleX * 1.05,
                     y: initialScaley * 1.05,
@@ -495,9 +502,26 @@ export class Card extends Container {
         }
         return finalPower;
     }
+
+    private addAnimation() {
+        this.burnAnimation = new DragonBonesAnimation("Ernutet_Frame_Animation",
+            Loader.shared.resources[`Ernutet_Frame_AnimationData`].data,
+            Loader.shared.resources[`Ernutet_Frame_AnimationTextures`].data,
+            Loader.shared.resources[`Ernutet_Frame_AnimationImage`].texture
+        );
+        this.burnAnimation.armatureDisplay.scale.set(
+            1.65, 0.77
+        );
+        this.burnAnimation.armatureDisplay.anchor.set(0);
+        this.burnAnimation.armatureDisplay.x = (this.card_x + this.card_width / 2) - 5;
+        this.burnAnimation.armatureDisplay.y = this.cardImg.y + this.cardImg.height / 2;
+        this.addChild(this.burnAnimation.armatureDisplay);
+        this.burnAnimation.armatureDisplay.visible = false;
+
+        // this.burnAnimation.play();
+    }
 }
 
 export interface IColors {
     [key: string]: string;
 }
-
