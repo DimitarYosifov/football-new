@@ -650,7 +650,6 @@ export default class Grid extends Container {
         this.nextRoundDelay = delay;
         for (let row = 0; row < 8; row++) {
             for (let col = 0; col < 6; col++) {
-
                 //         check left-up
                 if (col > 0 && row > 0) {
                     let tempType = this.blocks[row][col].type;
@@ -809,8 +808,13 @@ export default class Grid extends Container {
         this.hintMatch = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
         this.bestPossibleMove = smartMove(possibleMoves);
 
-        // this.noMoves =true// possibleMoves.length === 0;
+        // this "fromNoMovePopup" fixes the bug when opponent changes turn
+        let fromNoMovePopup = this.noMoves;
+        // before its move is finished
+
         this.noMoves = possibleMoves.length === 0;
+        if (fromNoMovePopup) return;
+        
         console.log(`possible moves => ${JSON.stringify(possibleMoves)}`);
         if (!newlyCreatedGrid) {
             setTimeout(() => {
@@ -836,14 +840,14 @@ export default class Grid extends Container {
                 gsap.delayedCall(5, () => {
                     // TODO - HANDLE PVP GAME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     if (!App.isPlayerTurn || this.level.autoplayMode) {
-                        this.checkPossibleMove()
+                        this.checkPossibleMove(0, false)
                         this.proceedToNextRound();
                     }
                 })
             })
         }, 1);
         this.reShufleGrid();
-        this.noMoves = false;
+        // this.noMoves = false;
     }
 
     private checkGoalAttemps() {
