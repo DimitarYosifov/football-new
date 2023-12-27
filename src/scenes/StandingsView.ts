@@ -154,7 +154,7 @@ export class StandingsView extends Container implements IScene {
                             img: "randomColor",
                             name: "Color Collector",
                             _name: "ColorCollector",
-                            price: 200000,
+                            price: 400_000,
                             quantity: 10,
                             description: "Collects all blocks of color by choice"
                         },

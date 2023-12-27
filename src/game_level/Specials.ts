@@ -429,7 +429,8 @@ export default class Specials extends Container {
         // C O L O R    C O L L E C T O R
         else if (specialType === "ColorCollector") {
             let matches: grid_interfaces.IMatches[] = [];
-            let targetColor = (this.level.grid.blocks as any)[row][col].img;
+            let targetColor1 = (this.level.grid.blocks as any)[row][col].img.split("-")[0];
+            let targetColor2 = (this.level.grid.blocks as any)[row][col].img.split("-")[1];
 
             let colors: any = {
                 "ball_red": "0xFF1D00",     // RED:
@@ -441,9 +442,15 @@ export default class Specials extends Container {
             for (let r = 0; r < 8; r++) {
                 for (let c = 0; c < 6; c++) {
                     let currentBlock = (this.level.grid.blocks as any)[r][c];
-                    let currentColor = currentBlock.img;
+                    let currentColor1 = currentBlock.img.split("-")[0];
+                    let currentColor2 = currentBlock.img.split("-")[1];
 
-                    if (currentColor === targetColor) {
+                    if (
+                        currentColor1 === targetColor1 ||
+                        currentColor1 === targetColor2 ||
+                        (currentColor2 && (currentColor2 === targetColor1)) ||
+                        (currentColor2 && targetColor2 && (currentColor2 === targetColor2))
+                    ) {
                         console.log(currentBlock);
                         let blockData: grid_interfaces.IMatches = {
                             beingSwapped: false,
@@ -451,7 +458,7 @@ export default class Specials extends Container {
                             dir: "",
                             id: 1,
                             row: currentBlock.row,
-                            type: currentColor
+                            type: currentBlock.img
                         }
                         matches.push(blockData);
                         let startScale = currentBlock.blockImg.scale.x;
@@ -468,7 +475,7 @@ export default class Specials extends Container {
                                     outerStrength: 5,
                                     innerStrength: 0,
                                     // color: 0xf43636,
-                                    color: colors[currentColor],
+                                    color: colors[currentColor1],
                                     quality: 1,
                                     knockout: false,
                                 })

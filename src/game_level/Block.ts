@@ -136,22 +136,44 @@ export default class Block extends Container {
         // note - same method is used server side for PVP games...
         let x = Math.floor(Math.random() * 100) + 1;
         let a;
+
+        let getTwoColoredBlock = () => {
+            //order is important here. DO NOT rearange!
+            let colors = ["ball_red", "ball_blue", "ball_purple", "ball_green", "ball_yellow"];
+
+            let rnd1 = Math.floor(Math.random() * 5);
+            let rnd2 = -1;
+            let rnd2_unset = true;
+            while (rnd2_unset) {
+                rnd2 = Math.floor(Math.random() * 5);
+                if (rnd2 !== rnd1) {
+                    rnd2_unset = false;
+                }
+            }
+            console.log(`-----------------------------${colors[rnd1]}-${colors[rnd2]}`);
+
+            return rnd1 < rnd2 ? `${colors[rnd1]}-${colors[rnd2]}` : `${colors[rnd2]}-${colors[rnd1]}`;
+        }
+
         switch (true) {
-            //blocks - 18%       yellow card - 6%     red card- 2%      injury - 2%
-            case x <= 18:
+            //one color blocks -each 16%(total - 80%)   two color block - 10%     yellow card - 6%     red card- 2%      injury - 2%
+            case x <= 16:
                 a = "ball_blue";
                 break;
-            case (x > 18 && x <= 36):
+            case (x > 16 && x <= 32):
                 a = "ball_green";
                 break;
-            case x > 36 && x <= 54:
+            case x > 32 && x <= 48:
                 a = "ball_purple";
                 break;
-            case x > 54 && x <= 72:
+            case x > 48 && x <= 64:
                 a = "ball_red";
                 break;
-            case x > 72 && x <= 90:
+            case x > 64 && x <= 80:
                 a = "ball_yellow";
+                break;
+            case x > 80 && x <= 90:
+                a = getTwoColoredBlock();
                 break;
             case x > 90 && x <= 96:
                 a = "yellow_card";
@@ -169,14 +191,25 @@ export default class Block extends Container {
         return a;
     }
 
-    public createNonMatchingGrid(_row: number, _col: number, img: string | Sprite): boolean | undefined {
+    public createNonMatchingGrid(_row: number, _col: number, img: string): boolean | undefined {
+
+        let img1 = img.split("-")[0];
+        let img2 = img.split("-")[1];
+
         let checkLeft = () => {
             if (_col < 2) {
                 return false;
             }
             let matches = 1;
             for (let col = 1; col < 3; col++) {
-                if (img === (this.rowContainer.children[_col - col] as any).type) {
+                let type1 = (this.rowContainer.children[_col - col] as any).type.split("-")[0];
+                let type2 = (this.rowContainer.children[_col - col] as any).type.split("-")[1];
+                if (
+                    img1 === type1 ||
+                    img1 === type2 ||
+                    img2 === type1 ||
+                    (typeof (img2) === "string" && typeof (type2) === "string" && img2 === type2)
+                ) {
                     matches++;
                     if (matches === 3) {
                         return true;
@@ -193,7 +226,15 @@ export default class Block extends Container {
             }
             let matches = 1;
             for (let row = 1; row < 3; row++) {
-                if (img === (this.grid.children[_row - row] as any).children[_col].type) {
+
+                let type1 = (this.grid.children[_row - row] as any).children[_col].type.split("-")[0];
+                let type2 = (this.grid.children[_row - row] as any).children[_col].type.split("-")[1];
+                if (
+                    img1 === type1 ||
+                    img1 === type2 ||
+                    img2 === type1 ||
+                    (typeof (img2) === "string" && typeof (type2) === "string" && img2 === type2)
+                ) {
                     matches++;
                     if (matches === 3) {
                         return true;

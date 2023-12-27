@@ -267,18 +267,28 @@ export default class Grid extends Container {
                     prevBlock_Up2 = this.blocks[row - 2][col] ? this.blocks[row - 2][col].type : null;
                 }
 
+                let checkForMultiColor = (...args: any) => {
+                    if (args.includes(null)) return false;
+                    let type1 = args[0].split("-")[0];
+                    let type2 = args[0].split("-")[1];
+                    if (args[1].includes(type1) && args[2].includes(type1)) {
+                        return true;
+                    }
+                    else if (type2 && args[1].includes(type2) && args[2].includes(type2)) {
+                        return true;
+                    }
+                    return false;
+                }
+
                 if (
-                    (thisBlock === prevBlock_Up1 && thisBlock === prevBlock_Up2) ||
-                    (thisBlock === nextBlock_down1 && thisBlock === nextBlock_down2) ||
-                    (thisBlock === nextBlock_down1 && thisBlock === prevBlock_Up1) ||
-                    (thisBlock === nextBlock_right1 && thisBlock === nextBlock_right2) ||
-                    (thisBlock === prevBlock_left1 && thisBlock === prevBlock_left2) ||
-                    (thisBlock === nextBlock_right1 && thisBlock === prevBlock_left1)
+                    checkForMultiColor(thisBlock, prevBlock_Up1, prevBlock_Up2) ||
+                    checkForMultiColor(thisBlock, nextBlock_down1, nextBlock_down2) ||
+                    checkForMultiColor(thisBlock, nextBlock_down1, prevBlock_Up1) ||
+                    checkForMultiColor(thisBlock, nextBlock_right1, nextBlock_right2) ||
+                    checkForMultiColor(thisBlock, prevBlock_left1, prevBlock_left2) ||
+                    checkForMultiColor(thisBlock, nextBlock_right1, prevBlock_left1)
                 ) {
                     matches.push(match);
-                }
-                else {
-                    //...
                 }
             }
         }
@@ -814,7 +824,7 @@ export default class Grid extends Container {
 
         this.noMoves = possibleMoves.length === 0;
         if (fromNoMovePopup) return;
-        
+
         console.log(`possible moves => ${JSON.stringify(possibleMoves)}`);
         if (!newlyCreatedGrid) {
             setTimeout(() => {

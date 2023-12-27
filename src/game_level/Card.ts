@@ -283,9 +283,15 @@ export class Card extends Container {
         let tweenStart_y = level.grid.blocks[randomMatchingBlock.row][randomMatchingBlock.col].blockImg.y;
 
         let defenceColor = this.colors[this.stats.defense_color];
+        let def_points_from_color1 = matches.filter(e => (e["type"] as any).split("-")[0] === defenceColor).length;
+        let def_points_from_color2 = matches.filter(e => (e["type"] as any).split("-")[1] === defenceColor).length;
+        let def_points = def_points_from_color1 + def_points_from_color2;
+
         let attackColor = this.colors[this.stats.attack_color];
-        let def_points = matches.filter(e => e["type"] === defenceColor).length;
-        let atk_points = matches.filter(e => e["type"] === attackColor).length;
+        let atk_points_from_color1 = matches.filter(e => (e["type"] as any).split("-")[0] === attackColor).length;
+        let atk_points_from_color2 = matches.filter(e => (e["type"] as any).split("-")[1] === attackColor).length
+        let atk_points = atk_points_from_color1 + atk_points_from_color2;
+
         let initialScaleX = this.cardImg.scale.x;
         let initialScaley = this.cardImg.scale.y;
 
