@@ -354,7 +354,7 @@ export default class Grid extends Container {
                         distance: 5,// higher value is not working on mobile !!!!
                         outerStrength: 5,
                         innerStrength: 0,
-                        color: colors[match.type],
+                        color: colors[match.type.split("-")[0]],
                         quality: 1,
                         knockout: false,
                     })
@@ -941,7 +941,7 @@ export default class Grid extends Container {
                 this.level.playerCards.children[tweenTarget.initiatorIndex].goalsScored++;
             }
             let finalY = App.isPlayerTurn ? App.height * 0.12 : App.height * 0.88
-            gsap.to(tweenTarget, .5, {
+            gsap.to(tweenTarget, .3, {
                 delay: 1.1,
                 y: finalY,
                 alpha: 0,
@@ -950,9 +950,10 @@ export default class Grid extends Container {
                     App.isPlayerTurn ? this.level.playerScore++ : this.level.opponentScore++;
                     tweenTarget.parent.removeChild(tweenTarget);
                     this.showText("GOAL!");
+                    App.EE.emit("goal_scored");
                 }
             });
-            gsap.to(tweenTarget.scale, .5, {
+            gsap.to(tweenTarget.scale, .3, {
                 delay: 1.1,
                 x: scaleValue,
                 y: scaleValue,

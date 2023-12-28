@@ -370,6 +370,7 @@ export class Card extends Container {
             this.stats.attack_current += atk_points;
             // if (this.stats.attack_current >= 5) { // test
             if (this.stats.attack_current >= this.stats.attack_full) {
+                // if (true) {//test
 
                 this.burnAnimation.play();
                 this.burnAnimation.armatureDisplay.visible = true;

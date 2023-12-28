@@ -916,7 +916,7 @@ export class StandingsView extends Container implements IScene {
         deleteBtn.interactive = true;
         deleteBtn.buttonMode = true;
 
-        deleteBtn.on('pointerdown', (e) => {
+        deleteBtn.once('pointerdown', (e) => {
             //TODO - add confirm popup...
             this.deleteProgress();
             App.removeScene(this);

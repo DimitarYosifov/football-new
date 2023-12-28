@@ -71,6 +71,7 @@ export class App {
             view: document.getElementById("pixi-canvas") as HTMLCanvasElement,
             resolution: window.devicePixelRatio > minDPR ? window.devicePixelRatio : minDPR || 1,
             autoDensity: true,
+            antialias : true,
             backgroundColor: background,
             width: width,
             height: height

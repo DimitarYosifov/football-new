@@ -10,6 +10,7 @@ import WaitingOpponentPopup from "../popups/WaitingOpponentPopup";
 import { ActiveDefense } from "../game_level/ActiveDefense";
 import { InitialRandomBallPoints } from "../game_level/InitialRandomBallPoints";
 import Specials from "../game_level/Specials";
+import { ShockwaveFilter } from '@pixi/filter-shockwave';
 
 export class Level extends Container implements IScene {
 
@@ -37,6 +38,7 @@ export class Level extends Container implements IScene {
     private waitingOpponentPopup: WaitingOpponentPopup | null;
     public allSpecials: string[] = [];
     private opponentSpecials: string[] = [];
+    private shockWaveFilter: ShockwaveFilter | null = null;
 
     constructor() {
         super();
@@ -73,6 +75,10 @@ export class Level extends Container implements IScene {
         App.EE.on("waiting_opponent", (showPopup: boolean, opponentLeft: boolean) => {
             this.waitingOpponent(showPopup, opponentLeft);
         });
+
+        App.EE.on("goal_scored", () => {
+            this.addShockWave();
+        });
     }
 
     private dataRecieved = () => {
@@ -80,7 +86,16 @@ export class Level extends Container implements IScene {
         this.addChild(this.matchStartPopup);
     }
 
-    public update(time: number): void { }
+    public update(time: number): void {
+        if (this.shockWaveFilter) {
+            if (this.shockWaveFilter.time >= 1) {
+                this.shockWaveFilter = null;
+                this.filters = [];
+            } else {
+                this.shockWaveFilter.time += 0.01;
+            }
+        }
+    }
 
     public addBG(): void {
         this.backgroundImg = Sprite.from("pitch");
@@ -141,10 +156,10 @@ export class Level extends Container implements IScene {
         }
     }
 
-     /**
-     * CREATE GAME SPECIALS
-     */
-     private createSpecials(): void {
+    /**
+    * CREATE GAME SPECIALS
+    */
+    private createSpecials(): void {
         let allSpecialsContainer = new Specials("player");
         this.addChild(allSpecialsContainer);
     }
@@ -227,5 +242,20 @@ export class Level extends Container implements IScene {
                 App.app.ticker.start();
             }, 100);
         }
+    }
+
+    private addShockWave(): void {
+        this.shockWaveFilter = new ShockwaveFilter(
+            [270, App.isPlayerTurn ? App.height * 0.16   : App.height * 0.85],
+            {
+                amplitude: 10,
+                wavelength: 160,
+                speed: 400,
+                brightness: 1,
+                radius: 300,
+            },
+            0
+        );
+        this.filters = [this.shockWaveFilter];
     }
 }

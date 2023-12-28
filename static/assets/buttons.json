@@ -47,6 +47,30 @@
         "x": 0.5,
         "y": 0.5
       }
+    },
+    "delete": {
+      "frame": {
+        "x": 0,
+        "y": 229,
+        "w": 176,
+        "h": 177
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 12,
+        "w": 176,
+        "h": 177
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 200
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
     }
   },
   "meta": {
@@ -56,7 +80,7 @@
     "format": "RGBA8888",
     "size": {
       "w": 955,
-      "h": 275
+      "h": 405
     },
     "scale": 1
   }
