@@ -166,7 +166,12 @@ export class Level extends Container implements IScene {
 
     public onIntroFinish() {
         this.grid = new Grid();
-        this.createSpecials();
+
+        if (!App.friendly && !App.pvpGame) {
+            // no specials for friendly and PVP for now
+            this.createSpecials();
+        }
+
         this.addChild(this.grid);
         this.addRandomDefense();
         //TODO - this.addSelectedDefences(); // add player's selected defences
@@ -246,7 +251,7 @@ export class Level extends Container implements IScene {
 
     private addShockWave(): void {
         this.shockWaveFilter = new ShockwaveFilter(
-            [270, App.isPlayerTurn ? App.height * 0.16   : App.height * 0.85],
+            [270, App.isPlayerTurn ? App.height * 0.16 : App.height * 0.85],
             {
                 amplitude: 10,
                 wavelength: 160,
