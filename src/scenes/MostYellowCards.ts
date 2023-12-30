@@ -99,7 +99,7 @@ export default class MostYellowCards extends Container implements IScene {
             index.position.set(App.width * 0.05, y + App.height * 0.01);
             index.anchor.set(0.5, 0);
             cont.addChild(index);
-            let img = Sprite.from(`player_id_${data.img}`);
+            let img = Sprite.from(`${data.img}`);
             img.width = App.width / 15;
             img.scale.y = img.scale.x;
             img.position.set(App.width * 0.15, y);

@@ -34,7 +34,7 @@ export default class LevelCardsSet extends Container {
                 stats: this.lineUps.player![i],
                 font_size: App.height / 45,  //change this shit!!
 
-                cardTexture: `player_id_${this.lineUps.player![i].player_img_id}`,
+                cardTexture: `${this.lineUps.player![i].player_img_id}`,
                 card_x: card_x,
                 card_y: card_y,
                 card_width: card_width,
@@ -99,7 +99,7 @@ export default class LevelCardsSet extends Container {
                 stats: this.lineUps.opponent![i],
                 font_size: App.height / 45,  //idiotic!!!! TODO...
 
-                cardTexture: `player_id_${this.lineUps.opponent![i].player_img_id}`,
+                cardTexture: `${this.lineUps.opponent![i].player_img_id}`,
                 card_x: card_x,
                 card_y: 0,
                 card_width: card_width,

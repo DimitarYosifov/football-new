@@ -113,7 +113,7 @@ export class EditTeam extends Container implements IScene {
                 stats: player,
                 font_size: this.stageHeight / 45,// + 'px',  //change this shit!!
 
-                cardTexture: `player_id_${player.player_img_id}`,
+                cardTexture: `${player.player_img_id}`,
                 card_x: card_x,
                 card_y: card_y,
                 card_width: card_width,

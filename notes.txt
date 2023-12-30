@@ -61,22 +61,51 @@ if we want to add new club or change existing double click add-players.html and 
             knockout: false,
         })]
 
-7:                              total    avrg  starting avrg
-man city                         436  -24.22    133
-bayern   -                       433  -24.05    130
-real madrid                      432  -24.00    129
 
-6:
-roma                             473  -26.27    149
-inter                            468  -26.00    148
-Club Atlético de Madrid          475  -26.38    147 
+old-----------------------------------------------------------------
+                                total  avrg               total
+man city                         466  -25.88               6
+bayern                           488  -27.10               5
+real madrid                      478  -26.55               6
+roma                             546  -30.33               4
+inter                            513  -28.50               5
+Atlético                         530  -29.44               4 
+rangers                          575  -31.94               3
+dortmund                         532  -29.55               4
+Feyenoord                        548  -30.44               4
+Beşiktaş                         571  -31.72               3 
+PAOK FC                          588  -32.66               3
+ludogorets                       597  -33.16               2
 
-5:
-rangers                          512  -28.44    164
-dortmund                         511  -28.38    162
-Feyenoord                        516  -28.66    166
 
-4:
-ludogorets                       557  -30.94    179
-Beşiktaş                         559  -31.22    180 
-PAOK FC                          558  -31.11    178
+-----------------------------------------------------------------
+
+7 - 190m+        = 17(points for atk/def)
+    175m- 189m   = 18
+    150m- 174m   = 19
+    135m- 149m   = 20
+    120m- 134m   = 21
+    105m- 119m   = 22
+    90m - 104m   = 23
+    75m - 89m    = 24              
+    60m - 74m    = 25 
+6 - 50m - 59m    = 26
+    40m - 49m    = 27
+5 - 30m - 39m    = 28
+    20m - 29m    = 29
+4 - 12m - 19m    = 30
+     5m - 11m    = 31
+3 -  3m -  5m    = 32
+     1m -  2.99m = 33
+2 - 0.5m-0.99m   = 34
+    0.1m-0.49m   = 35
+1 -  <0.1m       = 36
+
+ (est. atk/def)
+goalkeepers -  80%/20%
+defenders   -  65%/35%
+midfielders -  50%/50%
+forwards    -  35%/65%
+
+DONE:
+man city      

@@ -1,502 +1,1087 @@
 {
   "meta": {
-    "version": "0.6.4"
+    "version": "0.6.7"
   },
-  "savePath": "C:\\Users\\User\\Desktop\\football\\assets",
+  "savePath": "C:\\Users\\yosif\\OneDrive\\Desktop\\football-new\\static\\assets",
   "images": [
     {
-      "name": "player_id_001.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_001.png",
+      "name": "Aboubakar.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Aboubakar.png",
       "folder": ""
     },
     {
-      "name": "player_id_002.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_002.png",
+      "name": "Abraham.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Abraham.png",
       "folder": ""
     },
     {
-      "name": "player_id_003.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_003.png",
+      "name": "Acerbi.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Acerbi.png",
       "folder": ""
     },
     {
-      "name": "player_id_004.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_004.png",
+      "name": "Adeyemi.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Adeyemi.png",
       "folder": ""
     },
     {
-      "name": "player_id_005.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_005.png",
+      "name": "Akanji.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Akanji.png",
       "folder": ""
     },
     {
-      "name": "player_id_006.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_006.png",
+      "name": "Ake.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Ake.png",
       "folder": ""
     },
     {
-      "name": "player_id_007.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_007.png",
+      "name": "Alaba.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Alaba.png",
       "folder": ""
     },
     {
-      "name": "player_id_008.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_008.png",
+      "name": "Almeida.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Almeida.png",
       "folder": ""
     },
     {
-      "name": "player_id_009.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_009.png",
+      "name": "Alvarez.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Alvarez.png",
       "folder": ""
     },
     {
-      "name": "player_id_010.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_010.png",
+      "name": "Amartey.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Amartey.png",
       "folder": ""
     },
     {
-      "name": "player_id_011.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_011.png",
+      "name": "Antonio.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Antonio.png",
       "folder": ""
     },
     {
-      "name": "player_id_012.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_012.png",
+      "name": "Aouar.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Aouar.png",
       "folder": ""
     },
     {
-      "name": "player_id_013.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_013.png",
+      "name": "Arnautovic.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Arnautovic.png",
       "folder": ""
     },
     {
-      "name": "player_id_014.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_014.png",
+      "name": "Arrizabalaga.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Arrizabalaga.png",
       "folder": ""
     },
     {
-      "name": "player_id_015.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_015.png",
+      "name": "Asllani.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Asllani.png",
       "folder": ""
     },
     {
-      "name": "player_id_016.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_016.png",
+      "name": "Audero.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Audero.png",
       "folder": ""
     },
     {
-      "name": "player_id_017.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_017.png",
+      "name": "Augusto.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Augusto.png",
       "folder": ""
     },
     {
-      "name": "player_id_018.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_018.png",
+      "name": "Azpilicueta.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Azpilicueta.png",
       "folder": ""
     },
     {
-      "name": "player_id_019.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_019.png",
+      "name": "Baba.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Baba.png",
       "folder": ""
     },
     {
-      "name": "player_id_020.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_020.png",
+      "name": "Barella.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Barella.png",
       "folder": ""
     },
     {
-      "name": "player_id_021.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_021.png",
+      "name": "Barisic.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Barisic.png",
       "folder": ""
     },
     {
-      "name": "player_id_022.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_022.png",
+      "name": "Barrios.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Barrios.png",
       "folder": ""
     },
     {
-      "name": "player_id_023.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_023.png",
+      "name": "Bastoni.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Bastoni.png",
       "folder": ""
     },
     {
-      "name": "player_id_024.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_024.png",
+      "name": "Baytekin.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Baytekin.png",
       "folder": ""
     },
     {
-      "name": "player_id_025.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_025.png",
+      "name": "Bellingham.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Bellingham.png",
       "folder": ""
     },
     {
-      "name": "player_id_026.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_026.png",
+      "name": "Bensebaini.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Bensebaini.png",
       "folder": ""
     },
     {
-      "name": "player_id_027.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_027.png",
+      "name": "Bijlow.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Bijlow.png",
       "folder": ""
     },
     {
-      "name": "player_id_028.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_028.png",
+      "name": "Bisseck.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Bisseck.png",
       "folder": ""
     },
     {
-      "name": "player_id_029.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_029.png",
+      "name": "Boer.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Boer.png",
       "folder": ""
     },
     {
-      "name": "player_id_030.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_030.png",
+      "name": "Bove.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Bove.png",
       "folder": ""
     },
     {
-      "name": "player_id_031.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_031.png",
+      "name": "Brandt.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Brandt.png",
       "folder": ""
     },
     {
-      "name": "player_id_032.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_032.png",
+      "name": "Bulut.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Bulut.png",
       "folder": ""
     },
     {
-      "name": "player_id_033.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_033.png",
+      "name": "Butland.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Butland.png",
       "folder": ""
     },
     {
-      "name": "player_id_034.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_034.png",
+      "name": "Camavinga.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Camavinga.png",
       "folder": ""
     },
     {
-      "name": "player_id_035.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_035.png",
+      "name": "Can.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Can.png",
       "folder": ""
     },
     {
-      "name": "player_id_036.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_036.png",
+      "name": "Cantwell.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Cantwell.png",
       "folder": ""
     },
     {
-      "name": "player_id_037.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_037.png",
+      "name": "Carvajal.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Carvajal.png",
       "folder": ""
     },
     {
-      "name": "player_id_038.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_038.png",
+      "name": "Chamberlain.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Chamberlain.png",
       "folder": ""
     },
     {
-      "name": "player_id_039.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_039.png",
+      "name": "Cifuentes.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Cifuentes.png",
       "folder": ""
     },
     {
-      "name": "player_id_040.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_040.png",
+      "name": "Colley.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Colley.png",
       "folder": ""
     },
     {
-      "name": "player_id_041.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_041.png",
+      "name": "Coman.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Coman.png",
       "folder": ""
     },
     {
-      "name": "player_id_042.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_042.png",
+      "name": "Courtois.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Courtois.png",
       "folder": ""
     },
     {
-      "name": "player_id_043.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_043.png",
+      "name": "Cristante.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Cristante.png",
       "folder": ""
     },
     {
-      "name": "player_id_044.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_044.png",
+      "name": "Danilo.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Danilo.png",
       "folder": ""
     },
     {
-      "name": "player_id_045.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_045.png",
+      "name": "Davides.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Davides.png",
       "folder": ""
     },
     {
-      "name": "player_id_046.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_046.png",
+      "name": "Davies.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Davies.png",
       "folder": ""
     },
     {
-      "name": "player_id_047.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_047.png",
+      "name": "De Broyne.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/De Broyne.png",
       "folder": ""
     },
     {
-      "name": "player_id_048.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_048.png",
+      "name": "Despodov.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Despodov.png",
       "folder": ""
     },
     {
-      "name": "player_id_049.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_049.png",
+      "name": "Dessers.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Dessers.png",
       "folder": ""
     },
     {
-      "name": "player_id_050.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_050.png",
+      "name": "Destanoğlu.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Destanoğlu.png",
       "folder": ""
     },
     {
-      "name": "player_id_051.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_051.png",
+      "name": "Dias.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Dias.png",
       "folder": ""
     },
     {
-      "name": "player_id_052.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_052.png",
+      "name": "Diaz.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Diaz.png",
       "folder": ""
     },
     {
-      "name": "player_id_053.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_053.png",
+      "name": "Dimarco.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Dimarco.png",
       "folder": ""
     },
     {
-      "name": "player_id_054.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_054.png",
+      "name": "Dowell.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Dowell.png",
       "folder": ""
     },
     {
-      "name": "player_id_055.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_055.png",
+      "name": "Dumfries.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Dumfries.png",
       "folder": ""
     },
     {
-      "name": "player_id_056.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_056.png",
+      "name": "Dybala.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Dybala.png",
       "folder": ""
     },
     {
-      "name": "player_id_057.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_057.png",
+      "name": "Ederson.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Ederson.png",
       "folder": ""
     },
     {
-      "name": "player_id_058.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_058.png",
+      "name": "Ekong.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Ekong.png",
       "folder": ""
     },
     {
-      "name": "player_id_059.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_059.png",
+      "name": "Fernandes.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Fernandes.png",
       "folder": ""
     },
     {
-      "name": "player_id_060.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_060.png",
+      "name": "Foden.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Foden.png",
       "folder": ""
     },
     {
-      "name": "player_id_061.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_061.png",
+      "name": "Frattesi.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Frattesi.png",
       "folder": ""
     },
     {
-      "name": "player_id_062.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_062.png",
+      "name": "Galan.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Galan.png",
       "folder": ""
     },
     {
-      "name": "player_id_063.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_063.png",
+      "name": "Garcia.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Garcia.png",
       "folder": ""
     },
     {
-      "name": "player_id_064.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_064.png",
+      "name": "Geertruida.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Geertruida.png",
       "folder": ""
     },
     {
-      "name": "player_id_065.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_065.png",
+      "name": "Gennaro.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Gennaro.png",
       "folder": ""
     },
     {
-      "name": "player_id_066.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_066.png",
+      "name": "Gimenes.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Gimenes.png",
       "folder": ""
     },
     {
-      "name": "player_id_067.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_067.png",
+      "name": "Gimenez.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Gimenez.png",
       "folder": ""
     },
     {
-      "name": "player_id_068.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_068.png",
+      "name": "Goldson.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Goldson.png",
       "folder": ""
     },
     {
-      "name": "player_id_069.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_069.png",
+      "name": "Goncalves.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Goncalves.png",
       "folder": ""
     },
     {
-      "name": "player_id_070.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_070.png",
+      "name": "Goretzka.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Goretzka.png",
       "folder": ""
     },
     {
-      "name": "player_id_071.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_071.png",
+      "name": "Grbic.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Grbic.png",
       "folder": ""
     },
     {
-      "name": "player_id_072.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_072.png",
+      "name": "Griezmann.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Griezmann.png",
       "folder": ""
     },
     {
-      "name": "player_id_073.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_073.png",
+      "name": "Guerreiro.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Guerreiro.png",
       "folder": ""
     },
     {
-      "name": "player_id_074.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_074.png",
+      "name": "Guler.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Guler.png",
       "folder": ""
     },
     {
-      "name": "player_id_075.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_075.png",
+      "name": "Gvardiol.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Gvardiol.png",
       "folder": ""
     },
     {
-      "name": "player_id_076.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_076.png",
+      "name": "Günok.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Günok.png",
       "folder": ""
     },
     {
-      "name": "player_id_077.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_077.png",
+      "name": "Haaland.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Haaland.png",
       "folder": ""
     },
     {
-      "name": "player_id_078.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_078.png",
+      "name": "Hadziahmetovic.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Hadziahmetovic.png",
       "folder": ""
     },
     {
-      "name": "player_id_079.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_079.png",
+      "name": "Hakan.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Hakan.png",
       "folder": ""
     },
     {
-      "name": "player_id_080.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_080.png",
+      "name": "Hancko.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Hancko.png",
       "folder": ""
     },
     {
-      "name": "player_id_081.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_081.png",
+      "name": "Hartman.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Hartman.png",
       "folder": ""
     },
     {
-      "name": "player_id_082.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_082.png",
+      "name": "Hermoso.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Hermoso.png",
       "folder": ""
     },
     {
-      "name": "player_id_083.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_083.png",
+      "name": "Hummels.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Hummels.png",
       "folder": ""
     },
     {
-      "name": "player_id_084.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_084.png",
+      "name": "Ivanusec.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Ivanusec.png",
       "folder": ""
     },
     {
-      "name": "player_id_085.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_085.png",
+      "name": "Jack.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Jack.png",
       "folder": ""
     },
     {
-      "name": "player_id_086.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_086.png",
+      "name": "Joselu.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Joselu.png",
       "folder": ""
     },
     {
-      "name": "player_id_087.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_087.png",
+      "name": "Junior.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Junior.png",
       "folder": ""
     },
     {
-      "name": "player_id_088.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_088.png",
+      "name": "Kane.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Kane.png",
       "folder": ""
     },
     {
-      "name": "player_id_089.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_089.png",
+      "name": "Kedziora.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Kedziora.png",
       "folder": ""
     },
     {
-      "name": "player_id_090.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_090.png",
+      "name": "Kim.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Kim.png",
       "folder": ""
     },
     {
-      "name": "player_id_091.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_091.png",
+      "name": "Kimmich.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Kimmich.png",
       "folder": ""
     },
     {
-      "name": "player_id_092.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_092.png",
+      "name": "Kobel.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Kobel.png",
       "folder": ""
     },
     {
-      "name": "player_id_093.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_093.png",
+      "name": "Koke.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Koke.png",
       "folder": ""
     },
     {
-      "name": "player_id_094.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_094.png",
+      "name": "Konstantelias.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Konstantelias.png",
       "folder": ""
     },
     {
-      "name": "player_id_095.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_095.png",
+      "name": "Kotarski.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Kotarski.png",
       "folder": ""
     },
     {
-      "name": "player_id_096.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_096.png",
+      "name": "Koulierakis.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Koulierakis.png",
       "folder": ""
     },
     {
-      "name": "player_id_097.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_097.png",
+      "name": "Kovacic.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Kovacic.png",
       "folder": ""
     },
     {
-      "name": "player_id_098.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_098.png",
+      "name": "Kristensen.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Kristensen.png",
       "folder": ""
     },
     {
-      "name": "player_id_099.png",
-      "path": "C:/Users/User/Desktop/football/images/players/player_id_099.png",
+      "name": "Kumbulla.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Kumbulla.png",
+      "folder": ""
+    },
+    {
+      "name": "Laimer.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Laimer.png",
+      "folder": ""
+    },
+    {
+      "name": "Lemar.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Lemar.png",
+      "folder": ""
+    },
+    {
+      "name": "Lewis.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Lewis.png",
+      "folder": ""
+    },
+    {
+      "name": "Ligt.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Ligt.png",
+      "folder": ""
+    },
+    {
+      "name": "Lingr.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Lingr.png",
+      "folder": ""
+    },
+    {
+      "name": "Lino.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Lino.png",
+      "folder": ""
+    },
+    {
+      "name": "Llorente.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Llorente.png",
+      "folder": ""
+    },
+    {
+      "name": "Lopez.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Lopez.png",
+      "folder": ""
+    },
+    {
+      "name": "Lorente.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Lorente.png",
+      "folder": ""
+    },
+    {
+      "name": "Lotka.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Lotka.png",
+      "folder": ""
+    },
+    {
+      "name": "Lukaku.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Lukaku.png",
+      "folder": ""
+    },
+    {
+      "name": "Lundstram.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Lundstram.png",
+      "folder": ""
+    },
+    {
+      "name": "Lunin.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Lunin.png",
+      "folder": ""
+    },
+    {
+      "name": "Malen.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Malen.png",
+      "folder": ""
+    },
+    {
+      "name": "Mancini.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Mancini.png",
+      "folder": ""
+    },
+    {
+      "name": "Mandava.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Mandava.png",
+      "folder": ""
+    },
+    {
+      "name": "Martinez.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Martinez.png",
+      "folder": ""
+    },
+    {
+      "name": "Masuaku.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Masuaku.png",
+      "folder": ""
+    },
+    {
+      "name": "Mazraoui.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Mazraoui.png",
+      "folder": ""
+    },
+    {
+      "name": "McCrorie.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/McCrorie.png",
+      "folder": ""
+    },
+    {
+      "name": "McLaughlin.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/McLaughlin.png",
+      "folder": ""
+    },
+    {
+      "name": "Meite.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Meite.png",
+      "folder": ""
+    },
+    {
+      "name": "Mendy.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Mendy.png",
+      "folder": ""
+    },
+    {
+      "name": "Meyer.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Meyer.png",
+      "folder": ""
+    },
+    {
+      "name": "Michailidis.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Michailidis.png",
+      "folder": ""
+    },
+    {
+      "name": "Milambo.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Milambo.png",
+      "folder": ""
+    },
+    {
+      "name": "Militao.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Militao.png",
+      "folder": ""
+    },
+    {
+      "name": "Molina.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Molina.png",
+      "folder": ""
+    },
+    {
+      "name": "Moukoko.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Moukoko.png",
+      "folder": ""
+    },
+    {
+      "name": "Musiala.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Musiala.png",
+      "folder": ""
+    },
+    {
+      "name": "Müller.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Müller.png",
+      "folder": ""
+    },
+    {
+      "name": "Naressi.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Naressi.png",
+      "folder": ""
+    },
+    {
+      "name": "Ndicka.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Ndicka.png",
+      "folder": ""
+    },
+    {
+      "name": "Nedelev.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Nedelev.png",
+      "folder": ""
+    },
+    {
+      "name": "Nedyalkov.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Nedyalkov.png",
+      "folder": ""
+    },
+    {
+      "name": "Neuer.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Neuer.png",
+      "folder": ""
+    },
+    {
+      "name": "Nieuwkoop.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Nieuwkoop.png",
+      "folder": ""
+    },
+    {
+      "name": "Niguez.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Niguez.png",
+      "folder": ""
+    },
+    {
+      "name": "Nmecha.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Nmecha.png",
+      "folder": ""
+    },
+    {
+      "name": "Nunes.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Nunes.png",
+      "folder": ""
+    },
+    {
+      "name": "Oblak.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Oblak.png",
+      "folder": ""
+    },
+    {
+      "name": "Onana.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Onana.png",
+      "folder": ""
+    },
+    {
+      "name": "Ortega.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Ortega.png",
+      "folder": ""
+    },
+    {
+      "name": "Ozcan.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Ozcan.png",
+      "folder": ""
+    },
+    {
+      "name": "Ozdoev.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Ozdoev.png",
+      "folder": ""
+    },
+    {
+      "name": "Padt.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Padt.png",
+      "folder": ""
+    },
+    {
+      "name": "Paixao.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Paixao.png",
+      "folder": ""
+    },
+    {
+      "name": "Patricio.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Patricio.png",
+      "folder": ""
+    },
+    {
+      "name": "Paul.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Paul.png",
+      "folder": ""
+    },
+    {
+      "name": "Pavard.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Pavard.png",
+      "folder": ""
+    },
+    {
+      "name": "Pavlovic.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Pavlovic.png",
+      "folder": ""
+    },
+    {
+      "name": "Pellegrini.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Pellegrini.png",
+      "folder": ""
+    },
+    {
+      "name": "Peretz.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Peretz.png",
+      "folder": ""
+    },
+    {
+      "name": "Phillips.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Phillips.png",
+      "folder": ""
+    },
+    {
+      "name": "Piotrowski.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Piotrowski.png",
+      "folder": ""
+    },
+    {
+      "name": "Rashica.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Rashica.png",
+      "folder": ""
+    },
+    {
+      "name": "Raskin.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Raskin.png",
+      "folder": ""
+    },
+    {
+      "name": "Reyna.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Reyna.png",
+      "folder": ""
+    },
+    {
+      "name": "Riquelme.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Riquelme.png",
+      "folder": ""
+    },
+    {
+      "name": "Rodri.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Rodri.png",
+      "folder": ""
+    },
+    {
+      "name": "Rodrygo.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Rodrygo.png",
+      "folder": ""
+    },
+    {
+      "name": "Rosier.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Rosier.png",
+      "folder": ""
+    },
+    {
+      "name": "Rudiger.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Rudiger.png",
+      "folder": ""
+    },
+    {
+      "name": "Ryerson.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Ryerson.png",
+      "folder": ""
+    },
+    {
+      "name": "Sabitzer.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Sabitzer.png",
+      "folder": ""
+    },
+    {
+      "name": "Samatta.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Samatta.png",
+      "folder": ""
+    },
+    {
+      "name": "Sanches.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Sanches.png",
+      "folder": ""
+    },
+    {
+      "name": "Sane.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Sane.png",
+      "folder": ""
+    },
+    {
+      "name": "Sanuc.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Sanuc.png",
+      "folder": ""
+    },
+    {
+      "name": "Sas.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Sas.png",
+      "folder": ""
+    },
+    {
+      "name": "Schlotterbeck.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Schlotterbeck.png",
+      "folder": ""
+    },
+    {
+      "name": "Seco.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Seco.png",
+      "folder": ""
+    },
+    {
+      "name": "Silva.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Silva.png",
+      "folder": ""
+    },
+    {
+      "name": "Sima.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Sima.png",
+      "folder": ""
+    },
+    {
+      "name": "Sluga.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Sluga.png",
+      "folder": ""
+    },
+    {
+      "name": "Soares.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Soares.png",
+      "folder": ""
+    },
+    {
+      "name": "Soaress.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Soaress.png",
+      "folder": ""
+    },
+    {
+      "name": "Sommer.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Sommer.png",
+      "folder": ""
+    },
+    {
+      "name": "Son.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Son.png",
+      "folder": ""
+    },
+    {
+      "name": "Soyuncu.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Soyuncu.png",
+      "folder": ""
+    },
+    {
+      "name": "Spinazzola.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Spinazzola.png",
+      "folder": ""
+    },
+    {
+      "name": "Steffan.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Steffan.png",
+      "folder": ""
+    },
+    {
+      "name": "Stengs.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Stengs.png",
+      "folder": ""
+    },
+    {
+      "name": "Sterling.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Sterling.png",
+      "folder": ""
+    },
+    {
+      "name": "Stones.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Stones.png",
+      "folder": ""
+    },
+    {
+      "name": "Sule.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Sule.png",
+      "folder": ""
+    },
+    {
+      "name": "Sundberg.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Sundberg.png",
+      "folder": ""
+    },
+    {
+      "name": "Svilar.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Svilar.png",
+      "folder": ""
+    },
+    {
+      "name": "Talichmanidis.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Talichmanidis.png",
+      "folder": ""
+    },
+    {
+      "name": "Tavernier.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Tavernier.png",
+      "folder": ""
+    },
+    {
+      "name": "Tchouameni.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Tchouameni.png",
+      "folder": ""
+    },
+    {
+      "name": "Tekpetey.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Tekpetey.png",
+      "folder": ""
+    },
+    {
+      "name": "Terziev.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Terziev.png",
+      "folder": ""
+    },
+    {
+      "name": "Thuram.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Thuram.png",
+      "folder": ""
+    },
+    {
+      "name": "Timber.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Timber.png",
+      "folder": ""
+    },
+    {
+      "name": "Trauner.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Trauner.png",
+      "folder": ""
+    },
+    {
+      "name": "Tsingaras.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Tsingaras.png",
+      "folder": ""
+    },
+    {
+      "name": "Tıknaz.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Tıknaz.png",
+      "folder": ""
+    },
+    {
+      "name": "Ucan.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Ucan.png",
+      "folder": ""
+    },
+    {
+      "name": "Ulreich.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Ulreich.png",
+      "folder": ""
+    },
+    {
+      "name": "Upamecano.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Upamecano.png",
+      "folder": ""
+    },
+    {
+      "name": "Valverde.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Valverde.png",
+      "folder": ""
+    },
+    {
+      "name": "Verdon.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Verdon.png",
+      "folder": ""
+    },
+    {
+      "name": "Vidal.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Vidal.png",
+      "folder": ""
+    },
+    {
+      "name": "Vrij.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Vrij.png",
+      "folder": ""
+    },
+    {
+      "name": "Wellenreuther.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Wellenreuther.png",
+      "folder": ""
+    },
+    {
+      "name": "Wieffer.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Wieffer.png",
+      "folder": ""
+    },
+    {
+      "name": "Witry.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Witry.png",
+      "folder": ""
+    },
+    {
+      "name": "Wolf.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Wolf.png",
+      "folder": ""
+    },
+    {
+      "name": "Yankov.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Yankov.png",
+      "folder": ""
+    },
+    {
+      "name": "Yordanov.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Yordanov.png",
+      "folder": ""
+    },
+    {
+      "name": "Yılmaz.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Yılmaz.png",
+      "folder": ""
+    },
+    {
+      "name": "Zalewski.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Zalewski.png",
+      "folder": ""
+    },
+    {
+      "name": "Zaynutdinov.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Zaynutdinov.png",
+      "folder": ""
+    },
+    {
+      "name": "Zerrouki.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Zerrouki.png",
+      "folder": ""
+    },
+    {
+      "name": "Zivkovic.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Zivkovic.png",
+      "folder": ""
+    },
+    {
+      "name": "Zivkovich.png",
+      "path": "C:/Users/yosif/OneDrive/Desktop/football-new/images/players/Zivkovich.png",
       "folder": ""
     }
   ],
@@ -513,7 +1098,7 @@
     "filter": "none",
     "exporter": "JSON (hash)",
     "fileName": "pack-result",
-    "savePath": "C:\\Users\\User\\Desktop\\football\\assets",
+    "savePath": "C:\\Users\\yosif\\OneDrive\\Desktop\\football-new\\static\\assets",
     "width": 2048,
     "height": 2048,
     "fixedSize": false,
