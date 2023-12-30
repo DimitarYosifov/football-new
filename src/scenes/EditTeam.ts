@@ -174,7 +174,7 @@ export class EditTeam extends Container implements IScene {
 
         this.makeInteractive();
 
-        createText('goalkeepers', getStyle(), this.container, App.height * 0.05, 0, 0, 0.5, App.height / 145);
+        createText('goalkeepers', getStyle(), this.container, App.height * 0.05, 0, 0, 0.5, App.height / 45);
         createText('defenders', getStyle(), this.container, App.height * 0.24, 0, 0, 0.5, App.height / 45);
         createText('midfielders', getStyle(), this.container, App.height * 0.43, 0, 0, 0.5, App.height / 45);
         createText('forwards', getStyle(), this.container, App.height * 0.62, 0, 0, 0.5, App.height / 45);

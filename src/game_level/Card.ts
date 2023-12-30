@@ -79,10 +79,13 @@ export class Card extends Container {
 
     public attackValuesText: Text;
     public defenseValuesText: Text;
+    public playerName: Text;
     public starsContainer: Container = new Container();
+
 
     public stars: Sprite;
     public starsBG: Graphics = new Graphics();
+    public infoBG: Graphics = new Graphics();
 
     public burnAnimation: any;
 
@@ -262,16 +265,76 @@ export class Card extends Container {
         this.starsBG.endFill();
         this.starsContainer.addChildAt(this.starsBG, 0);
 
+        //player name    - TODO - put it in seperated container
+        const styleName = new TextStyle({
+            fontFamily: config.mainFont,
+            fill: '#ffffff',
+            align: 'center',
+            // stroke: '#000000',
+            // strokeThickness: 1
+        });
+
+        this.playerName = createText(
+            this.cardTexture,
+            styleName,
+            this,
+            this.cardImg.y + this.cardImg.height / 2,
+            this.cardImg.x + this.cardImg.width / 2,
+            1,
+            0,
+            15
+        );
+        this.playerName.anchor.set(0.5);
+        this.playerName.alpha = 0;
+
+        // player info BG  - TODO - put it in seperated container
+        this.infoBG.beginFill(0x000000, 1);
+        this.infoBG.drawRect(
+            this.cardImg.x,
+            this.cardImg.y,
+            this.cardImg.width,
+            this.cardImg.height
+        );
+        this.infoBG.endFill();
+        this.infoBG.alpha = 0;
+        this.addChild(this.infoBG);
+
         this.addChild(this.starsContainer);
-
-        // this.addChild(this.attackValuesText);
-        // this.addChild(this.defenseValuesText);
-
         this.addChild(this.shoe);
         this.addChild(this.glove);
         this.addChild(this.injury);
         this.addChild(this.yellowCard);
         this.addChild(this.border);
+        this.addChild(this.infoBG);
+        this.addChild(this.playerName);
+        this.cardImg.interactive = true;
+        this.addInteraction();
+    }
+
+    private addInteraction() {
+        let held = false;
+        this.cardImg.on('pointerdown', () => {
+            held = true;
+            gsap.delayedCall(0.15, () => {
+                if (held) {
+                    gsap.to([this.playerName, this.infoBG], .5, {
+                        alpha: 1
+                    });
+                }
+            });
+            this.cardImg.on('pointerup', () => {
+                held = false;
+                gsap.to([this.playerName, this.infoBG], .5, {
+                    alpha: 0
+                });
+            })
+            this.cardImg.on('pointerupoutside', () => {
+                held = false;
+                gsap.to([this.playerName, this.infoBG], .5, {
+                    alpha: 0
+                });
+            })
+        });
     }
 
     private increasePoints(matches: []) {
