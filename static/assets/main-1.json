@@ -312,6 +312,30 @@
         "y": 0.5
       }
     },
+    "pointer-hand": {
+      "frame": {
+        "x": 349,
+        "y": 465,
+        "w": 73,
+        "h": 75
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 7,
+        "y": 2,
+        "w": 73,
+        "h": 75
+      },
+      "sourceSize": {
+        "w": 85,
+        "h": 85
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
     "glove2": {
       "frame": {
         "x": 0,
@@ -747,7 +771,7 @@
     "ball_red-ball_yellow": {
       "frame": {
         "x": 371,
-        "y": 465,
+        "y": 540,
         "w": 185,
         "h": 192
       },
@@ -770,12 +794,12 @@
     },
     "ball_red": {
       "frame": {
-        "x": 371,
-        "y": 657,
+        "x": 517,
+        "y": 202,
         "w": 185,
         "h": 192
       },
-      "rotated": true,
+      "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
         "x": 8,
@@ -794,8 +818,8 @@
     },
     "ball_yellow": {
       "frame": {
-        "x": 492,
-        "y": 202,
+        "x": 686,
+        "y": 0,
         "w": 185,
         "h": 192
       },
@@ -818,8 +842,8 @@
     },
     "next": {
       "frame": {
-        "x": 565,
-        "y": 0,
+        "x": 475,
+        "y": 732,
         "w": 150,
         "h": 150
       },
@@ -842,8 +866,8 @@
     },
     "prev": {
       "frame": {
-        "x": 556,
-        "y": 394,
+        "x": 475,
+        "y": 882,
         "w": 150,
         "h": 150
       },

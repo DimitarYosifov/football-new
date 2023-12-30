@@ -39,6 +39,7 @@ export class Level extends Container implements IScene {
     public allSpecials: string[] = [];
     private opponentSpecials: string[] = [];
     private shockWaveFilter: ShockwaveFilter | null = null;
+    public hintHand: Sprite;
 
     constructor() {
         super();
@@ -173,6 +174,7 @@ export class Level extends Container implements IScene {
         }
 
         this.addChild(this.grid);
+        this.addHintHand();
         this.addRandomDefense();
         //TODO - this.addSelectedDefences(); // add player's selected defences
         // // this.addSnow();
@@ -183,6 +185,14 @@ export class Level extends Container implements IScene {
     //     this.addChild(this.snowContainer.container);
     //     this.snowContainer.update();
     // }
+
+    public addHintHand(){
+        this.hintHand = Sprite.from(`pointer-hand`);
+        this.hintHand.position.set(150, 150)
+        this.hintHand.scale.set(0.65);
+        this.hintHand.visible = false;
+        this.addChild(this.hintHand);
+    }
 
     public addRandomDefense() {
         ///inital defenses and ball points

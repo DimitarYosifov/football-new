@@ -43,7 +43,7 @@ export default class Grid extends Container {
     private fallingBlocksOnColumn: any = {};
     private delayStep: number = 0.05
     private fallTweenDuration: number = 0.35;
-    private hintTween1: gsap.core.Tween;
+    private hintTween1: gsap.core.Timeline;;
     private hintTween2: gsap.core.Tween;
 
     constructor() {
@@ -89,6 +89,11 @@ export default class Grid extends Container {
             this.mask = mask;
             // this.checkPossibleMove(2, true);  
         }, 0);
+
+        // this.hintHand = Sprite.from(`pointer-hand`);
+        // this.hintHand.position.set(150, 150)
+        // this.hintHand.scale.set(0.65)
+        // this.level.addChild(this.hintHand);
     }
 
     private swapBlocks(block1_x: number, block1_y: number, dir: string) {
@@ -1087,43 +1092,40 @@ export default class Grid extends Container {
     }
 
     private addHint() {
-        this.hintTimeout = gsap.delayedCall(5, () => {
+        this.hintTimeout = gsap.delayedCall(6, () => {
+            let target1 = this.blocks[this.hintMatch.row][this.hintMatch.col];
+            let target2;
+            if (this.hintMatch.dir === "right") {
+                target2 = this.blocks[this.hintMatch.row][this.hintMatch.col + 1];
+            }
+            else if (this.hintMatch.dir === "down") {
+                target2 = this.blocks[this.hintMatch.row + 1][this.hintMatch.col];
+            }
+            else if (this.hintMatch.dir === "leftUp") {
+                target2 = this.blocks[this.hintMatch.row - 1][this.hintMatch.col - 1];
+            }
+            else {// rightUp
+                target2 = this.blocks[this.hintMatch.row - 1][this.hintMatch.col + 1];
+            }
+            
+            this.level.hintHand.position.set(target1.blockImg.x, target1.blockImg.y);
+            this.level.hintHand.visible =true;
+            this.hintTween1 = gsap.timeline({ paused: false });
+            this.hintTween1.to(this.level.hintHand, 0.75, {
+                x: target2.blockImg.x,
+                y:  target2.blockImg.y,
+                yoyo: true,
+                repeat: -1,
+                ease: "Power2.easeInOut",
+            });
+
             let start = () => {
                 this.hintInterval = gsap.delayedCall(0.6, () => {
-                    let target1 = this.blocks[this.hintMatch.row][this.hintMatch.col];
-                    let target2;
-                    if (this.hintMatch.dir === "right") {
-                        target2 = this.blocks[this.hintMatch.row][this.hintMatch.col + 1];
-                    }
-                    else if (this.hintMatch.dir === "down") {
-                        target2 = this.blocks[this.hintMatch.row + 1][this.hintMatch.col];
-                    }
-                    else if (this.hintMatch.dir === "leftUp") {
-                        target2 = this.blocks[this.hintMatch.row - 1][this.hintMatch.col - 1];
-                    }
-                    else {// rightUp
-                        target2 = this.blocks[this.hintMatch.row - 1][this.hintMatch.col + 1];
-                    }
-
-                    let width1 = target1.width! * 1.05;
-                    let height1 = target1.height! * 1.05;
-                    let width2 = target2.width! * 1.05;
-                    let height2 = target2.height! * 1.05;
-
-                    this.hintTween1 = gsap.to(target1.blockImg, 0.3, {
-                        width: width1,
-                        height: height1,
-                        yoyo: true,
-                        repeat: 1
-                    });
-                    this.hintTween2 = gsap.to(target2.blockImg, 0.3, {
-                        width: width2,
-                        height: height2,
-                        yoyo: true,
-                        repeat: 1
-                    });
                     if (!this.level.animationInProgress && !App.specialInProgress) {
                         start();
+                    }else{
+                        this.hintTween1.kill();
+                        this.level.hintHand.visible = false;
                     }
                 });
             }
