@@ -213,7 +213,7 @@ export class StandingsView extends Container implements IScene {
                 location.reload();
             }
             else if (
-                !App.seasonFixtures[App.currentRound] && this.lastGameRersult
+                 App.seasonFixtures![App.currentRound] && this.lastGameRersult
 
             ) {
                 /*
@@ -457,7 +457,7 @@ export class StandingsView extends Container implements IScene {
         ServerRequest(
             "fixtures",
             JSON.stringify({
-                seasonFixtures: App.seasonFixtures,
+                seasonFixtures: App.seasonFixtures!,
                 user: App.user,
                 currentRound: App.currentRound,
                 playerClubData: App.playerClubData,
@@ -527,7 +527,7 @@ export class StandingsView extends Container implements IScene {
 
         let playerClub = App.playerClubData.name;
 
-        App.leagueRounds = Array.isArray(App.seasonFixtures) ? App.seasonFixtures.length - 1 : [null, ...Object.values(App.seasonFixtures)].length - 1;
+        App.leagueRounds = Array.isArray(App.seasonFixtures) ? App.seasonFixtures!.length - 1 : [null, ...Object.values(App.seasonFixtures!)].length - 1;
         for (let round = 1; round <= App.leagueRounds; round++) {
             //Header
             let _y = this.height * 0.2;
@@ -542,7 +542,7 @@ export class StandingsView extends Container implements IScene {
             this.fixturesContainer.addChild(this.fixturesHeader);
 
 
-            App.seasonFixtures[round].forEach((game: any, i: number) => {
+            App.seasonFixtures![round].forEach((game: any, i: number) => {
                 let splitGame = game.split(' ')[0];
                 let firstClub = splitGame.split(":")[0];
                 let secondClub = splitGame.split(":")[1];
@@ -564,7 +564,7 @@ export class StandingsView extends Container implements IScene {
                     if (this.shouldGenerateResults && round === App.currentRound) {
                         result = this.randomResult(firstClub, secondClub, i);
                     } else {
-                        result = App.seasonFixtures[round][i].split(" ")[1];
+                        result = App.seasonFixtures![round][i].split(" ")[1];
                     }
                 } else {
                     if (this.lastGameRersult && round === App.currentRound) {
@@ -575,10 +575,10 @@ export class StandingsView extends Container implements IScene {
                             this.lastRoundGoals[firstClub] = result.split("-")[1];
                         }
                         //this is dirty hack here to remove undefined...
-                        App.seasonFixtures[round][i] = App.seasonFixtures[round][i].split(" ")[0];
-                        App.seasonFixtures[round][i] += ` ${result}`;
+                        App.seasonFixtures![round][i] = App.seasonFixtures![round][i].split(" ")[0];
+                        App.seasonFixtures![round][i] += ` ${result}`;
                     } else {
-                        result = App.seasonFixtures[round][i].split(" ")[1];
+                        result = App.seasonFixtures![round][i].split(" ")[1];
                     }
                     if (this.shouldGenerateResults && round === App.currentRound) {
                         this.calculatePoints(firstClub, secondClub, result)
@@ -651,7 +651,7 @@ export class StandingsView extends Container implements IScene {
         this.lastRoundGoals[firstClub] = result.split("-")[0];
         this.lastRoundGoals[secondClub] = result.split("-")[1];
 
-        App.seasonFixtures[App.currentRound][i] += ` ${result}`;
+        App.seasonFixtures![App.currentRound][i] += ` ${result}`;
         this.calculatePoints(firstClub, secondClub, result);
         return result;
     }
@@ -754,7 +754,7 @@ export class StandingsView extends Container implements IScene {
 
     private getNextOpponent = () => {
         let playerClub = App.playerClubData.name;
-        let game: string = App.seasonFixtures[App.currentRound].find((x: string | any[]) => x.includes(playerClub))!;
+        let game: string = App.seasonFixtures!![App.currentRound].find((x: string | any[]) => x.includes(playerClub))!;
         let firstClub = game.split(":")[0];
         let secondClub = game.split(":")[1];
 
@@ -918,6 +918,7 @@ export class StandingsView extends Container implements IScene {
 
         deleteBtn.once('pointerdown', (e) => {
             //TODO - add confirm popup...
+            App.seasonFixtures = null;
             this.deleteProgress();
             App.removeScene(this);
             App.checkGameInProgress();

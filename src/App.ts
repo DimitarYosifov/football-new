@@ -31,7 +31,7 @@ export class App {
     public static isPlayerHome: boolean;
     public static isPlayerTurn: boolean = true;
     public static allClubNames: string[];
-    public static seasonFixtures: ISeasonFixtures;
+    public static seasonFixtures: ISeasonFixtures | null;
     public static topScorers: ITopScorers;
     public static mostYellowCards: IMostYellowCards;
     public static playerCash: number;
