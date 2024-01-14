@@ -21,10 +21,10 @@ export class RotatingButton extends Sprite {
         let event = once ? "once" : "on";
         this.finalTexture[event]('pointerdown', () => {
             this.activate();
-            gsap.delayedCall(0.2, () => {
+            // gsap.delayedCall(0.2, () => {
                 onPointerDown();
                 this.deactivate();
-            });
+            // });
         })
         this.finalTexture.on('pointerover', () => {
             this.activate();

@@ -108,6 +108,25 @@ export class ModeSelection extends Container implements IScene {
         this.addChild(this.league);
     }
 
+    private disable_PVP(): void {
+        this.pvp.interactive = false;
+        this.pvp.buttonMode = false;
+        let style = new TextStyle({
+            fontFamily: config.mainFont,
+            fontSize: 23,
+            fill: '#ff0000',
+            align: 'center',
+            stroke: '#ffffff',
+            fontWeight: "800",
+            lineJoin: "bevel",
+            strokeThickness: 2
+        });
+        let text = new Text('work in progress', style);
+        text.anchor.set(0.5, 0.5);
+        text.angle = 30;
+        this.pvp.addChild(text);
+    }
+
     private addPvP() {
         this.pvp = new Text('PvP', this.textStyles);
         this.pvp.position.set(App.width / 2, App.height * -0.2);
@@ -132,6 +151,7 @@ export class ModeSelection extends Container implements IScene {
                 });
         })
         this.addChild(this.pvp);
+        this.disable_PVP();
     }
 
     private modeSelected(mode: string) {
@@ -217,7 +237,7 @@ export class ModeSelection extends Container implements IScene {
                 pvpEmitter.destroy();
                 pvpEmitter.cleanup();
                 pvpEmitter.update = (): void => { };
-            }); 
+            });
         });
 
         //tween friendly text

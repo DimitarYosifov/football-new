@@ -15,6 +15,7 @@ import { EditTeam } from "./EditTeam";
 import { Level } from "./Level";
 import { SpecialsView } from "./SpecialsView";
 import { IShopItemsConfig } from "./SpecialsView";
+import { ModeSelection } from "./ModeSelection";
 
 export class StandingsView extends Container implements IScene {
     private fixturesHeader: Text;
@@ -39,6 +40,7 @@ export class StandingsView extends Container implements IScene {
     private coin: AnimatedSprite;
     private level: any;
     private opponentCards: [];
+    private deleteBtn: Sprite;
 
     constructor(increaseRound: boolean = false, lastGameRersult: string = "", shouldGenerateResults: boolean = false, opponentCards: [] = []) {
         super();
@@ -213,7 +215,7 @@ export class StandingsView extends Container implements IScene {
                 location.reload();
             }
             else if (
-                 App.seasonFixtures![App.currentRound] && this.lastGameRersult
+                !App.seasonFixtures![App.currentRound] && this.lastGameRersult
 
             ) {
                 /*
@@ -906,23 +908,85 @@ export class StandingsView extends Container implements IScene {
     }
 
     private addDeleteProgress(): void {
-        let deleteBtn = Sprite.from("delete");
-        deleteBtn.x = App.width * 0.85;
-        deleteBtn.y = App.height * 0.015;
-        deleteBtn.width = App.width * 0.12;
-        deleteBtn.height = App.width * 0.12;
-        this.addChild(deleteBtn);
-        deleteBtn.alpha = 0.5;
-        deleteBtn.interactive = true;
-        deleteBtn.buttonMode = true;
+        this.deleteBtn = Sprite.from("delete");
+        this.deleteBtn.x = App.width * 0.85;
+        this.deleteBtn.y = App.height * 0.015;
+        this.deleteBtn.width = App.width * 0.12;
+        this.deleteBtn.height = App.width * 0.12;
+        this.addChild(this.deleteBtn);
+        // this.deleteBtn.alpha = 0.5;
+        this.deleteBtn.interactive = true;
+        this.deleteBtn.buttonMode = true;
 
-        deleteBtn.once('pointerdown', (e) => {
-            //TODO - add confirm popup...
+        this.deleteBtn.on('pointerdown', (e) => {
+            this.deleteBtn.interactive = false;
+            this.confirmDeleteProgress();
+        })
+    }
+    private confirmDeleteProgress(): void {
+
+        let container = new Container();
+
+        //bg
+        let bg = new Graphics();
+        bg.beginFill(0x000000, 0.75);
+        bg.drawRect(
+            0,
+            0,
+            App.width,
+            App.height
+        );
+        bg.endFill();
+        bg.interactive = true;
+        container.addChild(bg);
+
+        //message
+        let style = new TextStyle({
+            fontFamily: config.mainFont,
+            fontSize: 63,
+            fill: '#ff0000',
+            align: 'center',
+            stroke: '#ffffff',
+            fontWeight: "800",
+            lineJoin: "bevel",
+            strokeThickness: 1
+        });
+        let warning = new Text('Your progress\nwill be lost.\nAre yoiu sure?', style);
+        warning.position.set(App.width / 2, App.height / 2.5)
+        warning.anchor.set(0.5, 0.5);
+        container.addChild(warning);
+        this.addChild(container);
+
+        //yes
+        let yes = () => {
             App.seasonFixtures = null;
             this.deleteProgress();
             App.removeScene(this);
-            App.checkGameInProgress();
-        })
+            App.setScene(new ModeSelection());
+        }
+        let yes_btn = new RotatingButton("", "", yes, true);
+        container.addChild(yes_btn.finalTexture);
+        yes_btn.setButtonSize(App.height * 0.1, App.width * 0.5, App.height * 1.25);
+        yes_btn.finalTexture.position.set(App.width * 0.2, warning.y + warning.height)
+        yes_btn.addLabel(`Yes`, 0.25);
+        yes_btn.interactive = true;
+
+        //no
+        let no = () => {
+            gsap.to(container, .3, {
+                alpha: 0,
+                onComplete: () => {
+                    this.removeChild(container);
+                    this.deleteBtn.interactive = true;
+                }
+            });
+        }
+        let no_btn = new RotatingButton("", "", no, true);
+        container.addChild(no_btn.finalTexture);
+        no_btn.setButtonSize(App.height * 0.1, App.width * 0.5, App.height * 1.25);
+        no_btn.finalTexture.position.set(App.width * 0.8, warning.y + warning.height)
+        no_btn.addLabel(`No`, 0.25);
+        no_btn.interactive = true;
     }
 }
 
